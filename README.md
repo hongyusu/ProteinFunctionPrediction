@@ -3,7 +3,9 @@
 # Protein function prediction
 
 ## Data
-1. Gene ontology (GO) data
+
+1. Original data are extracted according to the [Master's thesis]().
+   1. Gene ontology (GO) data
 
    |Type|#Items|
    |---:|---:|
@@ -15,19 +17,19 @@
    |Molecular function|4815|
    |Cellular component|1669|
 
-2. Protein family (Pfam) data
+   2. Protein family (Pfam) data
 
    |#Protein|#Taxonomy features|
    |---:|---:|
    |100588|7340|
 
-3. Blast data
+   3. Blast data
 
    |#Protein|#Blast features|
    |---:|---:|
    |56837|12645|
 
-4. Taxonomy data
+   4. Taxonomy data
 
    |#Protein|#Taxonomy features|
    |---:|---:|
