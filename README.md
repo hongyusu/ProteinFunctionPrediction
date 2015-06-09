@@ -8,6 +8,9 @@
    |Type|#Items|
    |---:|---:|
    |Protein|101421|
+
+   |Type|#Items|
+   |---:|---:|
    |Biological process|12890|
    |Molecular function|4815|
    |Cellular component|1669|
