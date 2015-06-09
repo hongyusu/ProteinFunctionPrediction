@@ -4,7 +4,8 @@
 
 ## Data
 
-1. Original data are extracted according to the [Master's thesis]().
+1. Original data about proteins features in different categories are extracted according to the [Master's thesis]().
+
    1. Gene ontology (GO) data
 
       |Type|#Items|
