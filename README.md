@@ -4,7 +4,7 @@
 
 ## Original data
 
-1. Original data about proteins features in different categories are extracted according to the [Master's thesis](), which include
+1. Original data about protein features from different categories are extracted according to the [Master's thesis](), which covers the protein features listed as follows: 
 
    1. Gene ontology (GO) data
 
@@ -35,6 +35,8 @@
       |#Protein|#Taxonomy features|
       |---:|---:|
       |104115|3003|
+
+2. Original data files are located in the directory `./Data/`.
 
 ## Data preprocessing
 
