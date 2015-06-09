@@ -5,8 +5,9 @@
 ## Data
 1. Gene ontology (GO) data
 
-   |Type|size|
+   |Type|#Items|
    |---:|---:|
+   |Protein|101421|
    |Biological process|12890|
    |Molecular function|4815|
    |Cellular component|1669|
