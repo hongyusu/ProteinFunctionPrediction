@@ -2,7 +2,7 @@
 
 # Protein function prediction
 
-## Data
+## Original data
 
 1. Original data about proteins features in different categories are extracted according to the [Master's thesis](), which include
 
@@ -35,5 +35,9 @@
       |#Protein|#Taxonomy features|
       |---:|---:|
       |104115|3003|
+
+## Data preprocessing
+
+1. 
 
 ##
