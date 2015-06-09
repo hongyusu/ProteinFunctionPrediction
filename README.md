@@ -17,11 +17,20 @@
 
 2. Protein family (Pfam) data
 
+   |#Protein|#Taxonomy feature|
+   |---:|---:|
+   |100588|7340|
 
 3. Blast data
 
    |#Protein|#Blast feature|
    |---:|---:|
    |56837|12645|
+
+4. Taxonomy data
+
+   |#Protein|#Taxonomy feature|
+   |---:|---:|
+   |104115|3003|
 
 ##
