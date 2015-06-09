@@ -4,6 +4,7 @@
 
 ## Data
 1. Gene ontology data
+
    |Type|size|
    |---:|---:|
    |Biological process|12890|
