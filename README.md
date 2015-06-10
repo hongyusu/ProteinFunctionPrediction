@@ -40,6 +40,20 @@
 
 ## Data preprocessing
 
-1. 
+1. Merge data from different sources:
+
+   1. Merge the following feature type into one matrix
+
+      |Data type|Number of features|
+      |----:|----:|
+      |matgoBP|12891|
+      |matgoCC|1670|
+      |matgoMF|4816|
+      |matblastcompressed|12646|
+      |matpfam|7341|
+      |mattaxo|3004|
+      |Total|42368|
+
+   1. 
 
 ##
