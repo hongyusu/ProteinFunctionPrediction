@@ -10,7 +10,7 @@
 
       |Type|#Items|
       |---:|---:|
-      |Protein|101421|
+      |Protein|101422|
 
       |GO feature type|#Items|
       |---:|---:|
@@ -22,19 +22,19 @@
 
       |#Protein|#Taxonomy features|
       |---:|---:|
-      |100588|7341|
+      |100589|7341|
 
    3. Blast data
 
       |#Protein|#Blast features|
       |---:|---:|
-      |56837|12646|
+      |56838|12646|
 
    4. Taxonomy data
 
       |#Protein|#Taxonomy features|
       |---:|---:|
-      |104115|3004|
+      |104116|3004|
 
 2. Original data files are located in the directory `./Data/`.
 
@@ -44,18 +44,18 @@
 
    1. Merge the following feature types into one matrix
 
-      |Data type|Number of features|
+      |Data type|#Proteins|#Features|
       |----:|----:|
-      |matgoBP|12891|
-      |matgoCC|1670|
-      |matgoMF|4816|
-      |matblastcompressed|12646|
-      |matpfam|7341|
-      |mattaxo|3004|
+      |matgoBP|101422|12891|
+      |matgoCC|101422|1670|
+      |matgoMF|101422|4816|
+      |matblastcompressed|56838|12646|
+      |matpfam|100589|7341|
+      |mattaxo|104116|3004|
 
    1. In the end, we have 
 
-      |#Protein|#Features|
+      |#Proteins|#Features|
       |----:|----:|
       |113863|42368|
 
