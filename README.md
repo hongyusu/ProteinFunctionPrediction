@@ -45,7 +45,7 @@
    1. Merge the following feature types into one matrix
 
       |Data type|#Proteins|#Features|
-      |----:|----:|
+      |----:|----:|----:|
       |matgoBP|101422|12891|
       |matgoCC|101422|1670|
       |matgoMF|101422|4816|
