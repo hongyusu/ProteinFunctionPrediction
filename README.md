@@ -14,35 +14,35 @@
 
       |GO feature type|#Items|
       |---:|---:|
-      |Biological process|12890|
-      |Molecular function|4815|
-      |Cellular component|1669|
+      |Biological process|12891|
+      |Molecular function|4816|
+      |Cellular component|1670|
 
    2. Protein family (Pfam) data
 
       |#Protein|#Taxonomy features|
       |---:|---:|
-      |100588|7340|
+      |100588|7341|
 
    3. Blast data
 
       |#Protein|#Blast features|
       |---:|---:|
-      |56837|12645|
+      |56837|12646|
 
    4. Taxonomy data
 
       |#Protein|#Taxonomy features|
       |---:|---:|
-      |104115|3003|
+      |104115|3004|
 
 2. Original data files are located in the directory `./Data/`.
 
 ## Data preprocessing
 
-1. Merge data from different sources:
+1. Merge datasets from different sources:
 
-   1. Merge the following feature type into one matrix
+   1. Merge the following feature types into one matrix
 
       |Data type|Number of features|
       |----:|----:|
@@ -52,8 +52,11 @@
       |matblastcompressed|12646|
       |matpfam|7341|
       |mattaxo|3004|
-      |Total|42368|
 
-   1. 
+   1. In the end, we have 
+
+      |#Protein|#Features|
+      |----:|----:|
+      |113863|42368|
 
 ##
