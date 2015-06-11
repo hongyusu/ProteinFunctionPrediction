@@ -68,7 +68,9 @@ For now, the project aims to reliably predict the function of the transporter pr
       |113863|42368|
 
    2. A big global matrix is computed by concatenating the matrices of protein-GO, protein-Blast, protein-Ffam, protein-taxonomy, and protein-TCDB.
+
       1. The number of proteins and the number of features in the union of the collection of matrices are shown in the following table.
+
       2. The number of proteins and the number of features in the intersection of the collection of matrics are shown in the following table. Notice that a protein will present in the interection matrix if it has features in GO/BLAST/Pfam/Taxonomy categories. 
 
          |Type|#Proteins|#Features|
