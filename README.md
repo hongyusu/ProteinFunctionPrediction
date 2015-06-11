@@ -74,6 +74,6 @@ For now, the project aims to reliably predict the function of the transporter pr
       |Intersection|1336|51824|
 
 
-1. Scripts for data preprocessing are located in `./Preprocessing/` directory.
+1. Scripts for data preprocessing are located in `./Preprocessing/`. 
 
 ##
