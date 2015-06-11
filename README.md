@@ -61,11 +61,21 @@ For now, the project aims to reliably predict the function of the transporter pr
       |matpfam|100589|7341|
       |mattaxo|104116|3004|
 
-   1. In the end, we have 
+   1. The union of all data  
 
       |#Proteins|#Features|
       |----:|----:|
       |113863|42368|
+
+   2. A big global matrix is computed by concatenating the matrices of protein-GO, protein-Blast, protein-Ffam, protein-taxonomy, and protein-TCDB.
+      1. The number of proteins and the number of features in the union of the collection of matrices are shown in the following table.
+      2. The number of proteins and the number of features in the intersection of the collection of matrics are shown in the following table. Notice that a protein will present in the interection matrix if it has features in GO/BLAST/Pfam/Taxonomy categories. 
+
+      |Type|#Proteins|#Features|
+      ||----:|----:|
+      |Union|123610|51824|
+      |Intersection|1336|51824|
+
 
 1. Scripts for data preprocessing are located in `./Preprocessing/` directory.
 
