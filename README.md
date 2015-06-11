@@ -38,9 +38,9 @@
 
 1. TCDB data are download from [TCDB database](http://www.tcdb.org/public/). 
 
-      |#Protein|#TCDB annotations|
-      |---:|---:|
-      |12516|9456|
+   |#Protein|#TCDB annotations|
+   |---:|---:|
+   |12516|9456|
 
 1. Original data files are located in the directory `./Data/`.
 
