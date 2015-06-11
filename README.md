@@ -60,12 +60,7 @@ For now, the project aims to reliably predict the function of the transporter pr
       |matblastcompressed|56838|12646|
       |matpfam|100589|7341|
       |mattaxo|104116|3004|
-
-   1. The union of all data  
-
-      |#Proteins|#Features|
-      |----:|----:|
-      |113863|42368|
+      |TCDB|12516|9456|
 
    2. A big global matrix is computed by concatenating the matrices of protein-GO, protein-Blast, protein-Ffam, protein-taxonomy, and protein-TCDB.
 
