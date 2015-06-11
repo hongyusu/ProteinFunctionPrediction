@@ -36,7 +36,13 @@
       |---:|---:|
       |104116|3004|
 
-2. Original data files are located in the directory `./Data/`.
+1. TCDB data are download from [TCDB database](http://www.tcdb.org/public/). 
+
+      |#Protein|#TCDB annotations|
+      |---:|---:|
+      |12516|9456|
+
+1. Original data files are located in the directory `./Data/`.
 
 ## Data preprocessing
 
@@ -46,7 +52,7 @@
 
       |Data type|#Proteins|#Features|
       |----:|----:|----:|
-      |matgoBP|101422|12891|
+      |matgoBP|10142|12891|
       |matgoCC|101422|1670|
       |matgoMF|101422|4816|
       |matblastcompressed|56838|12646|

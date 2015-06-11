@@ -5,70 +5,91 @@
 #import pandas as pd
 #import numpy as np
 import os
+import re
 
 
-def put_together_names(filename,fout):
-  colnamelist = []
+def process_tcdb(filename,fout):
+  for line in open('../../Data/tcdb'):
+    if not line.startswith('>'):
+      continue
+    words = line.strip().split('|')
+    proteinname = re.sub(' ','',words[2])
+    tcdbname = 'TC' + re.sub(' .*','',words[3]) 
+    fout.write('%s %s %d\n' % (proteinname,tcdbname,1))
+  pass
+
+def put_together_names():
+  filenamelist = ['matgoBP','matgoCC','matgoMF','matblastcompressed','matpfam','mattaxo','tcdb']
+  fout = open('../../Preprocessing/Results/data','w')
+
+  for filename in filenamelist:
+    if filename == 'tcdb':
+      process_tcdb(filename,fout)
+      continue
+
+    colnames = {}
+    lineind = 0
+    for line in open('../../Data/%s.collab' % filename):
+      lineind += 1
+      colnames[lineind] = line.strip()
+
+    rownames = {}
+    lineind = 0
+    for line in open('../../Data/%s.rowlab' % filename):
+      lineind += 1
+      rownames[lineind] = line.strip()
+
+    # write file
+    lineind = -1
+    for line in open('../../Data/%s.mtx' % filename):
+      lineind += 1
+      if lineind < 3:
+        continue
+      words = line.strip().split(' ')
+      fout.write('%s %s %s\n' % (rownames[eval(words[0])], colnames[eval(words[1])], words[2]))
+
+  fout.close()
+  pass
+
+def rename_files():
+  # get row and col labels
+  os.system(""" cat ../../Preprocessing/Results/data | awk -F' ' '{print $1}' | sort|uniq > ../../Preprocessing/Results/data.rowlab """)
+  os.system(""" cat ../../Preprocessing/Results/data | awk -F' ' '{print $2}' | sort|uniq > ../../Preprocessing/Results/data.collab """)
+  os.system(""" cat ../../Preprocessing/Results/data |  sort -k1,1 -k2,2  > ../../Preprocessing/Results/tmp; mv ../../Preprocessing/Results/tmp ../../Preprocessing/Results/data """)
+  # rename
   colnames = {}
-  lineind = 0
-  for line in open('../../Data/%s.collab' % filename):
-    lineind += 1
-    colnames[lineind] = line.strip()
-    colnamelist.append(line.strip())
-  rownamelist = []
   rownames = {}
   lineind = 0
-  for line in open('../../Data/%s.rowlab' % filename):
+  for line in open('../../Preprocessing/Results/data.collab'):
     lineind += 1
-    rownames[lineind] = line.strip()
-    rownamelist.append(line.strip())
-  # write file
-  lineind = -1
-  for line in open('../../Data/%s.mtx' % filename):
+    colnames[line.strip()] = lineind
+  rownames = {}
+  Lineind = 0
+  for line in open('../../Preprocessing/Results/data.rowlab'):
     lineind += 1
-    if lineind < 3:
-      continue
+    rownames[line.strip()] = lineind
+  fout = open('../../Preprocessing/Results/data.mtx', 'w')
+  for line in open('../../Preprocessing/Results/data'):
     words = line.strip().split(' ')
-    fout.write('%s %s %s\n' % (rownames[eval(words[0])], colnames[eval(words[1])], words[2]))
-  return (rownamelist,colnamelist)
+    fout.write('%d %d %s\n' % ( rownames[words[0]], colnames[words[1]], words[2]  ))
+  fout.close()
   pass
-  
+
+
+
 def merge_datasets():
-  filenamelist = ['matgoBP','matgoCC','matgoMF','matblastcompressed','matpfam','mattaxo']
-  allrownames = []
-  allcolnames = []
-  fout = open('../../Preprocessing/Results/data.mtx','w')
-  for filename in filenamelist:
-    (rownames,colnames) = put_together_names(filename,fout)
-    allrownames += rownames
-    allcolnames += colnames
-  fout.close()
-  allrownames = list(set(allrownames))
-  fout = open('../../Preprocessing/Results/data.rowlab','w')
-  fout.write('%s\n' % '\n'.join((allrownames)) )
-  fout.close()
-  fout = open('../../Preprocessing/Results/data.collab','w')
-  fout.write('%s\n' % '\n'.join((allcolnames)) )
-  fout.close()
-  # renumber
-  rowdata = {}
-  index = 0
-  for name in allrownames:
-    index += 1
-    rowdata[name] = index
-  coldata = {}
-  index = 0
-  for name in allcolnames:
-    index += 1
-    coldata[name] = index
-  fout = open('../../Preprocessing/Results/tmp','w')
-  for line in open('../../Preprocessing/Results/data.mtx'):
-    words = line.strip().split(' ')
-    fout.write('%d %d %s\n' %( rowdata[words[0]], coldata[words[1]], words[2]))
-  fout.close()
-  os.system('mv ../../Preprocessing/Results/tmp ../../Preprocessing/Results/data.mtx')
+  put_together_names()
+  rename_files()
   pass
 
 
 if __name__ == '__main__':
   merge_datasets()
+
+
+
+
+
+
+
+
