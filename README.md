@@ -73,10 +73,10 @@ For now, the project aims to reliably predict the function of the transporter pr
 
       2. The number of proteins and the number of features in the intersection of the collection of matrics are shown in the following table. Notice that a protein will present in the interection matrix if it has features in GO/BLAST/Pfam/Taxonomy categories. 
 
-         |Type|#Proteins|#Features|
-         ||----:|----:|
-         |Union|123610|51824|
-         |Intersection|1336|51824|
+      |Type|#Proteins|#Features|
+      |----:|----:|----:|
+      |Union|123610|51824|
+      |Intersection|1336|51824|
 
 
 1. Scripts for data preprocessing are located in `./Preprocessing/` directory.
