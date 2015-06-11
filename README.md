@@ -65,4 +65,6 @@
       |----:|----:|
       |113863|42368|
 
+1. Scsripts for data preprocess are located in `./Preprocessing/` directory.
+
 ##
