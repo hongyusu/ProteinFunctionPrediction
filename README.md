@@ -2,6 +2,8 @@
 
 # Protein function prediction
 
+For now, the project aims to reliably predict the function of the transporter protein. The function will be given as the hierarchical structure. Each protein is represented as a set of features, including Gene Ontology, protein familiy, BLAST, and Taxonomy.
+
 ## Original data
 
 1. Original data about protein features from different categories are extracted according to the [Master's thesis](), which covers the protein features listed as follows: 
@@ -65,6 +67,6 @@
       |----:|----:|
       |113863|42368|
 
-1. Scsripts for data preprocess are located in `./Preprocessing/` directory.
+1. Scripts for data preprocessing are located in `./Preprocessing/` directory.
 
 ##
