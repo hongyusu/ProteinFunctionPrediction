@@ -54,7 +54,7 @@ For now, the project aims to reliably predict the function of the transporter pr
 
       |Data type|#Proteins|#Features|
       |----:|----:|----:|
-      |matgoBP|10142|12891|
+      |matgoBP|101422|12891|
       |matgoCC|101422|1670|
       |matgoMF|101422|4816|
       |matblastcompressed|56838|12646|
