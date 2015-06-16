@@ -43,11 +43,21 @@ For now, the project aims to reliably predict the function of the transporter pr
       |Protein|104116|
       |Taxonomy feature|3004|
 
-1. TCDB data are download from [TCDB database](http://www.tcdb.org/public/). 
+1. Transport protein classification data are downloaded from [TCDB database](http://www.tcdb.org/public/). 
 
-   |#Protein|#TCDB annotations|
+   |Type of data|Number of items|
    |---:|---:|
-   |12516|9456|
+   |Protein|12516|
+   |TCDB annotation|9456|
+
+   1. The annotation of TCDB follows a five level classificaiton hierarchy. The number of annoations in each level is shown in the following table
+
+      |Level|Number of annotations|
+      |1|7| 
+      |2|30| 
+      |3|867| 
+      |4|2237| 
+      |5|9456| 
 
 1. Original data files are located in the directory `./Data/`.
 
