@@ -99,8 +99,8 @@ For now, the project aims to reliably predict the function of the transporter pr
 
       |Type|#Proteins|#Features|
       |----:|----:|----:|
-      |Union|123610|51824|
-      |Intersection|1336|51824|
+      |Union|123619|64328|
+      |Intersection|1336|64328|
 
 1. Scripts for data preprocessing are located in `./Preprocessing/`. 
 
