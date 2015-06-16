@@ -91,7 +91,7 @@ For now, the project aims to reliably predict the function of the transporter pr
       |mattaxo|104116|3004|
       |TCDB|12516|9456|
 
-   2. A big global matrix is computed by concatenating the matrices of protein-GO, protein-Blast, protein-Ffam, protein-taxonomy, and protein-TCDB.
+   2. A big global matrix is computed by concatenating the matrices of protein-GO, protein-Blast, protein-Ffam, protein-taxonomy, and protein-TCDB, and protein-TCDBblast.
 
       1. The number of proteins and the number of features in the union of the collection of matrices are shown in the following table.
 
@@ -102,6 +102,20 @@ For now, the project aims to reliably predict the function of the transporter pr
          |Union|123619|64328|
          |Intersection|1336|64328|
 
-1. Scripts for data preprocessing are located in `./Preprocessing/`. 
+      3. Different type of fetures are annotated in `.collab` according to the following table
+
+         |Prefix|Feature type|
+         |---:|---:|
+         |Gene ontology: biological process|GB|
+         |Gene ontology: cellular component|GC|
+         |Gene ontology: molecular function|GM|
+         |Protein family|PF|
+         |BLAST|MB|
+         |Taxonomy|MT|
+         |TCDB classification|TC|
+         |TCDB BLAST|TB|
+
+1. Scripts for data preprocessing are located in `./Preprocessing/Bin/`. 
+1. Results for data preprocessing are located in `./Preprocessing/Results/`. 
 
 ##
