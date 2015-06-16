@@ -64,6 +64,8 @@ For now, the project aims to reliably predict the function of the transporter pr
 
 ## Data preprocessing
 
+# BLAST 
+
 1. Merge datasets from different sources:
 
    1. Merge the following feature types into one matrix
