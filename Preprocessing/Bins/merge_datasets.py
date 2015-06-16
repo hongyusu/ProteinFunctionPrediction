@@ -15,24 +15,54 @@ def process_tcdb(filename,fout):
     words = line.strip().split('|')
     proteinname = re.sub(' ','',words[2])
     tcdbname = 'TC' + re.sub(' .*','',words[3]) 
-    fout.write('%s %s %d\n' % (proteinname,tcdbname,1))
+    fout.write('%s %s 1\n' % (proteinname,tcdbname))
   pass
 
+def process_tcdbblast(filename,fout):
+  for line in open('../../Data/tcdbblast'):
+    words = line.strip().split('\t')
+    proteinname = re.sub('.*\|','',words[0])
+    featurename = re.sub('.*\|','',words[1])
+    fout.write('%s TB%s %s\n' % (proteinname,featurename,words[11]))
+  pass
+
+
 def put_together_names():
-  filenamelist = ['matgoBP','matgoCC','matgoMF','matblastcompressed','matpfam','mattaxo','tcdb']
+  filenamelist = ['matgoBP','matgoCC','matgoMF','matblastcompressed','matpfam','mattaxo','tcdb','tcdbblast']
   fout = open('../../Preprocessing/Results/data','w')
 
+  # process individual file
   for filename in filenamelist:
+    print filename
+
     if filename == 'tcdb':
       process_tcdb(filename,fout)
       continue
+    if filename == 'tcdbblast':
+      process_tcdbblast(filename,fout)
+      continue
+
+
+    # rolnames
+    colnameprefix = ''
+    if filename == 'matgoBP':
+      colnameprefix = 'GB'
+    if filename == 'matgoCC':
+      colnameprefix = 'GC'
+    if filename == 'matgoMF':
+      colnameprefix = 'GM'
+    if filename == 'matblastcompressed':
+      colnameprefix = 'M'
+    if filename == 'mattaxo':
+      colnameprefix = 'M'
 
     colnames = {}
     lineind = 0
     for line in open('../../Data/%s.collab' % filename):
       lineind += 1
-      colnames[lineind] = line.strip()
-
+      colnames[lineind] = colnameprefix+line.strip()
+    
+    # rownames
     rownames = {}
     lineind = 0
     for line in open('../../Data/%s.rowlab' % filename):
@@ -82,9 +112,47 @@ def merge_datasets():
   rename_files()
   pass
 
+def compute_statistics():
+  s = ''
+  ptname = ''
+  features = [0,0,0,0,0,0,0,0]
+  for line in open('../../Preprocessing/Results/data'):
+    words = line.strip().split(' ')
+    if ptname == '':
+      ptname = words[0]
+    if not ptname == words[0]:
+      # process
+      s += '%s %s\n' % (ptname,' '.join(map(str,features)))
+      # initialize
+      ptname = words[0]
+      features = [0,0,0,0,0,0,0,0]
+    if words[1].startswith('GM'):
+      features[0] += 1
+    if words[1].startswith('GB'):
+      features[1] += 1
+    if words[1].startswith('GC'):
+      features[2] += 1
+    if words[1].startswith('MB'):
+      features[3] += 1
+    if words[1].startswith('PF'):
+      features[4] += 1
+    if words[1].startswith('MT'):
+      features[5] += 1
+    if words[1].startswith('TB'):
+      features[6] += 1
+    if words[1].startswith('TC'):
+      features[7] += 1
+  s += '%s %s\n' % (ptname,' '.join(map(str,features)))
+  fout = open('../../Preprocessing/Results/data_statistics','w')
+  fout.write(s)
+  fout.close()
+  pass
+
+
 
 if __name__ == '__main__':
   merge_datasets()
+  compute_statistics()
 
 
 
