@@ -64,7 +64,7 @@ For now, the project aims to reliably predict the function of the transporter pr
 
 ## Data preprocessing
 
-# BLAST 
+### BLAST 
 
 1. Merge datasets from different sources:
 
