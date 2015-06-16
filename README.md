@@ -68,10 +68,10 @@ For now, the project aims to reliably predict the function of the transporter pr
    1. After removing replicated proteins, there are 12515 protein left in TCDB.
    1. For the BLAST search, we obtain all hits with e-value above 0.01. 
 
-   |Type of data|Number of items|
-   |---:|---:|
-   |Protein|12515|
-   |TCDB BLAST|12515|
+      |Type of data|Number of items|
+      |---:|---:|
+      |Protein|12515|
+      |TCDB BLAST|12515|
 
 1. Original data files are located in the directory `./Data/`.
 
