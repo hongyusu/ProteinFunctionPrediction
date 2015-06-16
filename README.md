@@ -2,29 +2,32 @@
 
 # Protein function prediction
 
-For now, the project aims to reliably predict the function of the transporter protein. The function will be given as the hierarchical structure. Each protein is represented as a set of features, including Gene Ontology, protein familiy, BLAST, and Taxonomy.
+For now, the project aims to reliably predict the function of the transporter proteins. The function is defined as TC code following the hierarchical structure of the transporter protein classification system. In addition to transporter proteins in TCDB, we obtain proteins from UniProt and represent each protein with the following features, including
+   1. Gene Ontology
+   2. Protein Family
+   3. BLAST score with UniProt
+   4. Taxonomy in NCBI
+   5. BLAST score with TCDB
 
-## Original data
+## Feature representation of proteins 
 
-1. Original data about protein features from different categories are extracted according to the [Master's thesis](), which covers the protein features listed as follows: 
+1. We obtain some feature representations for proteins based on the [Master's thesis](). This covers features in the following categories. 
 
-   1. Gene ontology (GO) data
+   1. Features from Gene ontology (GO)
 
-      |Type|#Items|
+      |Type of data|Number of items|
       |---:|---:|
       |Protein|101422|
-
-      |GO feature type|#Items|
-      |---:|---:|
-      |Biological process|12891|
-      |Molecular function|4816|
-      |Cellular component|1670|
+      |GO: Biological process|12891|
+      |GO: Molecular function|4816|
+      |GO: Cellular component|1670|
 
    2. Protein family (Pfam) data
 
-      |#Protein|#Taxonomy features|
+      |Type of data|Number of items|
       |---:|---:|
-      |100589|7341|
+      |Protein|100589|
+      |Pfam feature| 7341|
 
    3. Blast data
 
