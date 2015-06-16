@@ -59,7 +59,7 @@ def rename_files():
     lineind += 1
     colnames[line.strip()] = lineind
   rownames = {}
-  Lineind = 0
+  lineind = 0
   for line in open('../../Preprocessing/Results/data_intersection.rowlab'):
     lineind += 1
     rownames[line.strip()] = lineind
@@ -72,6 +72,6 @@ def rename_files():
 
 
 if __name__ == '__main__':
-  #compute_statistics()
-  #get_intersection()
+  compute_statistics()
+  get_intersection()
   rename_files()
