@@ -104,7 +104,7 @@ For now, the project aims to reliably predict the function of the transporter pr
 
       3. Different type of fetures are annotated in `.collab` according to the following table
 
-         |Prefix|Feature type|
+         |Feature name|Prefix|
          |---:|---:|
          |Gene ontology: biological process|GB|
          |Gene ontology: cellular component|GC|
