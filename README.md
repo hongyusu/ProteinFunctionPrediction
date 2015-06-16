@@ -60,12 +60,14 @@ For now, the project aims to reliably predict the function of the transporter pr
       |4|2237| 
       |5|9456| 
 
-1. Original data files are located in the directory `./Data/`.
 
 1. BLAST with TCDB
 
    1. TCDB proteins are compared with themselves by running BLAST algorithms in order to obtain a pairwise similarity matrix.
-   1. Instruction for BLAST installation and running can be found from [my blog](http://hongyusu.github.io/lessons/2015/06/16/ncbi-blast-installation-and-running-in-parallel/). 
+   1. Instruction for BLAST installation and running can be found from [my blog post](http://hongyusu.github.io/lessons/2015/06/16/ncbi-blast-installation-and-running-in-parallel/). 
+
+
+1. Original data files are located in the directory `./Data/`.
 
 ## Data preprocessing
 
