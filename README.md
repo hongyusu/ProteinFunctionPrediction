@@ -9,7 +9,7 @@ For now, the project aims to reliably predict the function of the transporter pr
    4. Taxonomy in NCBI
    5. BLAST score with TCDB
 
-## Feature representation of proteins 
+## Data sources and feature representations 
 
 1. We obtain some feature representations for proteins based on the [Master's thesis](). This covers features in the following categories. 
 
@@ -62,9 +62,12 @@ For now, the project aims to reliably predict the function of the transporter pr
 
 1. Original data files are located in the directory `./Data/`.
 
-## Data preprocessing
+1. BLAST with TCDB
 
-### BLAST 
+   1. TCDB proteins are compared with themselves by running BLAST algorithms in order to obtain a pairwise similarity matrix.
+   1. Instruction for BLAST installation and running can be found from [my blog](http://hongyusu.github.io/lessons/2015/06/16/ncbi-blast-installation-and-running-in-parallel/). 
+
+## Data preprocessing
 
 1. Merge datasets from different sources:
 
