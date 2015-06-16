@@ -29,17 +29,19 @@ For now, the project aims to reliably predict the function of the transporter pr
       |Protein|100589|
       |Pfam feature| 7341|
 
-   3. Blast data
+   3. Blast score with UniProt
 
-      |#Protein|#Blast features|
+      |Type of data|Number of items|
       |---:|---:|
-      |56838|12646|
+      |Protein|56838|
+      |Blast feature|12646|
 
    4. Taxonomy data
 
-      |#Protein|#Taxonomy features|
+      |Type of data|Number of items|
       |---:|---:|
-      |104116|3004|
+      |Protein|104116|
+      |Taxonomy feature|3004|
 
 1. TCDB data are download from [TCDB database](http://www.tcdb.org/public/). 
 
