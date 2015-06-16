@@ -53,6 +53,7 @@ For now, the project aims to reliably predict the function of the transporter pr
    1. The annotation of TCDB follows a five level classificaiton hierarchy. The number of annoations in each level is shown in the following table
 
       |Level|Number of annotations|
+      |---:|---:|
       |1|7| 
       |2|30| 
       |3|867| 
