@@ -60,6 +60,8 @@ For now, the project aims to reliably predict the function of the transporter pr
       |4|2237| 
       |5|9456| 
 
+  1. Data file for TCDB sequence and classification information is in the file `./Data/tcdb`
+
 
 1. BLAST with TCDB
 
@@ -73,12 +75,14 @@ For now, the project aims to reliably predict the function of the transporter pr
       |Protein|12515|
       |TCDB BLAST|12515|
 
+   1. Data file for TCDB BLAST feature is in the file `./Data/tcdbblast`
+
 1. InterProScan
 
    1. For all proteins in TCDB, we extract various protein features by running [InterProScan](https://code.google.com/p/interproscan/).
    1. As this procedure takes time, we install and run the software locally.
    1. Intruction for installation and running InterProScan is illustrated in [my blog post](http://hongyusu.github.io/lessons/2015/06/17/extract-protein-features-via-interproscan/).
-   1. In particular, we download the InterProScan package with various databases. Versions for software and databases can be found from the following table
+   1. In particular, we download the InterProScan package with various databases. Version information for InterProScan software and databases can be found from the following table
 
       |Software and databases|Version|
       |---:|---:|
@@ -100,6 +104,8 @@ For now, the project aims to reliably predict the function of the transporter pr
 1. Original data files are located in the directory `./Data/`.
 
 ## Data preprocessing
+
+1. Remove duplication in TCDB sequence and classification files.
 
 1. Merge datasets from different sources:
 
