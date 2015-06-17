@@ -126,17 +126,34 @@ For now, the project aims to reliably predict the function of the transporter pr
       |TIGRFAM|15.0|TIGRFAMs are protein families based on Hidden Markov Models or HMMs|
       |PrositePatterns||PROSITE consists of documentation entries describing protein domains, families and functional sites as well as associated patterns and profiles to identify them|
       |Coils|2.2|Prediction of Coiled Coil Regions in Proteins|
-      |TMHMM| 2.0| Analysis TMHMM-2.0c| 
-      |Phobius |1.01|Analysis Phobius-1.01 |
-      |SignalP_GRAM_NEGATIVE |4.0|Analysis SignalP_GRAM_NEGATIVE-4.0 |
-      |SignalP_EUK |4.0|Analysis SignalP_EUK-4.0 |
-      |SignalP_GRAM_POSITIVE |4.0|Analysis SignalP_GRAM_POSITIVE-4.0 |
+      |TMHMM| 2.0| Prediction of transmembrane helices in proteins| 
+      |Phobius |1.01|A combined transmembrane topology and signal peptide predictor|
+      |SignalP_GRAM_NEGATIVE |4.0|SignalP (organism type gram-negative prokaryotes) predicts the presence and location of signal peptide cleavage sites in amino acid sequences for gram-negative prokaryotes|
+      |SignalP_EUK |4.0|SignalP (organism type eukaryotes) predicts the presence and location of signal peptide cleavage sites in amino acid sequences for eukaryotes.|
+      |SignalP_GRAM_POSITIVE |4.0|SignalP (organism type gram-positive prokaryotes) predicts the presence and location of signal peptide cleavage sites in amino acid sequences for gram-positive prokaryotes|
    
    1. Note that the last five tools and Panthon database are installed into InterProScan manually.
    1. It is not necessary to perform again the scanning with InterProScan for all TCDB sequences as most of the TCDB sequences already have UniProt accession number. Therefore, we depend on the lookup service provided by InterProScan in order to directly extract the sequence features from the database.
    1. In addition to direct extraction, protein sequences that is not known to InterProScan are scanned.
+   1. Interproscan results is located as `./Data/tcdbips`. The file follows the structure described in the following table
 
-1. Original data files are located in the directory `./Data/tcdbips`.
+      |Column|Description|
+      |---:|---:|
+      |1|Protein Accession (e.g. P51587)|
+      |2|Sequence MD5 digest (e.g. 14086411a2cdf1c4cba63020e1622579)|
+      |3|Sequence Length (e.g. 3418)|
+      |4|Analysis (e.g. Pfam / PRINTS / Gene3D)|
+      |5|Signature Accession (e.g. PF09103 / G3DSA:2.40.50.140)|
+      |6|Signature Description (e.g. BRCA2 repeat profile)|
+      |7|Start location|
+      |8|Stop location|
+      |9|Score - is the e-value of the match reported by member database method (e.g. 3.1E-52)|
+      |10|Status - is the status of the match (T: true)|
+      |11|Date - is the date of the run|
+      |12|InterPro annotations - accession (e.g. IPR002093)|
+      |13|InterPro annotations - description (e.g. BRCA2 repeat) |
+      |14|GO annotations (e.g. GO:0005515) |
+      |15|Pathways annotations (e.g. REACT_71) |
 
 ## Data preprocessing
 
