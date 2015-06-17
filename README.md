@@ -63,7 +63,7 @@ For now, the project aims to reliably predict the function of the transporter pr
   1. Data file for TCDB sequence and classification information is in the file `./Data/tcdb`.
 
 
-1. BLAST with TCDB
+1. [BLAST with TCDB](http://hongyusu.github.io/lessons/2015/06/16/ncbi-blast-installation-and-running-in-parallel/)
 
    1. Protein sequences are aligned with themselves by running BLAST algorithms.
    1. This procedure will genrate a pairwise similarity matrix.
@@ -81,7 +81,7 @@ For now, the project aims to reliably predict the function of the transporter pr
    1. Data file for TCDB BLAST feature is in the file `./Data/tcdbblast`.
       1. The format of this file is `qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue bitscore`.
 
-1. InterProScan
+1. [InterProScan](http://hongyusu.github.io/lessons/2015/06/17/extract-protein-features-via-interproscan/)
 
    1. For all proteins in TCDB, we extract various protein features by running [InterProScan](https://code.google.com/p/interproscan/).
    1. As this procedure takes time, we would like to install and run the InterProScan on local machines other than webservers.
