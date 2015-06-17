@@ -67,7 +67,7 @@ For now, the project aims to reliably predict the function of the transporter pr
 
    1. Protein sequences are aligned with themselves by running BLAST algorithms.
    1. This procedure will genrate a pairwise similarity matrix.
-   1. Instruction for installing and running can be found from [my blog post](http://hongyusu.github.io/lessons/2015/06/16/ncbi-blast-installation-and-running-in-parallel/). 
+   1. Instruction for installing and running BLAST can be found from [my blog post](http://hongyusu.github.io/lessons/2015/06/16/ncbi-blast-installation-and-running-in-parallel/). 
    1. In particular, after removing some replicated proteins, there are 12515 protein left in TCDB which will be used to build a TCDB BLAST database.
    1. For the BLAST search, we obtain all hits with e-value above 0.01. 
    1. We use BLAST score as similary measure between pair of proteins.
