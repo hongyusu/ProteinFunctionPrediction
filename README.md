@@ -85,7 +85,7 @@ For now, the project aims to reliably predict the function of the transporter pr
        
       2. The keywords are explained in the following table
 
-         |Keyword|Means|
+         |Keyword|Representation|
          |---:|---:|
          |qseqid | Query Seq-id|
          |sseqid | Subject Seq-id|
@@ -103,7 +103,7 @@ For now, the project aims to reliably predict the function of the transporter pr
          |gapopen | Number of gap openings|
 
 
-1. [InterProScan](http://hongyusu.github.io/lessons/2015/06/17/extract-protein-features-via-interproscan/)|
+1. [InterProScan](http://hongyusu.github.io/lessons/2015/06/17/extract-protein-features-via-interproscan/)
 
    1. For all proteins in TCDB, we extract various protein features by running [InterProScan](https://code.google.com/p/interproscan/).
    1. As this procedure takes time, we would like to install and run the InterProScan on local machines other than webservers.
