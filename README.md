@@ -80,6 +80,7 @@ For now, the project aims to reliably predict the function of the transporter pr
 
    1. Data file for TCDB BLAST feature is located as `./Data/tcdbblast`.
       1. The format of this file is
+
          `qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue bitscore`.
 
 1. [InterProScan](http://hongyusu.github.io/lessons/2015/06/17/extract-protein-features-via-interproscan/)
