@@ -73,6 +73,30 @@ For now, the project aims to reliably predict the function of the transporter pr
       |Protein|12515|
       |TCDB BLAST|12515|
 
+1. InterProScan
+
+   1. For proteins in TCDB, we extract various protein features by running [InterProScan](https://code.google.com/p/interproscan/).
+   1. As this procedure takes time, we install and run the software locally.
+   1. Intruction for installation and running InterProScan is illustrated in [my blog post](http://hongyusu.github.io/lessons/2015/06/17/extract-protein-features-via-interproscan/).
+   1. In particular, we download the InterProScan package with various databases. Versions for software and databases can be found from the following table
+
+      |Software and databases|Version|
+      |---:|---:|
+      |InterProScan|5.13-52.0|
+      |jobProDom|2006.1|
+      |HAMAP||
+      |SMART|6.2|
+      |SuperFamily|1.75|
+      |PRINTS|42.0|
+      |Panther|9.0|
+      |Gene3d|3.5.0|
+      |PIRSF|3.01|
+      |PfamA|27.0|
+      |PrositeProfiles|
+      |TIGRFAM|15.0|
+      |PrositePatterns|
+      |Coils|2.2|
+
 1. Original data files are located in the directory `./Data/`.
 
 ## Data preprocessing

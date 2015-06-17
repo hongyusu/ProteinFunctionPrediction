@@ -1,20 +1,20 @@
 
 import re
-
+import os
 
 
 def process_tcdb_for_blast():
   data = []
   write = 0
   fout = open('/cs/fs/home/su/softwares/blast/bin/tcdb','w')
-  for line in open('../../Data/tcdb'):
+  for line in open('../../Data/tcdb.1'):
     if line.startswith('>'):
       words = line.strip().split('|')
       proteinname = (words[2]).upper()
       if not proteinname in data:
         write = 1
         data.append(proteinname)
-        fout.write("%s|TCDB|%s %s\n" % (words[0],proteinname,words[3]))
+        fout.write("%s|TC-DB|%s|%s\n" % (words[0],proteinname,words[3]))
       else:
         write = 0
         print proteinname
@@ -22,6 +22,7 @@ def process_tcdb_for_blast():
       if write == 1:
         fout.write(line)
   fout.close()
+  os.system('cp /cs/fs/home/su/softwares/blast/bin/tcdb ../../Data/tcdb')
   pass
 
 
@@ -35,7 +36,7 @@ def process_tcdb_label():
     if line.startswith('>'):
       words = line.strip().split('|')
       if not words[2].upper() in rownamelist:
-        rownamelist.append(words[2])
+        rownamelist.append(words[2].upper())
       colname = re.sub(' .*','',words[3])
       if not colname.upper() in colnamelist:
         colnamelist.append(colname)
