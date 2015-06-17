@@ -100,9 +100,9 @@ For now, the project aims to reliably predict the function of the transporter pr
       |Gene3d|3.5.0|Structural assignment for whole genes and genomes using the CATH domain structure database|
       |PIRSF|3.01|The PIRSF concept is being used as a guiding principle to provide comprehensive and non-overlapping clustering of UniProtKB sequences into a hierarchical order to reflect their evolutionary relationships.|
       |PfamA|27.0|A large collection of protein families, each represented by multiple sequence alignments and hidden Markov models (HMMs)|
-      |PrositeProfiles|PROSITE consists of documentation entries describing protein domains, families and functional sites as well as associated patterns and profiles to identify them|
+      |PrositeProfiles||PROSITE consists of documentation entries describing protein domains, families and functional sites as well as associated patterns and profiles to identify them|
       |TIGRFAM|15.0|TIGRFAMs are protein families based on Hidden Markov Models or HMMs|
-      |PrositePatterns|PROSITE consists of documentation entries describing protein domains, families and functional sites as well as associated patterns and profiles to identify them|
+      |PrositePatterns||PROSITE consists of documentation entries describing protein domains, families and functional sites as well as associated patterns and profiles to identify them|
       |Coils|2.2|Prediction of Coiled Coil Regions in Proteins|
 
 
