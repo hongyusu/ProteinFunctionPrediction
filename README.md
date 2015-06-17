@@ -112,7 +112,7 @@ For now, the project aims to reliably predict the function of the transporter pr
 
 ## Data preprocessing
 
-1. Remove duplication in TCDB sequence and classification files.
+1. Remove duplication in transporter protein classification database sequence-classification file.
 
 1. Merge datasets from different sources:
 
