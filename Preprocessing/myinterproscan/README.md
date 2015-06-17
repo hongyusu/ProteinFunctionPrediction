@@ -1,11 +1,3 @@
----
-layout: post
-title: "Extract protein features via InterProScan"
-description: ""
-category: Lessons
-tags: [Programming, InterProScan, Bioinformatics, Feature Extraction, Protein]
----
-{% include JB/setup %}
 
 # InterProScan
 
