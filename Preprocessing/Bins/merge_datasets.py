@@ -13,8 +13,9 @@ def process_tcdb(filename,fout):
     if not line.startswith('>'):
       continue
     words = line.strip().split('|')
-    proteinname = re.sub(' ','',words[2])
-    tcdbname = 'TC' + re.sub(' .*','',words[3]) 
+    words = words[2].split(' ')
+    proteinname = words[0]
+    tcdbname = 'TC' + words[1]
     fout.write('%s %s 1\n' % (proteinname,tcdbname))
   pass
 

@@ -14,7 +14,7 @@ def process_tcdb_for_blast():
       if not proteinname in data:
         write = 1
         data.append(proteinname)
-        fout.write("%s|TC-DB|%s|%s\n" % (words[0],proteinname,words[3]))
+        fout.write("%s|TC-DB|%s %s\n" % (words[0],proteinname,words[3]))
       else:
         write = 0
         print proteinname
@@ -35,11 +35,13 @@ def process_tcdb_label():
   for line in open('../../Data/tcdb'):
     if line.startswith('>'):
       words = line.strip().split('|')
-      if not words[2].upper() in rownamelist:
-        rownamelist.append(words[2].upper())
-      colname = re.sub(' .*','',words[3])
-      if not colname.upper() in colnamelist:
-        colnamelist.append(colname)
+      words = words[2].split(' ')
+      proteinname = words[0].upper()
+      tcname = words[1].upper()
+      if not proteinname in rownamelist:
+        rownamelist.append(proteinname)
+      if not tcname in colnamelist:
+        colnamelist.append(tcname)
   fout_row.write('%s' % ('\n'.join(rownamelist)))
   fout_col.write('%s' % ('\n'.join(colnamelist)))
   fout_col.close()
