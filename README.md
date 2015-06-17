@@ -90,7 +90,7 @@ For now, the project aims to reliably predict the function of the transporter pr
 
       |Software and databases|Version|Information|
       |---:|---:|---:|
-      |InterProScan|5.13-52.0||
+      |InterProScan|5.13-52.0|InterProScan package|
       |ProDom|2006.1|ProDom is a comprehensive set of protein domain families automatically generated from the UniProt Knowledge Database.|
       |HAMAP||High-quality Automated and Manual Annotation of Microbial Proteomes|
       |SMART|6.2|SMART allows the identification and analysis of domain architectures based on Hidden Markov Models or HMMs|
