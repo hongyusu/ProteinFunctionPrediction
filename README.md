@@ -75,7 +75,7 @@ For now, the project aims to reliably predict the function of the transporter pr
 
 1. InterProScan
 
-   1. For proteins in TCDB, we extract various protein features by running [InterProScan](https://code.google.com/p/interproscan/).
+   1. For all proteins in TCDB, we extract various protein features by running [InterProScan](https://code.google.com/p/interproscan/).
    1. As this procedure takes time, we install and run the software locally.
    1. Intruction for installation and running InterProScan is illustrated in [my blog post](http://hongyusu.github.io/lessons/2015/06/17/extract-protein-features-via-interproscan/).
    1. In particular, we download the InterProScan package with various databases. Versions for software and databases can be found from the following table
