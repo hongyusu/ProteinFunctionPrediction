@@ -155,6 +155,8 @@ For now, the project aims to reliably predict the function of the transporter pr
       |14|GO annotations (e.g. GO:0005515) |
       |15|Pathways annotations (e.g. REACT_71) |
 
+   1. Otherwise, original data are located in the directory `./Data/`
+
 ## Data preprocessing
 
 1. Remove duplication in transporter protein classification database sequence-classification file.
