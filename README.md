@@ -109,7 +109,8 @@ For now, the project aims to reliably predict the function of the transporter pr
       |Phobius |1.01|Analysis Phobius-1.01 |
       |SignalP_EUK |4.0|Analysis SignalP_EUK-4.0 |
       |SignalP_GRAM_POSITIVE |4.0|Analysis SignalP_GRAM_POSITIVE-4.0 |
-
+   
+   1. Note that the last five tools are not installed so far. 
    1. It is not necessary to redo the scan with InterProScan for all TCDB sequences as most of the TCDB sequences already have UniProt accession number. Therefore, we depend on the lookup service provided by InterProScan in order to directly extract the sequence features from the database.
    1. In addition to direct extraction, protein sequences that is not known to InterProScan are scanned.
 
