@@ -106,7 +106,7 @@ For now, the project aims to reliably predict the function of the transporter pr
 1. [InterProScan](http://hongyusu.github.io/lessons/2015/06/17/extract-protein-features-via-interproscan/)
 
    1. For all proteins in TCDB, we extract various protein features by running [InterProScan](https://code.google.com/p/interproscan/).
-   1. As this procedure takes time, we would like to install and run the InterProScan on local machines other than webservers.
+   1. As this procedure takes time, we would like to install and run the InterProScan on local machines other than on webservers.
    1. A brief intruction for installation and running InterProScan is documented in [my blog post](http://hongyusu.github.io/lessons/2015/06/17/extract-protein-features-via-interproscan/).
    1. In particular, we download the InterProScan package together with various databases. Version information of InterProScan software and databases can be found from the following table
 
@@ -132,11 +132,11 @@ For now, the project aims to reliably predict the function of the transporter pr
       |SignalP_EUK |4.0|Analysis SignalP_EUK-4.0 |
       |SignalP_GRAM_POSITIVE |4.0|Analysis SignalP_GRAM_POSITIVE-4.0 |
    
-   1. Note that the last five tools are installed into InterProScan separately.
-   1. It is not necessary to redo the scan with InterProScan for all TCDB sequences as most of the TCDB sequences already have UniProt accession number. Therefore, we depend on the lookup service provided by InterProScan in order to directly extract the sequence features from the database.
+   1. Note that the last five tools and Panthon database are installed into InterProScan manually.
+   1. It is not necessary to perform again the scanning with InterProScan for all TCDB sequences as most of the TCDB sequences already have UniProt accession number. Therefore, we depend on the lookup service provided by InterProScan in order to directly extract the sequence features from the database.
    1. In addition to direct extraction, protein sequences that is not known to InterProScan are scanned.
 
-1. Original data files are located in the directory `./Data/`.
+1. Original data files are located in the directory `./Data/tcdbips`.
 
 ## Data preprocessing
 
