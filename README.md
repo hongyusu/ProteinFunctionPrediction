@@ -82,8 +82,28 @@ For now, the project aims to reliably predict the function of the transporter pr
       1. The format of this file is
 
          `qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue bitscore`.
+       
+      2. The keywords are explained in the following table
 
-1. [InterProScan](http://hongyusu.github.io/lessons/2015/06/17/extract-protein-features-via-interproscan/)
+         |Keyword|Means|
+         |---:|---:|
+         |qseqid | Query Seq-id|
+         |sseqid | Subject Seq-id|
+         |sallacc | All subject accessions|
+         |qstart | Start of alignment in query|
+         |qend | End of alignment in query|
+         |sstart | Start of alignment in subject|
+         |send | End of alignment in subject|
+         |evalue | Expect value|
+         |bitscore | Bit score|
+         |score | Raw score|
+         |length | Alignment length|
+         |pident | Percentage of identical matches|
+         |mismatch | Number of mismatches|
+         |gapopen | Number of gap openings|
+
+
+1. [InterProScan](http://hongyusu.github.io/lessons/2015/06/17/extract-protein-features-via-interproscan/)|
 
    1. For all proteins in TCDB, we extract various protein features by running [InterProScan](https://code.google.com/p/interproscan/).
    1. As this procedure takes time, we would like to install and run the InterProScan on local machines other than webservers.
