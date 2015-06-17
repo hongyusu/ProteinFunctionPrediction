@@ -1,1 +1,12 @@
-./interproscan.sh -i ../../../Data/tcdb -iprlookup -f tsv
+
+
+
+
+
+
+./interproscan.sh -i ../../../Data/tcdb -iprlookup -f tsv --goterms
+
+
+
+
+
