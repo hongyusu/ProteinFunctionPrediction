@@ -1,0 +1,25 @@
+\contentsline {section}{\numberline {1}Classification criteria underlying the TCDB}{2}
+\contentsline {subsection}{\numberline {1.1}Structure of TCDB}{2}
+\contentsline {subsection}{\numberline {1.2}The levels of the TCDB hierarchy}{3}
+\contentsline {subsubsection}{\numberline {1.2.1}The class level}{3}
+\contentsline {subsubsection}{\numberline {1.2.2}The subclass level}{4}
+\contentsline {subsubsection}{\numberline {1.2.3}The family level}{4}
+\contentsline {subsubsection}{\numberline {1.2.4}The subfamily level}{5}
+\contentsline {subsubsection}{\numberline {1.2.5}The most specific level}{6}
+\contentsline {subsection}{\numberline {1.3}Remarks on the TCDB annotations}{6}
+\contentsline {subsubsection}{\numberline {1.3.1}Meaning of the multiple annotations for the most specific classes.}{6}
+\contentsline {subsubsection}{\numberline {1.3.2}Proteins annotated to more than 1 leaf of the TCDB}{8}
+\contentsline {section}{\numberline {2}The data}{8}
+\contentsline {subsection}{\numberline {2.1}Taxonomy data}{8}
+\contentsline {subsection}{\numberline {2.2}The annotation data}{8}
+\contentsline {subsection}{\numberline {2.3}The input feature data}{8}
+\contentsline {subsubsection}{\numberline {2.3.1}BLAST-based data}{8}
+\contentsline {subsubsection}{\numberline {2.3.2}InterPro feature data}{9}
+\contentsline {subsubsection}{\numberline {2.3.3}TransMembrane Segments (TMS) data}{9}
+\contentsline {subsubsection}{\numberline {2.3.4}PDB-based data}{9}
+\contentsline {subsubsection}{\numberline {2.3.5}Taxonomic data}{9}
+\contentsline {subsubsection}{\numberline {2.3.6}Other features}{9}
+\contentsline {section}{\numberline {3}Methods}{10}
+\contentsline {subsection}{\numberline {3.1}Proposed methods}{10}
+\contentsline {subsection}{\numberline {3.2}Related work}{10}
+\contentsline {subsection}{\numberline {3.3}Baseline methods}{10}
