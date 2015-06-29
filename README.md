@@ -128,7 +128,7 @@ As the intersection of the protein data listed above and the ones in TCDB is ver
 
    1. For all proteins in TCDB, we extract various protein features by running [InterProScan](https://code.google.com/p/interproscan/).
    1. As this procedure takes time, we would like to install and run the InterProScan on local machines other than on webservers.
-   1. A brief intruction for installation and running InterProScan is documented in [my blog post](http://hongyusu.github.io/lessons/2015/06/17/extract-protein-features-via-interproscan/).
+   1. A brief instruction for installation and running InterProScan is documented in [my blog post](http://hongyusu.github.io/lessons/2015/06/17/extract-protein-features-via-interproscan/).
    1. In particular, we download the InterProScan package together with various databases. Version information of InterProScan software and databases can be found from the following table
 
       |Software and databases|Version|Information|
@@ -251,7 +251,7 @@ As the intersection of the protein data listed above and the ones in TCDB is ver
    |---:|---:|
    |Number of proteins|12546|
    |Number of features|32036|
-   |TYpe of features|18|
+   |Type of features|18|
 
 1. Feature types are listed as follows: 
 
