@@ -256,7 +256,7 @@ As the intersection of the protein data listed above and the ones in TCDB is ver
 1. Feature types are listed as follows: 
 
    |Feature prefix|Feature type|Version information|Description|
-   |---:|---:|---:|---:|
+   |---:|---:|---:|----------:|
    |TC_|TCDB||TCDB classification|
    |TB_|BLAST||BLAST search|
    |TIProDom_|ProDom|2006.1|ProDom is a comprehensive set of protein domain families automatically generated from the UniProt Knowledge Database.|
