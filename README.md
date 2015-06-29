@@ -231,14 +231,15 @@ As the intersection of the protein data listed above and the ones in TCDB is ver
    1. Files are listed as follows:
 
       ```
-      |---Bins
-      |   |---process_tcdb.py      # process original tcdb database (remove duplication ect)
-      |   |---merge_tcdb_blast_and_ips.py          # merge tcdb blast, ips and classfiication data
-      |---Results
-      |   |---tcdbdata      # merged data in sparse matrix format: 'protein name' 'feature name' 'value' 
-      |   |---tcdbdata.collab       # feature names
-      |   |---tcdbdata.rowlab       # protein names
-      |   |---tcdbdata.mtx          # sparse data matrix with format 'protein id' 'feature id' 'value'
+      |Preprocessing
+      |---|Bins
+      |   |---|process_tcdb.py      # process original tcdb database (remove duplication ect)
+      |   |---|merge_tcdb_blast_and_ips.py          # merge tcdb blast, ips and classfiication data
+      |---|Results
+      |   |---|tcdbdata      # merged data in sparse matrix format: 'protein name' 'feature name' 'value' 
+      |   |---|tcdbdata.collab       # feature names
+      |   |---|tcdbdata.rowlab       # protein names
+      |   |---|tcdbdata.mtx          # sparse data matrix with format 'protein id' 'feature id' 'value'
       ```
  
 ##
