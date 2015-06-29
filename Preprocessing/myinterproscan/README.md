@@ -1,6 +1,8 @@
 
 # InterProScan
 
+More information can be found from [my blog post](http://hongyusu.github.io/lessons/2015/06/17/extract-protein-features-via-interproscan/).
+
 This post aims to illustrate the installation and running InterProScan on a local machine. InterProScan is frequently used in Bioinformatics data analysis the goal of which is to extract various protein features based on sequence alignment of database search.
 As scanning a protein sequence is time consuming even on a local machine, we install the lookup database based on which features of known protein can be directed extracted from the database.
 
