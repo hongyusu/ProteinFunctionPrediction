@@ -184,45 +184,43 @@ As the intersection of the protein data listed above and the ones in TCDB is ver
 1. The first strategy we used is to merge the protein data from the Master thesis and from TCDB database to find an intersection of proteins with both various features and classification information in TCDB.
    1. However, we found out that the intersection is very small. Only about 1000 proteins from TCDB has feature representations in the Master thesis data.
    1. This strategy is briefly illustrated as followings:
-   ```
-   1. Merge datasets from different sources:
-   
-      1. Merge the following feature types into one matrix
-   
-         |Data type|#Proteins|#Features|
-         |----:|----:|----:|
-         |matgoBP|101422|12891|
-         |matgoCC|101422|1670|
-         |matgoMF|101422|4816|
-         |matblastcompressed|56838|12646|
-         |matpfam|100589|7341|
-         |mattaxo|104116|3004|
-         |TCDB|12516|9456|
-   
-      2. A big global matrix is computed by concatenating the matrices of protein-GO, protein-Blast, protein-Ffam, protein-taxonomy, and protein-TCDB, and protein-TCDBblast.
-   
-         1. The number of proteins and the number of features in the union of the collection of matrices are shown in the following table.
-   
-         2. The number of proteins and the number of features in the intersection of the collection of matrics are shown in the following table. Notice that a protein will present in the interection matrix if it has features in GO/BLAST/Pfam/Taxonomy categories. 
-   
-            |Type|#Proteins|#Features|
+      1. Merge datasets from different sources:
+      
+         1. Merge the following feature types into one matrix
+      
+            |Data type|#Proteins|#Features|
             |----:|----:|----:|
-            |Union|123619|64328|
-            |Intersection|1336|64328|
-   
-         3. Different type of fetures are annotated in `.collab` according to the following table
-   
-            |Feature name|Prefix|
-            |---:|---:|
-            |Gene ontology: biological process|GB|
-            |Gene ontology: cellular component|GC|
-            |Gene ontology: molecular function|GM|
-            |Protein family|PF|
-            |BLAST|MB|
-            |Taxonomy|MT|
-            |TCDB classification|TC|
-            |TCDB BLAST|TB|
-   ```
+            |matgoBP|101422|12891|
+            |matgoCC|101422|1670|
+            |matgoMF|101422|4816|
+            |matblastcompressed|56838|12646|
+            |matpfam|100589|7341|
+            |mattaxo|104116|3004|
+            |TCDB|12516|9456|
+      
+         2. A big global matrix is computed by concatenating the matrices of protein-GO, protein-Blast, protein-Ffam, protein-taxonomy, and protein-TCDB, and protein-TCDBblast.
+      
+            1. The number of proteins and the number of features in the union of the collection of matrices are shown in the following table.
+      
+            2. The number of proteins and the number of features in the intersection of the collection of matrics are shown in the following table. Notice that a protein will present in the interection matrix if it has features in GO/BLAST/Pfam/Taxonomy categories. 
+      
+               |Type|#Proteins|#Features|
+               |----:|----:|----:|
+               |Union|123619|64328|
+               |Intersection|1336|64328|
+      
+            3. Different type of fetures are annotated in `.collab` according to the following table
+      
+               |Feature name|Prefix|
+               |---:|---:|
+               |Gene ontology: biological process|GB|
+               |Gene ontology: cellular component|GC|
+               |Gene ontology: molecular function|GM|
+               |Protein family|PF|
+               |BLAST|MB|
+               |Taxonomy|MT|
+               |TCDB classification|TC|
+               |TCDB BLAST|TB|
    
 1. Then we leave the origin data used in the Master thesis and only rely on the proteins from TCDB. In particular, we compute various features via running BLAST and InterProScan.
   
