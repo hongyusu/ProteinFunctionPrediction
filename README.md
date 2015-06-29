@@ -254,6 +254,7 @@ As the intersection of the protein data listed above and the ones in TCDB is ver
    |TYpe of features|18|
 
 1. Feature types are listed as follows: 
+
    |Feature prefix|Feature type|Version information|Description|
    |---:|---:|---:|
    |TC_|TCDB||TCDB classification|
