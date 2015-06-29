@@ -274,9 +274,9 @@ As the intersection of the protein data listed above and the ones in TCDB is ver
    |TICoils__|Coils|2.2|Prediction of Coiled Coil Regions in Proteins|
    |TITMHMM__|TMHMM| 2.0| Prediction of transmembrane helices in proteins| 
    |TIPhobius__|Phobius |1.01|A combined transmembrane topology and signal peptide predictor|
-   |TISignalP_GRAM_NEGATIVE|SignalP_GRAM_NEGATIVE |4.0|SignalP (organism type gram-negative prokaryotes) predicts the presence and location of signal peptide cleavage sites in amino acid sequences for gram-negative prokaryotes|
-   |TISignalP_EUK|SignalP_EUK |4.0|SignalP (organism type eukaryotes) predicts the presence and location of signal peptide cleavage sites in amino acid sequences for eukaryotes.|
-   |TISignalP_GRAM_POSITIVE|SignalP_GRAM_POSITIVE |4.0|SignalP (organism type gram-positive prokaryotes) predicts the presence and location of signal peptide cleavage sites in amino acid sequences for gram-positive prokaryotes|
+   |TISignalP_GRAM_NEGATIVE__|SignalP_GRAM_NEGATIVE |4.0|SignalP (organism type gram-negative prokaryotes) predicts the presence and location of signal peptide cleavage sites in amino acid sequences for gram-negative prokaryotes|
+   |TISignalP_EUK__|SignalP_EyUK|4.0|SignalP (organism type eukaryotes) predicts the presence and location of signal peptide cleavage sites in amino acid sequences for eukaryotes.|
+   |TISignalP_GRAM_POSITIVE__|SignalP_GRAM_POSITIVE |4.0|SignalP (organism type gram-positive prokaryotes) predicts the presence and location of signal peptide cleavage sites in amino acid sequences for gram-positive prokaryotes|
  
 
 
