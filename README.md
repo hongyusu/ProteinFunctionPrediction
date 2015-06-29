@@ -2,6 +2,9 @@
 
 # Protein function prediction
 
+
+## Introduction
+
 For now, the project aims to reliably predict the function of the transporter proteins.
 The function is defined as TC code following the hierarchical structure of the transporter protein classification system.
 The hierarchical structure of the classification system has five level. We aim to predict the first four level as the fifth level is the very specific classification.
@@ -18,39 +21,43 @@ For TCDB proteins we extract features of the following two categorises
    1. BLAST score with TCDB
    1. Several InterProScan feature
 
-## Data sources and feature representations 
+## Data
 
-1. We obtain some feature representations for proteins based on the [Master thesis](). This covers features in the following categories. 
+### Data from [Master thesis]() work
+ 
+We obtain some feature representations for proteins based on the [Master thesis](). This covers features in the following categories. 
 
-   1. Features from Gene ontology (GO)
+1. Features from Gene ontology (GO)
 
-      |Type of data|Number of items|
-      |---:|---:|
-      |Protein|101422|
-      |GO: Biological process|12891|
-      |GO: Molecular function|4816|
-      |GO: Cellular component|1670|
+   |Type of data|Number of items|
+   |---:|---:|
+   |Protein|101422|
+   |GO: Biological process|12891|
+   |GO: Molecular function|4816|
+   |GO: Cellular component|1670|
 
-   2. Protein family (Pfam) data
+2. Protein family (Pfam) data
 
-      |Type of data|Number of items|
-      |---:|---:|
-      |Protein|100589|
-      |Pfam feature| 7341|
+   |Type of data|Number of items|
+   |---:|---:|
+   |Protein|100589|
+   |Pfam feature| 7341|
 
-   3. Blast score with UniProt
+3. Blast score with UniProt
 
-      |Type of data|Number of items|
-      |---:|---:|
-      |Protein|56838|
-      |Blast feature|12646|
+   |Type of data|Number of items|
+   |---:|---:|
+   |Protein|56838|
+   |Blast feature|12646|
 
-   4. Taxonomy data
+4. Taxonomy data
 
-      |Type of data|Number of items|
-      |---:|---:|
-      |Protein|104116|
-      |Taxonomy feature|3004|
+   |Type of data|Number of items|
+   |---:|---:|
+   |Protein|104116|
+   |Taxonomy feature|3004|
+
+### Other data
 
 1. Transport protein classification data are downloaded from [TCDB database](http://www.tcdb.org/public/). 
 
