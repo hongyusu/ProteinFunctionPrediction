@@ -18,7 +18,7 @@ def process_tcdb(filename,fout):
     words = words[2].split(' ')
     proteinname = words[0]
     tcdbname = words[1]
-    fout.write('%s TC_%s 1\n' % (proteinname,tcdbname))
+    fout.write('%s TC__%s 1\n' % (proteinname,tcdbname))
   pass
 
 def process_tcdbblast(filename,fout):
@@ -26,7 +26,7 @@ def process_tcdbblast(filename,fout):
     words = line.strip().split('\t')
     proteinname = re.sub('.*\|','',words[0])
     featurename = re.sub('.*\|','',words[1])
-    fout.write('%s TB_%s %s\n' % (proteinname,featurename,words[11]))
+    fout.write('%s TB__%s %s\n' % (proteinname,featurename,words[11]))
   pass
 
 def process_tcdbips(filename,fout):
@@ -36,7 +36,7 @@ def process_tcdbips(filename,fout):
   for line in open('../../Data/tcdbips'):
     words = line.strip().split('\t')
     proteinname = re.sub('.*\|','',words[0])
-    featurename = words[3] +'_'+ words[4]
+    featurename = words[3] +'__'+ words[4]
     if words[8] == '-':
       words[8] = '1'
     fout.write('%s TI%s %s\n' % (proteinname,featurename,words[8]))
