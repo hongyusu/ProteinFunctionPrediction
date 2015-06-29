@@ -168,7 +168,7 @@ For now, the project aims to reliably predict the function of the transporter pr
    |---Results
    ```
 
-1. Remove duplication in transporter protein classification database sequence-classification file.
+1. Remove duplication in transporter protein classification database (TCDB) sequence v.s. TC classification file.
 
 1. Merge datasets from different sources:
 
