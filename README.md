@@ -253,29 +253,29 @@ As the intersection of the protein data listed above and the ones in TCDB is ver
    |Number of features|32036|
    |TYpe of features|18|
 
-1. 
-      |Feature prefix|Feature type|Version information|Description|
-      |---:|---:|---:|
-      |TC_|TCDB||TCDB classification|
-      |TB_|BLAST||BLAST search|
-      |TIProDom_|ProDom|2006.1|ProDom is a comprehensive set of protein domain families automatically generated from the UniProt Knowledge Database.|
-      |TIHamap_|HAMAP||High-quality Automated and Manual Annotation of Microbial Proteomes|
-      |TISMART_|SMART|6.2|SMART allows the identification and analysis of domain architectures based on Hidden Markov Models or HMMs|
-      |TISUPERFAMILY_|SuperFamily|1.75|SUPERFAMILY is a database of structural and functional annotation for all proteins and genomes.|
-      |TIPRINTS_|PRINTS|42.0|A fingerprint is a group of conserved motifs used to characterise a protein family|
-      |TIPANTHER_|Panther|9.0|The PANTHER (Protein ANalysis THrough Evolutionary Relationships) Classification System is a unique resource that classifies genes by their functions, using published scientific experimental evidence and evolutionary relationships to predict function even in the absence of direct experimental evidence.|
-      |TIGene3D_|Gene3d|3.5.0|Structural assignment for whole genes and genomes using the CATH domain structure database|
-      |TIPIRSF_|PIRSF|3.01|The PIRSF concept is being used as a guiding principle to provide comprehensive and non-overlapping clustering of UniProtKB sequences into a hierarchical order to reflect their evolutionary relationships.|
-      |TIPfam_|PfamA|27.0|A large collection of protein families, each represented by multiple sequence alignments and hidden Markov models (HMMs)|
-      |TIProSiteProfiles_|PrositeProfiles||PROSITE consists of documentation entries describing protein domains, families and functional sites as well as associated patterns and profiles to identify them|
-      |TITIGRFAM_|TIGRFAM|15.0|TIGRFAMs are protein families based on Hidden Markov Models or HMMs|
-      |TIProSitePatterns_|PrositePatterns||PROSITE consists of documentation entries describing protein domains, families and functional sites as well as associated patterns and profiles to identify them|
-      |TICoils_|Coils|2.2|Prediction of Coiled Coil Regions in Proteins|
-      |TITMHMM_|TMHMM| 2.0| Prediction of transmembrane helices in proteins| 
-      |TIPhobius_|Phobius |1.01|A combined transmembrane topology and signal peptide predictor|
-      |TISignalP_|SignalP_GRAM_NEGATIVE |4.0|SignalP (organism type gram-negative prokaryotes) predicts the presence and location of signal peptide cleavage sites in amino acid sequences for gram-negative prokaryotes|
-      |TISignalP_|SignalP_EUK |4.0|SignalP (organism type eukaryotes) predicts the presence and location of signal peptide cleavage sites in amino acid sequences for eukaryotes.|
-      |TISignalP_|SignalP_GRAM_POSITIVE |4.0|SignalP (organism type gram-positive prokaryotes) predicts the presence and location of signal peptide cleavage sites in amino acid sequences for gram-positive prokaryotes|
+1. Feature types are listed as follows: 
+   |Feature prefix|Feature type|Version information|Description|
+   |---:|---:|---:|
+   |TC_|TCDB||TCDB classification|
+   |TB_|BLAST||BLAST search|
+   |TIProDom_|ProDom|2006.1|ProDom is a comprehensive set of protein domain families automatically generated from the UniProt Knowledge Database.|
+   |TIHamap_|HAMAP||High-quality Automated and Manual Annotation of Microbial Proteomes|
+   |TISMART_|SMART|6.2|SMART allows the identification and analysis of domain architectures based on Hidden Markov Models or HMMs|
+   |TISUPERFAMILY_|SuperFamily|1.75|SUPERFAMILY is a database of structural and functional annotation for all proteins and genomes.|
+   |TIPRINTS_|PRINTS|42.0|A fingerprint is a group of conserved motifs used to characterise a protein family|
+   |TIPANTHER_|Panther|9.0|The PANTHER (Protein ANalysis THrough Evolutionary Relationships) Classification System is a unique resource that classifies genes by their functions, using published scientific experimental evidence and evolutionary relationships to predict function even in the absence of direct experimental evidence.|
+   |TIGene3D_|Gene3d|3.5.0|Structural assignment for whole genes and genomes using the CATH domain structure database|
+   |TIPIRSF_|PIRSF|3.01|The PIRSF concept is being used as a guiding principle to provide comprehensive and non-overlapping clustering of UniProtKB sequences into a hierarchical order to reflect their evolutionary relationships.|
+   |TIPfam_|PfamA|27.0|A large collection of protein families, each represented by multiple sequence alignments and hidden Markov models (HMMs)|
+   |TIProSiteProfiles_|PrositeProfiles||PROSITE consists of documentation entries describing protein domains, families and functional sites as well as associated patterns and profiles to identify them|
+   |TITIGRFAM_|TIGRFAM|15.0|TIGRFAMs are protein families based on Hidden Markov Models or HMMs|
+   |TIProSitePatterns_|PrositePatterns||PROSITE consists of documentation entries describing protein domains, families and functional sites as well as associated patterns and profiles to identify them|
+   |TICoils_|Coils|2.2|Prediction of Coiled Coil Regions in Proteins|
+   |TITMHMM_|TMHMM| 2.0| Prediction of transmembrane helices in proteins| 
+   |TIPhobius_|Phobius |1.01|A combined transmembrane topology and signal peptide predictor|
+   |TISignalP_|SignalP_GRAM_NEGATIVE |4.0|SignalP (organism type gram-negative prokaryotes) predicts the presence and location of signal peptide cleavage sites in amino acid sequences for gram-negative prokaryotes|
+   |TISignalP_|SignalP_EUK |4.0|SignalP (organism type eukaryotes) predicts the presence and location of signal peptide cleavage sites in amino acid sequences for eukaryotes.|
+   |TISignalP_|SignalP_GRAM_POSITIVE |4.0|SignalP (organism type gram-positive prokaryotes) predicts the presence and location of signal peptide cleavage sites in amino acid sequences for gram-positive prokaryotes|
  
 
 
