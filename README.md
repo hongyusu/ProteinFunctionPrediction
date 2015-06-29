@@ -251,7 +251,7 @@ As the intersection of the protein data listed above and the ones in TCDB is ver
    |---:|---:|
    |Number of proteins|12546|
    |Number of features|32036|
-   |TYpe of features|18|
+   |Type of features|20|
 
 1. Feature types are listed as follows: 
 
