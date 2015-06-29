@@ -176,7 +176,8 @@ As the intersection of the protein data listed above and the ones in TCDB is ver
       |14|GO annotations (e.g. GO:0005515) |
       |15|Pathways annotations (e.g. REACT_71) |
 
-   1. Otherwise, original data are located in the directory `./Data/`
+1. Besides the data files described above, all original data are located in the directory `./Data/`
+
 
 ## Data preprocessing
 
@@ -184,13 +185,15 @@ As the intersection of the protein data listed above and the ones in TCDB is ver
 
    ```
    |---Bins
-   |   |---process_tcdb.py          process original tcdb database (remove duplication ect)
-   |   |---merge_tcdb_blast_and_ips.py          merge tcdb blast, ips and classfiication data
+   |   |---process_tcdb.py      # process original tcdb database (remove duplication ect)
+   |   |---merge_tcdb_blast_and_ips.py          # merge tcdb blast, ips and classfiication data
    |---Results
    ```
 
 1. Remove duplication in transporter protein classification database (TCDB) sequence v.s. TC classification file.
 
+
+```
 1. Merge datasets from different sources:
 
    1. Merge the following feature types into one matrix
@@ -228,8 +231,16 @@ As the intersection of the protein data listed above and the ones in TCDB is ver
          |Taxonomy|MT|
          |TCDB classification|TC|
          |TCDB BLAST|TB|
+```
 
 1. Scripts for data preprocessing are located in `./Preprocessing/Bin/`. 
 1. Results for data preprocessing are located in `./Preprocessing/Results/`. 
 
 ##
+
+
+
+
+
+
+
