@@ -161,10 +161,12 @@ For now, the project aims to reliably predict the function of the transporter pr
 
 1. Scripts:
 
+   ```
    |---Bins
        |---process_tcdb.py          process original tcdb database (remove duplication ect)
        |---merge_tcdb_blast_and_ips.py          merge tcdb blast, ips and classfiication data
    |---Results
+   ```
 
 1. Remove duplication in transporter protein classification database sequence-classification file.
 
