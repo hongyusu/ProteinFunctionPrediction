@@ -4,6 +4,9 @@ import os
 
 
 def process_tcdb_for_blast():
+  '''
+  process tcdb database for blast serach: remove dupliate proteins etc.
+  '''
   data = []
   write = 0
   fout = open('/cs/fs/home/su/softwares/blast/bin/tcdb','w')
