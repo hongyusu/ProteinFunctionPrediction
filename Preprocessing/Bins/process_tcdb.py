@@ -6,6 +6,8 @@ import os
 def process_tcdb_for_blast():
   '''
   process tcdb database for blast serach: remove dupliate proteins etc.
+  original tcdb file: tcdb.1
+  result tcdb file: tcdb
   '''
   data = []
   write = 0
@@ -40,7 +42,8 @@ def process_tcdb_label():
       words = line.strip().split('|')
       words = words[2].split(' ')
       proteinname = words[0].upper()
-      tcname = words[1].upper()
+      tcname = words[1].upper().split('.')
+      tcname = '.'.join(tcname[0:4])
       if not proteinname in rownamelist:
         rownamelist.append(proteinname)
       if not tcname in colnamelist:
@@ -52,7 +55,6 @@ def process_tcdb_label():
   pass
 
 
-
 if __name__ == '__main__':
-  process_tcdb_for_blast()
+  #process_tcdb_for_blast()
   process_tcdb_label()
