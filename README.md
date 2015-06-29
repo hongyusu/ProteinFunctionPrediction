@@ -7,11 +7,14 @@ The function is defined as TC code following the hierarchical structure of the t
 The hierarchical structure of the classification system has five level. We aim to predict the first four level as the fifth level is the very specific classification.
 In addition to the transporter proteins documented in TCDB, we also collect proteins from UniProt.
 Uniprot proteins have the following features:
+
    1. Gene Ontology
    2. Protein Family
    3. BLAST score with UniProt
    4. Taxonomy in NCBI
+
 For TCDB proteins we extract features of the following two categorises
+
    1. BLAST score with TCDB
    1. Several InterProScan feature
 
