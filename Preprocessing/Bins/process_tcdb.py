@@ -11,11 +11,11 @@ def process_tcdb_for_blast():
   '''
   data = []
   write = 0
-  fout = open('/cs/fs/home/su/softwares/blast/bin/tcdb','w')
+  fout = open('../../Data/tcdb','w')
   for line in open('../../Data/tcdb.1'):
     if line.startswith('>'):
       words = line.strip().split('|')
-      proteinname = (words[2]).upper()
+      proteinname = (words[2]).upper().strip()
       if not proteinname in data:
         write = 1
         data.append(proteinname)
@@ -27,7 +27,10 @@ def process_tcdb_for_blast():
       if write == 1:
         fout.write(line)
   fout.close()
-  os.system('cp /cs/fs/home/su/softwares/blast/bin/tcdb ../../Data/tcdb')
+  try:
+    os.system('cp ../../Data/tcdb /cs/fs/home/su/softwares/blast/bin/tcdb')
+  except Exception as errormessage:
+    print 'now on trition'
   pass
 
 
@@ -56,5 +59,5 @@ def process_tcdb_label():
 
 
 if __name__ == '__main__':
-  #process_tcdb_for_blast()
+  process_tcdb_for_blast()
   process_tcdb_label()
