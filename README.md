@@ -2,12 +2,18 @@
 
 # Protein function prediction
 
-For now, the project aims to reliably predict the function of the transporter proteins. The function is defined as TC code following the hierarchical structure of the transporter protein classification system. In addition to transporter proteins in TCDB, we obtain proteins from UniProt and represent each protein with the following features, including
+For now, the project aims to reliably predict the function of the transporter proteins.
+The function is defined as TC code following the hierarchical structure of the transporter protein classification system.
+The hierarchical structure of the classification system has five level. We aim to predict the first four level as the fifth level is the very specific classification.
+In addition to the transporter proteins documented in TCDB, we also collect proteins from UniProt.
+Uniprot proteins have the following features:
    1. Gene Ontology
    2. Protein Family
    3. BLAST score with UniProt
    4. Taxonomy in NCBI
-   5. BLAST score with TCDB
+For TCDB proteins we extract features of the following two categorises
+   1. BLAST score with TCDB
+   1. Several InterProScan feature
 
 ## Data sources and feature representations 
 
