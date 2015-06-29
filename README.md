@@ -59,6 +59,9 @@ We obtain some feature representations for proteins based on the [Master thesis]
 
 ### Other data
 
+We extract protein classification data from TCDB database.
+As the intersection of the protein data listed above and the ones in TCDB is very small we compute protein features via BLAST and InterProScan.
+
 1. Transport protein classification data are downloaded from [TCDB database](http://www.tcdb.org/public/). 
 
    |Type of data|Number of items|
@@ -76,7 +79,7 @@ We obtain some feature representations for proteins based on the [Master thesis]
       |4|2237| 
       |5|9456| 
 
-  1. Data file for TCDB sequence and classification information is in the file `./Data/tcdb`.
+  1. Data file for TCDB sequence and classification information is in the file `./Data/tcdb.1`.
 
 
 1. [BLAST with TCDB](http://hongyusu.github.io/lessons/2015/06/16/ncbi-blast-installation-and-running-in-parallel/)
@@ -85,6 +88,7 @@ We obtain some feature representations for proteins based on the [Master thesis]
    1. This procedure will genrate a pairwise similarity matrix.
    1. Instruction for installing and running BLAST can be found from [my blog post](http://hongyusu.github.io/lessons/2015/06/16/ncbi-blast-installation-and-running-in-parallel/). 
    1. In particular, after removing some replicated proteins, there are 12515 protein left in TCDB which will be used to build a TCDB BLAST database.
+   1. The cleaned TCDB data file is located in `./Data/tcdb`.
    1. For the BLAST search, we obtain all hits with e-value above 0.01. 
    1. We use BLAST score as similary measure between pair of proteins.
    1. Some statistics about the TCDB BLAST features are shown in the following table
@@ -95,6 +99,7 @@ We obtain some feature representations for proteins based on the [Master thesis]
       |TCDB BLAST feature|12515|
 
    1. Data file for TCDB BLAST feature is located as `./Data/tcdbblast`.
+
       1. The format of this file is
 
          `qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue bitscore`.
