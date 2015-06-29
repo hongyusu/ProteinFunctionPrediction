@@ -224,17 +224,17 @@ As the intersection of the protein data listed above and the ones in TCDB is ver
             |TCDB BLAST|TB|
    ```
    
-1. Then we leave the origin data used in the Master thesis and only rely on the proteins from TCDB. In particular, we compute various feature via running BLAST and InterProScan.
+1. Then we leave the origin data used in the Master thesis and only rely on the proteins from TCDB. In particular, we compute various features via running BLAST and InterProScan.
   
    1. Remove duplicated proteins in transporter protein classification database (TCDB) sequence v.s. TC classification file.
-   1. Merge tcdb classification file, TCDB BLAST feature, and TCDB InterProScan features.
+   1. Merge TCDB classification file, TCDB BLAST feature, and TCDB InterProScan features.
    1. Files are listed as follows:
 
       ```
       Preprocessing
       |--Bins
-         |---process_tcdb.py        # process original tcdb database (remove duplication ect)
-         |---merge_tcdb_blast_and_ips.py          # merge tcdb blast, ips and classfiication data
+         |---process_tcdb.py        # process original TCDB database (remove duplication ect)
+         |---merge_tcdb_blast_and_ips.py          # merge TCDB blast, ips and classfiication data
       |--|Results
          |---tcdbdata               # merged data in sparse matrix format: 'protein name' 'feature name' 'value' 
          |---tcdbdata.collab        # feature names
