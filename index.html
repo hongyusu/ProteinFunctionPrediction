@@ -22,21 +22,35 @@
       <h1>
 <a id="protein-function-prediction" class="anchor" href="#protein-function-prediction" aria-hidden="true"><span class="octicon octicon-link"></span></a>Protein function prediction</h1>
 
-<p>For now, the project aims to reliably predict the function of the transporter proteins. The function is defined as TC code following the hierarchical structure of the transporter protein classification system. In addition to transporter proteins in TCDB, we obtain proteins from UniProt and represent each protein with the following features, including</p>
+<h2>
+<a id="introduction" class="anchor" href="#introduction" aria-hidden="true"><span class="octicon octicon-link"></span></a>Introduction</h2>
+
+<p>For now, the project aims to reliably predict the function of the transporter proteins.
+The function is defined as TC code following the hierarchical structure of the transporter protein classification system.
+The hierarchical structure of the classification system has five level. We aim to predict the first four level as the fifth level is the very specific classification.
+In addition to the transporter proteins documented in TCDB, we also collect proteins from UniProt.
+Uniprot proteins have the following features:</p>
 
 <ol>
 <li>Gene Ontology</li>
 <li>Protein Family</li>
 <li>BLAST score with UniProt</li>
 <li>Taxonomy in NCBI</li>
+</ol>
+
+<p>For TCDB proteins we extract features of the following two categorises</p>
+
+<ol>
 <li>BLAST score with TCDB</li>
+<li>Several InterProScan feature</li>
 </ol>
 
 <h2>
-<a id="data-sources-and-feature-representations" class="anchor" href="#data-sources-and-feature-representations" aria-hidden="true"><span class="octicon octicon-link"></span></a>Data sources and feature representations</h2>
+<a id="data" class="anchor" href="#data" aria-hidden="true"><span class="octicon octicon-link"></span></a>Data</h2>
 
-<ol>
-<li>
+<h3>
+<a id="data-from-master-thesis-work" class="anchor" href="#data-from-master-thesis-work" aria-hidden="true"><span class="octicon octicon-link"></span></a>Data from <a href="">Master thesis</a> work</h3>
+
 <p>We obtain some feature representations for proteins based on the <a href="">Master thesis</a>. This covers features in the following categories. </p>
 
 <ol>
@@ -137,7 +151,14 @@
 </table>
 </li>
 </ol>
-</li>
+
+<h3>
+<a id="other-data" class="anchor" href="#other-data" aria-hidden="true"><span class="octicon octicon-link"></span></a>Other data</h3>
+
+<p>We extract protein classification data from TCDB database.
+As the intersection of the protein data listed above and the ones in TCDB is very small we compute protein features via BLAST and InterProScan.</p>
+
+<ol>
 <li>
 <p>Transport protein classification data are downloaded from <a href="http://www.tcdb.org/public/">TCDB database</a>. </p>
 
@@ -195,7 +216,7 @@
 </tbody>
 </table>
 </li>
-<li><p>Data file for TCDB sequence and classification information is in the file <code>./Data/tcdb</code>.</p></li>
+<li><p>Data file for TCDB sequence and classification information is in the file <code>./Data/tcdb.1</code>.</p></li>
 </ol>
 </li>
 <li>
@@ -204,8 +225,9 @@
 <ol>
 <li>Protein sequences are aligned with themselves by running BLAST algorithms.</li>
 <li>This procedure will genrate a pairwise similarity matrix.</li>
-<li>Instruction for installing and running can be found from <a href="http://hongyusu.github.io/lessons/2015/06/16/ncbi-blast-installation-and-running-in-parallel/">my blog post</a>. </li>
+<li>Instruction for installing and running BLAST can be found from <a href="http://hongyusu.github.io/lessons/2015/06/16/ncbi-blast-installation-and-running-in-parallel/">my blog post</a>. </li>
 <li>In particular, after removing some replicated proteins, there are 12515 protein left in TCDB which will be used to build a TCDB BLAST database.</li>
+<li>The cleaned TCDB data file is located in <code>./Data/tcdb</code>.</li>
 <li>For the BLAST search, we obtain all hits with e-value above 0.01. </li>
 <li>We use BLAST score as similary measure between pair of proteins.</li>
 <li>
@@ -224,17 +246,91 @@
 <td align="right">12515</td>
 </tr>
 <tr>
-<td align="right">TCDB BLAST</td>
+<td align="right">TCDB BLAST feature</td>
 <td align="right">12515</td>
 </tr>
 </tbody>
 </table>
 </li>
 <li>
-<p>Data file for TCDB BLAST feature is in the file <code>./Data/tcdbblast</code>.</p>
+<p>Data file for TCDB BLAST feature is located as <code>./Data/tcdbblast</code>.</p>
 
 <ol>
-<li>The format of this file is <code>qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue bitscore</code>.</li>
+<li>
+<p>The format of this file is</p>
+
+<p><code>qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue bitscore</code>.</p>
+</li>
+<li>
+<p>The keywords are explained in the following table</p>
+
+<table>
+<thead>
+<tr>
+<th align="right">Keyword</th>
+<th align="right">Representation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="right">qseqid</td>
+<td align="right">Query Seq-id</td>
+</tr>
+<tr>
+<td align="right">sseqid</td>
+<td align="right">Subject Seq-id</td>
+</tr>
+<tr>
+<td align="right">sallacc</td>
+<td align="right">All subject accessions</td>
+</tr>
+<tr>
+<td align="right">qstart</td>
+<td align="right">Start of alignment in query</td>
+</tr>
+<tr>
+<td align="right">qend</td>
+<td align="right">End of alignment in query</td>
+</tr>
+<tr>
+<td align="right">sstart</td>
+<td align="right">Start of alignment in subject</td>
+</tr>
+<tr>
+<td align="right">send</td>
+<td align="right">End of alignment in subject</td>
+</tr>
+<tr>
+<td align="right">evalue</td>
+<td align="right">Expect value</td>
+</tr>
+<tr>
+<td align="right">bitscore</td>
+<td align="right">Bit score</td>
+</tr>
+<tr>
+<td align="right">score</td>
+<td align="right">Raw score</td>
+</tr>
+<tr>
+<td align="right">length</td>
+<td align="right">Alignment length</td>
+</tr>
+<tr>
+<td align="right">pident</td>
+<td align="right">Percentage of identical matches</td>
+</tr>
+<tr>
+<td align="right">mismatch</td>
+<td align="right">Number of mismatches</td>
+</tr>
+<tr>
+<td align="right">gapopen</td>
+<td align="right">Number of gap openings</td>
+</tr>
+</tbody>
+</table>
+</li>
 </ol>
 </li>
 </ol>
@@ -244,8 +340,8 @@
 
 <ol>
 <li>For all proteins in TCDB, we extract various protein features by running <a href="https://code.google.com/p/interproscan/">InterProScan</a>.</li>
-<li>As this procedure takes time, we would like to install and run the InterProScan on local machines other than webservers.</li>
-<li>A brief intruction for installation and running InterProScan is documented in <a href="http://hongyusu.github.io/lessons/2015/06/17/extract-protein-features-via-interproscan/">my blog post</a>.</li>
+<li>As this procedure takes time, we would like to install and run the InterProScan on local machines other than on webservers.</li>
+<li>A brief instruction for installation and running InterProScan is documented in <a href="http://hongyusu.github.io/lessons/2015/06/17/extract-protein-features-via-interproscan/">my blog post</a>.</li>
 <li>
 <p>In particular, we download the InterProScan package together with various databases. Version information of InterProScan software and databases can be found from the following table</p>
 
@@ -331,180 +427,355 @@
 <tr>
 <td align="right">TMHMM</td>
 <td align="right">2.0</td>
-<td align="right">Analysis TMHMM-2.0c</td>
-</tr>
-<tr>
-<td align="right">SignalP_GRAM_NEGATIVE</td>
-<td align="right">4.0</td>
-<td align="right">Analysis SignalP_GRAM_NEGATIVE-4.0</td>
+<td align="right">Prediction of transmembrane helices in proteins</td>
 </tr>
 <tr>
 <td align="right">Phobius</td>
 <td align="right">1.01</td>
-<td align="right">Analysis Phobius-1.01</td>
+<td align="right">A combined transmembrane topology and signal peptide predictor</td>
+</tr>
+<tr>
+<td align="right">SignalP_GRAM_NEGATIVE</td>
+<td align="right">4.0</td>
+<td align="right">SignalP (organism type gram-negative prokaryotes) predicts the presence and location of signal peptide cleavage sites in amino acid sequences for gram-negative prokaryotes</td>
 </tr>
 <tr>
 <td align="right">SignalP_EUK</td>
 <td align="right">4.0</td>
-<td align="right">Analysis SignalP_EUK-4.0</td>
+<td align="right">SignalP (organism type eukaryotes) predicts the presence and location of signal peptide cleavage sites in amino acid sequences for eukaryotes.</td>
 </tr>
 <tr>
 <td align="right">SignalP_GRAM_POSITIVE</td>
 <td align="right">4.0</td>
-<td align="right">Analysis SignalP_GRAM_POSITIVE-4.0</td>
+<td align="right">SignalP (organism type gram-positive prokaryotes) predicts the presence and location of signal peptide cleavage sites in amino acid sequences for gram-positive prokaryotes</td>
 </tr>
 </tbody>
 </table>
 </li>
-<li><p>Note that the last five tools are not installed so far. </p></li>
-<li>It is not necessary to redo the scan with InterProScan for all TCDB sequences as most of the TCDB sequences already have UniProt accession number. Therefore, we depend on the lookup service provided by InterProScan in order to directly extract the sequence features from the database.</li>
+<li><p>Note that the last five tools and Panthon database are installed into InterProScan manually.</p></li>
+<li>It is not necessary to perform again the scanning with InterProScan for all TCDB sequences as most of the TCDB sequences already have UniProt accession number. Therefore, we depend on the lookup service provided by InterProScan in order to directly extract the sequence features from the database.</li>
 <li>In addition to direct extraction, protein sequences that is not known to InterProScan are scanned.</li>
+<li>
+<p>Interproscan results is located as <code>./Data/tcdbips</code>. The file follows the structure described in the following table</p>
+
+<table>
+<thead>
+<tr>
+<th align="right">Column</th>
+<th align="right">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="right">1</td>
+<td align="right">Protein Accession (e.g. P51587)</td>
+</tr>
+<tr>
+<td align="right">2</td>
+<td align="right">Sequence MD5 digest (e.g. 14086411a2cdf1c4cba63020e1622579)</td>
+</tr>
+<tr>
+<td align="right">3</td>
+<td align="right">Sequence Length (e.g. 3418)</td>
+</tr>
+<tr>
+<td align="right">4</td>
+<td align="right">Analysis (e.g. Pfam / PRINTS / Gene3D)</td>
+</tr>
+<tr>
+<td align="right">5</td>
+<td align="right">Signature Accession (e.g. PF09103 / G3DSA:2.40.50.140)</td>
+</tr>
+<tr>
+<td align="right">6</td>
+<td align="right">Signature Description (e.g. BRCA2 repeat profile)</td>
+</tr>
+<tr>
+<td align="right">7</td>
+<td align="right">Start location</td>
+</tr>
+<tr>
+<td align="right">8</td>
+<td align="right">Stop location</td>
+</tr>
+<tr>
+<td align="right">9</td>
+<td align="right">Score - is the e-value of the match reported by member database method (e.g. 3.1E-52)</td>
+</tr>
+<tr>
+<td align="right">10</td>
+<td align="right">Status - is the status of the match (T: true)</td>
+</tr>
+<tr>
+<td align="right">11</td>
+<td align="right">Date - is the date of the run</td>
+</tr>
+<tr>
+<td align="right">12</td>
+<td align="right">InterPro annotations - accession (e.g. IPR002093)</td>
+</tr>
+<tr>
+<td align="right">13</td>
+<td align="right">InterPro annotations - description (e.g. BRCA2 repeat)</td>
+</tr>
+<tr>
+<td align="right">14</td>
+<td align="right">GO annotations (e.g. GO:0005515)</td>
+</tr>
+<tr>
+<td align="right">15</td>
+<td align="right">Pathways annotations (e.g. REACT_71)</td>
+</tr>
+</tbody>
+</table>
+</li>
 </ol>
 </li>
-<li><p>Original data files are located in the directory <code>./Data/</code>.</p></li>
+<li><p>Besides the data files described above, all original data are located in the directory <code>./Data/</code></p></li>
 </ol>
 
 <h2>
 <a id="data-preprocessing" class="anchor" href="#data-preprocessing" aria-hidden="true"><span class="octicon octicon-link"></span></a>Data preprocessing</h2>
 
 <ol>
-<li><p>Remove duplication in transporter protein classification database sequence-classification file.</p></li>
 <li>
-<p>Merge datasets from different sources:</p>
+<p>The first strategy we used is to merge the protein data from the Master thesis and from TCDB database to find an intersection of proteins with both various features and classification information in TCDB.</p>
+
+<ol>
+<li>However, we found out that the intersection is very small. Only about 1000 proteins from TCDB has feature representations in the Master thesis data.</li>
+<li>This strategy is briefly illustrated as followings:</li>
+</ol>
+
+<pre><code>1. Merge datasets from different sources:
+
+  1. Merge the following feature types into one matrix
+
+     |Data type|#Proteins|#Features|
+     |----:|----:|----:|
+     |matgoBP|101422|12891|
+     |matgoCC|101422|1670|
+     |matgoMF|101422|4816|
+     |matblastcompressed|56838|12646|
+     |matpfam|100589|7341|
+     |mattaxo|104116|3004|
+     |TCDB|12516|9456|
+
+  2. A big global matrix is computed by concatenating the matrices of protein-GO, protein-Blast, protein-Ffam, protein-taxonomy, and protein-TCDB, and protein-TCDBblast.
+
+     1. The number of proteins and the number of features in the union of the collection of matrices are shown in the following table.
+
+     2. The number of proteins and the number of features in the intersection of the collection of matrics are shown in the following table. Notice that a protein will present in the interection matrix if it has features in GO/BLAST/Pfam/Taxonomy categories. 
+
+        |Type|#Proteins|#Features|
+        |----:|----:|----:|
+        |Union|123619|64328|
+        |Intersection|1336|64328|
+
+     3. Different type of fetures are annotated in `.collab` according to the following table
+
+        |Feature name|Prefix|
+        |---:|---:|
+        |Gene ontology: biological process|GB|
+        |Gene ontology: cellular component|GC|
+        |Gene ontology: molecular function|GM|
+        |Protein family|PF|
+        |BLAST|MB|
+        |Taxonomy|MT|
+        |TCDB classification|TC|
+        |TCDB BLAST|TB|
+</code></pre>
+</li>
+<li>
+<p>Then we leave the origin data used in the Master thesis and only rely on the proteins from TCDB. In particular, we compute various features via running BLAST and InterProScan.</p>
+
+<ol>
+<li>Remove duplicated proteins in transporter protein classification database (TCDB) sequence v.s. TC classification file.</li>
+<li>Merge TCDB classification file, TCDB BLAST feature, and TCDB InterProScan features.</li>
+<li>
+<p>Files are listed as follows:</p>
+
+<pre><code>Preprocessing
+|--Bins
+   |---process_tcdb.py        # process original TCDB database (remove duplication ect)
+   |---merge_tcdb_blast_and_ips.py          # merge TCDB blast, ips and classfiication data
+|--Results
+   |---tcdbdata               # merged data in sparse matrix format: 'protein name' 'feature name' 'value' 
+   |---tcdbdata.collab        # feature names
+   |---tcdbdata.rowlab        # protein names
+   |---tcdbdata.mtx           # sparse data matrix with format 'protein id' 'feature id' 'value'
+
+</code></pre>
+</li>
+</ol>
+</li>
+</ol>
+
+<h2>
+<a id="data-statistics" class="anchor" href="#data-statistics" aria-hidden="true"><span class="octicon octicon-link"></span></a>Data statistics</h2>
 
 <ol>
 <li>
-<p>Merge the following feature types into one matrix</p>
+<p>I compute the following statistice for the merged dataset, in particular, <code>./Preprocessing/Results/tcdb.mtx</code>.</p>
 
 <table>
 <thead>
 <tr>
-<th align="right">Data type</th>
-<th align="right">#Proteins</th>
-<th align="right">#Features</th>
+<th align="right">Type of statistics</th>
+<th align="right">Number</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td align="right">matgoBP</td>
-<td align="right">101422</td>
-<td align="right">12891</td>
+<td align="right">Number of proteins</td>
+<td align="right">12546</td>
 </tr>
 <tr>
-<td align="right">matgoCC</td>
-<td align="right">101422</td>
-<td align="right">1670</td>
+<td align="right">Number of features</td>
+<td align="right">32036</td>
 </tr>
 <tr>
-<td align="right">matgoMF</td>
-<td align="right">101422</td>
-<td align="right">4816</td>
+<td align="right">Type of features</td>
+<td align="right">18</td>
 </tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Feature types are listed as follows: </p>
+
+<table>
+<thead>
 <tr>
-<td align="right">matblastcompressed</td>
-<td align="right">56838</td>
-<td align="right">12646</td>
+<th align="right">Feature prefix</th>
+<th align="right">Feature type</th>
+<th align="right">Version information</th>
+<th align="right">Description</th>
 </tr>
+</thead>
+<tbody>
 <tr>
-<td align="right">matpfam</td>
-<td align="right">100589</td>
-<td align="right">7341</td>
-</tr>
-<tr>
-<td align="right">mattaxo</td>
-<td align="right">104116</td>
-<td align="right">3004</td>
-</tr>
-<tr>
+<td align="right">TC__</td>
 <td align="right">TCDB</td>
-<td align="right">12516</td>
-<td align="right">9456</td>
-</tr>
-</tbody>
-</table>
-</li>
-<li>
-<p>A big global matrix is computed by concatenating the matrices of protein-GO, protein-Blast, protein-Ffam, protein-taxonomy, and protein-TCDB, and protein-TCDBblast.</p>
-
-<ol>
-<li><p>The number of proteins and the number of features in the union of the collection of matrices are shown in the following table.</p></li>
-<li>
-<p>The number of proteins and the number of features in the intersection of the collection of matrics are shown in the following table. Notice that a protein will present in the interection matrix if it has features in GO/BLAST/Pfam/Taxonomy categories. </p>
-
-<table>
-<thead>
-<tr>
-<th align="right">Type</th>
-<th align="right">#Proteins</th>
-<th align="right">#Features</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="right">Union</td>
-<td align="right">123619</td>
-<td align="right">64328</td>
-</tr>
-<tr>
-<td align="right">Intersection</td>
-<td align="right">1336</td>
-<td align="right">64328</td>
-</tr>
-</tbody>
-</table>
-</li>
-<li>
-<p>Different type of fetures are annotated in <code>.collab</code> according to the following table</p>
-
-<table>
-<thead>
-<tr>
-<th align="right">Feature name</th>
-<th align="right">Prefix</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="right">Gene ontology: biological process</td>
-<td align="right">GB</td>
-</tr>
-<tr>
-<td align="right">Gene ontology: cellular component</td>
-<td align="right">GC</td>
-</tr>
-<tr>
-<td align="right">Gene ontology: molecular function</td>
-<td align="right">GM</td>
-</tr>
-<tr>
-<td align="right">Protein family</td>
-<td align="right">PF</td>
-</tr>
-<tr>
-<td align="right">BLAST</td>
-<td align="right">MB</td>
-</tr>
-<tr>
-<td align="right">Taxonomy</td>
-<td align="right">MT</td>
-</tr>
-<tr>
+<td align="right"></td>
 <td align="right">TCDB classification</td>
-<td align="right">TC</td>
 </tr>
 <tr>
-<td align="right">TCDB BLAST</td>
-<td align="right">TB</td>
+<td align="right">TB__</td>
+<td align="right">BLAST</td>
+<td align="right"></td>
+<td align="right">BLAST search</td>
+</tr>
+<tr>
+<td align="right">TIProDom__</td>
+<td align="right">ProDom</td>
+<td align="right">2006.1</td>
+<td align="right">ProDom is a comprehensive set of protein domain families automatically generated from the UniProt Knowledge Database.</td>
+</tr>
+<tr>
+<td align="right">TIHamap__</td>
+<td align="right">HAMAP</td>
+<td align="right"></td>
+<td align="right">High-quality Automated and Manual Annotation of Microbial Proteomes</td>
+</tr>
+<tr>
+<td align="right">TISMART__</td>
+<td align="right">SMART</td>
+<td align="right">6.2</td>
+<td align="right">SMART allows the identification and analysis of domain architectures based on Hidden Markov Models or HMMs</td>
+</tr>
+<tr>
+<td align="right">TISUPERFAMILY__</td>
+<td align="right">SuperFamily</td>
+<td align="right">1.75</td>
+<td align="right">SUPERFAMILY is a database of structural and functional annotation for all proteins and genomes.</td>
+</tr>
+<tr>
+<td align="right">TIPRINTS__</td>
+<td align="right">PRINTS</td>
+<td align="right">42.0</td>
+<td align="right">A fingerprint is a group of conserved motifs used to characterise a protein family</td>
+</tr>
+<tr>
+<td align="right">TIPANTHER__</td>
+<td align="right">Panther</td>
+<td align="right">9.0</td>
+<td align="right">The PANTHER (Protein ANalysis THrough Evolutionary Relationships) Classification System is a unique resource that classifies genes by their functions, using published scientific experimental evidence and evolutionary relationships to predict function even in the absence of direct experimental evidence.</td>
+</tr>
+<tr>
+<td align="right">TIGene3D__</td>
+<td align="right">Gene3d</td>
+<td align="right">3.5.0</td>
+<td align="right">Structural assignment for whole genes and genomes using the CATH domain structure database</td>
+</tr>
+<tr>
+<td align="right">TIPIRSF__</td>
+<td align="right">PIRSF</td>
+<td align="right">3.01</td>
+<td align="right">The PIRSF concept is being used as a guiding principle to provide comprehensive and non-overlapping clustering of UniProtKB sequences into a hierarchical order to reflect their evolutionary relationships.</td>
+</tr>
+<tr>
+<td align="right">TIPfam__</td>
+<td align="right">PfamA</td>
+<td align="right">27.0</td>
+<td align="right">A large collection of protein families, each represented by multiple sequence alignments and hidden Markov models (HMMs)</td>
+</tr>
+<tr>
+<td align="right">TIProSiteProfiles__</td>
+<td align="right">PrositeProfiles</td>
+<td align="right"></td>
+<td align="right">PROSITE consists of documentation entries describing protein domains, families and functional sites as well as associated patterns and profiles to identify them</td>
+</tr>
+<tr>
+<td align="right">TITIGRFAM__</td>
+<td align="right">TIGRFAM</td>
+<td align="right">15.0</td>
+<td align="right">TIGRFAMs are protein families based on Hidden Markov Models or HMMs</td>
+</tr>
+<tr>
+<td align="right">TIProSitePatterns__</td>
+<td align="right">PrositePatterns</td>
+<td align="right"></td>
+<td align="right">PROSITE consists of documentation entries describing protein domains, families and functional sites as well as associated patterns and profiles to identify them</td>
+</tr>
+<tr>
+<td align="right">TICoils__</td>
+<td align="right">Coils</td>
+<td align="right">2.2</td>
+<td align="right">Prediction of Coiled Coil Regions in Proteins</td>
+</tr>
+<tr>
+<td align="right">TITMHMM__</td>
+<td align="right">TMHMM</td>
+<td align="right">2.0</td>
+<td align="right">Prediction of transmembrane helices in proteins</td>
+</tr>
+<tr>
+<td align="right">TIPhobius__</td>
+<td align="right">Phobius</td>
+<td align="right">1.01</td>
+<td align="right">A combined transmembrane topology and signal peptide predictor</td>
+</tr>
+<tr>
+<td align="right">TISignalP_GRAM_NEGATIVE__</td>
+<td align="right">SignalP_GRAM_NEGATIVE</td>
+<td align="right">4.0</td>
+<td align="right">SignalP (organism type gram-negative prokaryotes) predicts the presence and location of signal peptide cleavage sites in amino acid sequences for gram-negative prokaryotes</td>
+</tr>
+<tr>
+<td align="right">TISignalP_EUK__</td>
+<td align="right">SignalP_EyUK</td>
+<td align="right">4.0</td>
+<td align="right">SignalP (organism type eukaryotes) predicts the presence and location of signal peptide cleavage sites in amino acid sequences for eukaryotes.</td>
+</tr>
+<tr>
+<td align="right">TISignalP_GRAM_POSITIVE__</td>
+<td align="right">SignalP_GRAM_POSITIVE</td>
+<td align="right">4.0</td>
+<td align="right">SignalP (organism type gram-positive prokaryotes) predicts the presence and location of signal peptide cleavage sites in amino acid sequences for gram-positive prokaryotes</td>
 </tr>
 </tbody>
 </table>
 </li>
-</ol>
-</li>
-</ol>
-</li>
-<li><p>Scripts for data preprocessing are located in <code>./Preprocessing/Bin/</code>. </p></li>
-<li>Results for data preprocessing are located in <code>./Preprocessing/Results/</code>. </li>
 </ol>
 
       <footer class="site-footer">
