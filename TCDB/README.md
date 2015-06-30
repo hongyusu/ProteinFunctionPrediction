@@ -1,6 +1,6 @@
 Readme file for th directory TCDB
 
-directory source:  ------------------
+Directory source:  ------------------
 
 - do.TCDB.R : R script file used to generate both the annotation and the tree structure of the taxonomy.
 It uses the library files TCDB.R and IOgraph.R to parse the source files of the TCDB, and construct both the annotation and the tree of the TCDB taxonomy. 
@@ -8,7 +8,7 @@ It uses the library files TCDB.R and IOgraph.R to parse the source files of the 
 - TCDB.R: R library to process  the source files of the TCDB
 IOgraph.R:  R library to construct graph of class graphNEL (graph package of R) and to transform them in text files.
 
-directory Data:  -------------
+Directory Data:  -------------
 
 Note: all the data refer to the tcdb file (7 june 2015) downloaded from the TCDB
 (http://www.tcdb.org/public/) 
