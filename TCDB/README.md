@@ -1,4 +1,4 @@
-Readme file for th directory TCDB
+Readme file for the directory TCDB
 
 Directory source:  ------------------
 
