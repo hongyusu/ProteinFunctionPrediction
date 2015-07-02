@@ -24,7 +24,8 @@ def process_tcdbblast(filename,fout):
     words = line.strip().split('\t')
     proteinname = re.sub('.*\|','',words[0])
     featurename = re.sub('.*\|','',words[1])
-    fout.write('%s TB%s %s\n' % (proteinname,featurename,words[11]))
+    score = re.sub(' .*','',words[11])
+    fout.write('%s TB%s %s\n' % (proteinname,featurename,score))
   pass
 
 
