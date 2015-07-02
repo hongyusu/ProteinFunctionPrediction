@@ -89,7 +89,7 @@ As the intersection of the protein data listed above and the ones in TCDB is ver
    1. Instruction for installing and running BLAST can be found from [my blog post](http://hongyusu.github.io/lessons/2015/06/16/ncbi-blast-installation-and-running-in-parallel/). 
    1. In particular, after removing some replicated proteins, there are 12515 protein left in TCDB which will be used to build a TCDB BLAST database.
    1. The cleaned TCDB data file is located in `./Data/tcdb`.
-   1. For the BLAST search, we obtain all hits with e-value above 0.01. 
+   1. For the BLAST search, we obtain all hits with e-value below 0.01. 
    1. We use BLAST score as similary measure between pair of proteins.
    1. Some statistics about the TCDB BLAST features are shown in the following table
 
@@ -233,6 +233,8 @@ As the intersection of the protein data listed above and the ones in TCDB is ver
       |--Bins
          |---process_tcdb.py        # process original TCDB database (remove duplication ect)
          |---merge_tcdb_blast_and_ips.py          # merge TCDB blast, ips and classfiication data
+         |---run_blast.sh           # run BLAST search
+         |---run_interproscan.sh    # run interproscan search to generate protein features
       |--Results
          |---tcdbdata               # merged data in sparse matrix format: 'protein name' 'feature name' 'value' 
          |---tcdbdata.collab        # feature names
@@ -254,7 +256,7 @@ As the intersection of the protein data listed above and the ones in TCDB is ver
 1. Feature types are listed as follows: 
 
    |Feature prefix|Feature type|Version information|Description|
-   |---:|---:|---:|----------:|
+   |:---:|:---:|:---:|:----------:|
    |TC__|TCDB||TCDB classification|
    |TB__|BLAST||BLAST search|
    |TIProDom__|ProDom|2006.1|ProDom is a comprehensive set of protein domain families automatically generated from the UniProt Knowledge Database.|

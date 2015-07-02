@@ -17,8 +17,11 @@ def process_tcdb(filename,fout):
     words = line.strip().split('|')
     words = words[2].split(' ')
     proteinname = words[0]
-    tcdbname = '.'.join(words[1].split('.')[0:4])
-    fout.write('%s TC__%s 1\n' % (proteinname,tcdbname))
+    #tcdbname = '.'.join(words[1].split('.')[0:4])
+    fout.write('%s TC__%s 1\n' % (proteinname,'.'.join(words[1].split('.')[0:1])))
+    fout.write('%s TC__%s 1\n' % (proteinname,'.'.join(words[1].split('.')[0:2])))
+    fout.write('%s TC__%s 1\n' % (proteinname,'.'.join(words[1].split('.')[0:3])))
+    fout.write('%s TC__%s 1\n' % (proteinname,'.'.join(words[1].split('.')[0:4])))
   pass
 
 def process_tcdbblast(filename,fout):
