@@ -2,4 +2,4 @@
 
 ## data matrices of different types
 
-Data matrix of BLAST feature is not included due to the size limit of GitHub 
+Many data matrices of protein feature are not included due to the size limit of GitHub 
