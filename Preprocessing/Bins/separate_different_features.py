@@ -1,6 +1,6 @@
 
 
-
+import re
 
 
 
@@ -30,12 +30,18 @@ def process_one_prefix(prefix):
     if featureid in featureidlist:
       data[proteinid][featureid] = score
   # write
-  fout = open('../../Experiments/Data/tcdb.%s' % prefix)
-  fout.write('0 %s\n' % ' '.join(map(str,featureid)))
+  fout = open('../../Experiments/Data/tcdb.%s' % re.sub('__','',prefix),'w')
+  fout.write('0 %s\n' % ' '.join(map(str,sorted(featureidlist))))
   for proteinid in sorted(proteinidlist):
       fout.write('%d' % proteinid)
-      for featureid in sorted(featureidlist):
-        fout.write(' %s' % data[proteinid][featureid])
+      if not proteinid in data:
+        fout.write('%s/n' % ' 0'*len(featureidlist))
+      else:
+        for featureid in sorted(featureidlist):
+          if not featureid in data[proteinid]:
+            fout.write(' 0')
+          else:
+            fout.write(' %s' % data[proteinid][featureid])
       fout.write('\n')
   fout.close()
      
@@ -47,7 +53,6 @@ def separate_features():
   prefixlist = ['TC__', 'TB__', 'TIProDom__', 'TIHamap__', 'TISMART__', 'TISUPERFAMILY__', 'TIPRINTS__', 'TIPANTHER__', 'TIGene3D__', 'TIPIRSF__', 'TIPfam__', 'TIProSiteProfiles__', 'TITIGRFAM__', 'TIProSitePatterns__', 'TICoils__', 'TITMHMM__', 'TIPhobius__', 'TISignalP_GRAM_NEGATIVE__', 'TISignalP_EUK__', 'TISignalP_GRAM_POSITIVE__']
   for prefix in prefixlist:
       process_one_prefix(prefix)
-      break
   pass
 
 if __name__ == '__main__':
