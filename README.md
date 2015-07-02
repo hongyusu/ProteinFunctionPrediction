@@ -245,38 +245,38 @@ As the intersection of the protein data listed above and the ones in TCDB is ver
  
 ## Data statistics
 
-1. I compute the following statistice for the merged dataset, in particular, `./Preprocessing/Results/tcdb.mtx`.
+1. I compute the following statistice for the overall merged dataset, in particular, for the file `./Preprocessing/Results/tcdb.mtx`.
 
-   |Type of statistics|Number|
-   |---:|---:|
+   |Type of statistics|Value|
+   |:---|---:|
    |Number of proteins|12546|
-   |Number of features|32036|
-   |Type of features|20|
+   |Number of features|25704|
+   |Number of categories|20|
 
-1. Feature types are listed as follows: 
+1. Category information are listed in the table as follows: 
 
-   |Feature prefix|Feature type|Version information|Description|
-   |:---:|:---:|:---:|:----------:|
-   |TC__|TCDB||TCDB classification|
-   |TB__|BLAST||BLAST search|
-   |TIProDom__|ProDom|2006.1|ProDom is a comprehensive set of protein domain families automatically generated from the UniProt Knowledge Database.|
-   |TIHamap__|HAMAP||High-quality Automated and Manual Annotation of Microbial Proteomes|
-   |TISMART__|SMART|6.2|SMART allows the identification and analysis of domain architectures based on Hidden Markov Models or HMMs|
-   |TISUPERFAMILY__|SuperFamily|1.75|SUPERFAMILY is a database of structural and functional annotation for all proteins and genomes.|
-   |TIPRINTS__|PRINTS|42.0|A fingerprint is a group of conserved motifs used to characterise a protein family|
-   |TIPANTHER__|Panther|9.0|The PANTHER (Protein ANalysis THrough Evolutionary Relationships) Classification System is a unique resource that classifies genes by their functions, using published scientific experimental evidence and evolutionary relationships to predict function even in the absence of direct experimental evidence.|
-   |TIGene3D__|Gene3d|3.5.0|Structural assignment for whole genes and genomes using the CATH domain structure database|
-   |TIPIRSF__|PIRSF|3.01|The PIRSF concept is being used as a guiding principle to provide comprehensive and non-overlapping clustering of UniProtKB sequences into a hierarchical order to reflect their evolutionary relationships.|
-   |TIPfam__|PfamA|27.0|A large collection of protein families, each represented by multiple sequence alignments and hidden Markov models (HMMs)|
-   |TIProSiteProfiles__|PrositeProfiles||PROSITE consists of documentation entries describing protein domains, families and functional sites as well as associated patterns and profiles to identify them|
-   |TITIGRFAM__|TIGRFAM|15.0|TIGRFAMs are protein families based on Hidden Markov Models or HMMs|
-   |TIProSitePatterns__|PrositePatterns||PROSITE consists of documentation entries describing protein domains, families and functional sites as well as associated patterns and profiles to identify them|
-   |TICoils__|Coils|2.2|Prediction of Coiled Coil Regions in Proteins|
-   |TITMHMM__|TMHMM| 2.0| Prediction of transmembrane helices in proteins| 
-   |TIPhobius__|Phobius |1.01|A combined transmembrane topology and signal peptide predictor|
-   |TISignalP_GRAM_NEGATIVE__|SignalP_GRAM_NEGATIVE |4.0|SignalP (organism type gram-negative prokaryotes) predicts the presence and location of signal peptide cleavage sites in amino acid sequences for gram-negative prokaryotes|
-   |TISignalP_EUK__|SignalP_EyUK|4.0|SignalP (organism type eukaryotes) predicts the presence and location of signal peptide cleavage sites in amino acid sequences for eukaryotes.|
-   |TISignalP_GRAM_POSITIVE__|SignalP_GRAM_POSITIVE |4.0|SignalP (organism type gram-positive prokaryotes) predicts the presence and location of signal peptide cleavage sites in amino acid sequences for gram-positive prokaryotes|
+   |Feature prefix|Number of features|Feature type|Version information|Description|
+   |:---:|---:|:---:|:---:|:----------|
+   |TC__|3145|	TCDB||TCDB classification|
+   |TB__|12535|	BLAST||BLAST search|
+   |TIProDom__|145|	ProDom|2006.1|ProDom is a comprehensive set of protein domain families automatically generated from the UniProt Knowledge Database.|
+   |TIHamap__|209|	HAMAP||High-quality Automated and Manual Annotation of Microbial Proteomes|
+   |TISMART__|240|	SMART|6.2|SMART allows the identification and analysis of domain architectures based on Hidden Markov Models or HMMs|
+   |TISUPERFAMILY__|512|	SuperFamily|1.75|SUPERFAMILY is a database of structural and functional annotation for all proteins and genomes.|
+   |TIPRINTS__||	PRINTS|42.0|A fingerprint is a group of conserved motifs used to characterise a protein family|
+   |TIPANTHER__||	Panther|9.0|The PANTHER (Protein ANalysis THrough Evolutionary Relationships) Classification System is a unique resource that classifies genes by their functions, using published scientific experimental evidence and evolutionary relationships to predict function even in the absence of direct experimental evidence.|
+   |TIGene3D__||	Gene3d|3.5.0|Structural assignment for whole genes and genomes using the CATH domain structure database|
+   |TIPIRSF__||	PIRSF|3.01|The PIRSF concept is being used as a guiding principle to provide comprehensive and non-overlapping clustering of UniProtKB sequences into a hierarchical order to reflect their evolutionary relationships.|
+   |TIPfam__||	PfamA|27.0|A large collection of protein families, each represented by multiple sequence alignments and hidden Markov models (HMMs)|
+   |TIProSiteProfiles__||	PrositeProfiles||PROSITE consists of documentation entries describing protein domains, families and functional sites as well as associated patterns and profiles to identify them|
+   |TITIGRFAM__||	TIGRFAM|15.0|TIGRFAMs are protein families based on Hidden Markov Models or HMMs|
+   |TIProSitePatterns__||	PrositePatterns||PROSITE consists of documentation entries describing protein domains, families and functional sites as well as associated patterns and profiles to identify them|
+   |TICoils__||	Coils|2.2|Prediction of Coiled Coil Regions in Proteins|
+   |TITMHMM__||	TMHMM| 2.0| Prediction of transmembrane helices in proteins| 
+   |TIPhobius__||	Phobius |1.01|A combined transmembrane topology and signal peptide predictor|
+   |TISignalP_GRAM_NEGATIVE__||	SignalP_GRAM_NEGATIVE |4.0|SignalP (organism type gram-negative prokaryotes) predicts the presence and location of signal peptide cleavage sites in amino acid sequences for gram-negative prokaryotes|
+   |TISignalP_EUK__||	SignalP_EyUK|4.0|SignalP (organism type eukaryotes) predicts the presence and location of signal peptide cleavage sites in amino acid sequences for eukaryotes.|
+   |TISignalP_GRAM_POSITIVE__||	SignalP_GRAM_POSITIVE |4.0|SignalP (organism type gram-positive prokaryotes) predicts the presence and location of signal peptide cleavage sites in amino acid sequences for gram-positive prokaryotes|
  
 
 
