@@ -183,7 +183,7 @@ As the intersection of the protein data listed above and the ones in TCDB is ver
 
 1. The first strategy we used is to merge the protein data from the Master thesis and from TCDB database to find an intersection of proteins with both various features and classification information in TCDB.
    1. However, we found out that the intersection is very small. Only about 1000 proteins from TCDB has feature representations in the Master thesis data.
-   1. This strategy is briefly illustrated as followings:
+   1. Anywauy, this strategy is briefly illustrated as followings:
       1. Merge datasets from different sources:
       
          1. Merge the following feature types into one matrix
@@ -222,25 +222,30 @@ As the intersection of the protein data listed above and the ones in TCDB is ver
                |TCDB classification|TC|
                |TCDB BLAST|TB|
    
-1. Then we leave the origin data used in the Master thesis and only rely on the proteins from TCDB. In particular, we compute various features via running BLAST and InterProScan.
+1. Realizing that I cannot rely on the data used in the Master thesis, I directly work on proteins from TCDB. In particular, I compuate various protein features via running BLAST search and InterProScan.
   
-   1. Remove duplicated proteins in transporter protein classification database (TCDB) sequence v.s. TC classification file.
-   1. Merge TCDB classification file, TCDB BLAST feature, and TCDB InterProScan features.
-   1. Files are listed as follows:
+   1. First I remove duplicated proteins from the transporter protein classification database (TCDB), particularly, by analyzing the sequence-classification data file.
+   1. Then I run BLAST search and InterProScan for all preprocessed proteins.
+   1. Merge TCDB classification (protein labels), TCDB BLAST features, and TCDB InterProScan features.
+   1. Make data matrices of different types, e.g., different feature matrices and label matrix.
+   1. Important scripts and result files are listed as follows.
 
       ```
       Preprocessing
       |--Bins
-         |---process_tcdb.py        # process original TCDB database (remove duplication ect)
-         |---merge_tcdb_blast_and_ips.py          # merge TCDB blast, ips and classfiication data
-         |---run_blast.sh           # run BLAST search
-         |---run_interproscan.sh    # run interproscan search to generate protein features
-      |--Results
-         |---tcdbdata               # merged data in sparse matrix format: 'protein name' 'feature name' 'value' 
-         |---tcdbdata.collab        # feature names
-         |---tcdbdata.rowlab        # protein names
-         |---tcdbdata.mtx           # sparse data matrix with format 'protein id' 'feature id' 'value'
-
+          |---process_tcdb.py        # process original TCDB database (remove duplication ect)
+          |---merge_tcdb_blast_and_ips.py          # merge TCDB blast, ips and classfiication data
+          |---run_blast.sh           # run BLAST search
+          |---run_interproscan.sh    # run interproscan search to generate protein features
+          |---separate_different_features.py # generate feature matrices of different types
+      |---Results
+          |---tcdbdata               # merged data in sparse matrix format: 'protein name' 'feature name' 'value' 
+          |---tcdbdata.collab        # feature names
+          |---tcdbdata.rowlab        # protein names
+          |---tcdbdata.mtx           # sparse data matrix with format 'protein id' 'feature id' 'value'
+      Experiments
+      |---Data
+          |---tcdb.prefix       # data matrices of different type, where type information are explained in the section of Data statistics.
       ```
  
 ## Data statistics

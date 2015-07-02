@@ -35,11 +35,11 @@ def process_one_prefix(prefix):
   for proteinid in sorted(proteinidlist):
       fout.write('%d' % proteinid)
       if not proteinid in data:
-        fout.write('%s/n' % ' 0'*len(featureidlist))
+        fout.write('%s/n' % ' na'*len(featureidlist))
       else:
         for featureid in sorted(featureidlist):
           if not featureid in data[proteinid]:
-            fout.write(' 0')
+            fout.write(' na')
           else:
             fout.write(' %s' % data[proteinid][featureid])
       fout.write('\n')
