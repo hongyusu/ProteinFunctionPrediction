@@ -1,3 +1,6 @@
+Preliminary workplan
+Please, add any modification/suggestion you wish.
+
 -- Preliminary experiments to evaluate the predictability of the TCDB classes
 
 A. Experiments using BLAST data and the about 12000 proteins having at least 1 annotation. We should exlude TCDB classes
