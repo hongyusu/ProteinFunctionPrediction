@@ -3,7 +3,8 @@ Please, add any modification/suggestion you wish.
 
 ## Preliminary experiments to evaluate the predictability of the TCDB classes
 
-### Experiments using BLAST data and the about 12000 proteins having at least 1 annotation. We should exlude TCDB classes
+### Experiments using BLAST data and the about 12000 proteins having at least 1 annotation. 
+We should exlude TCDB classes
 having only 1 annotation, thus resulting in about 3414 classes (TCDB release 7 june 2015). As a consequence we may have also a reduced number of proteins (i.e. less than 12000).
 Metrics: AUC per class  and precision at different level of recall. Evaluation: leave-one-out (loo). 
 Results averaged across classes, across levels, and per class. 
