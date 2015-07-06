@@ -17,12 +17,15 @@ Preliminary flat methods that could be considered:
     4. linear SVM? 	
 		
 ### Selection of the InterPro features most informative for the prediction of transport proteins
+TO DO
 ### Definition of other non-InterPro features most meaningful for the prediction of transport proteins (e.g. TMS data)
-
+TO DO
 
 ## Design of Tree structured output methods for single-path predictions
+TO DO
 
 ## Design of hierarchical ensembles for single-path predictions
+TO DO
 
     Status API Training Shop Blog About Help 
 
