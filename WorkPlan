@@ -6,8 +6,8 @@ Metrics: AUC per class  and precision at different level of recall. Evaluation: 
 Results averaged across classes, across levels, and per class. 
     1. BLAST (best hit?) as (strong) baseline  (Su?)
     2. Nearest Neighbour 
-		3. RANKS (Giorgio)		
-		4. linear SVM? 	
+    3. RANKS (Giorgio)		
+    4. linear SVM? 	
 		
 B. Selection of the InterPro features most informative for the prediction of transport proteins
 C. Definition of other non-InterPro features most meaningful for the prediction of transport proteins (e.g. TMS data)
