@@ -19,7 +19,7 @@ Uniprot proteins have the following features:
 For TCDB proteins we extract features of the following two categorises
 
    1. BLAST score with TCDB
-   1. Several InterProScan feature
+   2. Several InterProScan feature
 
 ## Data
 
@@ -63,15 +63,16 @@ We extract protein classification data from TCDB database.
 As the intersection of the protein data listed above and the ones in TCDB is very small we compute protein features via BLAST and InterProScan.
 
 1. Transport protein classification data are downloaded from [TCDB database](http://www.tcdb.org/public/). 
+NOTE: Su, her you should specify which version has been considered (I guess a version after 7 june)
 
    |Type of data|Number of items|
    |---:|---:|
    |Protein|12515|
    |TCDB annotation|9456|
 
-   1. The annotation of TCDB follows a five level classificaiton hierarchy. The number of annoations in each level is shown in the following table
+   1. The annotation of TCDB follows a five level classification hierarchy. The number of classes in each level is shown in the following table
 
-      |Level|Number of annotations|
+      |Level|Number of classes|
       |---:|---:|
       |1|7| 
       |2|30| 
