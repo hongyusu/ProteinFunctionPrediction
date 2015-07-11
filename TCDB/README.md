@@ -1,22 +1,26 @@
 Readme file for the directory TCDB
 
-Directory source:  ------------------
+# Directory source:  ------------------
 
-- do.TCDB.R : R script file used to generate both the annotation and the tree structure of the taxonomy.
+- do.TCDB.R : 
+R script file used to generate both the annotation and the tree structure of the taxonomy.
 It uses the library files TCDB.R and IOgraph.R to parse the source files of the TCDB, and construct both the annotation and the tree of the TCDB taxonomy. 
 
-- TCDB.R: R library to process  the source files of the TCDB
-IOgraph.R:  R library to construct graph of class graphNEL (graph package of R) and to transform them in text files.
+-TCDB.R: 
+R library to process  the source files of the TCDB
 
-Directory Data:  -------------
+-IOgraph.R:  
+R library to construct graph of class graphNEL (graph package of R) and to transform them in text files.
+
+# Directory Data:  -------------
 
 Note: all the data refer to the tcdb file (7 june 2015) downloaded from the TCDB
 (http://www.tcdb.org/public/) 
 
-- tcdb7June2015.txt: original tcdb file downloaded from the TCDB repository  (version 7 june 2015). Note that the two errrors have been fixed: 
+- tcdb7June2015.txt: original tcdb file downloaded from the TCDB repository  (version 7 june 2015). Note that the two errors have been fixed: 
 The first one is a space after the AC P81694
 >gnl|TC-DB|P81694 |8.B.19.2.2 Omega-ctenitoxin-Cs1a OS=Cupiennius salei PE=1 SV=2
-The second s the missed protein description field for protein UPI0002B5B01D:
+The second is the missed protein description field for protein UPI0002B5B01D:
 >gnl|TC-DB|UPI0002B5B01D|1.E.49.1.3
 
 - tcdb20June2015.txt: original tcdb file downloaded from the TCDB repository  (version 20 june 2015). The same previous two errors have been fixed.
