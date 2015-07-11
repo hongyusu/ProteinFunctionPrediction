@@ -227,7 +227,7 @@ NOTE: Su, her you should specify which version has been considered (I guess a ve
   
    1. First I remove duplicated proteins from the transporter protein classification database (TCDB), particularly, by analyzing the sequence-classification data file.
    
-NOTE: In his way you removed the annotations for proteins having multiple annotation paths. These are only 28, but in this way we miss (considering annotations form the first to the fourth level) 41 annotations. To my opinion it is not a good idea to eliminate such annotations. Considering that in practice there are only a few lultiple paths, we can ignore multiple paths in our predictions, but without removing them form the data. You can recover the full TCDB annotations using the file tcdb.1 instead of tcdb in the Data directory.
+NOTE: In this way you removed the annotations for proteins having multiple annotation paths. These are only 28, but in this way we miss (considering annotations from the first to the fourth level) 41 annotations. To my opinion it is not a good idea to eliminate such annotations. Considering that in practice there are only a few multiple paths, we can ignore multiple paths in our predictions, but without removing them from the data. You can recover the full TCDB annotations using the file tcdb.1 instead of tcdb in the Data directory.
    1. Then I run BLAST search and InterProScan for all preprocessed proteins.
    1. Merge TCDB classification (protein labels), TCDB BLAST features, and TCDB InterProScan features.
    1. Make data matrices of different types, e.g., different feature matrices and label matrix.
