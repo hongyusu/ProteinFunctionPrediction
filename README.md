@@ -229,9 +229,11 @@ NOTE: Su, her you should specify which version has been considered (I guess a ve
    
 NOTE: In this way you removed the annotations for proteins having multiple annotation paths. These are 29:
 
-|AC	  |    TC     |
-|D4ZJA6 |	1.A.30.1.5|
-|D4ZJA6	1.A.30.1.6
+|AC|TC|
+|---:|---:|
+|D4ZJA6|1.A.30.1.5|
+|D4ZJA6|1.A.30.1.6|
+
 O24303	1.A.18.1.1
 O24303	3.A.9.1.1
 O34840	2.A.19.2.7
