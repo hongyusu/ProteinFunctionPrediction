@@ -293,6 +293,10 @@ NOTE: In this way you removed the annotations for proteins having multiple annot
 
 If we consider only the annotation till to the fourth level we have only 13 proteins with multiple annotated paths, but in this way we miss (considering annotations from the first to the fourth level) 41 annotations. To my opinion it is not a good idea to eliminate such annotations. Considering that in practice there are only a few multiple paths, we can ignore multiple paths in our predictions, but without removing them from the data. You can recover the full TCDB annotations using the file tcdb.1 instead of tcdb in the Data directory.
 
+The TCDB annotation matrix, including all the duplicated path annotations till to the fourth level of the TCDB is available in Preprocessing/Results/tcdb1.annotations.levels1234.txt.gz.
+This gzipped text file has Protein AC on rows (12546 AC) and 3145 TCDB classes on columns. This is a 0/1 dense matrix: the entry (i,j) is equal to 1 means that protein i is annotated with TCDB class j, otherwise (i,j) = 0.
+
+
    1. Then I run BLAST search and InterProScan for all preprocessed proteins.
    1. Merge TCDB classification (protein labels), TCDB BLAST features, and TCDB InterProScan features.
    1. Make data matrices of different types, e.g., different feature matrices and label matrix.
