@@ -233,63 +233,63 @@ NOTE: In this way you removed the annotations for proteins having multiple annot
 |---:|---:|
 |D4ZJA6|1.A.30.1.5|
 |D4ZJA6|1.A.30.1.6|
+|O24303|1.A.18.1.1|
+|O24303|3.A.9.1.1|
+|O34840|2.A.19.2.7|
+|O34840|2.A.19.2.11|
+|P0AAW9|8.A.50.1.1|
+|P0AAW9|2.A.6.2.2|
+|P0C1S5|9.A.39.1.3|
+|P0C1S5|9.A.39.1.2|
+|P18409|1.B.33.3.1|
+|P18409|1.B.8.6.1|
+|P23644|3.A.8.1.1|
+|P23644|1.B.8.2.1|
+|P25568|2.A.1.24.1|
+|P25568|9.A.15.1.1|
+|P28795|9.A.17.1.1|
+|P28795|3.A.20.1.5|
+|P29340|3.A.20.1.1|
+|P29340|3.A.20.1.5|
+|P34230|3.A.1.203.2|
+|P34230|3.A.1.203.6|
+|P94360|3.A.1.1.26|
+|P94360|3.A.1.1.34|
+|Q03PY5|3.A.1.28.2|
+|Q03PY5|3.A.1.26.9|
+|Q03PY7|3.A.1.28.2|
+|Q03PY7|3.A.1.26.9|
+|Q07418|9.A.17.1.1|
+|Q07418|3.A.20.1.5|
+|Q15049|9.B.129.1.1|
+|Q15049|2.A.1.76.1|
+|Q55JG4|9.B.178.1.5|
+|Q55JG4|9.B.178.1.6|
+|Q6GHV7|9.A.39.1.1|
+|Q6GHV7|9.A.39.1.2|
+|Q6GUB0|2.A.88.1.1|
+|Q6GUB0|3.A.1.25.1|
+|Q72L52|3.A.1.1.24|
+|Q72L52|3.A.1.1.25|
+|Q8EAG6|1.A.30.1.5|
+|Q8EAG6|1.A.30.1.6|
+|Q8KQR1|9.A.39.1.4|
+|Q8KQR1|9.A.39.1.2|
+|Q99257|1.I.1.1.1|
+|Q99257|3.A.22.1.1|
+|Q9FBS5|3.A.1.1.42|
+|Q9FBS5|3.A.1.1.43|
+|Q9FBS6|3.A.1.1.42|
+|Q9FBS6|3.A.1.1.43|
+|Q9FBS7|3.A.1.1.42|
+|Q9FBS7|3.A.1.1.43|
+|Q9L0Q1|3.A.1.1.33|
+|Q9L0Q1|3.A.1.1.36|
+|Q9RL01|2.A.1.72.1|
+|Q9RL01|2.A.1.15.15|
+|Q9Y3Q4|1.A.1.5.10|
+|Q9Y3Q4|1.A.1.5.11|
 
-O24303	1.A.18.1.1
-O24303	3.A.9.1.1
-O34840	2.A.19.2.7
-O34840	2.A.19.2.11
-P0AAW9	8.A.50.1.1
-P0AAW9	2.A.6.2.2
-P0C1S5	9.A.39.1.3
-P0C1S5	9.A.39.1.2
-P18409	1.B.33.3.1
-P18409	1.B.8.6.1
-P23644	3.A.8.1.1
-P23644	1.B.8.2.1
-P25568	2.A.1.24.1
-P25568	9.A.15.1.1
-P28795	9.A.17.1.1
-P28795	3.A.20.1.5
-P29340	3.A.20.1.1
-P29340	3.A.20.1.5
-P34230	3.A.1.203.2
-P34230	3.A.1.203.6
-P94360	3.A.1.1.26
-P94360	3.A.1.1.34
-Q03PY5	3.A.1.28.2
-Q03PY5	3.A.1.26.9
-Q03PY7	3.A.1.28.2
-Q03PY7	3.A.1.26.9
-Q07418	9.A.17.1.1
-Q07418	3.A.20.1.5
-Q15049	9.B.129.1.1
-Q15049	2.A.1.76.1
-Q55JG4	9.B.178.1.5
-Q55JG4	9.B.178.1.6
-Q6GHV7	9.A.39.1.1
-Q6GHV7	9.A.39.1.2
-Q6GUB0	2.A.88.1.1
-Q6GUB0	3.A.1.25.1
-Q72L52	3.A.1.1.24
-Q72L52	3.A.1.1.25
-Q8EAG6	1.A.30.1.5
-Q8EAG6	1.A.30.1.6
-Q8KQR1	9.A.39.1.4
-Q8KQR1	9.A.39.1.2
-Q99257	1.I.1.1.1
-Q99257	3.A.22.1.1
-Q9FBS5	3.A.1.1.42
-Q9FBS5	3.A.1.1.43
-Q9FBS6	3.A.1.1.42
-Q9FBS6	3.A.1.1.43
-Q9FBS7	3.A.1.1.42
-Q9FBS7	3.A.1.1.43
-Q9L0Q1	3.A.1.1.33
-Q9L0Q1	3.A.1.1.36
-Q9RL01	2.A.1.72.1
-Q9RL01	2.A.1.15.15
-Q9Y3Q4	1.A.1.5.10
-Q9Y3Q4	1.A.1.5.11
 
 If we consider only the annotation till to the fourth level we have only 13 proteins with multiple annotated paths, but in this way we miss (considering annotations from the first to the fourth level) 41 annotations. To my opinion it is not a good idea to eliminate such annotations. Considering that in practice there are only a few multiple paths, we can ignore multiple paths in our predictions, but without removing them from the data. You can recover the full TCDB annotations using the file tcdb.1 instead of tcdb in the Data directory.
 
