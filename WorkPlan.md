@@ -11,7 +11,7 @@ The gzipped text file tcdb1.annotations.levels1234.MoreThan1.txt.gz in the direc
 
 - As a second step we could try to add Interpro features.
 
-- Metrics: AUC per class  and precision at different level of recall. Evaluation: leave-one-out (loo). 
+- Metrics: AUC per class  and precision at different level of recall (e.g. at recall levels varying from 0.1 to 1 at 0.1 steps). Evaluation: leave-one-out (loo). 
 Results averaged across classes, across levels, and per class.
 
 - Preliminary flat methods that could be considered:
@@ -21,11 +21,11 @@ Results averaged across classes, across levels, and per class.
     3. Semi-supervised flat learning methods: GBA and RANKS (Giorgio)		
     4. linear SVM and/or logistic regression or some other linear method. 	
 
-Su could you perform task 1, 2 and 4? (of course if you agree on this set-up ...)
+Su, could you perform task i, ii and iv? (of course if you agree on this set-up :-)
 	
 ### Experiments using InterPro features
 TO DO
-### Definition of other non-InterPro features most meaningful for the prediction of transport proteins (e.g. TMS data)
+### Definition of other non-InterPro features useful for the prediction of transport proteins (e.g. TMS data)
 TO DO
 
 ## Design of Tree structured output methods for single-path predictions
