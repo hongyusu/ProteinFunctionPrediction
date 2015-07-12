@@ -311,6 +311,9 @@ If we consider only the annotation till to the fourth level we have only 13 prot
           |---tcdbdata.collab        # feature names
           |---tcdbdata.rowlab        # protein names
           |---tcdbdata.mtx           # sparse data matrix with format 'protein id' 'feature id' 'value'
+		  |---tcdb1.annotations.gz   # dense matrix (text file gzipped) with Swissprot AC on rows and TCDB classes on columns. 
+		                             # Entry (i,j) of the matrix is 1 if protein i is annotated to TC class j, otherwise (i,j) = 0
+									 # this matrix includes all the annotations (including multiple paths) obtained from the file tcdb.1 in the Data directory.
       Experiments
       |---Data
           |---tcdb.prefix       # data matrices of different type, where type information are explained in the section of Data statistics.
