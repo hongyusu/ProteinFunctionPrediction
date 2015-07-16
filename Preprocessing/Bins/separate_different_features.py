@@ -1,5 +1,5 @@
 
-
+import os
 import re
 
 
@@ -71,5 +71,11 @@ def separate_features():
       process_one_prefix(prefix)
   pass
 
+def copy_names():
+  os.system('cp ../../Preprocessing/Results/tcdbdata.collab ../../Experiments/Data/tcdb.collab')
+  os.system('cp ../../Preprocessing/Results/tcdbdata.rowlab ../../Experiments/Data/tcdb.rowlab')
+  pass
+
 if __name__ == '__main__':
-  separate_features()
+  #separate_features()
+  copy_names()

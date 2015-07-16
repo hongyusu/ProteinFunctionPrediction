@@ -2,7 +2,9 @@
 
 ## Data matrices of different types
 
-1. These files are not uploaded into Github due to the size limit of 100MB.
+1. These files are not uploaded into Github individually due to the size limit of 100MB.
+
+1. However, they are uploaded as a compressed tar packages.
 
 1. Format:
    1. First row (header line), '0 feature_id1 feature_id2 ...'

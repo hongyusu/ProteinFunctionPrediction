@@ -322,7 +322,10 @@ NOTE: Su, her you should specify which version has been considered (I guess a ve
       Experiments
       |---Data
           |---tcdb.prefix       # data matrices of different type, where type information are explained in the section of Data statistics.
-      |---Data.tar.gz           # compressed Data files
+          |---README.md         # read me file for experimental data
+          |---tcdb.collab       # feature names
+          |---tcdb.rowlab       # protein names
+      |---Data.tar.gz           # compressed Data files, including files in `./Data` folder
       ```
  
 ## Data statistics
