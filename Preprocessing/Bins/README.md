@@ -6,4 +6,5 @@
 |---process_tcdb.py                 # process tcdb database to remove duplication etc.
 |---run_blast.sh                    # run BLAST serach
 |---run_interproscan.sh             # run interproscan
+|---separate_different_features.py  # separate different feature into different matrices
 ```
