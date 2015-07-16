@@ -305,7 +305,7 @@ NOTE: Su, her you should specify which version has been considered (I guess a ve
 
       ```
       Preprocessing
-      |--Bins
+      |---Bins
           |---process_tcdb.py        # process original TCDB database (remove duplication ect)
           |---merge_tcdb_blast_and_ips.py          # merge TCDB blast, ips and classfiication data
           |---run_blast.sh           # run BLAST search
@@ -322,6 +322,7 @@ NOTE: Su, her you should specify which version has been considered (I guess a ve
       Experiments
       |---Data
           |---tcdb.prefix       # data matrices of different type, where type information are explained in the section of Data statistics.
+      |---Data.tar.gz           # compressed Data files
       ```
  
 ## Data statistics
