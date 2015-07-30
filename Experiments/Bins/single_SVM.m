@@ -6,7 +6,7 @@
 %%
 % 
 % xFilename:    input feature
-% yFilename:    output multiple label
+% yFilename:    output multiple label, label is either 0 or 1
 % labelIndex:   index of a single label in multilabel
 % foldIndex:    index of the fold in 5-fold cv
 % tmpDir:       tmp directory for results
@@ -16,8 +16,8 @@
 function single_SVM(xFilename,yFilename,labelIndex,foldIndex,tmpDir,svmC,isTest)
 
   % some global parameter
-  smallN = 100;
-  outputFilename = sprintf('%s/%s_%s_%s_%', tmpDir, labelIndex, foldIndex, svmC, isTest);
+  smallN = 1000;
+  outputFilename = sprintf('%s/%s_%s_%s_%s', tmpDir, labelIndex, foldIndex, svmC, isTest);
 
   % random number generator
   rand('twister',0)
@@ -69,7 +69,7 @@ function single_SVM(xFilename,yFilename,labelIndex,foldIndex,tmpDir,svmC,isTest)
 
   % save the results
   res = [find(Ind==foldIndex),Yprobsvm];
-  dlmwrite(outputfilename, res); 
+  dlmwrite(outputFilename, res); 
 
 end
 
