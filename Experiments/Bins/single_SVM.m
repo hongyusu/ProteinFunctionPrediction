@@ -70,6 +70,8 @@ function single_SVM(xFilename,yFilename,labelIndex,foldIndex,svmC,outputFilename
   res = [find(Ind==foldIndex),Yprobsvm];
   dlmwrite(outputFilename, res); 
 
+  exit;
+
 end
 
 function Yprobsvm = clear_prob(Ytr,Yprobsvm)
