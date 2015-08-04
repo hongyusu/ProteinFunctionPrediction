@@ -1,5 +1,9 @@
 
 
+# Table of content
+* auto-gen TOC:
+  {:toc}
+
 # Protein function prediction
 
 
