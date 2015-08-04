@@ -3,7 +3,7 @@
 # Table of content
 
 * auto-gen TOC:
-  {:toc}
+{:toc}
 
 # Protein function prediction
 
