@@ -2,8 +2,6 @@
 
 
 
-%%
-% compute the best svm C parameter for the input and output pair
 
 function compute_best_svmC(xFilename,yFilename)
 
@@ -15,14 +13,21 @@ function compute_best_svmC(xFilename,yFilename)
   isTest = '1';
   suffix = 'sel';
   svmCList = {'0.01','0.1','1','10','100'};
-  svmCList = {'0.01','0.1'};
 
-  res = zeros(size(svmCList,1),2)
+  res = zeros(size(svmCList,2),2);
   for svmCIndex = 1:length(svmCList)
     svmC = svmCList{svmCIndex};
-    res(svmCIndex,:) = compute_performance(xFilename,yFilename,svmC,isTest,suffix,Y);
+    [auc,accuracy] = compute_performance(xFilename,yFilename,svmC,isTest,suffix,Y);
+    res(svmCIndex,1:2) = [auc,accuracy];
+    res
   end
-  res
+
+  [~,I] = sortrows(res,[-1,-2]);
+  bestSVMC = svmCList{I(1)};
+  
+  fileID = fopen('./parameter_setting','a');
+  fprintf(fileID, '%s %s %s\n',xFilename,yFilename,bestSVMC);
+  fclose(fileID);
 
 end
 
@@ -34,11 +39,11 @@ end
 % svmC:                 svm slack parameter
 % isTest:               select a small port of data for sanity check if isTest=True  
 %
-function [auc,acc] = compute_performance(xFilename,yFilename,svmC,isTest,suffix,Y)
+function [auc,accuracy] = compute_performance(xFilename,yFilename,svmC,isTest,suffix,Y)
 
   Ypred = zeros(size(Y));
 
-  for labelIndex = 1:30
+  for labelIndex = 1:size(Y,2)
     for foldIndex = 1:5
       % processing
       outputFilename = sprintf('../tmpDir/%s_%s_l%d_f%d_c%s_t%s_%s',...
@@ -53,5 +58,7 @@ function [auc,acc] = compute_performance(xFilename,yFilename,svmC,isTest,suffix,
 
   accuracy = 1-sum(sum(xor(Y,Ypred)))/size(Y,1)/size(Y,2);
   [X,Y,T,auc] = perfcurve(reshape(Y,size(Y,1)*size(Y,2),1),reshape(Ypred,size(Y,1)*size(Y,2),1),1);
+
+  
   
 end
