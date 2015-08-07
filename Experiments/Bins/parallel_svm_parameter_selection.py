@@ -95,18 +95,18 @@ def run():
   paramInd = 0
   kFold    = 5 
   numLabel = 3200  
-  tmpDir   = '../tmpDir/'
   suffix   = 'sel'
   isTest   = '1'
-  if not os.path.exists(tmpDir): os.mkdir(tmpDir)
   # iterate over the lists
-  xFilenameList         = ['../Data/tcdb.TB']
+  xFilenameList         = ['../Data/tcdb.TIGene3D','../Data/tcdb.TICoils']
   yFilenameList         = ['../Data/tcdb.TC']
   labelIndexList        = xrange(1,numLabel+1)
   foldIndexList         = xrange(1,kFold+1) 
   cList    = ['0.01','0.1','1','10','100']
   # generate job queue, will iterate over c,k,label
   for xFilename,yFilename,labelIndex,foldIndex,svmC in list(itertools.product(xFilenameList,yFilenameList,labelIndexList,foldIndexList,cList)):
+    tmpDir   = '../tmp_%s_%s/' % ( re.sub('.*/','',xFilename), re.sub('.*/','',yFilename))
+    if not os.path.exists(tmpDir): os.mkdir(tmpDir)
     paramInd += 1
     outputFilename = tmpDir + '/' + re.sub('.*/','',xFilename) + '_' + re.sub('.*/','',yFilename) + '_l' + str(labelIndex) + '_f' + str(foldIndex) + '_c' +svmC + '_t' + isTest + '_' + suffix 
     ## check if result is ready already
@@ -125,7 +125,7 @@ def run():
   is_main_run_factor=1
   # running job_queue
   threads = []
-  workerload = 2 
+  workerload = 3 
   for i in range(len(cluster)):
     for j in range(workerload):
       if job_queue.empty(): break

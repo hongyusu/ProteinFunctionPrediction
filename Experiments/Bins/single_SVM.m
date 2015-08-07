@@ -16,7 +16,7 @@
 function single_SVM(xFilename,yFilename,labelIndex,foldIndex,svmC,outputFilename,isTest)
 
   % some global parameter
-  smallN = 1000;
+  smallN = 5000;
 
   % random number generator
   rand('twister',0)
