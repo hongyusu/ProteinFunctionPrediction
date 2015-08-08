@@ -129,7 +129,7 @@ def run():
   is_main_run_factor=1
   # running job_queue
   threads = []
-  workerload = 3 
+  workerload = 2 
   for i in range(len(cluster)):
     for j in range(workerload):
       if job_queue.empty(): break
