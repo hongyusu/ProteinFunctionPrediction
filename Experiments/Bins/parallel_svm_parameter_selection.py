@@ -61,7 +61,10 @@ global_rundir = ''
 
 # function to check if the result file already exist in the destination folder
 def checkfile(filename):
-  return os.path.exists(filename)
+  if os.path.exists(filename):
+    if os.path.getsize(filename) > 0: return 1
+    else: return 0
+  else: return 0
 
 
 def singleJob(node, job):
