@@ -109,7 +109,7 @@ def run():
   cList    = ['0.01','0.1','1','10','100']
   # generate job queue, will iterate over c,k,label
   for xFilename,yFilename,labelIndex,foldIndex,svmC in list(itertools.product(xFilenameList,yFilenameList,labelIndexList,foldIndexList,cList)):
-    tmpDir   = '/var/tmp/tmp_%s_%s/' % ( re.sub('.*/','',xFilename), re.sub('.*/','',yFilename))
+    tmpDir   = '../tmp_%s_%s/' % ( re.sub('.*/','',xFilename), re.sub('.*/','',yFilename))
     if not os.path.exists(tmpDir): os.mkdir(tmpDir)
     paramInd += 1
     outputFilename = tmpDir + '/' + re.sub('.*/','',xFilename) + '_' + re.sub('.*/','',yFilename) + '_l' + str(labelIndex) + '_f' + str(foldIndex) + '_c' +svmC + '_t' + isTest + '_' + suffix 
