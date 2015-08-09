@@ -2,6 +2,7 @@
 
 
 '''
+
 |---README.md                                   # this file
 |---single_SVM.m                                # SVM learner on one single label, one fold, one SVM C parameter setting
 |---parallel_svm_parameter_selection.py         # run svm in parallel for parameter selection
@@ -9,5 +10,6 @@
 |---parameter_setting                           # parameter setting for different data
 |---parallel_svm.py                             # run svm in parallem for training and testing (cross validation)
 |---compute_results.m                           # compute auc and acc for the experiment
+
  '''
 
