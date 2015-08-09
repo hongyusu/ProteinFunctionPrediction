@@ -61,8 +61,10 @@ global_rundir = ''
 
 # function to check if the result file already exist in the destination folder
 def checkfile(filename):
-  return os.path.exists(filename)
-
+  if os.path.exists(filename):
+    if os.path.getsize(filename) > 0: return 1
+    else: return 0
+  else: return 0
 
 def singleJob(node, job):
   (priority, job_detail) = job
@@ -73,7 +75,8 @@ def singleJob(node, job):
       fail_penalty = 0
     else:
       logging.info('\t--> (priority) %d (node)%s (filename) %s' %(priority, node, outputFilename))
-      os.system(""" ssh -o StrictHostKeyChecking=no %s 'cd /cs/taatto/group/urenzyme/workspace/ProteinFunctionPrediction/Experiments/Bins/; nohup matlab -nodisplay -nosplash -r "single_SVM '%s' '%s' '%s' '%s' '%s' '%s' '%s'" > /var/tmp/tmp'  """ % (node,xFilename,yFilename,labelIndex,foldIndex,svmC,outputFilename,isTest) )
+      #os.system(""" ssh -o StrictHostKeyChecking=no %s 'cd /cs/taatto/group/urenzyme/workspace/ProteinFunctionPrediction/Experiments/Bins/; nohup matlab -nodisplay -nosplash -r "single_SVM '%s' '%s' '%s' '%s' '%s' '%s' '%s'" > /var/tmp/tmp'  """ % (node,xFilename,yFilename,labelIndex,foldIndex,svmC,outputFilename,isTest) )
+      os.system(""" ssh -o StrictHostKeyChecking=no %s 'cd /cs/fs/home/su/ProteinFunctionPrediction/Experiments/Bins/; nohup matlab -nodisplay -nosplash -r "single_SVM '%s' '%s' '%s' '%s' '%s' '%s' '%s'" > /var/tmp/tmp'  """ % (node,xFilename,yFilename,labelIndex,foldIndex,svmC,outputFilename,isTest) )
       logging.info('\t--| (priority) %d (node)%s (filename) %s' %(priority, node, outputFilename))
       fail_penalty = -1
       time.sleep(1)
@@ -95,12 +98,10 @@ def run():
   paramInd = 0
   kFold    = 5 
   numLabel = 3200  
-  tmpDir   = '../tmpDirVal/'
   suffix   = 'val'
   isTest   = '0'
-  if not os.path.exists(tmpDir): os.mkdir(tmpDir)
   # iterate over the lists
-  xFilenameList         = ['../Data/tcdb.TB']
+  xFilenameList         = ['../Data/tcdb.TB','../Data/tcdb.TICoils','../Data/tcdb.TIGene3D']
   yFilenameList         = ['../Data/tcdb.TC']
   labelIndexList        = xrange(1,numLabel+1)
   foldIndexList         = xrange(1,kFold+1) 
@@ -110,6 +111,8 @@ def run():
       words = line.strip().split(' ')
       if words[0] == xFilename and words[1] == yFilename:
         svmC = words[2]
+    tmpDir   = '../Results/%s_%s/' % ( re.sub('.*/','',xFilename), re.sub('.*/','',yFilename))
+    if not os.path.exists(tmpDir): os.mkdir(tmpDir)
     paramInd += 1
     outputFilename = tmpDir + '/' + re.sub('.*/','',xFilename) + '_' + re.sub('.*/','',yFilename) + '_l' + str(labelIndex) + '_f' + str(foldIndex) + '_c' +svmC + '_t' + isTest + '_' + suffix 
     ## check if result is ready already
