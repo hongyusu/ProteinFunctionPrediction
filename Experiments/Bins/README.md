@@ -8,5 +8,6 @@
 |---compute_best_svmC.m                         # compute the best parameter from parameter selection
 |---parameter_setting                           # parameter setting for different data
 |---parallel_svm.py                             # run svm in parallem for training and testing (cross validation)
-'''
+|---compute_results.m                           # compute auc and acc for the experiment
+ '''
 
