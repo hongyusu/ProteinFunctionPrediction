@@ -75,8 +75,8 @@ def singleJob(node, job):
       fail_penalty = 0
     else:
       logging.info('\t--> (priority) %d (node)%s (filename) %s' %(priority, node, outputFilename))
-      #os.system(""" ssh -o StrictHostKeyChecking=no %s 'cd /cs/taatto/group/urenzyme/workspace/ProteinFunctionPrediction/Experiments/Bins/; nohup matlab -nodisplay -nosplash -r "single_SVM '%s' '%s' '%s' '%s' '%s' '%s' '%s'" > /var/tmp/tmp'  """ % (node,xFilename,yFilename,labelIndex,foldIndex,svmC,outputFilename,isTest) )
-      os.system(""" ssh -o StrictHostKeyChecking=no %s 'cd /cs/fs/home/su/ProteinFunctionPrediction/Experiments/Bins/; nohup matlab -nodisplay -nosplash -r "single_SVM '%s' '%s' '%s' '%s' '%s' '%s' '%s'" > /var/tmp/tmp'  """ % (node,xFilename,yFilename,labelIndex,foldIndex,svmC,outputFilename,isTest) )
+      os.system(""" ssh -o StrictHostKeyChecking=no %s 'cd /cs/taatto/group/urenzyme/workspace/ProteinFunctionPrediction/Experiments/Bins/; nohup matlab -nodisplay -nosplash -r "single_SVM '%s' '%s' '%s' '%s' '%s' '%s' '%s'" > /var/tmp/tmp'  """ % (node,xFilename,yFilename,labelIndex,foldIndex,svmC,outputFilename,isTest) )
+      #os.system(""" ssh -o StrictHostKeyChecking=no %s 'cd /cs/fs/home/su/ProteinFunctionPrediction/Experiments/Bins/; nohup matlab -nodisplay -nosplash -r "single_SVM '%s' '%s' '%s' '%s' '%s' '%s' '%s'" > /var/tmp/tmp'  """ % (node,xFilename,yFilename,labelIndex,foldIndex,svmC,outputFilename,isTest) )
       logging.info('\t--| (priority) %d (node)%s (filename) %s' %(priority, node, outputFilename))
       fail_penalty = -1
       time.sleep(1)
