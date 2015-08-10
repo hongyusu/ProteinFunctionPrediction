@@ -18,13 +18,13 @@ Uniprot proteins have the following features:
 
    1. Gene Ontology
    2. Protein Family
-   3. BLAST score with UniProt
+   3. _BLAST_ score with UniProt
    4. Taxonomy in NCBI
 
 For TCDB proteins we extract features of the following two categorises
 
-   1. BLAST score with TCDB
-   2. Several InterProScan feature
+   1. _BLAST_ score with TCDB
+   2. Many InterProScan features
 
 ## Data
 
@@ -65,7 +65,7 @@ We obtain some feature representations for proteins based on the [Master thesis]
 ### Other data
 
 We extract protein classification data from TCDB database.
-As the intersection of the protein data listed above and the ones in TCDB is very small we compute protein features via BLAST and InterProScan.
+As the intersection of the protein data listed above and the ones in TCDB is very small we compute protein features via _BLAST_ and InterProScan.
 
 1. Transport protein classification data are downloaded from [TCDB database](http://www.tcdb.org/public/). 
 NOTE: Su, her you should specify which version has been considered (I guess a version after 7 june)
@@ -88,23 +88,23 @@ NOTE: Su, her you should specify which version has been considered (I guess a ve
   1. Data file for TCDB sequence and classification information is in the file `./Data/tcdb.1`.
 
 
-1. [BLAST with TCDB](http://hongyusu.github.io/lessons/2015/06/16/ncbi-blast-installation-and-running-in-parallel/)
+1. [_BLAST_ with TCDB](http://hongyusu.github.io/lessons/2015/06/16/ncbi-blast-installation-and-running-in-parallel/)
 
-   1. Protein sequences are aligned with themselves by running BLAST algorithms.
+   1. Protein sequences are aligned with themselves by running _BLAST_ algorithms.
    1. This procedure will genrate a pairwise similarity matrix.
-   1. Instruction for installing and running BLAST can be found from [my blog post](http://hongyusu.github.io/lessons/2015/06/16/ncbi-blast-installation-and-running-in-parallel/). 
-   1. In particular, after removing some replicated proteins, there are 12515 protein left in TCDB which will be used to build a TCDB BLAST database.
+   1. Instruction for installing and running _BLAST_ can be found from [my blog post](http://hongyusu.github.io/lessons/2015/06/16/ncbi-blast-installation-and-running-in-parallel/). 
+   1. In particular, after removing some replicated proteins, there are 12515 protein left in TCDB which will be used to build a TCDB _BLAST_ database.
    1. The cleaned TCDB data file is located in `./Data/tcdb`.
-   1. For the BLAST search, we obtain all hits with e-value below 0.01. 
-   1. We use BLAST score as similary measure between pair of proteins.
-   1. Some statistics about the TCDB BLAST features are shown in the following table
+   1. For the _BLAST_ search, we obtain all hits with e-value below 0.01. 
+   1. We use _BLAST_ score as similary measure between pair of proteins.
+   1. Some statistics about the TCDB _BLAST_ features are shown in the following table
 
       |Type of Data|Number of items|
       |---:|---:|
       |Protein|12515|
-      |TCDB BLAST feature|12515|
+      |TCDB _BLAST_ feature|12515|
 
-   1. Data file for TCDB BLAST feature is located as `./Data/tcdbblast`.
+   1. Data file for TCDB _BLAST_ feature is located as `./Data/tcdbblast`.
 
       1. The format of this file is
 
@@ -208,7 +208,7 @@ NOTE: Su, her you should specify which version has been considered (I guess a ve
       
             1. The number of proteins and the number of features in the union of the collection of matrices are shown in the following table.
       
-            2. The number of proteins and the number of features in the intersection of the collection of matrics are shown in the following table. Notice that a protein will present in the interection matrix if it has features in GO/BLAST/Pfam/Taxonomy categories. 
+            2. The number of proteins and the number of features in the intersection of the collection of matrics are shown in the following table. Notice that a protein will present in the interection matrix if it has features in GO/_BLAST_/Pfam/Taxonomy categories. 
       
                |Type|#Proteins|#Features|
                |----:|----:|----:|
@@ -223,12 +223,12 @@ NOTE: Su, her you should specify which version has been considered (I guess a ve
                |Gene ontology: cellular component|GC|
                |Gene ontology: molecular function|GM|
                |Protein family|PF|
-               |BLAST|MB|
+               |_BLAST_|MB|
                |Taxonomy|MT|
                |TCDB classification|TC|
-               |TCDB BLAST|TB|
+               |TCDB _BLAST_|TB|
    
-1. Realizing that I cannot rely on the data used in the Master thesis, I directly work on proteins from TCDB. In particular, I compuate various protein features via running BLAST search and InterProScan.
+1. Realizing that I cannot rely on the data used in the Master thesis, I directly work on proteins from TCDB. In particular, I compuate various protein features via running _BLAST_ search and InterProScan.
   
    1. First I remove duplicated proteins from the transporter protein classification database (TCDB), particularly, by analyzing the sequence-classification data file.
          
@@ -302,10 +302,10 @@ NOTE: Su, her you should specify which version has been considered (I guess a ve
       This gzipped text file has Protein AC on rows (12546 AC) and 3145 TCDB classes on columns. This is a 0/1 dense matrix: the entry (i,j) is equal to 1 means that protein i is annotated with TCDB class j, otherwise (i,j) = 0.
 
 
-   1. Then I run BLAST search and InterProScan for all preprocessed proteins.
-   1. Merge TCDB classification (protein labels), TCDB BLAST features, and TCDB InterProScan features.
+   1. Then I run _BLAST_ search and InterProScan for all preprocessed proteins.
+   1. Merge TCDB classification (protein labels), TCDB _BLAST_ features, and TCDB InterProScan features.
    1. Make data matrices of different types, e.g., different feature matrices and label matrix.
-      1. In particular, BLAST features use real number (BLAST score), other InterProScan feature use integer number as count
+      1. In particular, _BLAST_ features use real number (_BLAST_ score), other InterProScan feature use integer number as count
    1. Important scripts and result files are listed as follows.
 
       ```
@@ -313,7 +313,7 @@ NOTE: Su, her you should specify which version has been considered (I guess a ve
       |---Bins
           |---process_tcdb.py        # process original TCDB database (remove duplication ect)
           |---merge_tcdb_blast_and_ips.py          # merge TCDB blast, ips and classfiication data
-          |---run_blast.sh           # run BLAST search
+          |---run_blast.sh           # run _BLAST_ search
           |---run_interproscan.sh    # run interproscan search to generate protein features
           |---separate_different_features.py # generate feature matrices of different types
       |---Results
@@ -348,7 +348,7 @@ NOTE: Su, her you should specify which version has been considered (I guess a ve
    |Feature prefix|Number of features|Feature type|Version information|Description|
    |:---:|---:|:---:|:---:|:----------|
    |TC__|3145|	TCDB||TCDB classification|
-   |TB__|12535|	BLAST||BLAST search|
+   |TB__|12535|	_BLAST_||_BLAST_ search|
    |TIProDom__|145|	ProDom|2006.1|ProDom is a comprehensive set of protein domain families automatically generated from the UniProt Knowledge Database.|
    |TIHamap__|209|	HAMAP||High-quality Automated and Manual Annotation of Microbial Proteomes|
    |TISMART__|240|	SMART|6.2|SMART allows the identification and analysis of domain architectures based on Hidden Markov Models or HMMs|
