@@ -374,7 +374,7 @@ NOTE: Su, her you should specify which version has been considered (I guess a ve
 
 # Empirical evaluation 
 
-## Experiment setup
+## Setup
 
    1. We use linear SVM as baseline classifier.
    1. For each input data, we select SVM margin slack parameter (C) from the set {0.01,0.1,1,10,100}. Parameter selection is performed with 5000 proteins from the dataset.
