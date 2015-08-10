@@ -2,8 +2,13 @@
 function plot_auc_curve()
 
   addpath('./savefigure/');
+
   [xFilenameList,yFilenameList,svmCList] = textread('parameter_setting','%s %s %s');
+
   figure1 = figure('visible','off');
+  set(figure1, 'PaperUnits', 'centimeters');
+  set(figure1, 'Position',[0 0 20 20]);
+              
   for i=1:size(xFilenameList,1)
     xFilename = xFilenameList{i};
     yFilename = yFilenameList{i};
