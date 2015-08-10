@@ -7,7 +7,7 @@ function plot_auc_curve()
 
   figure1 = figure('visible','off');
   set(figure1, 'PaperUnits', 'centimeters');
-  set(figure1, 'Position',[0 0 20 20]);
+  set(figure1, 'Position',[0 0 50 50]);
               
   for i=1:size(xFilenameList,1)
     xFilename = xFilenameList{i};
