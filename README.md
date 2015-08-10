@@ -372,6 +372,17 @@ NOTE: Su, her you should specify which version has been considered (I guess a ve
 
 
 
+## Experimental results
 
+1. Preliminary experimental results are shown in the following table
+
+   | Input | Output | AUC | Accuracy | F1 | Precision | Recall |
+   |../Data/tcdb.TB|../Data/tcdb.TC|0.9641|0.9992|0.7445|0.9786|0.6008|
+   |../Data/tcdb.TICoils|../Data/tcdb.TC|0.8541|0.9964|0.0356|0.0380|0.0336|
+   |../Data/tcdb.TIGene3D|../Data/tcdb.TC|0.8815|0.9881|0.0403|0.0240|0.1266|
+
+1. Auc curve is shown as 
+  
+   ![alt text](https://github.com/aalto-ics-kepaco/ProteinFunctionPrediction/blob/master/Experiments/Plots/auc.jpg)
 
 
