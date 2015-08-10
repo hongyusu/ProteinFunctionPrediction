@@ -376,11 +376,12 @@ NOTE: Su, her you should specify which version has been considered (I guess a ve
 
 ## Setup
 
-   1. We use linear SVM as baseline classifier.
-   1. For each input data, we select SVM margin slack parameter (C) from the set {0.01,0.1,1,10,100}. Parameter selection is performed with 5000 proteins from the dataset.
-   1. The best SVM C parameter is then used in training the SVM classifier.
-   1. We perform five fold cross validation. In particular, we random divide examples into five disjoint set of equal size. In each iteration, we use one set for testing and other four sets for training. We repeat the same procedure five times. 
-   1. To measure the performance, we report the following score: AUC, accuracy, F1, precision, and recall.
+1. We use linear SVM as baseline classifier. In particular, we use libSVM package.
+1. For each input data, we select SVM margin slack parameter (C) from the set {0.01,0.1,1,10,100}.
+1. Parameter selection is based on 5000 randomly selected proteins from the dataset.
+1. The best SVM C parameter is then applied to train a SVM classifier.
+1. Experimental results are reported from a five fold cross validation procedure. In particular, we randomly divide examples into five disjoint set of equal size. In each iteration, we use one set for testing and rest for training. The same procedure is repeated five times. 
+1. To measure the performance, we report the following score computed based on microlabels: AUC, accuracy, F1, precision, and recall.
 
 ## Results
 
