@@ -25,7 +25,7 @@ function compute_results(xFilename,yFilename)
   [~,I] = sortrows(res,[-1,-2]);
   bestSVMC = svmCList{I(1)};
   
-  fileID = fopen('./results','a');
+  fileID = fopen('../Results/results','a');
   fprintf(fileID, '%s %s %.4f %.4f\n',xFilename,yFilename,res(1),res(2));
   fclose(fileID);
 
@@ -46,7 +46,9 @@ function [auc,accuracy] = compute_performance(xFilename,yFilename,svmC,isTest,su
   for labelIndex = 1:size(Y,2)
     for foldIndex = 1:5
       % processing
-      outputFilename = sprintf('../tmpDirVal/%s_%s_l%d_f%d_c%s_t%s_%s',...
+      outputFilename = sprintf('../Results/%s_%s/%s_%s_l%d_f%d_c%s_t%s_%s',...
+      regexprep(xFilename,'.*/',''),...
+      regexprep(yFilename,'.*/',''),...
       regexprep(xFilename,'.*/',''),...
       regexprep(yFilename,'.*/',''),...
       labelIndex,foldIndex,svmC,isTest,suffix);
