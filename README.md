@@ -5,16 +5,16 @@
 
 - [Table of content](#table-of-content)
 - [Introduction](#introduction)
-- [Data](#)
-	- [Data from Master thesis work](#)
-	- [Other data](#)
-- [Preprocessing](#)
-	- [Use the data from Master thesis](#)
-	- [Generate protein data with BLAST and InterProScan](#)
-	- [Data statistics](#)
-- [Empirical evaluation](#)
-	- [Setup](#)
-	- [Results](#)
+- [Data](#data)
+	- [Data from Master thesis work](#data-from-master-thesis)
+	- [Other data](#other-data)
+- [Preprocessing](#preprocessing)
+	- [Use the data from Master thesis](#use-data-from-master-thesis)
+	- [Generate protein data with BLAST and InterProScan](#generate-protein-data-with-blast-and-interproscan)
+	- [Data statistics](#data-statistics)
+- [Empirical evaluation](#empirical-evaluation)
+	- [Setup](#setup)
+	- [Results](#results)
 
 
 
