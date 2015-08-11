@@ -5,10 +5,9 @@
 * auto-gen TOC:
 {:toc}
 
-# Protein function prediction
 
 
-## Introduction
+# Introduction
 
 For now, the project aims to reliably predict the function of the transporter proteins.
 The function is defined as TC code following the hierarchical structure of the transporter protein classification system.
@@ -26,9 +25,9 @@ For TCDB proteins we extract features of the following two categorises
    1. _BLAST_ score with TCDB
    2. Many InterProScan features
 
-## Data
+# Data
 
-### Data from [Master thesis]() work
+## Data from [Master thesis]() work
  
 We obtain some feature representations for proteins based on the [Master thesis](). This covers features in the following categories. 
 
@@ -62,7 +61,7 @@ We obtain some feature representations for proteins based on the [Master thesis]
    |Protein|104116|
    |Taxonomy feature|3004|
 
-### Other data
+## Other data
 
 We extract protein classification data from TCDB database.
 As the intersection of the protein data listed above and the ones in TCDB is very small we compute protein features via _BLAST_ and InterProScan.
@@ -185,153 +184,157 @@ NOTE: Su, her you should specify which version has been considered (I guess a ve
 1. Besides the data files described above, all original data are located in the directory `./Data/`
 
 
-## Data preprocessing
+# Preprocessing
+
+## Use the data from Master thesis
 
 1. The first strategy we used is to merge the protein data from the Master thesis and from TCDB database to find an intersection of proteins with both various features and classification information in TCDB.
-   1. However, we found out that the intersection is very small. Only about 1000 proteins from TCDB has feature representations in the Master thesis data.
-   1. Anywauy, this strategy is briefly illustrated as followings:
-      1. Merge datasets from different sources:
-      
-         1. Merge the following feature types into one matrix
-      
-            |Data type|#Proteins|#Features|
-            |----:|----:|----:|
-            |matgoBP|101422|12891|
-            |matgoCC|101422|1670|
-            |matgoMF|101422|4816|
-            |matblastcompressed|56838|12646|
-            |matpfam|100589|7341|
-            |mattaxo|104116|3004|
-            |TCDB|12516|9456|
-      
-         2. A big global matrix is computed by concatenating the matrices of protein-GO, protein-Blast, protein-Ffam, protein-taxonomy, and protein-TCDB, and protein-TCDBblast.
-      
-            1. The number of proteins and the number of features in the union of the collection of matrices are shown in the following table.
-      
-            2. The number of proteins and the number of features in the intersection of the collection of matrics are shown in the following table. Notice that a protein will present in the interection matrix if it has features in GO/_BLAST_/Pfam/Taxonomy categories. 
-      
-               |Type|#Proteins|#Features|
-               |----:|----:|----:|
-               |Union|123619|64328|
-               |Intersection|1336|64328|
-      
-            3. Different type of fetures are annotated in `.collab` according to the following table
-      
-               |Feature name|Prefix|
-               |---:|---:|
-               |Gene ontology: biological process|GB|
-               |Gene ontology: cellular component|GC|
-               |Gene ontology: molecular function|GM|
-               |Protein family|PF|
-               |_BLAST_|MB|
-               |Taxonomy|MT|
-               |TCDB classification|TC|
-               |TCDB _BLAST_|TB|
+1. However, we found out that the intersection is very small. Only about 1000 proteins from TCDB has feature representations in the Master thesis data.
+1. Anywauy, this strategy is briefly illustrated as followings:
+   1. Merge datasets from different sources:
    
+      1. Merge the following feature types into one matrix
+   
+         |Data type|#Proteins|#Features|
+         |----:|----:|----:|
+         |matgoBP|101422|12891|
+         |matgoCC|101422|1670|
+         |matgoMF|101422|4816|
+         |matblastcompressed|56838|12646|
+         |matpfam|100589|7341|
+         |mattaxo|104116|3004|
+         |TCDB|12516|9456|
+   
+      2. A big global matrix is computed by concatenating the matrices of protein-GO, protein-Blast, protein-Ffam, protein-taxonomy, and protein-TCDB, and protein-TCDBblast.
+   
+         1. The number of proteins and the number of features in the union of the collection of matrices are shown in the following table.
+   
+         2. The number of proteins and the number of features in the intersection of the collection of matrics are shown in the following table. Notice that a protein will present in the interection matrix if it has features in GO/_BLAST_/Pfam/Taxonomy categories. 
+   
+            |Type|#Proteins|#Features|
+            |----:|----:|----:|
+            |Union|123619|64328|
+            |Intersection|1336|64328|
+   
+         3. Different type of fetures are annotated in `.collab` according to the following table
+   
+            |Feature name|Prefix|
+            |---:|---:|
+            |Gene ontology: biological process|GB|
+            |Gene ontology: cellular component|GC|
+            |Gene ontology: molecular function|GM|
+            |Protein family|PF|
+            |_BLAST_|MB|
+            |Taxonomy|MT|
+            |TCDB classification|TC|
+            |TCDB _BLAST_|TB|
+
+## Generate protein data with BLAST and InterProScan
+
 1. Realizing that I cannot rely on the data used in the Master thesis, I directly work on proteins from TCDB. In particular, I compuate various protein features via running _BLAST_ search and InterProScan.
   
-   1. First I remove duplicated proteins from the transporter protein classification database (TCDB), particularly, by analyzing the sequence-classification data file.
-         
-      NOTE: In this way you removed the annotations for proteins having multiple annotation paths. These are 29:
+1. First I remove duplicated proteins from the transporter protein classification database (TCDB), particularly, by analyzing the sequence-classification data file.
       
-      |AC|TC|
-      |---:|---:|
-      |D4ZJA6|1.A.30.1.5|
-      |D4ZJA6|1.A.30.1.6|
-      |O24303|1.A.18.1.1|
-      |O24303|3.A.9.1.1|
-      |O34840|2.A.19.2.7|
-      |O34840|2.A.19.2.11|
-      |P0AAW9|8.A.50.1.1|
-      |P0AAW9|2.A.6.2.2|
-      |P0C1S5|9.A.39.1.3|
-      |P0C1S5|9.A.39.1.2|
-      |P18409|1.B.33.3.1|
-      |P18409|1.B.8.6.1|
-      |P23644|3.A.8.1.1|
-      |P23644|1.B.8.2.1|
-      |P25568|2.A.1.24.1|
-      |P25568|9.A.15.1.1|
-      |P28795|9.A.17.1.1|
-      |P28795|3.A.20.1.5|
-      |P29340|3.A.20.1.1|
-      |P29340|3.A.20.1.5|
-      |P34230|3.A.1.203.2|
-      |P34230|3.A.1.203.6|
-      |P94360|3.A.1.1.26|
-      |P94360|3.A.1.1.34|
-      |Q03PY5|3.A.1.28.2|
-      |Q03PY5|3.A.1.26.9|
-      |Q03PY7|3.A.1.28.2|
-      |Q03PY7|3.A.1.26.9|
-      |Q07418|9.A.17.1.1|
-      |Q07418|3.A.20.1.5|
-      |Q15049|9.B.129.1.1|
-      |Q15049|2.A.1.76.1|
-      |Q55JG4|9.B.178.1.5|
-      |Q55JG4|9.B.178.1.6|
-      |Q6GHV7|9.A.39.1.1|
-      |Q6GHV7|9.A.39.1.2|
-      |Q6GUB0|2.A.88.1.1|
-      |Q6GUB0|3.A.1.25.1|
-      |Q72L52|3.A.1.1.24|
-      |Q72L52|3.A.1.1.25|
-      |Q8EAG6|1.A.30.1.5|
-      |Q8EAG6|1.A.30.1.6|
-      |Q8KQR1|9.A.39.1.4|
-      |Q8KQR1|9.A.39.1.2|
-      |Q99257|1.I.1.1.1|
-      |Q99257|3.A.22.1.1|
-      |Q9FBS5|3.A.1.1.42|
-      |Q9FBS5|3.A.1.1.43|
-      |Q9FBS6|3.A.1.1.42|
-      |Q9FBS6|3.A.1.1.43|
-      |Q9FBS7|3.A.1.1.42|
-      |Q9FBS7|3.A.1.1.43|
-      |Q9L0Q1|3.A.1.1.33|
-      |Q9L0Q1|3.A.1.1.36|
-      |Q9RL01|2.A.1.72.1|
-      |Q9RL01|2.A.1.15.15|
-      |Q9Y3Q4|1.A.1.5.10|
-      |Q9Y3Q4|1.A.1.5.11|
+   NOTE: In this way you removed the annotations for proteins having multiple annotation paths. These are 29:
+   
+   |AC|TC|
+   |---:|---:|
+   |D4ZJA6|1.A.30.1.5|
+   |D4ZJA6|1.A.30.1.6|
+   |O24303|1.A.18.1.1|
+   |O24303|3.A.9.1.1|
+   |O34840|2.A.19.2.7|
+   |O34840|2.A.19.2.11|
+   |P0AAW9|8.A.50.1.1|
+   |P0AAW9|2.A.6.2.2|
+   |P0C1S5|9.A.39.1.3|
+   |P0C1S5|9.A.39.1.2|
+   |P18409|1.B.33.3.1|
+   |P18409|1.B.8.6.1|
+   |P23644|3.A.8.1.1|
+   |P23644|1.B.8.2.1|
+   |P25568|2.A.1.24.1|
+   |P25568|9.A.15.1.1|
+   |P28795|9.A.17.1.1|
+   |P28795|3.A.20.1.5|
+   |P29340|3.A.20.1.1|
+   |P29340|3.A.20.1.5|
+   |P34230|3.A.1.203.2|
+   |P34230|3.A.1.203.6|
+   |P94360|3.A.1.1.26|
+   |P94360|3.A.1.1.34|
+   |Q03PY5|3.A.1.28.2|
+   |Q03PY5|3.A.1.26.9|
+   |Q03PY7|3.A.1.28.2|
+   |Q03PY7|3.A.1.26.9|
+   |Q07418|9.A.17.1.1|
+   |Q07418|3.A.20.1.5|
+   |Q15049|9.B.129.1.1|
+   |Q15049|2.A.1.76.1|
+   |Q55JG4|9.B.178.1.5|
+   |Q55JG4|9.B.178.1.6|
+   |Q6GHV7|9.A.39.1.1|
+   |Q6GHV7|9.A.39.1.2|
+   |Q6GUB0|2.A.88.1.1|
+   |Q6GUB0|3.A.1.25.1|
+   |Q72L52|3.A.1.1.24|
+   |Q72L52|3.A.1.1.25|
+   |Q8EAG6|1.A.30.1.5|
+   |Q8EAG6|1.A.30.1.6|
+   |Q8KQR1|9.A.39.1.4|
+   |Q8KQR1|9.A.39.1.2|
+   |Q99257|1.I.1.1.1|
+   |Q99257|3.A.22.1.1|
+   |Q9FBS5|3.A.1.1.42|
+   |Q9FBS5|3.A.1.1.43|
+   |Q9FBS6|3.A.1.1.42|
+   |Q9FBS6|3.A.1.1.43|
+   |Q9FBS7|3.A.1.1.42|
+   |Q9FBS7|3.A.1.1.43|
+   |Q9L0Q1|3.A.1.1.33|
+   |Q9L0Q1|3.A.1.1.36|
+   |Q9RL01|2.A.1.72.1|
+   |Q9RL01|2.A.1.15.15|
+   |Q9Y3Q4|1.A.1.5.10|
+   |Q9Y3Q4|1.A.1.5.11|
 
 
-      If we consider only the annotation till to the fourth level we have only 13 proteins with multiple annotated paths, but in this way we miss (considering annotations from the first to the fourth level) 41 annotations. To my opinion it is not a good idea to eliminate such annotations. Considering that in practice there are only a few multiple paths, we can ignore multiple paths in our predictions, but without removing them from the data. You can recover the full TCDB annotations using the file tcdb.1 instead of tcdb in the Data directory.
+   If we consider only the annotation till to the fourth level we have only 13 proteins with multiple annotated paths, but in this way we miss (considering annotations from the first to the fourth level) 41 annotations. To my opinion it is not a good idea to eliminate such annotations. Considering that in practice there are only a few multiple paths, we can ignore multiple paths in our predictions, but without removing them from the data. You can recover the full TCDB annotations using the file tcdb.1 instead of tcdb in the Data directory.
 
-      The TCDB annotation matrix, including all the duplicated path annotations till to the fourth level of the TCDB is available in Preprocessing/Results/tcdb1.annotations.levels1234.txt.gz.
-      This gzipped text file has Protein AC on rows (12546 AC) and 3145 TCDB classes on columns. This is a 0/1 dense matrix: the entry (i,j) is equal to 1 means that protein i is annotated with TCDB class j, otherwise (i,j) = 0.
+   The TCDB annotation matrix, including all the duplicated path annotations till to the fourth level of the TCDB is available in Preprocessing/Results/tcdb1.annotations.levels1234.txt.gz.
+   This gzipped text file has Protein AC on rows (12546 AC) and 3145 TCDB classes on columns. This is a 0/1 dense matrix: the entry (i,j) is equal to 1 means that protein i is annotated with TCDB class j, otherwise (i,j) = 0.
 
 
-   1. Then I run _BLAST_ search and InterProScan for all preprocessed proteins.
-   1. Merge TCDB classification (protein labels), TCDB _BLAST_ features, and TCDB InterProScan features.
-   1. Make data matrices of different types, e.g., different feature matrices and label matrix.
-      1. In particular, _BLAST_ features use real number (_BLAST_ score), other InterProScan feature use integer number as count
-   1. Important scripts and result files are listed as follows.
+1. Then I run _BLAST_ search and InterProScan for all preprocessed proteins.
+1. Merge TCDB classification (protein labels), TCDB _BLAST_ features, and TCDB InterProScan features.
+1. Make data matrices of different types, e.g., different feature matrices and label matrix.
+   1. In particular, _BLAST_ features use real number (_BLAST_ score), other InterProScan feature use integer number as count
+1. Important scripts and result files are listed as follows.
 
-      ```
-      Preprocessing
-      |---Bins
-          |---process_tcdb.py        # process original TCDB database (remove duplication ect)
-          |---merge_tcdb_blast_and_ips.py          # merge TCDB blast, ips and classfiication data
-          |---run_blast.sh           # run _BLAST_ search
-          |---run_interproscan.sh    # run interproscan search to generate protein features
-          |---separate_different_features.py # generate feature matrices of different types
-      |---Results
-          |---tcdbdata               # merged data in sparse matrix format: 'protein name' 'feature name' 'value' 
-          |---tcdbdata.collab        # feature names
-          |---tcdbdata.rowlab        # protein names
-          |---tcdbdata.mtx           # sparse data matrix with format 'protein id' 'feature id' 'value'
+   ```
+   Preprocessing
+   |---Bins
+       |---process_tcdb.py        # process original TCDB database (remove duplication ect)
+       |---merge_tcdb_blast_and_ips.py          # merge TCDB blast, ips and classfiication data
+       |---run_blast.sh           # run _BLAST_ search
+       |---run_interproscan.sh    # run interproscan search to generate protein features
+       |---separate_different_features.py # generate feature matrices of different types
+   |---Results
+       |---tcdbdata               # merged data in sparse matrix format: 'protein name' 'feature name' 'value' 
+       |---tcdbdata.collab        # feature names
+       |---tcdbdata.rowlab        # protein names
+       |---tcdbdata.mtx           # sparse data matrix with format 'protein id' 'feature id' 'value'
 		  |---tcdb1.annotations.gz   # dense matrix (text file gzipped) with Swissprot AC on rows and TCDB classes on columns. 
 		                             # Entry (i,j) of the matrix is 1 if protein i is annotated to TC class j, otherwise (i,j) = 0
 									 # this matrix includes all the annotations (including multiple paths) obtained from the file tcdb.1 in the Data directory.
-      Experiments
-      |---Data
-          |---tcdb.prefix       # data matrices of different type, where type information are explained in the section of Data statistics.
-          |---README.md         # read me file for experimental data
-          |---tcdb.collab       # feature names
-          |---tcdb.rowlab       # protein names
-      |---Data.tar.gz           # compressed Data files, including files in `./Data` folder
-      ```
+   Experiments
+   |---Data
+       |---tcdb.prefix       # data matrices of different type, where type information are explained in the section of Data statistics.
+       |---README.md         # read me file for experimental data
+       |---tcdb.collab       # feature names
+       |---tcdb.rowlab       # protein names
+   |---Data.tar.gz           # compressed Data files, including files in `./Data` folder
+   ```
  
 ## Data statistics
 
@@ -393,6 +396,7 @@ NOTE: Su, her you should specify which version has been considered (I guess a ve
    |../Data/tcdb.TICoils  |0.8541|0.9964|0.0356|0.0380|0.0336|
    |../Data/tcdb.TIGene3D |0.8815|0.9881|0.0403|0.0240|0.1266|
    |../Data/tcdb.TIHamap  |0.8691|0.9981|0.0553|0.9498|0.0285|
+   |../Data/tcdb.TIPANTHER|0.9081|0.9981|0.4240|0.5239|0.3562|
 
 1. AUC curve is shown as 
   
