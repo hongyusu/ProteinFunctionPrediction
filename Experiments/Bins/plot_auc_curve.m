@@ -3,8 +3,8 @@ function plot_auc_curve()
 
   addpath('./savefigure/');
 
-  [xFilenameList,yFilenameList,svmCList] = textread('parameter_setting','%s %s %s');
-
+  [xFilenameList,yFilenameList,auc,acc,f1,precision,recall] = textread('../Results/results','%s %s %s %s %s %s %s','headerlines',1);
+  
   figure1 = figure('visible','off');
   set(figure1, 'PaperUnits', 'centimeters');
   set(figure1, 'Position',[0 0 800 800]);
