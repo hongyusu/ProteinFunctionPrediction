@@ -408,6 +408,8 @@ NOTE: Su, her you should specify which version has been considered (I guess a ve
    |../Data/tcdb.TIGene3D |0.8815|0.9881|0.0403|0.0240|0.1266|
    |../Data/tcdb.TIHamap  |0.8691|0.9981|0.0553|0.9498|0.0285|
    |../Data/tcdb.TIPANTHER|0.9081|0.9981|0.4240|0.5239|0.3562|
+   |../Data/tcdb.TIPfam   |0.9415|0.9978|0.3822|0.4201|0.3506|
+
 
 1. AUC curve is shown as 
   
