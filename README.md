@@ -6,7 +6,7 @@
 - [Table of content](#table-of-content)
 - [Introduction](#introduction)
 - [Data](#data)
-	- [Data from Master thesis work](#data-from-master-thesis)
+	- [Data from Master thesis](#data-from-master-thesis)
 	- [Other data](#other-data)
 - [Preprocessing](#preprocessing)
 	- [Use the data from Master thesis](#use-data-from-master-thesis)
@@ -38,7 +38,7 @@ For TCDB proteins we extract features of the following two categorises
 
 # Data
 
-## Data from [Master thesis]() work
+## Data from Master thesis
  
 We obtain some feature representations for proteins based on the [Master thesis](). This covers features in the following categories. 
 
