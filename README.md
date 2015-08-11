@@ -359,8 +359,8 @@ NOTE: Su, her you should specify which version has been considered (I guess a ve
 
 1. Category information are listed in the table as follows: 
 
-   |Feature prefix|Number of features|Feature type|Version information|Description|
-   |:---:|---:|:---:|:---:|:----------|
+   |Feature prefix|Number of features|Feature type|Version information|Feature description|
+   |:---|---:|:---:|:---:|:----------|
    |TC__|3145|	TCDB||TCDB classification|
    |TB__|12535|	_BLAST_||_BLAST_ search|
    |TIProDom__|145|	ProDom|2006.1|ProDom is a comprehensive set of protein domain families automatically generated from the UniProt Knowledge Database.|
