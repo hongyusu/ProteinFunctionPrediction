@@ -359,7 +359,7 @@ NOTE: Su, her you should specify which version has been considered (I guess a ve
 
 1. Category information are listed in the table as follows: 
 
-   |Feature prefix|Number of features|Feature type|Version information|Feature description|
+   |Feature prefix|Size|Feature type|Version | Feature description|
    |:---|---:|:---:|:---:|:----------|
    |TC__|3145|	TCDB||TCDB classification|
    |TB__|12535|	_BLAST_||_BLAST_ search|
