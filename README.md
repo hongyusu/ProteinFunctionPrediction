@@ -1,9 +1,20 @@
 
 
-# Table of content
 
-* auto-gen TOC:
-{:toc}
+**Table of Contents**  *generated with [DocToc](http://doctoc.herokuapp.com/)*
+
+- [Table of content](#)
+- [Introduction](#)
+- [Data](#)
+	- [Data from Master thesis work](#)
+	- [Other data](#)
+- [Preprocessing](#)
+	- [Use the data from Master thesis](#)
+	- [Generate protein data with BLAST and InterProScan](#)
+	- [Data statistics](#)
+- [Empirical evaluation](#)
+	- [Setup](#)
+	- [Results](#)
 
 
 
