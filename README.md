@@ -17,8 +17,6 @@
         - [Setup](#setup)
         - [Results](#results)
 
-https://github.com/aalto-ics-kepaco/ProteinFunctionPrediction
-
 
 # Introduction
 
