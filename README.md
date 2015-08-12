@@ -11,11 +11,11 @@
 - [Preprocessing](#preprocessing)
 	- [Use the data from Master thesis](#use-data-from-master-thesis)
 	- [Generate protein data with BLAST and InterProScan](#generate-protein-data-with-blast-and-interproscan)
-	- [Data statistics](#data-statistics)
+        - [Data statistics](#data-statistics)
 - [Empirical evaluation](#empirical-evaluation)
         - [Support vector machines](#support-vector-machines)
-	        - [Setup](#setup)
-	        - [Results](#results)
+                - [Setup](#setup)
+                - [Results](#results)
 
 
 
