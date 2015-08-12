@@ -1,25 +1,37 @@
 <!DOCTYPE html>
-<html lang="en-us">
-  <head>
-    <meta charset="UTF-8">
-    <title>Proteinfunctionprediction by hongyusu</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
-  </head>
-  <body>
-    <section class="page-header">
-      <h1 class="project-name">Proteinfunctionprediction</h1>
-      <h2 class="project-tagline">Project about protein function prediction</h2>
-      <a href="https://github.com/hongyusu/ProteinFunctionPrediction" class="btn">View on GitHub</a>
-      <a href="https://github.com/hongyusu/ProteinFunctionPrediction/zipball/master" class="btn">Download .zip</a>
-      <a href="https://github.com/hongyusu/ProteinFunctionPrediction/tarball/master" class="btn">Download .tar.gz</a>
-    </section>
+<html>
 
-    <section class="main-content">
-      <h1>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Proteinfunctionprediction : Project about protein function prediction">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Proteinfunctionprediction</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/hongyusu/ProteinFunctionPrediction">View on GitHub</a>
+
+          <h1 id="project_title">Proteinfunctionprediction</h1>
+          <h2 id="project_tagline">Project about protein function prediction</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/hongyusu/ProteinFunctionPrediction/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/hongyusu/ProteinFunctionPrediction/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
 <a id="table-of-contents" class="anchor" href="#table-of-contents" aria-hidden="true"><span class="octicon octicon-link"></span></a>Table of Contents</h1>
 
 <ul>
@@ -1216,20 +1228,20 @@ Experiments
 <h2>
 <a id="support-vector-machines" class="anchor" href="#support-vector-machines" aria-hidden="true"><span class="octicon octicon-link"></span></a>Support vector machines</h2>
 
-<h2>
-<a id="setup" class="anchor" href="#setup" aria-hidden="true"><span class="octicon octicon-link"></span></a>Setup</h2>
+<h3>
+<a id="setup" class="anchor" href="#setup" aria-hidden="true"><span class="octicon octicon-link"></span></a>Setup</h3>
 
 <ol>
-<li>Linear SVM is used as the baseline learner. In particular, we use SVM implementation from <a href="https://www.csie.ntu.edu.tw/%7Ecjlin/libsvm/">libSVM</a>.</li>
-<li>We select for each input feature a SVM margin slack (C) parameter from the range {0.01,0.1,1,10,100}.</li>
-<li>Parameter selection procedure is baed on 5000 randomly selected proteins from the original dataset.</li>
+<li>Linear SVM is used as the baseline learner. We use a SVM implementation from <a href="https://www.csie.ntu.edu.tw/%7Ecjlin/libsvm/">libSVM</a>.</li>
+<li>We select for each input feature a SVM margin slack (C) parameter from the set {0.01,0.1,1,10,100}.</li>
+<li>Parameter selection is baed on 5000 randomly selected proteins from the original dataset.</li>
 <li>After parametere selection, the best SVM C parameter is applied to train a SVM classifier.</li>
 <li>Experimental results are reported from a five fold cross validation procedure. We randomly divide examples into five disjoin set of equal size. In each iteration, we use one set for testing and the rest for training. The same procedure is then repeated five times.</li>
-<li>We report the following metrics to measure the performance of the classifier including AUC, accuracy, F1, precision, and recall. The metrics are computed based on microlabels.</li>
+<li>We report the following metrics to measure the performance of the classifier including AUC, accuracy, F1, precision, and recall. The scores are computed by pooling all microlabels.</li>
 </ol>
 
-<h2>
-<a id="results" class="anchor" href="#results" aria-hidden="true"><span class="octicon octicon-link"></span></a>Results</h2>
+<h3>
+<a id="results" class="anchor" href="#results" aria-hidden="true"><span class="octicon octicon-link"></span></a>Results</h3>
 
 <ol>
 <li>
@@ -1238,7 +1250,7 @@ Experiments
 <table>
 <thead>
 <tr>
-<th align="center">Input</th>
+<th align="center">Input feature</th>
 <th align="center">AUC</th>
 <th align="center">Accuracy</th>
 <th align="center">F1</th>
@@ -1295,6 +1307,118 @@ Experiments
 <td align="center">0.4201</td>
 <td align="center">0.3506</td>
 </tr>
+<tr>
+<td align="center">../Data/tcdb.TIPhobius</td>
+<td align="center">0.8991</td>
+<td align="center">0.9964</td>
+<td align="center">0.1174</td>
+<td align="center">0.1130</td>
+<td align="center">0.1220</td>
+</tr>
+<tr>
+<td align="center">../Data/tcdb.TIPIRSF</td>
+<td align="center">0.8743</td>
+<td align="center">0.9981</td>
+<td align="center">0.1118</td>
+<td align="center">0.9687</td>
+<td align="center">0.0593</td>
+</tr>
+<tr>
+<td align="center">../Data/tcdb.TIPRINTS</td>
+<td align="center">0.8788</td>
+<td align="center">0.9979</td>
+<td align="center">0.1369</td>
+<td align="center">0.3550</td>
+<td align="center">0.0848</td>
+</tr>
+<tr>
+<td align="center">../Data/tcdb.TIProDom</td>
+<td align="center">0.8708</td>
+<td align="center">0.9981</td>
+<td align="center">0.0345</td>
+<td align="center">0.9884</td>
+<td align="center">0.0176</td>
+</tr>
+<tr>
+<td align="center">../Data/tcdb.TIProSitePatterns</td>
+<td align="center">0.8672</td>
+<td align="center">0.9870</td>
+<td align="center">0.0301</td>
+<td align="center">0.0176</td>
+<td align="center">0.1018</td>
+</tr>
+<tr>
+<td align="center">../Data/tcdb.TIProSiteProfiles</td>
+<td align="center">0.8783</td>
+<td align="center">0.9979</td>
+<td align="center">0.1560</td>
+<td align="center">0.3745</td>
+<td align="center">0.0985</td>
+</tr>
+<tr>
+<td align="center">../Data/tcdb.TISignalP_EUK</td>
+<td align="center">0.8596</td>
+<td align="center">0.9899</td>
+<td align="center">0.0109</td>
+<td align="center">0.0068</td>
+<td align="center">0.0283</td>
+</tr>
+<tr>
+<td align="center">../Data/tcdb.TISignalP_GRAM_NEGATIVE</td>
+<td align="center">0.8677</td>
+<td align="center">0.9979</td>
+<td align="center">0.0362</td>
+<td align="center">0.2543</td>
+<td align="center">0.0195</td>
+</tr>
+<tr>
+<td align="center">../Data/tcdb.TISignalP_GRAM_POSITIVE</td>
+<td align="center">0.8724</td>
+<td align="center">0.9980</td>
+<td align="center">0.0413</td>
+<td align="center">0.5434</td>
+<td align="center">0.0214</td>
+</tr>
+<tr>
+<td align="center">../Data/tcdb.TISMART</td>
+<td align="center">0.8732</td>
+<td align="center">0.9979</td>
+<td align="center">0.0715</td>
+<td align="center">0.2742</td>
+<td align="center">0.0411</td>
+</tr>
+<tr>
+<td align="center">../Data/tcdb.TISUPERFAMILY</td>
+<td align="center">0.8851</td>
+<td align="center">0.9975</td>
+<td align="center">0.1486</td>
+<td align="center">0.2275</td>
+<td align="center">0.1104</td>
+</tr>
+<tr>
+<td align="center">../Data/tcdb.TITIGRFAM</td>
+<td align="center">0.8819</td>
+<td align="center">0.9977</td>
+<td align="center">0.2226</td>
+<td align="center">0.3421</td>
+<td align="center">0.1650</td>
+</tr>
+<tr>
+<td align="center">../Data/tcdb.TITMHMM</td>
+<td align="center">0.8694</td>
+<td align="center">0.9975</td>
+<td align="center">0.0068</td>
+<td align="center">0.0153</td>
+<td align="center">0.0044</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
 </tbody>
 </table>
 </li>
@@ -1304,16 +1428,18 @@ Experiments
 <p><img src="https://github.com/aalto-ics-kepaco/ProteinFunctionPrediction/blob/master/Experiments/Plots/auc.jpg" alt="alt text"></p>
 </li>
 </ol>
+      </section>
+    </div>
 
-      <footer class="site-footer">
-        <span class="site-footer-owner"><a href="https://github.com/hongyusu/ProteinFunctionPrediction">Proteinfunctionprediction</a> is maintained by <a href="https://github.com/hongyusu">hongyusu</a>.</span>
-
-        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Proteinfunctionprediction maintained by <a href="https://github.com/hongyusu">hongyusu</a></p>
+        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
       </footer>
+    </div>
 
-    </section>
-
-            <script type="text/javascript">
+              <script type="text/javascript">
             var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
             document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
           </script>
@@ -1323,6 +1449,7 @@ Experiments
             pageTracker._trackPageview();
             } catch(err) {}
           </script>
+
 
   </body>
 </html>
