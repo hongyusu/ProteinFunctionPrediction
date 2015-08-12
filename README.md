@@ -14,8 +14,6 @@
         - [Data statistics](#data-statistics)
 - [Empirical evaluation](#empirical-evaluation)
         - [Support vector machines](#support-vector-machines)
-                - [Setup](#setup)
-                - [Results](#results)
 
 
 
