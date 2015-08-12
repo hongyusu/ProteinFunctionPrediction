@@ -391,7 +391,7 @@ NOTE: Su, her you should specify which version has been considered (I guess a ve
 
 ## Support vector machines
 
-## Setup
+### Setup
 
 1. Linear SVM is used as the baseline learner. We use a SVM implementation from [libSVM](https://www.csie.ntu.edu.tw/~cjlin/libsvm/).
 1. We select for each input feature a SVM margin slack (C) parameter from the set {0.01,0.1,1,10,100}.
@@ -400,7 +400,7 @@ NOTE: Su, her you should specify which version has been considered (I guess a ve
 1. Experimental results are reported from a five fold cross validation procedure. We randomly divide examples into five disjoin set of equal size. In each iteration, we use one set for testing and the rest for training. The same procedure is then repeated five times.
 1. We report the following metrics to measure the performance of the classifier including AUC, accuracy, F1, precision, and recall. The scores are computed by pooling all microlabels.
 
-## Results
+### Results
 
 1. Preliminary experimental results are shown in the following table
 
