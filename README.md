@@ -6,14 +6,16 @@
 - [Table of content](#table-of-content)
 - [Introduction](#introduction)
 - [Data](#data)
-	- [Data from Master thesis](#data-from-master-thesis)
-	- [Other data](#other-data)
+    - [Data from Master thesis](#data-from-master-thesis)
+    - [Other data](#other-data)
 - [Preprocessing](#preprocessing)
-	- [Use the data from Master thesis](#use-data-from-master-thesis)
-	- [Generate protein data with BLAST and InterProScan](#generate-protein-data-with-blast-and-interproscan)
-        - [Data statistics](#data-statistics)
+    - [Use the data from Master thesis](#use-data-from-master-thesis)
+    - [Generate protein data with BLAST and InterProScan](#generate-protein-data-with-blast-and-interproscan)
+    - [Data statistics](#data-statistics)
 - [Empirical evaluation](#empirical-evaluation)
-        - [Support vector machines](#support-vector-machines)
+    - [Support vector machines](#support-vector-machines)
+        - [Setup](#setup)
+        - [Results](#results)
 
 
 
