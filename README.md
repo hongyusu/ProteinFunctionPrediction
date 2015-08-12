@@ -393,12 +393,12 @@ NOTE: Su, her you should specify which version has been considered (I guess a ve
 
 ## Setup
 
-1. Linear SVM is used as the baseline learner. In particular, we use SVM implementation from [libSVM](https://www.csie.ntu.edu.tw/~cjlin/libsvm/).
-1. We select for each input feature a SVM margin slack (C) parameter from the range {0.01,0.1,1,10,100}.
-1. Parameter selection procedure is baed on 5000 randomly selected proteins from the original dataset.
+1. Linear SVM is used as the baseline learner. We use a SVM implementation from [libSVM](https://www.csie.ntu.edu.tw/~cjlin/libsvm/).
+1. We select for each input feature a SVM margin slack (C) parameter from the set {0.01,0.1,1,10,100}.
+1. Parameter selection is baed on 5000 randomly selected proteins from the original dataset.
 1. After parametere selection, the best SVM C parameter is applied to train a SVM classifier.
 1. Experimental results are reported from a five fold cross validation procedure. We randomly divide examples into five disjoin set of equal size. In each iteration, we use one set for testing and the rest for training. The same procedure is then repeated five times.
-1. We report the following metrics to measure the performance of the classifier including AUC, accuracy, F1, precision, and recall. The metrics are computed based on microlabels.
+1. We report the following metrics to measure the performance of the classifier including AUC, accuracy, F1, precision, and recall. The scores are computed by pooling all microlabels.
 
 ## Results
 
