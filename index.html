@@ -20,18 +20,46 @@
 
     <section class="main-content">
       <h1>
-<a id="table-of-content" class="anchor" href="#table-of-content" aria-hidden="true"><span class="octicon octicon-link"></span></a>Table of content</h1>
+<a id="table-of-contents" class="anchor" href="#table-of-contents" aria-hidden="true"><span class="octicon octicon-link"></span></a>Table of Contents</h1>
 
 <ul>
-<li>auto-gen TOC:
-{:toc}</li>
+<li><a href="#table-of-content">Table of content</a></li>
+<li><a href="#introduction">Introduction</a></li>
+<li>
+<a href="#data">Data</a>
+
+<ul>
+<li><a href="#data-from-master-thesis">Data from Master thesis</a></li>
+<li><a href="#other-data">Other data</a></li>
+</ul>
+</li>
+<li>
+<a href="#preprocessing">Preprocessing</a>
+
+<ul>
+<li><a href="#use-data-from-master-thesis">Use the data from Master thesis</a></li>
+<li><a href="#generate-protein-data-with-blast-and-interproscan">Generate protein data with BLAST and InterProScan</a></li>
+<li><a href="#data-statistics">Data statistics</a></li>
+</ul>
+</li>
+<li>
+<a href="#empirical-evaluation">Empirical evaluation</a>
+
+<ul>
+<li>
+<a href="#support-vector-machines">Support vector machines</a>
+
+<ul>
+<li><a href="#setup">Setup</a></li>
+<li><a href="#results">Results</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 
 <h1>
-<a id="protein-function-prediction" class="anchor" href="#protein-function-prediction" aria-hidden="true"><span class="octicon octicon-link"></span></a>Protein function prediction</h1>
-
-<h2>
-<a id="introduction" class="anchor" href="#introduction" aria-hidden="true"><span class="octicon octicon-link"></span></a>Introduction</h2>
+<a id="introduction" class="anchor" href="#introduction" aria-hidden="true"><span class="octicon octicon-link"></span></a>Introduction</h1>
 
 <p>For now, the project aims to reliably predict the function of the transporter proteins.
 The function is defined as TC code following the hierarchical structure of the transporter protein classification system.
@@ -42,22 +70,24 @@ Uniprot proteins have the following features:</p>
 <ol>
 <li>Gene Ontology</li>
 <li>Protein Family</li>
-<li>BLAST score with UniProt</li>
+<li>
+<em>BLAST</em> score with UniProt</li>
 <li>Taxonomy in NCBI</li>
 </ol>
 
 <p>For TCDB proteins we extract features of the following two categorises</p>
 
 <ol>
-<li>BLAST score with TCDB</li>
-<li>Several InterProScan feature</li>
+<li>
+<em>BLAST</em> score with TCDB</li>
+<li>Many InterProScan features</li>
 </ol>
 
-<h2>
-<a id="data" class="anchor" href="#data" aria-hidden="true"><span class="octicon octicon-link"></span></a>Data</h2>
+<h1>
+<a id="data" class="anchor" href="#data" aria-hidden="true"><span class="octicon octicon-link"></span></a>Data</h1>
 
-<h3>
-<a id="data-from-master-thesis-work" class="anchor" href="#data-from-master-thesis-work" aria-hidden="true"><span class="octicon octicon-link"></span></a>Data from <a href="">Master thesis</a> work</h3>
+<h2>
+<a id="data-from-master-thesis" class="anchor" href="#data-from-master-thesis" aria-hidden="true"><span class="octicon octicon-link"></span></a>Data from Master thesis</h2>
 
 <p>We obtain some feature representations for proteins based on the <a href="">Master thesis</a>. This covers features in the following categories. </p>
 
@@ -160,11 +190,11 @@ Uniprot proteins have the following features:</p>
 </li>
 </ol>
 
-<h3>
-<a id="other-data" class="anchor" href="#other-data" aria-hidden="true"><span class="octicon octicon-link"></span></a>Other data</h3>
+<h2>
+<a id="other-data" class="anchor" href="#other-data" aria-hidden="true"><span class="octicon octicon-link"></span></a>Other data</h2>
 
 <p>We extract protein classification data from TCDB database.
-As the intersection of the protein data listed above and the ones in TCDB is very small we compute protein features via BLAST and InterProScan.</p>
+As the intersection of the protein data listed above and the ones in TCDB is very small we compute protein features via <em>BLAST</em> and InterProScan.</p>
 
 <ol>
 <li>
@@ -229,18 +259,18 @@ NOTE: Su, her you should specify which version has been considered (I guess a ve
 </ol>
 </li>
 <li>
-<p><a href="http://hongyusu.github.io/lessons/2015/06/16/ncbi-blast-installation-and-running-in-parallel/">BLAST with TCDB</a></p>
+<p><a href="http://hongyusu.github.io/lessons/2015/06/16/ncbi-blast-installation-and-running-in-parallel/"><em>BLAST</em> with TCDB</a></p>
 
 <ol>
-<li>Protein sequences are aligned with themselves by running BLAST algorithms.</li>
+<li>Protein sequences are aligned with themselves by running <em>BLAST</em> algorithms.</li>
 <li>This procedure will genrate a pairwise similarity matrix.</li>
-<li>Instruction for installing and running BLAST can be found from <a href="http://hongyusu.github.io/lessons/2015/06/16/ncbi-blast-installation-and-running-in-parallel/">my blog post</a>. </li>
-<li>In particular, after removing some replicated proteins, there are 12515 protein left in TCDB which will be used to build a TCDB BLAST database.</li>
+<li>Instruction for installing and running <em>BLAST</em> can be found from <a href="http://hongyusu.github.io/lessons/2015/06/16/ncbi-blast-installation-and-running-in-parallel/">my blog post</a>. </li>
+<li>In particular, after removing some replicated proteins, there are 12515 protein left in TCDB which will be used to build a TCDB <em>BLAST</em> database.</li>
 <li>The cleaned TCDB data file is located in <code>./Data/tcdb</code>.</li>
-<li>For the BLAST search, we obtain all hits with e-value below 0.01. </li>
-<li>We use BLAST score as similary measure between pair of proteins.</li>
+<li>For the <em>BLAST</em> search, we obtain all hits with e-value below 0.01. </li>
+<li>We use <em>BLAST</em> score as similary measure between pair of proteins.</li>
 <li>
-<p>Some statistics about the TCDB BLAST features are shown in the following table</p>
+<p>Some statistics about the TCDB <em>BLAST</em> features are shown in the following table</p>
 
 <table>
 <thead>
@@ -255,14 +285,14 @@ NOTE: Su, her you should specify which version has been considered (I guess a ve
 <td align="right">12515</td>
 </tr>
 <tr>
-<td align="right">TCDB BLAST feature</td>
+<td align="right">TCDB <em>BLAST</em> feature</td>
 <td align="right">12515</td>
 </tr>
 </tbody>
 </table>
 </li>
 <li>
-<p>Data file for TCDB BLAST feature is located as <code>./Data/tcdbblast</code>.</p>
+<p>Data file for TCDB <em>BLAST</em> feature is located as <code>./Data/tcdbblast</code>.</p>
 
 <ol>
 <li>
@@ -543,14 +573,14 @@ NOTE: Su, her you should specify which version has been considered (I guess a ve
 <li><p>Besides the data files described above, all original data are located in the directory <code>./Data/</code></p></li>
 </ol>
 
+<h1>
+<a id="preprocessing" class="anchor" href="#preprocessing" aria-hidden="true"><span class="octicon octicon-link"></span></a>Preprocessing</h1>
+
 <h2>
-<a id="data-preprocessing" class="anchor" href="#data-preprocessing" aria-hidden="true"><span class="octicon octicon-link"></span></a>Data preprocessing</h2>
+<a id="use-the-data-from-master-thesis" class="anchor" href="#use-the-data-from-master-thesis" aria-hidden="true"><span class="octicon octicon-link"></span></a>Use the data from Master thesis</h2>
 
 <ol>
-<li>
-<p>The first strategy we used is to merge the protein data from the Master thesis and from TCDB database to find an intersection of proteins with both various features and classification information in TCDB.</p>
-
-<ol>
+<li>The first strategy we used is to merge the protein data from the Master thesis and from TCDB database to find an intersection of proteins with both various features and classification information in TCDB.</li>
 <li>However, we found out that the intersection is very small. Only about 1000 proteins from TCDB has feature representations in the Master thesis data.</li>
 <li>
 <p>Anywauy, this strategy is briefly illustrated as followings:</p>
@@ -616,7 +646,7 @@ NOTE: Su, her you should specify which version has been considered (I guess a ve
 <ol>
 <li><p>The number of proteins and the number of features in the union of the collection of matrices are shown in the following table.</p></li>
 <li>
-<p>The number of proteins and the number of features in the intersection of the collection of matrics are shown in the following table. Notice that a protein will present in the interection matrix if it has features in GO/BLAST/Pfam/Taxonomy categories. </p>
+<p>The number of proteins and the number of features in the intersection of the collection of matrics are shown in the following table. Notice that a protein will present in the interection matrix if it has features in GO/<em>BLAST</em>/Pfam/Taxonomy categories. </p>
 
 <table>
 <thead>
@@ -668,7 +698,7 @@ NOTE: Su, her you should specify which version has been considered (I guess a ve
 <td align="right">PF</td>
 </tr>
 <tr>
-<td align="right">BLAST</td>
+<td align="right"><em>BLAST</em></td>
 <td align="right">MB</td>
 </tr>
 <tr>
@@ -680,7 +710,8 @@ NOTE: Su, her you should specify which version has been considered (I guess a ve
 <td align="right">TC</td>
 </tr>
 <tr>
-<td align="right">TCDB BLAST</td>
+<td align="right">TCDB <em>BLAST</em>
+</td>
 <td align="right">TB</td>
 </tr>
 </tbody>
@@ -693,11 +724,12 @@ NOTE: Su, her you should specify which version has been considered (I guess a ve
 </ol>
 </li>
 </ol>
-</li>
-<li>
-<p>Realizing that I cannot rely on the data used in the Master thesis, I directly work on proteins from TCDB. In particular, I compuate various protein features via running BLAST search and InterProScan.</p>
+
+<h2>
+<a id="generate-protein-data-with-blast-and-interproscan" class="anchor" href="#generate-protein-data-with-blast-and-interproscan" aria-hidden="true"><span class="octicon octicon-link"></span></a>Generate protein data with BLAST and InterProScan</h2>
 
 <ol>
+<li><p>Realizing that I cannot rely on the data used in the Master thesis, I directly work on proteins from TCDB. In particular, I compuate various protein features via running <em>BLAST</em> search and InterProScan.</p></li>
 <li>
 <p>First I remove duplicated proteins from the transporter protein classification database (TCDB), particularly, by analyzing the sequence-classification data file.</p>
 
@@ -951,12 +983,12 @@ NOTE: Su, her you should specify which version has been considered (I guess a ve
 <p>The TCDB annotation matrix, including all the duplicated path annotations till to the fourth level of the TCDB is available in Preprocessing/Results/tcdb1.annotations.levels1234.txt.gz.
 This gzipped text file has Protein AC on rows (12546 AC) and 3145 TCDB classes on columns. This is a 0/1 dense matrix: the entry (i,j) is equal to 1 means that protein i is annotated with TCDB class j, otherwise (i,j) = 0.</p>
 </li>
-<li><p>Then I run BLAST search and InterProScan for all preprocessed proteins.</p></li>
-<li>Merge TCDB classification (protein labels), TCDB BLAST features, and TCDB InterProScan features.</li>
+<li><p>Then I run <em>BLAST</em> search and InterProScan for all preprocessed proteins.</p></li>
+<li>Merge TCDB classification (protein labels), TCDB <em>BLAST</em> features, and TCDB InterProScan features.</li>
 <li>Make data matrices of different types, e.g., different feature matrices and label matrix.
 
 <ol>
-<li>In particular, BLAST features use real number (BLAST score), other InterProScan feature use integer number as count</li>
+<li>In particular, <em>BLAST</em> features use real number (<em>BLAST</em> score), other InterProScan feature use integer number as count</li>
 </ol>
 </li>
 <li>
@@ -964,29 +996,27 @@ This gzipped text file has Protein AC on rows (12546 AC) and 3145 TCDB classes o
 
 <pre><code>Preprocessing
 |---Bins
-    |---process_tcdb.py        # process original TCDB database (remove duplication ect)
-    |---merge_tcdb_blast_and_ips.py          # merge TCDB blast, ips and classfiication data
-    |---run_blast.sh           # run BLAST search
-    |---run_interproscan.sh    # run interproscan search to generate protein features
-    |---separate_different_features.py # generate feature matrices of different types
+   |---process_tcdb.py        # process original TCDB database (remove duplication ect)
+   |---merge_tcdb_blast_and_ips.py          # merge TCDB blast, ips and classfiication data
+   |---run_blast.sh           # run _BLAST_ search
+   |---run_interproscan.sh    # run interproscan search to generate protein features
+   |---separate_different_features.py # generate feature matrices of different types
 |---Results
-    |---tcdbdata               # merged data in sparse matrix format: 'protein name' 'feature name' 'value' 
-    |---tcdbdata.collab        # feature names
-    |---tcdbdata.rowlab        # protein names
-    |---tcdbdata.mtx           # sparse data matrix with format 'protein id' 'feature id' 'value'
-    |---tcdb1.annotations.gz   # dense matrix (text file gzipped) with Swissprot AC on rows and TCDB classes on columns. 
-                               # Entry (i,j) of the matrix is 1 if protein i is annotated to TC class j, otherwise (i,j) = 0
-                               # this matrix includes all the annotations (including multiple paths) obtained from the file tcdb.1 in the Data directory.
+   |---tcdbdata               # merged data in sparse matrix format: 'protein name' 'feature name' 'value' 
+   |---tcdbdata.collab        # feature names
+   |---tcdbdata.rowlab        # protein names
+   |---tcdbdata.mtx           # sparse data matrix with format 'protein id' 'feature id' 'value'
+      |---tcdb1.annotations.gz   # dense matrix (text file gzipped) with Swissprot AC on rows and TCDB classes on columns. 
+                                 # Entry (i,j) of the matrix is 1 if protein i is annotated to TC class j, otherwise (i,j) = 0
+                                 # this matrix includes all the annotations (including multiple paths) obtained from the file tcdb.1 in the Data directory.
 Experiments
 |---Data
-    |---tcdb.prefix       # data matrices of different type, where type information are explained in the section of Data statistics.
-    |---README.md         # read me file for experimental data
-    |---tcdb.collab       # feature names
-    |---tcdb.rowlab       # protein names
+   |---tcdb.prefix       # data matrices of different type, where type information are explained in the section of Data statistics.
+   |---README.md         # read me file for experimental data
+   |---tcdb.collab       # feature names
+   |---tcdb.rowlab       # protein names
 |---Data.tar.gz           # compressed Data files, including files in `./Data` folder
 </code></pre>
-</li>
-</ol>
 </li>
 </ol>
 
@@ -1026,149 +1056,150 @@ Experiments
 <table>
 <thead>
 <tr>
-<th align="center">Feature prefix</th>
-<th align="right">Number of features</th>
+<th align="left">Feature prefix</th>
+<th align="right">Size</th>
 <th align="center">Feature type</th>
-<th align="center">Version information</th>
-<th align="left">Description</th>
+<th align="center">Version</th>
+<th align="left">Feature description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td align="center">TC__</td>
+<td align="left">TC__</td>
 <td align="right">3145</td>
 <td align="center">TCDB</td>
 <td align="center"></td>
 <td align="left">TCDB classification</td>
 </tr>
 <tr>
-<td align="center">TB__</td>
+<td align="left">TB__</td>
 <td align="right">12535</td>
-<td align="center">BLAST</td>
+<td align="center"><em>BLAST</em></td>
 <td align="center"></td>
-<td align="left">BLAST search</td>
+<td align="left">
+<em>BLAST</em> search</td>
 </tr>
 <tr>
-<td align="center">TIProDom__</td>
+<td align="left">TIProDom__</td>
 <td align="right">145</td>
 <td align="center">ProDom</td>
 <td align="center">2006.1</td>
 <td align="left">ProDom is a comprehensive set of protein domain families automatically generated from the UniProt Knowledge Database.</td>
 </tr>
 <tr>
-<td align="center">TIHamap__</td>
+<td align="left">TIHamap__</td>
 <td align="right">209</td>
 <td align="center">HAMAP</td>
 <td align="center"></td>
 <td align="left">High-quality Automated and Manual Annotation of Microbial Proteomes</td>
 </tr>
 <tr>
-<td align="center">TISMART__</td>
+<td align="left">TISMART__</td>
 <td align="right">240</td>
 <td align="center">SMART</td>
 <td align="center">6.2</td>
 <td align="left">SMART allows the identification and analysis of domain architectures based on Hidden Markov Models or HMMs</td>
 </tr>
 <tr>
-<td align="center">TISUPERFAMILY__</td>
+<td align="left">TISUPERFAMILY__</td>
 <td align="right">512</td>
 <td align="center">SuperFamily</td>
 <td align="center">1.75</td>
 <td align="left">SUPERFAMILY is a database of structural and functional annotation for all proteins and genomes.</td>
 </tr>
 <tr>
-<td align="center">TIPRINTS__</td>
+<td align="left">TIPRINTS__</td>
 <td align="right">579</td>
 <td align="center">PRINTS</td>
 <td align="center">42.0</td>
 <td align="left">A fingerprint is a group of conserved motifs used to characterise a protein family</td>
 </tr>
 <tr>
-<td align="center">TIPANTHER__</td>
+<td align="left">TIPANTHER__</td>
 <td align="right">4070</td>
 <td align="center">Panther</td>
 <td align="center">9.0</td>
 <td align="left">The PANTHER (Protein ANalysis THrough Evolutionary Relationships) Classification System is a unique resource that classifies genes by their functions, using published scientific experimental evidence and evolutionary relationships to predict function even in the absence of direct experimental evidence.</td>
 </tr>
 <tr>
-<td align="center">TIGene3D__</td>
+<td align="left">TIGene3D__</td>
 <td align="right">611</td>
 <td align="center">Gene3d</td>
 <td align="center">3.5.0</td>
 <td align="left">Structural assignment for whole genes and genomes using the CATH domain structure database</td>
 </tr>
 <tr>
-<td align="center">TIPIRSF__</td>
+<td align="left">TIPIRSF__</td>
 <td align="right">283</td>
 <td align="center">PIRSF</td>
 <td align="center">3.01</td>
 <td align="left">The PIRSF concept is being used as a guiding principle to provide comprehensive and non-overlapping clustering of UniProtKB sequences into a hierarchical order to reflect their evolutionary relationships.</td>
 </tr>
 <tr>
-<td align="center">TIPfam__</td>
+<td align="left">TIPfam__</td>
 <td align="right">2025</td>
 <td align="center">PfamA</td>
 <td align="center">27.0</td>
 <td align="left">A large collection of protein families, each represented by multiple sequence alignments and hidden Markov models (HMMs)</td>
 </tr>
 <tr>
-<td align="center">TIProSiteProfiles__</td>
+<td align="left">TIProSiteProfiles__</td>
 <td align="right">282</td>
 <td align="center">PrositeProfiles</td>
 <td align="center"></td>
 <td align="left">PROSITE consists of documentation entries describing protein domains, families and functional sites as well as associated patterns and profiles to identify them</td>
 </tr>
 <tr>
-<td align="center">TITIGRFAM__</td>
+<td align="left">TITIGRFAM__</td>
 <td align="right">769</td>
 <td align="center">TIGRFAM</td>
 <td align="center">15.0</td>
 <td align="left">TIGRFAMs are protein families based on Hidden Markov Models or HMMs</td>
 </tr>
 <tr>
-<td align="center">TIProSitePatterns__</td>
+<td align="left">TIProSitePatterns__</td>
 <td align="right">285</td>
 <td align="center">PrositePatterns</td>
 <td align="center"></td>
 <td align="left">PROSITE consists of documentation entries describing protein domains, families and functional sites as well as associated patterns and profiles to identify them</td>
 </tr>
 <tr>
-<td align="center">TICoils__</td>
+<td align="left">TICoils__</td>
 <td align="right">1</td>
 <td align="center">Coils</td>
 <td align="center">2.2</td>
 <td align="left">Prediction of Coiled Coil Regions in Proteins</td>
 </tr>
 <tr>
-<td align="center">TITMHMM__</td>
+<td align="left">TITMHMM__</td>
 <td align="right">1</td>
 <td align="center">TMHMM</td>
 <td align="center">2.0</td>
 <td align="left">Prediction of transmembrane helices in proteins</td>
 </tr>
 <tr>
-<td align="center">TIPhobius__</td>
+<td align="left">TIPhobius__</td>
 <td align="right">7</td>
 <td align="center">Phobius</td>
 <td align="center">1.01</td>
 <td align="left">A combined transmembrane topology and signal peptide predictor</td>
 </tr>
 <tr>
-<td align="center">TISignalP_GRAM_NEGATIVE__</td>
+<td align="left">TISignalP_GRAM_NEGATIVE__</td>
 <td align="right">2</td>
 <td align="center">SignalP_GRAM_NEGATIVE</td>
 <td align="center">4.0</td>
 <td align="left">SignalP (organism type gram-negative prokaryotes) predicts the presence and location of signal peptide cleavage sites in amino acid sequences for gram-negative prokaryotes</td>
 </tr>
 <tr>
-<td align="center">TISignalP_EUK__</td>
+<td align="left">TISignalP_EUK__</td>
 <td align="right">2</td>
 <td align="center">SignalP_EyUK</td>
 <td align="center">4.0</td>
 <td align="left">SignalP (organism type eukaryotes) predicts the presence and location of signal peptide cleavage sites in amino acid sequences for eukaryotes.</td>
 </tr>
 <tr>
-<td align="center">TISignalP_GRAM_POSITIVE__</td>
+<td align="left">TISignalP_GRAM_POSITIVE__</td>
 <td align="right">1</td>
 <td align="center">SignalP_GRAM_POSITIVE</td>
 <td align="center">4.0</td>
@@ -1176,6 +1207,101 @@ Experiments
 </tr>
 </tbody>
 </table>
+</li>
+</ol>
+
+<h1>
+<a id="empirical-evaluation" class="anchor" href="#empirical-evaluation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Empirical evaluation</h1>
+
+<h2>
+<a id="support-vector-machines" class="anchor" href="#support-vector-machines" aria-hidden="true"><span class="octicon octicon-link"></span></a>Support vector machines</h2>
+
+<h2>
+<a id="setup" class="anchor" href="#setup" aria-hidden="true"><span class="octicon octicon-link"></span></a>Setup</h2>
+
+<ol>
+<li>Linear SVM is used as the baseline learner. In particular, we use SVM implementation from <a href="https://www.csie.ntu.edu.tw/%7Ecjlin/libsvm/">libSVM</a>.</li>
+<li>We select for each input feature a SVM margin slack (C) parameter from the range {0.01,0.1,1,10,100}.</li>
+<li>Parameter selection procedure is baed on 5000 randomly selected proteins from the original dataset.</li>
+<li>After parametere selection, the best SVM C parameter is applied to train a SVM classifier.</li>
+<li>Experimental results are reported from a five fold cross validation procedure. We randomly divide examples into five disjoin set of equal size. In each iteration, we use one set for testing and the rest for training. The same procedure is then repeated five times.</li>
+<li>We report the following metrics to measure the performance of the classifier including AUC, accuracy, F1, precision, and recall. The metrics are computed based on microlabels.</li>
+</ol>
+
+<h2>
+<a id="results" class="anchor" href="#results" aria-hidden="true"><span class="octicon octicon-link"></span></a>Results</h2>
+
+<ol>
+<li>
+<p>Preliminary experimental results are shown in the following table</p>
+
+<table>
+<thead>
+<tr>
+<th align="center">Input</th>
+<th align="center">AUC</th>
+<th align="center">Accuracy</th>
+<th align="center">F1</th>
+<th align="center">Precision</th>
+<th align="center">Recall</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">../Data/tcdb.TB</td>
+<td align="center">0.9641</td>
+<td align="center">0.9992</td>
+<td align="center">0.7445</td>
+<td align="center">0.9786</td>
+<td align="center">0.6008</td>
+</tr>
+<tr>
+<td align="center">../Data/tcdb.TICoils</td>
+<td align="center">0.8541</td>
+<td align="center">0.9964</td>
+<td align="center">0.0356</td>
+<td align="center">0.0380</td>
+<td align="center">0.0336</td>
+</tr>
+<tr>
+<td align="center">../Data/tcdb.TIGene3D</td>
+<td align="center">0.8815</td>
+<td align="center">0.9881</td>
+<td align="center">0.0403</td>
+<td align="center">0.0240</td>
+<td align="center">0.1266</td>
+</tr>
+<tr>
+<td align="center">../Data/tcdb.TIHamap</td>
+<td align="center">0.8691</td>
+<td align="center">0.9981</td>
+<td align="center">0.0553</td>
+<td align="center">0.9498</td>
+<td align="center">0.0285</td>
+</tr>
+<tr>
+<td align="center">../Data/tcdb.TIPANTHER</td>
+<td align="center">0.9081</td>
+<td align="center">0.9981</td>
+<td align="center">0.4240</td>
+<td align="center">0.5239</td>
+<td align="center">0.3562</td>
+</tr>
+<tr>
+<td align="center">../Data/tcdb.TIPfam</td>
+<td align="center">0.9415</td>
+<td align="center">0.9978</td>
+<td align="center">0.3822</td>
+<td align="center">0.4201</td>
+<td align="center">0.3506</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>AUC curve is shown as </p>
+
+<p><img src="https://github.com/aalto-ics-kepaco/ProteinFunctionPrediction/blob/master/Experiments/Plots/auc.jpg" alt="alt text"></p>
 </li>
 </ol>
 
