@@ -13,8 +13,9 @@
 	- [Generate protein data with BLAST and InterProScan](#generate-protein-data-with-blast-and-interproscan)
 	- [Data statistics](#data-statistics)
 - [Empirical evaluation](#empirical-evaluation)
-	- [Setup](#setup)
-	- [Results](#results)
+        - [Support vector machines](#support-vector-machines)
+	        - [Setup](#setup)
+	        - [Results](#results)
 
 
 
@@ -388,9 +389,11 @@ NOTE: Su, her you should specify which version has been considered (I guess a ve
 
 # Empirical evaluation 
 
+## Support vector machines
+
 ## Setup
 
-1. Linear SVM is used as baseline learner. In particular, we use SVM implementation from libSVM package.
+1. Linear SVM is used as the baseline learner. In particular, we use SVM implementation from [libSVM](https://www.csie.ntu.edu.tw/~cjlin/libsvm/).
 1. We select for each input feature a SVM margin slack (C) parameter from the range {0.01,0.1,1,10,100}.
 1. Parameter selection procedure is baed on 5000 randomly selected proteins from the original dataset.
 1. After parametere selection, the best SVM C parameter is applied to train a SVM classifier.
