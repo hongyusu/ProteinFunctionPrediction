@@ -404,7 +404,7 @@ NOTE: Su, her you should specify which version has been considered (I guess a ve
 
 1. Preliminary experimental results are shown in the following table
 
-   | Input | AUC | Accuracy | F1 | Precision | Recall |
+   | Input feature | AUC | Accuracy | F1 | Precision | Recall |
    |:--:|:--:|:--:|:--:|:--:|:--:|
    |../Data/tcdb.TB         |0.9641|0.9992|0.7445|0.9786|0.6008|
    |../Data/tcdb.TICoils    |0.8541|0.9964|0.0356|0.0380|0.0336|
