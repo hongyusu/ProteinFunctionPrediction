@@ -3,7 +3,7 @@
 
 
 
-%%
+%%  =======
 % 
 % xFilename:            input feature
 % yFilename:            output multiple label, label is either 0 or 1
@@ -12,7 +12,8 @@
 % svmC:                 svm slack parameter
 % outputFilename:       tmp directory for results
 % isTest:               select a small port of data for sanity check if isTest=True  
-%
+%% =======
+
 function single_kernel(xFilename,yFilename,labelIndex,foldIndex,svmC,outputFilename,isTest)
 
   % some global parameter
@@ -31,7 +32,7 @@ function single_kernel(xFilename,yFilename,labelIndex,foldIndex,svmC,outputFilen
   addpath '~/softwares/libsvm-3.12/matlab/'
 
   % read in input and output files
-  K = dlmread(xFilename,' ');
+  K = dlmread(xFilename,',');
   Y = dlmread(yFilename,' ');
   Y = Y(2:size(Y,1),2:size(Y,2));
 
