@@ -16,6 +16,9 @@
     - [Support vector machines](#support-vector-machines)
         - [Setup](#setup)
         - [Results](#results)
+    - [Multiple kernel learning](#multiple-kernel-learning)
+        - [Experimental settings](#experimental-settings)
+        - [Results](#results)
 
 
 # Introduction
@@ -390,7 +393,7 @@ NOTE: Su, her you should specify which version has been considered (I guess a ve
 
 ## Support vector machines
 
-### Setup
+### Experimental settingsS
 
 1. Linear SVM is used as the baseline learner. We use a SVM implementation from [libSVM](https://www.csie.ntu.edu.tw/~cjlin/libsvm/).
 1. We select for each input feature a SVM margin slack (C) parameter from the set {0.01,0.1,1,10,100}.
@@ -428,5 +431,14 @@ NOTE: Su, her you should specify which version has been considered (I guess a ve
 1. AUC curve is shown as 
   
    ![alt text](https://github.com/aalto-ics-kepaco/ProteinFunctionPrediction/blob/master/Experiments/Plots/auc.jpg)
+
+## Multiple kernel learning
+
+### Experimental settings
+
+### Results
+
+
+
 
 

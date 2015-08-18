@@ -19,7 +19,7 @@ from threading import Thread
 import os
 import sys
 import commands
-sys.path.append('/cs/taatto/group/urenzyme/workspace/netscripts/')
+sys.path.append('/cs/work/group/urenzyme/workspace/netscripts/')
 from get_free_nodes import get_free_nodes
 import multiprocessing
 import time
@@ -77,7 +77,7 @@ def singleJob(node, job):
     else:
       print outputFilename
       logging.info('\t--> (priority) %d (node)%s (filename) %s' %(priority, node, outputFilename))
-      os.system(""" ssh -o StrictHostKeyChecking=no %s 'cd /cs/taatto/work/urenzyme/workspace/ProteinFunctionPrediction/Experiments/BinsMKL/; nohup matlab -nodisplay -nosplash -r "single_kernel '%s' '%s' '%s' '%s' '%s' '%s' '%s'" > /var/tmp/tmp'  """ % (node,xFilename,yFilename,labelIndex,foldIndex,svmC,outputFilename,isTest) )
+      os.system(""" ssh -o StrictHostKeyChecking=no %s 'cd /cs/work/group/urenzyme/workspace/ProteinFunctionPrediction/Experiments/BinsMKL/; nohup matlab -nodisplay -nosplash -r "single_kernel '%s' '%s' '%s' '%s' '%s' '%s' '%s'" > /var/tmp/tmp'  """ % (node,xFilename,yFilename,labelIndex,foldIndex,svmC,outputFilename,isTest) )
       logging.info('\t--| (priority) %d (node)%s (filename) %s' %(priority, node, outputFilename))
       fail_penalty = -1
       time.sleep(1)

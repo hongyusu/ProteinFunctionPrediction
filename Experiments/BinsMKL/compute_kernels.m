@@ -21,15 +21,17 @@ function compute_kernels()
   end
 
   
-  for i = 1:length(xFilenameList)
+  for i = 2:length(xFilenameList)
+    i
     xFilename = xFilenameList{i};
-    if i==1
+    if i==2
       Kall = dlmread(sprintf('%s.K',xFilename));
     else
       Kall = Kall + dlmread(sprintf('%s.K',xFilename));
     end
   end
-  dlmwrite(sprintf('../Data/tcdb.all.K'),K);
+  Kall = Kall/size(xFilenameList,2);
+  dlmwrite(sprintf('../Data/tcdb.all.K'),Kall);
 end
 
 
