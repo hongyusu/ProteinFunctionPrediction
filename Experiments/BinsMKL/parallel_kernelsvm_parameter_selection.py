@@ -2,13 +2,14 @@
 
 
 
-
+# ======================================================
 # The script uses Python thread and queue package.
 # Implement worker class and queuing system.
 # The framework looks at each parameter combination as a job and pools all job_queue in a queue.
 # It generates a group of workers (computing nodes). 
 # Each worker will always take and process the first job from the queue.
 # In case that job is not completed by the worker, it will be push back to the queue, and will be processed later on.
+# ======================================================
 
 
 import math             # enable math module for matrix etc.

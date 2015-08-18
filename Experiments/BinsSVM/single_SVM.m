@@ -54,7 +54,7 @@ function single_SVM(xFilename,yFilename,labelIndex,foldIndex,svmC,outputFilename
 
   % normalization: centering
   X = X - repmat(mean(X),size(X,1),1);
-  X = X ./ repmat(std(X),size(X,1),1);
+  %X = X ./ repmat(std(X),size(X,1),1);
   
   % cross validation index, 5 fold
   Ind = crossvalind('Kfold',size(X,1),5);
