@@ -30,7 +30,7 @@ function compute_kernels()
       Kall = Kall + dlmread(sprintf('%s.K',xFilename));
     end
   end
-  Kall = Kall/size(xFilenameList,2);
+  Kall = Kall/(size(xFilenameList,2)-1);
   dlmwrite(sprintf('../Data/tcdb.all.K'),Kall);
 end
 
