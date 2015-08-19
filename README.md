@@ -427,10 +427,10 @@ NOTE: Su, her you should specify which version has been considered (I guess a ve
    |../Data/tcdb.TISUPERFAMILY|0.8851|0.9975|0.1486|0.2275|0.1104|
    |../Data/tcdb.TITIGRFAM    |0.8819|0.9977|0.2226|0.3421|0.1650|
    |../Data/tcdb.TITMHMM      |0.8694|0.9975|0.0068|0.0153|0.0044|
-|
+
 1. AUC curve is shown as 
   
-   ![alt text](https://github.com/aalto-ics-kepaco/ProteinFunctionPrediction/blob/master/Experiments/Plots/auc.jpg)
+   ![alt text](https://github.com/aalto-ics-kepaco/ProteinFunctionPrediction/blob/master/Experiments/PlotsSVM/auc.jpg)
 
 ## Multiple kernel learning
 
@@ -438,7 +438,14 @@ NOTE: Su, her you should specify which version has been considered (I guess a ve
 
 ### Results
 
+1. Prediction performances of three multiple kernel learning approaches are listed in the following table
+
+   | Input feature | AUC | Accuracy | F1 | Precision | Recall |
+   |:--:|:--:|:--:|:--:|:--:|:--:|
+   |../Data/tcdb.all.KUNIMKL    |0.9808|0.9995|0.8584|0.9683|0.7710|
 
 
-
+1. AUC curves of three multiple kernel learning approaches are shown in the following figure 
+  
+   ![alt text](https://github.com/aalto-ics-kepaco/ProteinFunctionPrediction/blob/master/Experiments/PlotsMKL/auc.jpg)
 
