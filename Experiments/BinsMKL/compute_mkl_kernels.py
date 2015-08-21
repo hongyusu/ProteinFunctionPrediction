@@ -1,6 +1,6 @@
 
 
-
+import sys
 import numpy
 
 def mkl(kFilenameList,yFilename,kType):
@@ -46,7 +46,7 @@ def mkl(kFilenameList,yFilename,kType):
     M = numpy.zeros((len(kFilenameList), len(kFilenameList)),dtype='d')
     for i in range(len(kFilenameList)):
       Ki = numpy.loadtxt(kFilenameList[i],delimiter=',')
-      for j in range(len(kFilenameList)):
+      for j in range(i,len(kFilenameList)):
         print i,j
         Kj = numpy.loadtxt(kFilenameList[j],delimiter=',')
         M[i,j] = f_dot(Ki, Kj)
@@ -92,8 +92,9 @@ def f_dot(k1,k2):
 
 
 if __name__ == '__main__':
-  kFilenameList = ['../Data/tcdb.TB.K','../Data/tcdb.TICoils.K']#,'../Data/tcdb.TIGene3D.K','../Data/tcdb.TIHamap.K','../Data/tcdb.TIPANTHER.K','../Data/tcdb.TIPfam.K','../Data/tcdb.TIPhobius.K','../Data/tcdb.TIPIRSF.K','../Data/tcdb.TIPRINTS.K','../Data/tcdb.TIProDom.K','../Data/tcdb.TIProSitePatterns.K','../Data/tcdb.TIProSiteProfiles.K','../Data/tcdb.TISignalP_EUK.K','../Data/tcdb.TISignalP_GRAM_NEGATIVE.K','../Data/tcdb.TISignalP_GRAM_POSITIVE.K','../Data/tcdb.TISMART.K','../Data/tcdb.TISUPERFAMILY.K','../Data/tcdb.TITIGRFAM.K','../Data/tcdb.TITMHMM.K']
+  kFilenameList = ['../Data/tcdb.TB.K','../Data/tcdb.TICoils.K','../Data/tcdb.TIGene3D.K','../Data/tcdb.TIHamap.K','../Data/tcdb.TIPANTHER.K','../Data/tcdb.TIPfam.K','../Data/tcdb.TIPhobius.K','../Data/tcdb.TIPIRSF.K','../Data/tcdb.TIPRINTS.K','../Data/tcdb.TIProDom.K','../Data/tcdb.TIProSitePatterns.K','../Data/tcdb.TIProSiteProfiles.K','../Data/tcdb.TISignalP_EUK.K','../Data/tcdb.TISignalP_GRAM_NEGATIVE.K','../Data/tcdb.TISignalP_GRAM_POSITIVE.K','../Data/tcdb.TISMART.K','../Data/tcdb.TISUPERFAMILY.K','../Data/tcdb.TITIGRFAM.K','../Data/tcdb.TITMHMM.K']
   yFilename = '../Data/tcdb.TC.K'
-  #mkl(kFilenameList,yFilename,'UNIMKL')
+  mkl(kFilenameList,yFilename,sys.argv[1])
   #mkl(kFilenameList,yFilename,'ALIGN')
-  mkl(kFilenameList,yFilename,'ALIGNF')
+  #mkl(kFilenameList,yFilename,'ALIGNF')
+  #mkl(kFilenameList,yFilename,'UNIMKL')
