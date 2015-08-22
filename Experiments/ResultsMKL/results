@@ -1,2 +1,4 @@
 #Input Output AUC Accuracy F1 Precision Recall
-../Data/tcdb.all.KUNIMKL ../Data/tcdb.TC 0.9808 0.9995 0.8584 0.9683 0.7710
+../Data/tcdb.all.KUNIMKL ../Data/tcdb.TC 0.9807 0.9995 0.8583 0.9676 0.7713
+../Data/tcdb.all.KALIGN ../Data/tcdb.TC 0.9804 0.9995 0.8518 0.9548 0.7689
+../Data/tcdb.all.KALIGNF ../Data/tcdb.TC 0.9602 0.9989 0.6543 0.8678 0.5251
