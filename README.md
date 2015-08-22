@@ -442,7 +442,9 @@ NOTE: Su, her you should specify which version has been considered (I guess a ve
 
    | Input feature | AUC | Accuracy | F1 | Precision | Recall |
    |:--:|:--:|:--:|:--:|:--:|:--:|
-   |../Data/tcdb.all.KUNIMKL    |0.9808|0.9995|0.8584|0.9683|0.7710|
+   |../Data/tcdb.all.KUNIMKL|0.9807|0.9995|0.8583|0.9676|0.7713|
+   |../Data/tcdb.all.KALIGN |0.9804|0.9995|0.8518|0.9548|0.7689|
+   |../Data/tcdb.all.KALIGNF|0.9602|0.9989|0.6543|0.8678|0.5251|
 
 
 1. AUC curves of three multiple kernel learning approaches are shown in the following figure 
