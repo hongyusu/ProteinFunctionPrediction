@@ -463,6 +463,10 @@ In stead of predicting the transporter classification (TC) with single feature m
    | Align  |0.15|0.01|0.22|0.02|0.19|0.10|0.23|0.04|0.07|0.01|0.03|0.07|0.06|0.06|0.05|0.03|0.17|0.05|0.23|
    | AlignF |0.00|0.00|0.09|0.14|0.37|0.00|0.00|0.31|0.00|0.86|0.00|0.00|0.04|0.05|0.01|0.00|0.00|0.00|0.00|
 
+   In addition, kernel weights are shown in the following bar plot
+
+   ![alt text](https://github.com/aalto-ics-kepaco/ProteinFunctionPrediction/blob/master/Experiments/PlotsMKL/kernel_weights.jpg)
+
 1. Prediction performances of three multiple kernel learning approaches are listed in the following table
 
    | Input feature | AUC | Accuracy | F1 | Precision | Recall |
