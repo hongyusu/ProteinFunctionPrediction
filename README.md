@@ -460,8 +460,8 @@ In stead of predicting the transporter classification (TC) with single feature m
    |MKL|tcdb.TB|tcdb.TICoils|tcdb.TIGene3D|tcdb.TIHamap|tcdb.TIPANTHER|tcdb.TIPfam|tcdb.TIPhobius|tcdb.TIPIRSF|tcdb.TIPRINTS|tcdb.TIProDom|tcdb.TIProSitePatterns|tcdb.TIProSiteProfiles|tcdb.TISignalP_EUK|tcdb.TISignalP_GRAM_NEGATIVE|tcdb.TISignalP_GRAM_POSITIVE|tcdb.TISMART|tcdb.TISUPERFAMILY|tcdb.TITIGRFAM|tcdb.TITMHMM|
    |:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:---:|
    | UNIMKL |0.05|0.05|0.05|0.05|0.05|0.05|0.05|0.05|0.05|0.05|0.05|0.05|0.05|0.05|0.05|0.05|0.05|0.05|0.05|
-   | Align  |0.15|0.01|0.22|0.02|0.19|0.10|0.23|0.04|0.07|0.01|0.03|0.07|0.06|0.06|0.05|0.03|0.17|0.05|0.23|
-   | AlignF |0.00|0.00|0.09|0.14|0.37|0.00|0.00|0.31|0.00|0.86|0.00|0.00|0.04|0.05|0.01|0.00|0.00|0.00|0.00|
+   | ALIGN  |0.15|0.01|0.22|0.02|0.19|0.10|0.23|0.04|0.07|0.01|0.03|0.07|0.06|0.06|0.05|0.03|0.17|0.05|0.23|
+   | ALIGNF |0.00|0.00|0.09|0.14|0.37|0.00|0.00|0.31|0.00|0.86|0.00|0.00|0.04|0.05|0.01|0.00|0.00|0.00|0.00|
 
    In addition, kernel weights are shown in the following bar plot
 
