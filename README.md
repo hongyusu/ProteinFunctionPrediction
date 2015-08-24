@@ -393,12 +393,14 @@ NOTE: Su, her you should specify which version has been considered (I guess a ve
 
 ## Support vector machines
 
-### Experimental settingsS
+In this section, we test the classification performance on transporter classification (TC) based on different input feature maps as discussed in the previous section. 
+
+### Experimental settings
 
 1. Linear SVM is used as the baseline learner. We use a SVM implementation from [libSVM](https://www.csie.ntu.edu.tw/~cjlin/libsvm/).
-1. We select for each input feature a SVM margin slack (C) parameter from the set {0.01,0.1,1,10,100}.
-1. Parameter selection is baed on 5000 randomly selected proteins from the original dataset.
-1. After parametere selection, the best SVM C parameter is applied to train a SVM classifier.
+1. We select for each input feature map a SVM margin slack (C) parameter from the set {0.01,0.1,1,10,100}.
+1. Parameter selection is baed on a random selection of 5000 proteins from the original dataset.
+1. After parametere selection, the best SVM C parameter is applied to both training and test.
 1. Experiment results are reported from a five fold cross validation procedure. We randomly divide examples into five disjoin set of equal size. In each iteration, we use one set for testing and the rest for training. The same procedure is then repeated five times.
 1. We report the following metrics to measure the performance of the classifier including AUC, accuracy, F1, precision, and recall. The scores are computed by pooling all microlabels.
 
