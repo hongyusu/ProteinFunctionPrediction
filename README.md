@@ -23,7 +23,7 @@
 
 # Introduction
 
-For now, the project aims to reliably predict the function of the transporter proteins.
+For now the project aims to reliably predict the function of the transporter proteins.
 The function is defined as TC code following the hierarchical structure of the transporter protein classification system.
 The hierarchical structure of the classification system has five level. We aim to predict the first four level as the fifth level is the very specific classification.
 In addition to the transporter proteins documented in TCDB, we also collect proteins from UniProt.
