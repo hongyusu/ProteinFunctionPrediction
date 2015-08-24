@@ -406,13 +406,6 @@ In this section, we test the classification performance on transporter classific
 
 ### Results
 
-1. 
-   |MKL|tcdb.TB|tcdb.TICoils|tcdb.TIGene3D|tcdb.TIHamap|tcdb.TIPANTHER|tcdb.TIPfam|tcdb.TIPhobius|tcdb.TIPIRSF|tcdb.TIPRINTS|tcdb.TIProDom|tcdb.TIProSitePatterns|tcdb.TIProSiteProfiles|tcdb.TISignalP_EUK|tcdb.TISignalP_GRAM_NEGATIVE|tcdb.TISignalP_GRAM_POSITIVE|tcdb.TISMART|tcdb.TISUPERFAMILY|tcdb.TITIGRFAM|tcdb.TITMHMM|
-   |:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:---:|
-   | Align  |0.15|0.01|0.22|0.02|0.19|0.10|0.23|0.04|0.07|0.01|0.03|0.07|0.06|0.06|0.05|0.03|0.17|0.05|0.23|
-   | AlignF |0.00|0.00|0.09|0.14|0.37|0.00|0.00|0.31|0.00|0.86|0.00|0.00|0.04|0.05|0.01|0.00|0.00|0.00|0.00|
-   | UNIMKL |0.05|0.05|0.05|0.05|0.05|0.05|0.05|0.05|0.05|0.05|0.05|0.05|0.05|0.05|0.05|0.05|0.05|0.05|0.05|
-
 1. Preliminary experimental results are shown in the following table
 
    | Input feature | AUC | Accuracy | F1 | Precision | Recall |
@@ -437,6 +430,7 @@ In this section, we test the classification performance on transporter classific
    |../Data/tcdb.TITIGRFAM    |0.8819|0.9977|0.2226|0.3421|0.1650|
    |../Data/tcdb.TITMHMM      |0.8694|0.9975|0.0068|0.0153|0.0044|
 
+
 1. ROC curve is shown as 
   
    ![alt text](https://github.com/aalto-ics-kepaco/ProteinFunctionPrediction/blob/master/Experiments/PlotsSVM/auc.jpg)
@@ -460,6 +454,14 @@ In stead of predicting the transporter classification (TC) with single feature m
 1. We report the following metrics to measure the performance of the classifier including AUC, accuracy, F1, precision, and recall. The scores are computed by pooling all microlabels.
 
 ### Results
+
+1. Kernel weights computed from different multiple kernel learning approaches are listed in the following table
+ 
+   |MKL|tcdb.TB|tcdb.TICoils|tcdb.TIGene3D|tcdb.TIHamap|tcdb.TIPANTHER|tcdb.TIPfam|tcdb.TIPhobius|tcdb.TIPIRSF|tcdb.TIPRINTS|tcdb.TIProDom|tcdb.TIProSitePatterns|tcdb.TIProSiteProfiles|tcdb.TISignalP_EUK|tcdb.TISignalP_GRAM_NEGATIVE|tcdb.TISignalP_GRAM_POSITIVE|tcdb.TISMART|tcdb.TISUPERFAMILY|tcdb.TITIGRFAM|tcdb.TITMHMM|
+   |:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:---:|
+   | Align  |0.15|0.01|0.22|0.02|0.19|0.10|0.23|0.04|0.07|0.01|0.03|0.07|0.06|0.06|0.05|0.03|0.17|0.05|0.23|
+   | AlignF |0.00|0.00|0.09|0.14|0.37|0.00|0.00|0.31|0.00|0.86|0.00|0.00|0.04|0.05|0.01|0.00|0.00|0.00|0.00|
+   | UNIMKL |0.05|0.05|0.05|0.05|0.05|0.05|0.05|0.05|0.05|0.05|0.05|0.05|0.05|0.05|0.05|0.05|0.05|0.05|0.05|
 
 1. Prediction performances of three multiple kernel learning approaches are listed in the following table
 
