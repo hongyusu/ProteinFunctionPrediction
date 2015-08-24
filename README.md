@@ -399,7 +399,7 @@ NOTE: Su, her you should specify which version has been considered (I guess a ve
 1. We select for each input feature a SVM margin slack (C) parameter from the set {0.01,0.1,1,10,100}.
 1. Parameter selection is baed on 5000 randomly selected proteins from the original dataset.
 1. After parametere selection, the best SVM C parameter is applied to train a SVM classifier.
-1. Experimental results are reported from a five fold cross validation procedure. We randomly divide examples into five disjoin set of equal size. In each iteration, we use one set for testing and the rest for training. The same procedure is then repeated five times.
+1. Experiment results are reported from a five fold cross validation procedure. We randomly divide examples into five disjoin set of equal size. In each iteration, we use one set for testing and the rest for training. The same procedure is then repeated five times.
 1. We report the following metrics to measure the performance of the classifier including AUC, accuracy, F1, precision, and recall. The scores are computed by pooling all microlabels.
 
 ### Results
@@ -434,7 +434,21 @@ NOTE: Su, her you should specify which version has been considered (I guess a ve
 
 ## Multiple kernel learning
 
+In stead of predicting the transporter classification (TC) with single feature map as studied in the previous section, we aim to combine those 19 different feature maps with multiple kernel learning approaches.
+
 ### Experimental settings
+
+1. We compute an input base kernel (gram matrix) for each individual feature map. In particular, each base kenrel is a linear kernel on the original feature map.
+1. We compute a linear output kernel for the output multilabels. 
+1. Three multiple kernel learning approaches are applied to combine these 19 base kernels including
+   1. `UNIMKL` which computes a unifom combination of based kenrels
+   1. `ALIGN` which aligns each input kernel with the output kernel, then combines all based kernels according to the alignment scores
+   1. `ALIGNF` which maximizes the alignment score between the output kernel and a convex combination of all input kernels
+1. Support Vector Machines are used to build the classification model. In particular, we used a LibSVM version with precomputed kernel.
+1. We select SVM margin slack parameter (C) based on a random selection of 5000 examples. Best C is selected from the set {0.01,0.1,1,10,100}.
+1. After parameter selection, best C parameter is used for training and prediction.
+1. Experiment results are reported from a five fold cross validation procedure. We randomly divide examples into five disjoin set of equal size. In each iteration, we use one set for testing and the rest for training. The same procedure is then repeated five times.
+1. We report the following metrics to measure the performance of the classifier including AUC, accuracy, F1, precision, and recall. The scores are computed by pooling all microlabels.
 
 ### Results
 
