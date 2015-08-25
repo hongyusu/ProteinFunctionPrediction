@@ -15,9 +15,9 @@
 - [Empirical evaluation](#empirical-evaluation)
     - [Support vector machines](#support-vector-machines)
         - [SVM experiment settings](#svm-experiment-settings)
-        - [SVM Results](#svm-results)
+        - [SVM results](#svm-results)
     - [Multiple kernel learning](#multiple-kernel-learning)
-        - [MKL experiment settings](#mkl-experimental-settings)
+        - [MKL experiment settings](#mkl-experiment-settings)
         - [MKL results](#mkl-results)
 
 
