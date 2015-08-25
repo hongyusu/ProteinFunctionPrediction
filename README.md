@@ -468,7 +468,7 @@ In stead of predicting the transporter classification (TC) with single feature m
 
    ![alt text](https://github.com/aalto-ics-kepaco/ProteinFunctionPrediction/blob/master/Experiments/PlotsMKL/kernel_weights.jpg)
 
-# MKL results
+### MKL results
 
 1. Prediction performances of three multiple kernel learning approaches are listed in the following table
 
