@@ -18,6 +18,7 @@
         - [SVM results](#svm-results)
     - [Multiple kernel learning](#multiple-kernel-learning)
         - [MKL experiment settings](#mkl-experiment-settings)
+        - [MKL kernel weights](#mkl-kernel-weights)
         - [MKL results](#mkl-results)
 
 
@@ -395,7 +396,7 @@ NOTE: Su, her you should specify which version has been considered (I guess a ve
 
 In this section, we test the classification performance on transporter classification (TC) based on different input feature maps as discussed in the previous section. 
 
-### Experimental settings
+### SVM experiment settings
 
 1. Linear SVM is used as the baseline learner. We use a SVM implementation from [libSVM](https://www.csie.ntu.edu.tw/~cjlin/libsvm/).
 1. We select for each input feature map a SVM margin slack (C) parameter from the set {0.01,0.1,1,10,100}.
@@ -404,7 +405,7 @@ In this section, we test the classification performance on transporter classific
 1. Experiment results are reported from a five fold cross validation procedure. We randomly divide examples into five disjoin set of equal size. In each iteration, we use one set for testing and the rest for training. The same procedure is then repeated five times.
 1. We report the following metrics to measure the performance of the classifier including AUC, accuracy, F1, precision, and recall. The scores are computed by pooling all microlabels.
 
-### Results
+### SVM results
 
 1. Preliminary experimental results are shown in the following table
 
@@ -439,7 +440,7 @@ In this section, we test the classification performance on transporter classific
 
 In stead of predicting the transporter classification (TC) with single feature map as studied in the previous section, we aim to combine those 19 different feature maps with multiple kernel learning approaches.
 
-### Experimental settings
+### MKL experiment settings
 
 1. We compute an input base kernel (gram matrix) for each individual feature map. In particular, each base kenrel is a linear kernel on the original feature map.
 1. We compute a linear output kernel for the output multilabels. 
@@ -453,7 +454,7 @@ In stead of predicting the transporter classification (TC) with single feature m
 1. Experiment results are reported from a five fold cross validation procedure. We randomly divide examples into five disjoin set of equal size. In each iteration, we use one set for testing and the rest for training. The same procedure is then repeated five times.
 1. We report the following metrics to measure the performance of the classifier including AUC, accuracy, F1, precision, and recall. The scores are computed by pooling all microlabels.
 
-### Results
+### MKL kernel weights 
 
 1. Kernel weights computed from different multiple kernel learning approaches are listed in the following table
  
@@ -463,9 +464,11 @@ In stead of predicting the transporter classification (TC) with single feature m
    | ALIGN  |0.15|0.01|0.22|0.02|0.19|0.10|0.23|0.04|0.07|0.01|0.03|0.07|0.06|0.06|0.05|0.03|0.17|0.05|0.23|
    | ALIGNF |0.00|0.00|0.09|0.14|0.37|0.00|0.00|0.31|0.00|0.86|0.00|0.00|0.04|0.05|0.01|0.00|0.00|0.00|0.00|
 
-   In addition, kernel weights are shown in the following bar plot
+1. In addition, kernel weights are shown in the following bar plot
 
    ![alt text](https://github.com/aalto-ics-kepaco/ProteinFunctionPrediction/blob/master/Experiments/PlotsMKL/kernel_weights.jpg)
+
+# MKL results
 
 1. Prediction performances of three multiple kernel learning approaches are listed in the following table
 
