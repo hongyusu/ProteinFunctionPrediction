@@ -14,11 +14,11 @@
     - [Data statistics](#data-statistics)
 - [Empirical evaluation](#empirical-evaluation)
     - [Support vector machines](#support-vector-machines)
-        - [Setup](#setup)
-        - [Results](#results)
+        - [SVM experiment settings](#mkl-experiment-settings)
+        - [SVM Results](#SVM-results)
     - [Multiple kernel learning](#multiple-kernel-learning)
-        - [Experimental settings](#experimental-settings)
-        - [Results](#results)
+        - [MKL experiment settings](#mkl-experimental-settings)
+        - [MKL results](#mkl-results)
 
 
 # Introduction

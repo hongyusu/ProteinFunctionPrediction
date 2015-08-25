@@ -1,6 +1,6 @@
 
 
-function compute_kernels()
+function compute_base_kernels()
 
   xFilenameList = {'../Data/tcdb.TC','../Data/tcdb.TB','../Data/tcdb.TICoils','../Data/tcdb.TIGene3D','../Data/tcdb.TIHamap','../Data/tcdb.TIPANTHER','../Data/tcdb.TIPfam','../Data/tcdb.TIPhobius','../Data/tcdb.TIPIRSF','../Data/tcdb.TIPRINTS','../Data/tcdb.TIProDom','../Data/tcdb.TIProSitePatterns','../Data/tcdb.TIProSiteProfiles','../Data/tcdb.TISignalP_EUK','../Data/tcdb.TISignalP_GRAM_NEGATIVE','../Data/tcdb.TISignalP_GRAM_POSITIVE','../Data/tcdb.TISMART','../Data/tcdb.TISUPERFAMILY','../Data/tcdb.TITIGRFAM','../Data/tcdb.TITMHMM'};
 
@@ -14,6 +14,7 @@ function compute_kernels()
     end
     K = m*m';
     K = normalization(K);
+    K = centering(K);
     xFilename
     size(K)
     dlmwrite(sprintf('%s.k',xFilename),K);
@@ -35,6 +36,9 @@ end
 
 function Kn=normalization(K)
 
-  Kn = K ./ ( sqrt(diag(K)) * sqrt(diag(K))' );
+  Kd = diag(K);
+  Kd(Kd==0) = 1;
+
+  Kn = K ./ ( sqrt(Kd) * sqrt(Kd)' );
 
 end
