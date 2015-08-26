@@ -3,7 +3,7 @@ function plot_kernel_weight()
 
   addpath('./savefigure/');
 
-  [xFilenameList,yFilenameList,auc,acc,f1,precision,recall] = textread('../ResultsMKL/results','%s %s %s %s %s %s %s','headerlines',1);
+  [xFilenameList,yFilenameList,auc,auprc,acc,f1,precision,recall] = textread('../ResultsMKL/results','%s %s %s %s %s %s %s %s','headerlines',1);
   
   figure1 = figure('visible','off');
   set(figure1, 'PaperUnits', 'centimeters');
@@ -12,7 +12,7 @@ function plot_kernel_weight()
   W = [];
   for i=1:size(xFilenameList,1)
     xFilename = xFilenameList{i};
-    [X] = dlmread(sprintf('../Data/tcdb.all.w%s',regexprep(xFilename,'.*\.K','')));
+    [X] = dlmread(sprintf('../Data/tcdb.all.w%s',regexprep(xFilename,'.*\.','')));
     W = [W,X];
   end
   bar(W);
