@@ -473,7 +473,7 @@ In stead of predicting the transporter classification (TC) with single feature m
 1. Prediction performances of three multiple kernel learning approaches are listed in the following table
 
    | Input feature | AUC | Accuracy | F1 | Precision | Recall |
-   |::--:|:--:|--:|:--:|:--:|:--:|:--:|
+   |:--:|:--:|--:|:--:|:--:|:--:|:--:|
    |UNIMKL | 0.9807 | 0.9995 | 0.8583 | 0.9676 | 0.7713
    |ALIGN  | 0.9804 | 0.9995 | 0.8518 | 0.9548 | 0.7689
    |ALIGNF | 0.9602 | 0.9989 | 0.6543 | 0.8678 | 0.5251
