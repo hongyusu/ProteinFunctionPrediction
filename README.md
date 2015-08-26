@@ -452,7 +452,7 @@ In stead of predicting the transporter classification (TC) with single feature m
 1. We select SVM margin slack parameter (C) based on a random selection of 5000 examples. Best C is selected from the set {0.01,0.1,1,10,100}.
 1. After parameter selection, best C parameter is used for training and prediction.
 1. Experiment results are reported from a five fold cross validation procedure. We randomly divide examples into five disjoin set of equal size. In each iteration, we use one set for testing and the rest for training. The same procedure is then repeated five times.
-1. We report the following metrics to measure the performance of the classifier including AUC, accuracy, F1, precision, and recall. The scores are computed by pooling all microlabels.
+1. We report the following metrics to measure the performance of the classifier including AUC (area under the curve), AUPRC (area under the precision-recall curve), accuracy, F1, precision, and recall. The scores are computed by pooling all microlabels. In addition, precision, recall, and accuracy are computed with a threshold 0.5 to binarize all real valued predictions.
 
 ### MKL kernel weights 
 

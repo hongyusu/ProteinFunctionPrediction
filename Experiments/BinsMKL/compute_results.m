@@ -3,11 +3,11 @@ function compute_results()
 
   [xFilenameList,yFilenameList,svmCList] = textread('parameter_setting','%s %s %s');
   for i=1:size(xFilenameList,1)
-    i=4
+    %i=4
     tStart = tic;
     compute_results_single_dataset(xFilenameList{i},yFilenameList{i},svmCList{i});
     tEnd = toc(tStart)
-    return
+    %return
   end
 
 end
@@ -24,14 +24,14 @@ function compute_results_single_dataset(xFilename,yFilename,svmC)
 
   isTest = '0';
   suffix = 'val';
-  res = zeros(1,5);
-  [auc,accuracy,f1,precision,recall] = compute_performance(xFilename,yFilename,svmC,isTest,suffix,Y);
-  res = [auc,accuracy,f1,precision,recall];
+  res = zeros(1,6);
+  [auc,auprc,accuracy,f1,precision,recall] = compute_performance(xFilename,yFilename,svmC,isTest,suffix,Y);
+  res = [auc,auprc,accuracy,f1,precision,recall];
   res
 
   
   fileID = fopen('../ResultsMKL/results','a');
-  fprintf(fileID, '%s %s %.4f %.4f %.4f %.4f %.4f\n',xFilename,yFilename,res(1),res(2),res(3),res(4),res(5));
+  fprintf(fileID, '%s %s %.4f %.4f %.4f %.4f %.4f %.4f\n',xFilename,yFilename,res(1),res(2),res(3),res(4),res(5),res(6));
   fclose(fileID);
 
 end
@@ -44,7 +44,7 @@ end
 % svmC:                 svm slack parameter
 % isTest:               select a small port of data for sanity check if isTest=True  
 %
-function [auc,accuracy,f1,precision,recall] = compute_performance(xFilename,yFilename,svmC,isTest,suffix,Y)
+function [auc,auprc,accuracy,f1,precision,recall] = compute_performance(xFilename,yFilename,svmC,isTest,suffix,Y)
 
   allOutputFilename = sprintf('../ResultsMKL/%s_%s_c%s_t%s_%s',...
       regexprep(xFilename,'.*/',''),...
@@ -75,8 +75,10 @@ function [auc,accuracy,f1,precision,recall] = compute_performance(xFilename,yFil
 
 
   [Xs,Ys,T,auc] = perfcurve(reshape(Y,size(Y,1)*size(Y,2),1),reshape(Ypred,size(Y,1)*size(Y,2),1),1);
+  dlmwrite(sprintf('../ResultsMKL/perf_pn_%s_%s',regexprep(xFilename,'.*/',''),regexprep(yFilename,'.*/','')),[Xs,Ys]);
 
-  dlmwrite(sprintf('../ResultsMKL/perf_%s_%s',regexprep(xFilename,'.*/',''),regexprep(yFilename,'.*/','')),[Xs,Ys]);
+  [Xs,Ys,T,auprc] = perfcurve(reshape(Y,size(Y,1)*size(Y,2),1),reshape(Ypred,size(Y,1)*size(Y,2),1),1,'xCrit', 'reca', 'yCrit', 'prec');
+  dlmwrite(sprintf('../ResultsMKL/perf_pr_%s_%s',regexprep(xFilename,'.*/',''),regexprep(yFilename,'.*/','')),[Xs,Ys]);
 
   Ypred = Ypred>0.5;
   tp = sum(sum((Y+Ypred)==2));
