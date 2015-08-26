@@ -483,3 +483,7 @@ In stead of predicting the transporter classification (TC) with single feature m
   
    ![alt text](https://github.com/aalto-ics-kepaco/ProteinFunctionPrediction/blob/master/Experiments/PlotsMKL/auc.jpg)
 
+1. Precision recall curves are shown in the following figure.
+
+   ![alt text](https://github.com/aalto-ics-kepaco/ProteinFunctionPrediction/blob/master/Experiments/PlotsMKL/auprc.jpg)
+
