@@ -34,10 +34,10 @@ function plot_auc_curve()
     hold on;
   end
   lgd = legend(xFilenameList);
-  set(lgd, 'interpreter','latex','Position', [0.7,0.5,0.0,0.0]);
+  set(lgd, 'interpreter','latex','Position', [0.3,0.5,0.0,0.0]);
   xlabel('False positive rate'); 
   ylabel('True positive rate');
-  title('ROC Curves')
+  title('AUPRC Curves')
   hold off;
   export_fig(sprintf('../PlotsMKL/auprc.jpg'))
 
