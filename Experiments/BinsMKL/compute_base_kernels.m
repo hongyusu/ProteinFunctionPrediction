@@ -13,6 +13,7 @@ function compute_base_kernels()
       m = m(:,mSum>2);
     end
     K = m*m';
+    K = centering(K);
     K = normalization(K);
     K = centering(K);
     xFilename
