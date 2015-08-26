@@ -35,8 +35,8 @@ function plot_auc_curve()
   end
   lgd = legend(xFilenameList);
   set(lgd, 'interpreter','latex','Position', [0.3,0.5,0.0,0.0]);
-  xlabel('False positive rate'); 
-  ylabel('True positive rate');
+  xlabel('Recall'); 
+  ylabel('Precision');
   title('AUPRC Curves')
   hold off;
   export_fig(sprintf('../PlotsMKL/auprc.jpg'))
