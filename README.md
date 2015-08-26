@@ -473,10 +473,12 @@ In stead of predicting the transporter classification (TC) with single feature m
 1. Prediction performances of three multiple kernel learning approaches are listed in the following table
 
    | Input feature | AUC | Accuracy | F1 | Precision | Recall |
-   |:--:|:--:|:--:|:--:|:--:|:--:|
-   |../Data/tcdb.all.KUNIMKL|0.9807|0.9995|0.8583|0.9676|0.7713|
-   |../Data/tcdb.all.KALIGN |0.9804|0.9995|0.8518|0.9548|0.7689|
-   |../Data/tcdb.all.KALIGNF|0.9602|0.9989|0.6543|0.8678|0.5251|
+   |::--:|:--:|--:|:--:|:--:|:--:|:--:|
+   |UNIMKL | 0.9807 | 0.9995 | 0.8583 | 0.9676 | 0.7713
+   |ALIGN  | 0.9804 | 0.9995 | 0.8518 | 0.9548 | 0.7689
+   |ALIGNF | 0.9602 | 0.9989 | 0.6543 | 0.8678 | 0.5251
+   |UNIMKL*| 0.9851 | 0.9989 | 0.6826 | 0.8364 | 0.5766
+   |ALIGN* | 0.9889 | 0.9991 | 0.7463 | 0.8662 | 0.6555
 
 
 1. ROC curves of three multiple kernel learning approaches are shown in the following figure. It is worth noting that the red and the blue curves almost overlap on top of each other. 
