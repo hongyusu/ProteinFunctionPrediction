@@ -479,6 +479,8 @@ In stead of predicting the transporter classification (TC) with single feature m
    |ALIGNF | 0.9602 | 0.9989 | 0.6543 | 0.8678 | 0.5251
    |UNIMKL*| 0.9851 | 0.9989 | 0.6826 | 0.8364 | 0.5766
    |ALIGN* | 0.9889 | 0.9991 | 0.7463 | 0.8662 | 0.6555
+   |ALIGNF*| 0.9878 | 0.9993 | 0.7918 | 0.8885 | 0.7140
+
 
 
 1. ROC curves of three multiple kernel learning approaches are shown in the following figure. It is worth noting that the red and the blue curves almost overlap on top of each other. 
