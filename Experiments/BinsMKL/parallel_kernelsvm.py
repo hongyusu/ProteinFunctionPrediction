@@ -101,7 +101,7 @@ def run():
   suffix   = 'val'
   isTest   = '0'
   # iterate over the lists
-  xFilenameList         = ['../Data/tcdb.all.kALIGN']
+  xFilenameList         = ['../Data/tcdb.all.HALIGNF']
   yFilenameList         = ['../Data/tcdb.TC']
   labelIndexList        = xrange(1,numLabel+1)
   foldIndexList         = xrange(1,kFold+1) 
