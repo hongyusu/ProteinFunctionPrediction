@@ -1,37 +1,25 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en-us">
   <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="description" content="Proteinfunctionprediction : Project about protein function prediction">
-
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
-
-    <title>Proteinfunctionprediction</title>
+    <meta charset="UTF-8">
+    <title>Proteinfunctionprediction by hongyusu</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
   </head>
-
   <body>
+    <section class="page-header">
+      <h1 class="project-name">Proteinfunctionprediction</h1>
+      <h2 class="project-tagline">Project about protein function prediction</h2>
+      <a href="https://github.com/hongyusu/ProteinFunctionPrediction" class="btn">View on GitHub</a>
+      <a href="https://github.com/hongyusu/ProteinFunctionPrediction/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/hongyusu/ProteinFunctionPrediction/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
 
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/hongyusu/ProteinFunctionPrediction">View on GitHub</a>
-
-          <h1 id="project_title">Proteinfunctionprediction</h1>
-          <h2 id="project_tagline">Project about protein function prediction</h2>
-
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/hongyusu/ProteinFunctionPrediction/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/hongyusu/ProteinFunctionPrediction/tarball/master">Download this project as a tar.gz file</a>
-            </section>
-        </header>
-    </div>
-
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <h1>
+    <section class="main-content">
+      <h1>
 <a id="table-of-contents" class="anchor" href="#table-of-contents" aria-hidden="true"><span class="octicon octicon-link"></span></a>Table of Contents</h1>
 
 <ul>
@@ -62,8 +50,17 @@
 <a href="#support-vector-machines">Support vector machines</a>
 
 <ul>
-<li><a href="#setup">Setup</a></li>
-<li><a href="#results">Results</a></li>
+<li><a href="#svm-experiment-settings">SVM experiment settings</a></li>
+<li><a href="#svm-results">SVM results</a></li>
+</ul>
+</li>
+<li>
+<a href="#multiple-kernel-learning">Multiple kernel learning</a>
+
+<ul>
+<li><a href="#mkl-experiment-settings">MKL experiment settings</a></li>
+<li><a href="#mkl-kernel-weights">MKL kernel weights</a></li>
+<li><a href="#mkl-results">MKL results</a></li>
 </ul>
 </li>
 </ul>
@@ -73,7 +70,7 @@
 <h1>
 <a id="introduction" class="anchor" href="#introduction" aria-hidden="true"><span class="octicon octicon-link"></span></a>Introduction</h1>
 
-<p>For now, the project aims to reliably predict the function of the transporter proteins.
+<p>For now the project aims to reliably predict the function of the transporter proteins.
 The function is defined as TC code following the hierarchical structure of the transporter protein classification system.
 The hierarchical structure of the classification system has five level. We aim to predict the first four level as the fifth level is the very specific classification.
 In addition to the transporter proteins documented in TCDB, we also collect proteins from UniProt.
@@ -1228,20 +1225,22 @@ Experiments
 <h2>
 <a id="support-vector-machines" class="anchor" href="#support-vector-machines" aria-hidden="true"><span class="octicon octicon-link"></span></a>Support vector machines</h2>
 
+<p>In this section, we test the classification performance on transporter classification (TC) based on different input feature maps as discussed in the previous section. </p>
+
 <h3>
-<a id="setup" class="anchor" href="#setup" aria-hidden="true"><span class="octicon octicon-link"></span></a>Setup</h3>
+<a id="svm-experiment-settings" class="anchor" href="#svm-experiment-settings" aria-hidden="true"><span class="octicon octicon-link"></span></a>SVM experiment settings</h3>
 
 <ol>
 <li>Linear SVM is used as the baseline learner. We use a SVM implementation from <a href="https://www.csie.ntu.edu.tw/%7Ecjlin/libsvm/">libSVM</a>.</li>
-<li>We select for each input feature a SVM margin slack (C) parameter from the set {0.01,0.1,1,10,100}.</li>
-<li>Parameter selection is baed on 5000 randomly selected proteins from the original dataset.</li>
-<li>After parametere selection, the best SVM C parameter is applied to train a SVM classifier.</li>
-<li>Experimental results are reported from a five fold cross validation procedure. We randomly divide examples into five disjoin set of equal size. In each iteration, we use one set for testing and the rest for training. The same procedure is then repeated five times.</li>
+<li>We select for each input feature map a SVM margin slack (C) parameter from the set {0.01,0.1,1,10,100}.</li>
+<li>Parameter selection is baed on a random selection of 5000 proteins from the original dataset.</li>
+<li>After parametere selection, the best SVM C parameter is applied to both training and test.</li>
+<li>Experiment results are reported from a five fold cross validation procedure. We randomly divide examples into five disjoin set of equal size. In each iteration, we use one set for testing and the rest for training. The same procedure is then repeated five times.</li>
 <li>We report the following metrics to measure the performance of the classifier including AUC, accuracy, F1, precision, and recall. The scores are computed by pooling all microlabels.</li>
 </ol>
 
 <h3>
-<a id="results" class="anchor" href="#results" aria-hidden="true"><span class="octicon octicon-link"></span></a>Results</h3>
+<a id="svm-results" class="anchor" href="#svm-results" aria-hidden="true"><span class="octicon octicon-link"></span></a>SVM results</h3>
 
 <ol>
 <li>
@@ -1411,35 +1410,245 @@ Experiments
 <td align="center">0.0153</td>
 <td align="center">0.0044</td>
 </tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>ROC curve is shown as </p>
+
+<p><img src="https://github.com/aalto-ics-kepaco/ProteinFunctionPrediction/blob/master/Experiments/PlotsSVM/auc.jpg" alt="alt text"></p>
+</li>
+</ol>
+
+<h2>
+<a id="multiple-kernel-learning" class="anchor" href="#multiple-kernel-learning" aria-hidden="true"><span class="octicon octicon-link"></span></a>Multiple kernel learning</h2>
+
+<p>In stead of predicting the transporter classification (TC) with single feature map as studied in the previous section, we aim to combine those 19 different feature maps with multiple kernel learning approaches.</p>
+
+<h3>
+<a id="mkl-experiment-settings" class="anchor" href="#mkl-experiment-settings" aria-hidden="true"><span class="octicon octicon-link"></span></a>MKL experiment settings</h3>
+
+<ol>
+<li>We compute an input base kernel (gram matrix) for each individual feature map. In particular, each base kenrel is a linear kernel on the original feature map.</li>
+<li>We compute a linear output kernel for the output multilabels. </li>
+<li>Three multiple kernel learning approaches are applied to combine these 19 base kernels including
+
+<ol>
+<li>
+<code>UNIMKL</code> which computes a unifom combination of based kenrels</li>
+<li>
+<code>ALIGN</code> which aligns each input kernel with the output kernel, then combines all based kernels according to the alignment scores</li>
+<li>
+<code>ALIGNF</code> which maximizes the alignment score between the output kernel and a convex combination of all input kernels</li>
+</ol>
+</li>
+<li>Support Vector Machines are used to build the classification model. In particular, we used a LibSVM version with precomputed kernel.</li>
+<li>We select SVM margin slack parameter (C) based on a random selection of 5000 examples. Best C is selected from the set {0.01,0.1,1,10,100}.</li>
+<li>After parameter selection, best C parameter is used for training and prediction.</li>
+<li>Experiment results are reported from a five fold cross validation procedure. We randomly divide examples into five disjoin set of equal size. In each iteration, we use one set for testing and the rest for training. The same procedure is then repeated five times.</li>
+<li>We report the following metrics to measure the performance of the classifier including AUC (area under the curve), AUPRC (area under the precision-recall curve), accuracy, F1, precision, and recall. The scores are computed by pooling all microlabels. In addition, precision, recall, and accuracy are computed with a threshold 0.5 to binarize all real valued predictions.</li>
+</ol>
+
+<h3>
+<a id="mkl-kernel-weights" class="anchor" href="#mkl-kernel-weights" aria-hidden="true"><span class="octicon octicon-link"></span></a>MKL kernel weights</h3>
+
+<ol>
+<li>
+<p>Kernel weights computed from different multiple kernel learning approaches are listed in the following table</p>
+
+<table>
+<thead>
 <tr>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
+<th align="center">MKL</th>
+<th align="center">tcdb.TB</th>
+<th align="center">tcdb.TICoils</th>
+<th align="center">tcdb.TIGene3D</th>
+<th align="center">tcdb.TIHamap</th>
+<th align="center">tcdb.TIPANTHER</th>
+<th align="center">tcdb.TIPfam</th>
+<th align="center">tcdb.TIPhobius</th>
+<th align="center">tcdb.TIPIRSF</th>
+<th align="center">tcdb.TIPRINTS</th>
+<th align="center">tcdb.TIProDom</th>
+<th align="center">tcdb.TIProSitePatterns</th>
+<th align="center">tcdb.TIProSiteProfiles</th>
+<th align="center">tcdb.TISignalP_EUK</th>
+<th align="center">tcdb.TISignalP_GRAM_NEGATIVE</th>
+<th align="center">tcdb.TISignalP_GRAM_POSITIVE</th>
+<th align="center">tcdb.TISMART</th>
+<th align="center">tcdb.TISUPERFAMILY</th>
+<th align="center">tcdb.TITIGRFAM</th>
+<th align="center">tcdb.TITMHMM</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">UNIMKL</td>
+<td align="center">0.05</td>
+<td align="center">0.05</td>
+<td align="center">0.05</td>
+<td align="center">0.05</td>
+<td align="center">0.05</td>
+<td align="center">0.05</td>
+<td align="center">0.05</td>
+<td align="center">0.05</td>
+<td align="center">0.05</td>
+<td align="center">0.05</td>
+<td align="center">0.05</td>
+<td align="center">0.05</td>
+<td align="center">0.05</td>
+<td align="center">0.05</td>
+<td align="center">0.05</td>
+<td align="center">0.05</td>
+<td align="center">0.05</td>
+<td align="center">0.05</td>
+<td align="center">0.05</td>
+</tr>
+<tr>
+<td align="center">ALIGN</td>
+<td align="center">0.15</td>
+<td align="center">0.01</td>
+<td align="center">0.22</td>
+<td align="center">0.02</td>
+<td align="center">0.19</td>
+<td align="center">0.10</td>
+<td align="center">0.23</td>
+<td align="center">0.04</td>
+<td align="center">0.07</td>
+<td align="center">0.01</td>
+<td align="center">0.03</td>
+<td align="center">0.07</td>
+<td align="center">0.06</td>
+<td align="center">0.06</td>
+<td align="center">0.05</td>
+<td align="center">0.03</td>
+<td align="center">0.17</td>
+<td align="center">0.05</td>
+<td align="center">0.23</td>
+</tr>
+<tr>
+<td align="center">ALIGNF</td>
+<td align="center">0.00</td>
+<td align="center">0.00</td>
+<td align="center">0.09</td>
+<td align="center">0.14</td>
+<td align="center">0.37</td>
+<td align="center">0.00</td>
+<td align="center">0.00</td>
+<td align="center">0.31</td>
+<td align="center">0.00</td>
+<td align="center">0.86</td>
+<td align="center">0.00</td>
+<td align="center">0.00</td>
+<td align="center">0.04</td>
+<td align="center">0.05</td>
+<td align="center">0.01</td>
+<td align="center">0.00</td>
+<td align="center">0.00</td>
+<td align="center">0.00</td>
+<td align="center">0.00</td>
 </tr>
 </tbody>
 </table>
 </li>
 <li>
-<p>AUC curve is shown as </p>
+<p>In addition, kernel weights are shown in the following bar plot</p>
 
-<p><img src="https://github.com/aalto-ics-kepaco/ProteinFunctionPrediction/blob/master/Experiments/Plots/auc.jpg" alt="alt text"></p>
+<p><img src="https://github.com/aalto-ics-kepaco/ProteinFunctionPrediction/blob/master/Experiments/PlotsMKL/kernel_weights.jpg" alt="alt text"></p>
 </li>
 </ol>
-      </section>
-    </div>
 
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">Proteinfunctionprediction maintained by <a href="https://github.com/hongyusu">hongyusu</a></p>
-        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
+<h3>
+<a id="mkl-results" class="anchor" href="#mkl-results" aria-hidden="true"><span class="octicon octicon-link"></span></a>MKL results</h3>
+
+<ol>
+<li>
+<p>Prediction performances of three multiple kernel learning approaches are listed in the following table in which all combined kernel are centered and * corresponds to additional operation on the combined kernel <code>normalization-&gt;centering</code>.</p>
+
+<table>
+<thead>
+<tr>
+<th align="center">Input feature</th>
+<th align="center">AUC</th>
+<th align="right">Accuracy</th>
+<th align="center">F1</th>
+<th align="center">Precision</th>
+<th align="center">Recall</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">UNIMKL</td>
+<td align="center">0.9807</td>
+<td align="right">0.9995</td>
+<td align="center">0.8583</td>
+<td align="center">0.9676</td>
+<td align="center">0.7713</td>
+</tr>
+<tr>
+<td align="center">ALIGN</td>
+<td align="center">0.9804</td>
+<td align="right">0.9995</td>
+<td align="center">0.8518</td>
+<td align="center">0.9548</td>
+<td align="center">0.7689</td>
+</tr>
+<tr>
+<td align="center">ALIGNF</td>
+<td align="center">0.9602</td>
+<td align="right">0.9989</td>
+<td align="center">0.6543</td>
+<td align="center">0.8678</td>
+<td align="center">0.5251</td>
+</tr>
+<tr>
+<td align="center">UNIMKL*</td>
+<td align="center">0.9851</td>
+<td align="right">0.9989</td>
+<td align="center">0.6826</td>
+<td align="center">0.8364</td>
+<td align="center">0.5766</td>
+</tr>
+<tr>
+<td align="center">ALIGN*</td>
+<td align="center">0.9889</td>
+<td align="right">0.9991</td>
+<td align="center">0.7463</td>
+<td align="center">0.8662</td>
+<td align="center">0.6555</td>
+</tr>
+<tr>
+<td align="center">ALIGNF*</td>
+<td align="center">0.9878</td>
+<td align="right">0.9993</td>
+<td align="center">0.7918</td>
+<td align="center">0.8885</td>
+<td align="center">0.7140</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>ROC curves of three multiple kernel learning approaches are shown in the following figure. It is worth noting that the red and the blue curves almost overlap on top of each other. </p>
+
+<p><img src="https://github.com/aalto-ics-kepaco/ProteinFunctionPrediction/blob/master/Experiments/PlotsMKL/auc.jpg" alt="alt text"></p>
+</li>
+<li>
+<p>Precision recall curves are shown in the following figure.</p>
+
+<p><img src="https://github.com/aalto-ics-kepaco/ProteinFunctionPrediction/blob/master/Experiments/PlotsMKL/auprc.jpg" alt="alt text"></p>
+</li>
+</ol>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/hongyusu/ProteinFunctionPrediction">Proteinfunctionprediction</a> is maintained by <a href="https://github.com/hongyusu">hongyusu</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
       </footer>
-    </div>
 
-              <script type="text/javascript">
+    </section>
+
+            <script type="text/javascript">
             var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
             document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
           </script>
@@ -1449,7 +1658,6 @@ Experiments
             pageTracker._trackPageview();
             } catch(err) {}
           </script>
-
 
   </body>
 </html>
