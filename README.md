@@ -470,7 +470,7 @@ In stead of predicting the transporter classification (TC) with single feature m
 
 ### MKL results
 
-1. Prediction performances of three multiple kernel learning approaches are listed in the following table
+1. Prediction performances of three multiple kernel learning approaches are listed in the following table in which all combined kernel are centered and * corresponds to centering->normalization->centering.
 
    | Input feature | AUC | Accuracy | F1 | Precision | Recall |
    |:--:|:--:|--:|:--:|:--:|:--:|:--:|
