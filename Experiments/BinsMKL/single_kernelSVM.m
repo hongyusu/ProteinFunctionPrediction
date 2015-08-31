@@ -3,7 +3,7 @@
 
 
 
-%%  =======
+%%=========
 % 
 % xFilename:            input feature
 % yFilename:            output multiple label, label is either 0 or 1
@@ -12,7 +12,7 @@
 % svmC:                 svm slack parameter
 % outputFilename:       tmp directory for results
 % isTest:               select a small port of data for sanity check if isTest=True  
-%% =======
+%%========
 
 function single_kernelSVM(xFilename,yFilename,labelIndex,foldIndex,svmC,outputFilename,isTest)
 
