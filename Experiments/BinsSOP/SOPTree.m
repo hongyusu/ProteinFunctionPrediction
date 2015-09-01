@@ -44,56 +44,15 @@ function [rtn, ts_err] = SOPTree (paramsIn, dataIn)
     global opt_round;           %
     global Kxx_mu_x;            %
     global iter;                %   
-    initialize_other_global_parameters();
-
- 
     
- 
-    Kxx_mu_x_list               = cell(T_size, 1);
-    duality_gap_on_trees        = ones(1,T_size)*1e10;          % relative duality gap on individual spanning tree
-    norm_const_linear           = 1/(T_size);                   % The normalization linear term and quadratic term will make sure the obj will not increase with the number of spanning trees
-    norm_const_quadratic_list   = zeros(1,T_size) + 1/(T_size); % The same principal above
-    mu_list     = cell(T_size);     % a list of solutions in terms of marginalized dual variables on the collection of trees
-   
-    [loss,Ye,ind_edge_val]
+    % initialize other global variables
+    parameter_init();
     
-    
-    % For each random spanning tree, compute loss function, edge indicator function, and initial mu and Kxx variables.
-    for t=1:T_size
-        [loss_list{t},Ye_list{t},ind_edge_val_list{t}] = compute_loss_vector(Y_tr,t,params.mlloss);
-        mu_list{t}          = zeros(4*size(E_list{1},1),m);
-        Kxx_mu_x_list{t}    = zeros(4*size(E_list{1},1),m);
-    end
-    % initialize iteration indicator
-    iter = 0; 
-    % initialize global variables to return results 
-    %TODO: should be incorporate into function optimizer_init
-    val_list        = zeros(1,m);
-    Yipos_list      = ones(1,m)*(params.maxkappa+1);
-    kappa_list      = zeros(1,m);
-    GmaxG0_list     = ones(1,m)*T_size;
-    GoodUpdate_list = ones(1,m);
-    obj_list        = zeros(1,T_size);
-    
-    
-    %% Initialization
-    optimizer_init;
+    % initialize profiling function
     profile_init;
-    initialize_global_consensus_graph();
-    % scale loss function on trees and consensus graphs.
-    loss_scaling_factor_tree    = 1 / params.loss_scaling_factor;
-    loss_scaling_factor_graph   = loss_scaling_factor_tree;
-    for t=1:T_size
-        loss_list{t} = loss_list{t} * loss_scaling_factor_tree;
-    end
-    loss_global = loss_global * loss_scaling_factor_graph;
     
-    
-
     %% Optimization
-    print_message('Conditional gradient descend ...',0);
-    primal_ub = Inf;    % primal upper bound
-    opt_round = 0;      % the number of optimization
+    print_message('Training ...',0);
 
     % Compute dualit gap
 	compute_duality_gap;
@@ -484,24 +443,23 @@ end
 function compute_duality_gap
 
     %% global parameters
-    global duality_gap_on_trees;
-    global T_size;
-    global Kx_tr;
-    global loss_list;
-    global E_list;
-    global Y_tr;
+    global duality_gap;
+    global data;
+    global loss;
     global params;
-    global mu_list;
-    global ind_edge_val_list;
+    global mu;
+    global ind_edge_val;
     global primal_ub;
     global obj;
-    global kappa;
-    global norm_const_linear;
-    global norm_const_quadratic_list;
-    global iter;
     global m;
     global l;
-    global node_degree_list;
+    
+    
+    loss = reshape(loss,4,ENum*m);
+    mu   = reshape(mu,4,ENum*m);
+    Kmu  =
+    
+    % compute the best multilabel
     
     Y           = Y_tr;                                     % the true multilabel
     Ypred       = zeros(size(Y));                           % the predicted best multilabel
@@ -1611,118 +1569,4 @@ function w_phi_e = compute_w_phi_e(Kx,E,Ye,mu)
     return;
 end
 
-function initialize_other_global_parameters()
-    global data;
-    global m;
-    global l;
-    global ENum;
-    global loss;
-    global Ye;
-    global ind_edge_val;
-        
-    l   = size(data.Ytr,2);   
-    
-    m   = size(data.Ktr,1);   
-    
-    ENum = size(data.E,1);
-    
-    loss = one(4, m*ENum);
-    Te1 = data.Ytr(:,data.E(:,1))';
-    Te2 = data.Ytr(:,data.E(:,2))';
-    u = 0;
-    for u_1 = [-1, 1]
-        for u_2 = [-1, 1]
-            u = u + 1;
-            loss(u,:) = reshape((Te1 ~= u_1)+(Te2 ~= u_2),m*ENum,1);
-        end
-    end
-    
-    Ye = reshape(loss==0,4,Enum*m);
-    for u = 1:4
-        ind_edge_val{u} = sparse(reshape(Ye(u,:)~=0,ENum,m));
-    end
-    Ye = reshape(Ye,4*ENum,m);
-    
-end
 
-
-
-%% Initialize the profiling function
-function profile_init
-
-    global profile;
-    profile.start_time          = cputime;
-    profile.n_err               = 0;
-    profile.p_err               = 0; 
-    profile.n_err_microlabel    = 0; 
-    profile.p_err_microlabel    = 0; 
-    profile.n_err_microlabel_prev   = 0;
-    profile.microlabel_errors   = [];
-    profile.iter                = 0;
-    profile.err_ts              = 0;
-    
-end
-
-%% Initialize the optimization
-function optimizer_init
-
-    clear;
-    clear iter;
-    global T_size;
-    global Rmu_list;
-    global Smu_list;
-    global obj;
-    global delta_obj;
-    global opt_round;
-    global E_list;
-    global m;
-    global l;
-    global node_degree_list;
-    
-    Rmu_list = cell(T_size,1);
-    Smu_list = cell(T_size,1);
-    
-    for t=1:T_size
-        Rmu_list{t} = cell(1,4);
-        Smu_list{t} = cell(1,4);
-        for u = 1:4
-            Smu_list{t}{u} = zeros(size(E_list{t},1),m);
-            Rmu_list{t}{u} = zeros(size(E_list{t},1),m);
-        end
-    end
-    
-    node_degree_list = cell(T_size,1);
-    for t=1:T_size
-	    node_degree = zeros(1,l);
-        for i=1:l
-            node_degree(i) = sum(sum(E_list{t}==i));
-        end
-        node_degree_list{t}=node_degree;
-    end
-    
-    
-    obj         = 0;
-    delta_obj   = 0;
-    opt_round   = 0;
-    
-end
-
-%% 
-%   Print out message
-%%
-function print_message(msg,verbosity_level,filename)
-
-    global params;
-    global profile;
-
-    if params.verbosity >= verbosity_level
-%         fprintf('\n%s: %s ',datestr(clock,13),msg);
-        fprintf('\n%.1f: %s ',cputime-profile.start_time,msg);
-        if nargin == 3
-            fid = fopen(filename,'a');
-            fprintf(fid,'%.1f: %s\n',cputime-profile.start_time,msg);
-            fclose(fid);
-        end
-    end
-    
-end

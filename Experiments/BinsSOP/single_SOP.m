@@ -13,10 +13,7 @@
 % isTest:               select a small port of data for sanity check if isTest=True  
 %%========
 
-function single_SOP(xFilename,yFilename,EFilename,foldIndex,sopC,outputFilename,isTest)
-
-  % some global parameter
-  smallN = 5000;
+function single_SOP(xFilename,yFilename,EFilename,SFilename,foldIndex,sopC,outputFilename,isTest)
 
   % random number generator
   rand('twister',0)
@@ -32,8 +29,12 @@ function single_SOP(xFilename,yFilename,EFilename,foldIndex,sopC,outputFilename,
   % read in input and output files
   E = dlmread(EFilename,',');
   K = dlmread(xFilename,',');
+  S = dlmread(SFilename,' ');
   Y = dlmread(yFilename,' ');
   Y = Y(2:size(Y,1),2:size(Y,2));
+  
+  % some global parameter
+  smallN = min(5000,size(K,1));
 
   % selection: selecting labels with more than two proteins
   % do not perform selection, as the output graph is build for all labels indexed from 1
@@ -51,16 +52,16 @@ function single_SOP(xFilename,yFilename,EFilename,foldIndex,sopC,outputFilename,
 
   % separate training and test data
   Ktr = K(Ind~=foldIndex,Ind~=foldIndex);
-  Ytr = Y(Ind~=foldIndex,labelIndex); Ytr(Ytr==0)=-1;
+  Ytr = Y(Ind~=foldIndex,:); Ytr(Ytr==0)=-1;
   Kts = K(Ind==foldIndex,Ind~=foldIndex);
-  Yts = Y(Ind==foldIndex,labelIndex); Yts(Yts==0)=-1;
+  Yts = Y(Ind==foldIndex,:); Yts(Yts==0)=-1;
+  S(S==0) = -1;
 
   % set parameter
   paramsIn.profileiter    = 5;            % Profile the training every fix number of iterations
   paramsIn.maxiter        = 100;          % maximum number of iterations in the outer loop
-  paramsIn.losstype       = losstype;     % losstype
   paramsIn.mlloss         = 0;            % assign loss to microlabels(0) edges(1)
-  paramsIn.profiling      = 1;            % profile (test during learning)
+  paramsIn.profiling      = true;            % profile (test during learning)
   paramsIn.epsilon        = 1E-6;         % stopping criterion: minimum relative duality gap
   paramsIn.C              = sopC;         % margin slack
   paramsIn.max_CGD_iter   = 1;            % maximum number of conditional gradient iterations per example
@@ -68,19 +69,19 @@ function single_SOP(xFilename,yFilename,EFilename,foldIndex,sopC,outputFilename,
   paramsIn.tolerance      = 1E-10;        % numbers smaller than this are treated as zero
   paramsIn.verbosity      = 1;
   paramsIn.debugging      = 3;
-  paramsIn.filestem       = sprintf('%s',suffix);	% file name stem used for writing output
-  paramsIn.loss_scaling_factor = loss_scaling_factor;
-  paramsIn.tmpdir         = tmpdir;
+  paramsIn.filestem       = sprintf('%s','a');      % file name stem used for writing output
+  paramsIn.logFilename    = '/var/tmp/tmp.log';     % log file name
 
   % set input data
-  dataIn.E     =  E;          % edge
-  dataIn.Kx_tr =  Ktr;        % training kernel
-  dataIn.Kx_ts =  Kts';       % test kernel
-  dataIn.Y_tr  =   Ytr;       % training label
-  dataIn.Y_ts  =   Yts;       % test label
+  dataIn.S   = S;          % search space
+  dataIn.E   = E;          % edge
+  dataIn.Ktr =  Ktr;       % training kernel
+  dataIn.Kts =  Kts';      % test kernel
+  dataIn.Ytr =  Ytr;       % training label
+  dataIn.Yts =  Yts;       % test label
     
   % training and prediction
-  [rtn,~] = SOPTree (paramsIn, dataIn);
+  [~,~] = TCSOP (paramsIn, dataIn);
     
     % save margin dual mu
 %     muList{k} = rtn;
