@@ -17,6 +17,7 @@
 %
 %% ================================================================================================================
 function [rtn, ts_err] = TCSOP (paramsIn, dataIn)
+
     % Set random seed to make different run comparable.
     rand('twister', 0);
 
@@ -75,7 +76,7 @@ function [rtn, ts_err] = TCSOP (paramsIn, dataIn)
         % look the the progress at the fix time interval
         if mod(opt_round,params.profileiter) == 0
             compute_duality_gap;
-            profile_update_tr;
+            profile_update_ts;
         end
         
     end % while
