@@ -80,9 +80,13 @@ function [rtn, ts_err] = TCSOP (paramsIn, dataIn)
         
     end % while
 
+    profile_update_ts;
+    
+    rtn=0;
+    ts_err=0;
 end
 
-%% gradient descent on a single example
+%% gradient descent on a single example xi
 function gradient_descent(xi)
 
     global loss;
@@ -90,74 +94,74 @@ function gradient_descent(xi)
     global m;
     global mu;
     global delta_obj;
-    global data;
     global params;
     global Ye;
     global Kxx_mu_x;
     global Smu;
     global Rmu;
     global ind_edge_val;
+    global obj;
+    global data;
     
     loss_size = size(loss);
-    mu_size   = size(mu);
-    loss      = reshape(loss,4*ENum,m);
-    mu        = reshape(mu,4*ENum,m);
-    
-    % compute Kmu_x for the xi example
+    loss      = reshape(loss, 4*ENum,m);
+
     Kmu_x = compute_Kmu_x(xi);
     
-    % compute gradient for the xi example
     gradient_x  = loss(:,xi)-Kmu_x;
-    
-    % compute the violator for the xi example
-    [~,~,Umax,Gmax] = compute_best_multilabel(gradient_x);
 
     Gcur = -mu(:,xi)'*gradient_x;
+
+    [Ymax,~,Umax,Gmax] = compute_best_multilabel(gradient_x);
+    
     Gmax = Gmax*params.C;
+    
     mu_0 = Umax*params.C;
-    
-    if Gmax < Gcur
-        return
-    end
-    
-    % if Gmax > Gcur update mu by the negative gradient
+    mu_d  = mu_0 - mu(:,xi);
     
     smu_1_te = sum(reshape(mu_0.*Ye(:,xi),4,ENum),1);
     smu_1_te = reshape(smu_1_te(ones(4,1),:),numel(mu(:,xi)),1);
-    kxx_mu_0 = ~Ye(:,xi)*params.C+mu_0-smu_1_te;
-    Kmu_0    = Kmu_x + kxx_mu_0 - Kxx_mu_x(:,xi);
-  
-    mu_d  = mu_0 - mu(:,xi);
-    Kmu_d = Kmu_0 - Kmu_x;
+    Kxx_mu_0 = ~Ye(:,xi)*params.C+mu_0-smu_1_te;
+    Kmu_0    = Kmu_x + Kxx_mu_0 - Kxx_mu_x(:,xi);
+    Kmu_d    = Kmu_0 - Kmu_x;
 
     nomi   = mu_d'*gradient_x;
     denomi = Kmu_d' * mu_d;
     
+    if xi==0
+        [nomi,denomi,Gmax,Gcur]
+    end
     tau = min(nomi/denomi,1);
     
+    delta_obj = mu_d'*gradient_x*tau - tau^2/2*mu_d'*Kmu_d;
     
-    
-    
-    afasd
-    
-    
+    if delta_obj <= -1
+        [delta_obj,tau,nomi,denomi]
+        sum(sum(gradient_x))
+        sum(Ymax ~= data.Ytr(xi,:))
+        a=[mu_0,mu(:,xi)];
+        a(1:10,:)
+        sum(sum(mu_d))
+    end
+  
     mu(:,xi) = mu(:,xi) + tau*mu_d;
-    
         
-        Kmu_x = Kmu_x + Kd_x*alpha;
-        obj = obj + delta_obj;
-        Kxx_mu_x = (1-alpha)*Kxx_mu_x + alpha*kxx_mu_1;
-        iter = iter + 1;
+    obj = obj + delta_obj;
+    
+    Kxx_mu_x(:,xi) = (1-tau)*Kxx_mu_x(:,xi) + tau*Kxx_mu_0;
+   
     
     % update Smu and Rmu
-    mu_x = mu(:,xi);
+    mu_x = reshape(mu(:,xi),4,ENum);
+    
     for u = 1:4
         Smu{u}(:,xi) = (sum(mu_x)').*ind_edge_val{u}(:,xi);
         Rmu{u}(:,xi) = mu_x(u,:)';
     end
+
     
+  % reshape loss
     loss = reshape(loss,loss_size);
-    mu   = reshape(mu,mu_size);
     
 end
 
@@ -191,6 +195,7 @@ function w_phi_e = compute_w_phi_e(Kx)
     global mu;
     global Ye;
     global opt_round;
+    global ENum;
 
     Ye_size = size(Ye);
     mu_siz  = size(mu);
@@ -225,7 +230,7 @@ function [Ypred,YpredVal] = predicting(Y,K)
         Ypred = -1*ones(size(Y));
         YpredVal = Ypred*0;
     else
-        w_phi_e = compute_w_phi_e(Y,K);
+        w_phi_e = compute_w_phi_e(K);
         [Ypred,YpredVal,~,~] = compute_best_multilabel(w_phi_e);
     end
     
@@ -260,7 +265,49 @@ function profile_update_tr
         
         % print message
         print_message(...
-            sprintf('iter: %d 1_tr: %d %3.2f %% h_tr: %d %3.2f %% obj: %.2f gap: %.2f %%',...
+            sprintf('iter: %d 1_tr: %d %3.2f %% h_tr: %d %3.2f %% obj: %3.2f gap: %.2f %%',...
+            opt_round,...
+            profile.n_err,...
+            profile.p_err*100,...
+            profile.n_err_microlabel,...
+            profile.p_err_microlabel*100,...
+            obj,...
+            duality_gap/primal_ub*100),...
+            0,sprintf('%s',params.logFilename));
+    end
+    
+end
+
+%% Profile during training
+function profile_update_ts
+
+    global params;
+    global profile;
+    global obj;
+    global opt_round;
+    global data;
+    global m;
+    global l;
+    global duality_gap;
+    global primal_ub;
+    
+    if params.profiling
+        % remember error from last time
+        profile.n_err_microlabel_prev = profile.n_err_microlabel;
+        
+        % compute prediction on training
+        [Yts,~] = predicting(data.Yts,data.Kts);
+        
+        % compute training error
+        profile.microlabel_errors   = sum(abs(Yts-data.Yts) >0,2);
+        profile.n_err_microlabel    = sum(profile.microlabel_errors);
+        profile.p_err_microlabel    = profile.n_err_microlabel/m/l;
+        profile.n_err               = sum(profile.microlabel_errors > 0);
+        profile.p_err               = profile.n_err/m;
+        
+        % print message
+        print_message(...
+            sprintf('iter: %d 1_ts: %d %3.2f %% h_ts: %d %3.2f %% obj: %3.2f gap: %.2f %%',...
             opt_round,...
             profile.n_err,...
             profile.p_err*100,...
@@ -274,6 +321,7 @@ function profile_update_tr
 end
 
 
+%% 
 function [Ymax,YmaxVal,Umax,Gmax] = compute_best_multilabel (gradient)
 
     global data;
@@ -288,11 +336,10 @@ function [Ymax,YmaxVal,Umax,Gmax] = compute_best_multilabel (gradient)
     
 end
 
-
 %% function to compute duality gap
 function compute_duality_gap
 
-    %% global parameters
+    % global parameters
     global duality_gap;
     global loss;
     global params;
@@ -326,8 +373,6 @@ function compute_duality_gap
     Kmu  = reshape(Kmu,Kmu_size);
     
 end
-
-
 
 %% initialize parameters
 function parameter_init()
@@ -409,8 +454,6 @@ function parameter_init()
     
 end
 
-
-
 %% Initialize the profiling function
 function profile_init
 
@@ -426,8 +469,6 @@ function profile_init
     profile.err_ts                  = 0;
     
 end
-
-
 
 %% Print out message
 function print_message(msg,verbosity_level,filename)

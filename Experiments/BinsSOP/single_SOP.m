@@ -29,12 +29,15 @@ function single_SOP(xFilename,yFilename,EFilename,SFilename,foldIndex,sopC,outpu
   % read in input and output files
   E = dlmread(EFilename,',');
   K = dlmread(xFilename,',');
+  Kd = diag(K);
+  Kd(Kd==0) = 1;
+  K = K ./ ( sqrt(Kd) * sqrt(Kd)' );
   S = dlmread(SFilename,' ');
   Y = dlmread(yFilename,' ');
   Y = Y(2:size(Y,1),2:size(Y,2));
   
   % some global parameter
-  smallN = min(5000,size(K,1));
+  smallN = min(500,size(K,1));
 
   % selection: selecting labels with more than two proteins
   % do not perform selection, as the output graph is build for all labels indexed from 1
@@ -58,8 +61,8 @@ function single_SOP(xFilename,yFilename,EFilename,SFilename,foldIndex,sopC,outpu
   S(S==0) = -1;
 
   % set parameter
-  paramsIn.profileiter    = 5;            % Profile the training every fix number of iterations
-  paramsIn.maxiter        = 100;          % maximum number of iterations in the outer loop
+  paramsIn.profileiter    = 1;            % Profile the training every fix number of iterations
+  paramsIn.maxiter        = 10;          % maximum number of iterations in the outer loop
   paramsIn.mlloss         = 0;            % assign loss to microlabels(0) edges(1)
   paramsIn.profiling      = true;            % profile (test during learning)
   paramsIn.epsilon        = 1E-6;         % stopping criterion: minimum relative duality gap
