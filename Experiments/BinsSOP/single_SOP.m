@@ -36,8 +36,13 @@ function single_SOP(xFilename,yFilename,EFilename,SFilename,foldIndex,sopC,outpu
   Y = dlmread(yFilename,' ');
   Y = Y(2:size(Y,1),2:size(Y,2));
   
+  % restrict the search space to all the labels seen in training and test sets
+  S = unique(Y,'rows');
+  
+  
   % some global parameter
-  smallN = min(500,size(K,1));
+  smallN = 500;
+  smallN = min(smallN,size(K,1));
 
   % selection: selecting labels with more than two proteins
   % do not perform selection, as the output graph is build for all labels indexed from 1
@@ -62,9 +67,9 @@ function single_SOP(xFilename,yFilename,EFilename,SFilename,foldIndex,sopC,outpu
 
   % set parameter
   paramsIn.profileiter    = 1;            % Profile the training every fix number of iterations
-  paramsIn.maxiter        = 10;          % maximum number of iterations in the outer loop
+  paramsIn.maxiter        = 5;            % maximum number of iterations in the outer loop
   paramsIn.mlloss         = 0;            % assign loss to microlabels(0) edges(1)
-  paramsIn.profiling      = true;            % profile (test during learning)
+  paramsIn.profiling      = true;         % profile (test during learning)
   paramsIn.epsilon        = 1E-6;         % stopping criterion: minimum relative duality gap
   paramsIn.C              = sopC;         % margin slack
   paramsIn.max_CGD_iter   = 1;            % maximum number of conditional gradient iterations per example
@@ -73,7 +78,8 @@ function single_SOP(xFilename,yFilename,EFilename,SFilename,foldIndex,sopC,outpu
   paramsIn.verbosity      = 1;
   paramsIn.debugging      = 3;
   paramsIn.filestem       = sprintf('%s','a');      % file name stem used for writing output
-  paramsIn.logFilename    = '/var/tmp/tmp.log';     % log file name
+  paramsIn.logFilename    = logFilename;            % log file name
+  paramsIn.outputFilename = outputFilename;         % output filename
 
   % set input data
   dataIn.S   = S;          % search space

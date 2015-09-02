@@ -3,6 +3,8 @@
 
 %% ================================================================================================================ 
 %
+% Structured output prediction for predicting transporter protein classification
+%
 % INPUT PARAMETERS:
 %   paramsIn:   input parameters
 %   dataIn:     input data e.g., kernel and label matrices for training and testing
@@ -76,7 +78,7 @@ function [rtn, ts_err] = TCSOP (paramsIn, dataIn)
         % look the the progress at the fix time interval
         if mod(opt_round,params.profileiter) == 0
             compute_duality_gap;
-            profile_update_ts;
+            profile_update_tr;
         end
         
     end % while
@@ -102,8 +104,6 @@ function gradient_descent(xi)
     global Rmu;
     global ind_edge_val;
     global obj;
-    global data;
-    global opt_round;
     
     loss_size = size(loss);
     loss      = reshape(loss, 4*ENum,m);
@@ -114,19 +114,14 @@ function gradient_descent(xi)
 
     Gcur = -mu(:,xi)'*gradient_x;
 
-    [Ymax,~,Umax,Gmax] = compute_best_multilabel(gradient_x);
+    [~,~,Umax,Gmax] = compute_best_multilabel(gradient_x);
     
     Gmax = Gmax*params.C;
     
-    if xi==1
-        reshape(gradient_x(1:40),4,10)
-        reshape(mu(1:40,xi),4,10)
-        Gcur
-    end
     
-%     if Gmax < Gcur
-%         return
-%     end
+    if Gmax < Gcur
+        return
+    end
     
     mu_0 = Umax * params.C;  % feasible solution
     mu_d = mu_0 - mu(:,xi);  % update direction
@@ -140,20 +135,13 @@ function gradient_descent(xi)
     nomi   = mu_d'*gradient_x;
     denomi = Kmu_d' * mu_d;
     
-    if xi==1
-        [nomi,denomi,Gmax,Gcur]
-    end
     tau = min(nomi/denomi,1);
+    
     
     delta_obj = mu_d'*gradient_x*tau - tau^2/2*mu_d'*Kmu_d;
     
-    if delta_obj <= -1
-        [delta_obj,tau,nomi,denomi]
-        sum(sum(gradient_x))
-        sum(Ymax ~= data.Ytr(xi,:))
-        a=[mu_0,mu(:,xi)];
-        a(1:10,:)
-        sum(sum(mu_d))
+    if delta_obj <= 0 || tau < 0
+        return
     end
   
     mu(:,xi) = mu(:,xi) + tau*mu_d;
@@ -162,27 +150,15 @@ function gradient_descent(xi)
     
     Kxx_mu_x(:,xi) = (1-tau)*Kxx_mu_x(:,xi) + tau*Kxx_mu_0;
    
-    
     % update Smu and Rmu
     mu_x = reshape(mu(:,xi),4,ENum);
-    if xi==1
-        disp('--')
-        reshape(mu_0(1:40),4,10)
-        reshape(mu_0(1:40),4,10)
-        mu_x(:,1:10)
-    end
     for u = 1:4
         Smu{u}(:,xi) = (sum(mu_x)').*ind_edge_val{u}(:,xi);
         Rmu{u}(:,xi) = mu_x(u,:)';
     end
 
-    
   % reshape loss
     loss = reshape(loss,loss_size);
-    
-    if opt_round == 2
-        asdfsd
-    end
 
 end
 
@@ -270,36 +246,33 @@ function profile_update_tr
     global duality_gap;
     global primal_ub;
     
-    if params.profiling
-        % remember error from last time
-        profile.n_err_microlabel_prev = profile.n_err_microlabel;
-        
-        % compute prediction on training
-        [Ytr,~] = predicting(data.Ytr,data.Ktr);
-        
-        % compute training error
-        profile.microlabel_errors   = sum(abs(Ytr-data.Ytr) >0,2);
-        profile.n_err_microlabel    = sum(profile.microlabel_errors);
-        profile.p_err_microlabel    = profile.n_err_microlabel/m/l;
-        profile.n_err               = sum(profile.microlabel_errors > 0);
-        profile.p_err               = profile.n_err/m;
-        
-        % print message
-        print_message(...
-            sprintf('iter: %d 1_tr: %d %3.2f %% h_tr: %d %3.2f %% obj: %3.2f gap: %.2f %%',...
-            opt_round,...
-            profile.n_err,...
-            profile.p_err*100,...
-            profile.n_err_microlabel,...
-            profile.p_err_microlabel*100,...
-            obj,...
-            duality_gap/primal_ub*100),...
-            0,sprintf('%s',params.logFilename));
-    end
-    
+    % remember error from last time
+    profile.n_err_microlabel_prev = profile.n_err_microlabel;
+
+    % compute prediction on training
+    [Ytr,~] = predicting(data.Ytr,data.Ktr);
+
+    % compute training error
+    profile.microlabel_errors   = sum(abs(Ytr-data.Ytr) >0,2);
+    profile.n_err_microlabel    = sum(profile.microlabel_errors);
+    profile.p_err_microlabel    = profile.n_err_microlabel/m/l;
+    profile.n_err               = sum(profile.microlabel_errors > 0);
+    profile.p_err               = profile.n_err/m;
+
+    % print message
+    print_message(...
+        sprintf('iter: %d 1_tr: %d %3.2f %% h_tr: %d %3.2f %% obj: %3.2f gap: %.2f %%',...
+        opt_round,...
+        profile.n_err,...
+        profile.p_err*100,...
+        profile.n_err_microlabel,...
+        profile.p_err_microlabel*100,...
+        obj,...
+        duality_gap/primal_ub*100),...
+        0,sprintf('%s',params.logFilename));
 end
 
-%% Profile during training
+%% Profile after optimization --> prediction
 function profile_update_ts
 
     global params;
@@ -311,33 +284,35 @@ function profile_update_ts
     global l;
     global duality_gap;
     global primal_ub;
+    global mu;
     
-    if params.profiling
-        % remember error from last time
-        profile.n_err_microlabel_prev = profile.n_err_microlabel;
-        
-        % compute prediction on training
-        [Yts,~] = predicting(data.Yts,data.Kts);
-        
-        % compute training error
-        profile.microlabel_errors   = sum(abs(Yts-data.Yts) >0,2);
-        profile.n_err_microlabel    = sum(profile.microlabel_errors);
-        profile.p_err_microlabel    = profile.n_err_microlabel/m/l;
-        profile.n_err               = sum(profile.microlabel_errors > 0);
-        profile.p_err               = profile.n_err/m;
-        
-        % print message
-        print_message(...
-            sprintf('iter: %d 1_ts: %d %3.2f %% h_ts: %d %3.2f %% obj: %3.2f gap: %.2f %%',...
-            opt_round,...
-            profile.n_err,...
-            profile.p_err*100,...
-            profile.n_err_microlabel,...
-            profile.p_err_microlabel*100,...
-            obj,...
-            duality_gap/primal_ub*100),...
-            0,sprintf('%s',params.logFilename));
-    end
+    % remember error from last time
+    profile.n_err_microlabel_prev = profile.n_err_microlabel;
+
+    % compute prediction on training
+    [Yts,YtsVal] = predicting(data.Yts,data.Kts);
+
+    % compute training error
+    profile.microlabel_errors   = sum(abs(Yts-data.Yts) >0,2);
+    profile.n_err_microlabel    = sum(profile.microlabel_errors);
+    profile.p_err_microlabel    = profile.n_err_microlabel/m/l;
+    profile.n_err               = sum(profile.microlabel_errors > 0);
+    profile.p_err               = profile.n_err/m;
+
+    % print message
+    print_message(...
+        sprintf('iter: %d 1_ts: %d %3.2f %% h_ts: %d %3.2f %% obj: %3.2f gap: %.2f %%',...
+        opt_round,...
+        profile.n_err,...
+        profile.p_err*100,...
+        profile.n_err_microlabel,...
+        profile.p_err_microlabel*100,...
+        obj,...
+        duality_gap/primal_ub*100),...
+        0,sprintf('%s',params.logFilename));
+
+    running_time = cputime-profile.start_time;
+    save(params.outputFilename, 'Yts', 'YtsVal', 'params', 'running_time', 'mu')
     
 end
 
