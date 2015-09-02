@@ -56,7 +56,7 @@ function [rtn, ts_err] = TCSOP (paramsIn, dataIn)
     profile_init;
     
     % Optimization
-    print_message('Training ...',0);
+    print_message('Training model with gradient ascent ...',0);
 
     % Compute dualit gap
 	compute_duality_gap;
@@ -70,7 +70,8 @@ function [rtn, ts_err] = TCSOP (paramsIn, dataIn)
         opt_round = opt_round + 1;
         
         % gradient descent on each individual training example
-        for xi=1:m
+        %for xi=1:m
+        for xi = randsample(1:m,m)
             gradient_descent(xi);
             obj = obj + delta_obj;
         end
@@ -280,7 +281,6 @@ function profile_update_ts
     global obj;
     global opt_round;
     global data;
-    global m;
     global l;
     global duality_gap;
     global primal_ub;
@@ -295,9 +295,9 @@ function profile_update_ts
     % compute training error
     profile.microlabel_errors   = sum(abs(Yts-data.Yts) >0,2);
     profile.n_err_microlabel    = sum(profile.microlabel_errors);
-    profile.p_err_microlabel    = profile.n_err_microlabel/m/l;
+    profile.p_err_microlabel    = profile.n_err_microlabel/size(data.Yts,1)/l;
     profile.n_err               = sum(profile.microlabel_errors > 0);
-    profile.p_err               = profile.n_err/m;
+    profile.p_err               = profile.n_err/size(data.Yts,1);
 
     % print message
     print_message(...
@@ -311,11 +311,13 @@ function profile_update_ts
         duality_gap/primal_ub*100),...
         0,sprintf('%s',params.logFilename));
 
-    running_time = cputime-profile.start_time;
-    save(params.outputFilename, 'Yts', 'YtsVal', 'params', 'running_time', 'mu')
+    running_time = [params.foldIndex, cputime-profile.start_time];
+    Yts          = [params.exampleIndex,Yts];
+    YtsVal       = [params.exampleIndex,YtsVal];
+    test_err     = [profile.p_err, profile.p_err_microlabel];
+    save(params.outputFilename, 'test_err',  'Yts', 'YtsVal', 'params', 'running_time', 'mu')
     
 end
-
 
 %% Compute best multilabel based on current gradient
 function [Ymax,YmaxVal,Umax,Gmax] = compute_best_multilabel (gradient)
@@ -406,6 +408,7 @@ function parameter_init()
             loss(u,:) = reshape((Te1 ~= u_1)+(Te2 ~= u_2),m*ENum,1);
         end
     end
+    loss = loss/2;
     
     SrcSpc = ones(4,size(data.S,1)*ENum);
     Te1 = data.S(:,data.E(:,1))';

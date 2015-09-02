@@ -13,7 +13,7 @@
 % isTest:               select a small port of data for sanity check if isTest=True  
 %%========
 
-function single_SOP(xFilename,yFilename,EFilename,SFilename,foldIndex,sopC,outputFilename,isTest)
+function single_SOP(xFilename,yFilename,EFilename,SFilename,foldIndex,sopC,outputFilename,logFilename,isTest)
 
   % random number generator
   rand('twister',0)
@@ -28,10 +28,7 @@ function single_SOP(xFilename,yFilename,EFilename,SFilename,foldIndex,sopC,outpu
 
   % read in input and output files
   E = dlmread(EFilename,',');
-  K = dlmread(xFilename,',');
-  Kd = diag(K);
-  Kd(Kd==0) = 1;
-  K = K ./ ( sqrt(Kd) * sqrt(Kd)' );
+  K = dlmread(xFilename,','); Kd = diag(K);Kd(Kd==0) = 1;K = K ./ ( sqrt(Kd) * sqrt(Kd)' );
   S = dlmread(SFilename,' ');
   Y = dlmread(yFilename,' ');
   Y = Y(2:size(Y,1),2:size(Y,2));
@@ -67,19 +64,16 @@ function single_SOP(xFilename,yFilename,EFilename,SFilename,foldIndex,sopC,outpu
 
   % set parameter
   paramsIn.profileiter    = 1;            % Profile the training every fix number of iterations
-  paramsIn.maxiter        = 5;            % maximum number of iterations in the outer loop
+  paramsIn.maxiter        = 10;            % maximum number of iterations in the outer loop
   paramsIn.mlloss         = 0;            % assign loss to microlabels(0) edges(1)
-  paramsIn.profiling      = true;         % profile (test during learning)
   paramsIn.epsilon        = 1E-6;         % stopping criterion: minimum relative duality gap
   paramsIn.C              = sopC;         % margin slack
-  paramsIn.max_CGD_iter   = 1;            % maximum number of conditional gradient iterations per example
-  paramsIn.max_LBP_iter   = 3;            % number of Loopy belief propagation iterations
   paramsIn.tolerance      = 1E-10;        % numbers smaller than this are treated as zero
   paramsIn.verbosity      = 1;
-  paramsIn.debugging      = 3;
-  paramsIn.filestem       = sprintf('%s','a');      % file name stem used for writing output
   paramsIn.logFilename    = logFilename;            % log file name
   paramsIn.outputFilename = outputFilename;         % output filename
+  paramsIn.foldIndex      = foldIndex;              % fold index
+  paramsIn.exampleIndex   = find(Ind==foldIndex);   % index of examples
 
   % set input data
   dataIn.S   = S;          % search space
