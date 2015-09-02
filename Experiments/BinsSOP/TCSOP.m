@@ -103,12 +103,13 @@ function gradient_descent(xi)
     global ind_edge_val;
     global obj;
     global data;
+    global opt_round;
     
     loss_size = size(loss);
     loss      = reshape(loss, 4*ENum,m);
 
     Kmu_x = compute_Kmu_x(xi);
-    
+
     gradient_x  = loss(:,xi)-Kmu_x;
 
     Gcur = -mu(:,xi)'*gradient_x;
@@ -117,8 +118,18 @@ function gradient_descent(xi)
     
     Gmax = Gmax*params.C;
     
-    mu_0 = Umax*params.C;
-    mu_d  = mu_0 - mu(:,xi);
+    if xi==1
+        reshape(gradient_x(1:40),4,10)
+        reshape(mu(1:40,xi),4,10)
+        Gcur
+    end
+    
+%     if Gmax < Gcur
+%         return
+%     end
+    
+    mu_0 = Umax * params.C;  % feasible solution
+    mu_d = mu_0 - mu(:,xi);  % update direction
     
     smu_1_te = sum(reshape(mu_0.*Ye(:,xi),4,ENum),1);
     smu_1_te = reshape(smu_1_te(ones(4,1),:),numel(mu(:,xi)),1);
@@ -129,7 +140,7 @@ function gradient_descent(xi)
     nomi   = mu_d'*gradient_x;
     denomi = Kmu_d' * mu_d;
     
-    if xi==0
+    if xi==1
         [nomi,denomi,Gmax,Gcur]
     end
     tau = min(nomi/denomi,1);
@@ -154,7 +165,12 @@ function gradient_descent(xi)
     
     % update Smu and Rmu
     mu_x = reshape(mu(:,xi),4,ENum);
-    
+    if xi==1
+        disp('--')
+        reshape(mu_0(1:40),4,10)
+        reshape(mu_0(1:40),4,10)
+        mu_x(:,1:10)
+    end
     for u = 1:4
         Smu{u}(:,xi) = (sum(mu_x)').*ind_edge_val{u}(:,xi);
         Rmu{u}(:,xi) = mu_x(u,:)';
@@ -164,6 +180,10 @@ function gradient_descent(xi)
   % reshape loss
     loss = reshape(loss,loss_size);
     
+    if opt_round == 2
+        asdfsd
+    end
+
 end
 
 %% need to be checked, on training data
@@ -322,7 +342,7 @@ function profile_update_ts
 end
 
 
-%% 
+%% Compute best multilabel based on current gradient
 function [Ymax,YmaxVal,Umax,Gmax] = compute_best_multilabel (gradient)
 
     global data;
