@@ -71,7 +71,7 @@ function [rtn, ts_err] = TCSOP (paramsIn, dataIn)
         
         % gradient descent on each individual training example
         %for xi=1:m
-        for xi = randsample(1:m,m)
+        for xi = randsample(1:m,m/2)
             gradient_descent(xi);
             obj = obj + delta_obj;
         end
@@ -79,7 +79,7 @@ function [rtn, ts_err] = TCSOP (paramsIn, dataIn)
         % look the the progress at the fix time interval
         if mod(opt_round,params.profileiter) == 0
             compute_duality_gap;
-            profile_update_tr;
+            profile_update_ts;
         end
         
     end % while
@@ -137,7 +137,6 @@ function gradient_descent(xi)
     denomi = Kmu_d' * mu_d;
     
     tau = min(nomi/denomi,1);
-    
     
     delta_obj = mu_d'*gradient_x*tau - tau^2/2*mu_d'*Kmu_d;
     
