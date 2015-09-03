@@ -61,7 +61,7 @@ function single_SOP(xFilename,yFilename,EFilename,SFilename,foldIndex,sopC,outpu
   Kts = K(Ind==foldIndex,Ind~=foldIndex);
   Yts = Y(Ind==foldIndex,:); Yts(Yts==0)=-1;
   S(S==0) = -1;
-
+  
   % set parameter
   paramsIn.profileiter    = 1;            % Profile the training every fix number of iterations
   paramsIn.maxiter        = 10;            % maximum number of iterations in the outer loop
@@ -84,16 +84,7 @@ function single_SOP(xFilename,yFilename,EFilename,SFilename,foldIndex,sopC,outpu
   dataIn.Yts =  Yts;       % test label
     
   % training and prediction
-  [~,~] = TCSOP (paramsIn, dataIn);
-    
-    % save margin dual mu
-%     muList{k} = rtn;
-%     % collecting results
-%     load(sprintf('%s/Ypred_%s.mat', tmpdir, paramsIn.filestem));
-%     Ypred(Itest,:) = Ypred_ts;          % The prediction in binary value
-%     %YpredVal(Itest,:) = Ypred_ts_val;  % The prediction in real value
-%     running_times(k,1) = running_time;  % Running time of the algorithm on the Kth fold
-%     
+  TCSOP (paramsIn, dataIn);
     
     
     

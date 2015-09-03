@@ -9,16 +9,13 @@
 %   paramsIn:   input parameters
 %   dataIn:     input data e.g., kernel and label matrices for training and testing
 %
-% OUTPUT PARAMETERS:
-%   rtn:        return value
-%   ts_err:     test error
 %
 %
 % USAGE:
 %   This function is called by a MATLAB wrapper function single_SOP()
 %
 %% ================================================================================================================
-function [rtn, ts_err] = TCSOP (paramsIn, dataIn)
+function TCSOP (paramsIn, dataIn)
 
     % Set random seed to make different run comparable.
     rand('twister', 0);
@@ -70,8 +67,8 @@ function [rtn, ts_err] = TCSOP (paramsIn, dataIn)
         opt_round = opt_round + 1;
         
         % gradient descent on each individual training example
-        %for xi=1:m
-        for xi = randsample(1:m,m/2)
+        for xi=1:m
+        %for xi = randsample(1:m,m/2)
             gradient_descent(xi);
             obj = obj + delta_obj;
         end
@@ -86,8 +83,6 @@ function [rtn, ts_err] = TCSOP (paramsIn, dataIn)
 
     profile_update_ts;
     
-    rtn=0;
-    ts_err=0;
 end
 
 %% gradient descent on a single example xi
@@ -112,7 +107,8 @@ function gradient_descent(xi)
     Kmu_x = compute_Kmu_x(xi);
 
     gradient_x  = loss(:,xi)-Kmu_x;
-
+    
+    
     Gcur = -mu(:,xi)'*gradient_x;
 
     [~,~,Umax,Gmax] = compute_best_multilabel(gradient_x);
@@ -324,6 +320,7 @@ function [Ymax,YmaxVal,Umax,Gmax] = compute_best_multilabel (gradient)
     global data;
     global ENum;
     global SrcSpc;
+    global opt_round;
     
     gradient        = reshape(gradient,4*ENum,numel(gradient)/4/ENum);
     [Gmax,YmaxInd]  = max(gradient'*SrcSpc,[],2);   % Gmax is in mx1, YmaxInd is in mx1
@@ -390,6 +387,7 @@ function parameter_init()
     global opt_round;
     global Kmu;
     global SrcSpc;
+    global params;
         
     l   = size(data.Ytr,2);   
     
@@ -407,7 +405,7 @@ function parameter_init()
             loss(u,:) = reshape((Te1 ~= u_1)+(Te2 ~= u_2),m*ENum,1);
         end
     end
-    loss = loss/2;
+    loss = loss;
     
     SrcSpc = ones(4,size(data.S,1)*ENum);
     Te1 = data.S(:,data.E(:,1))';
@@ -475,7 +473,6 @@ function print_message(msg,verbosity_level,filename)
     global profile;
 
     if params.verbosity >= verbosity_level
-%         fprintf('\n%s: %s ',datestr(clock,13),msg);
         fprintf('\n%.1f: %s ',cputime-profile.start_time,msg);
         if nargin == 3
             fid = fopen(filename,'a');
