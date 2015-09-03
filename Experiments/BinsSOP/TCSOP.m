@@ -67,8 +67,13 @@ function TCSOP (paramsIn, dataIn)
         opt_round = opt_round + 1;
         
         % gradient descent on each individual training example
-        for xi=1:m
-        %for xi = randsample(1:m,m/2)
+        if opt_round > 10000
+            [~,I] = sort(sum(reshape(mu,4*ENum,m)),'descend');
+            I = I(1:round(m/3));
+        else
+            I = [1:m];
+        end
+        for xi=I
             gradient_descent(xi);
             obj = obj + delta_obj;
         end
@@ -76,7 +81,7 @@ function TCSOP (paramsIn, dataIn)
         % look the the progress at the fix time interval
         if mod(opt_round,params.profileiter) == 0
             compute_duality_gap;
-            profile_update_ts;
+            profile_update_tr;
         end
         
     end % while
@@ -100,6 +105,7 @@ function gradient_descent(xi)
     global Rmu;
     global ind_edge_val;
     global obj;
+    global opt_round;
     
     loss_size = size(loss);
     loss      = reshape(loss, 4*ENum,m);
@@ -107,7 +113,6 @@ function gradient_descent(xi)
     Kmu_x = compute_Kmu_x(xi);
 
     gradient_x  = loss(:,xi)-Kmu_x;
-    
     
     Gcur = -mu(:,xi)'*gradient_x;
 
@@ -133,10 +138,11 @@ function gradient_descent(xi)
     denomi = Kmu_d' * mu_d;
     
     tau = min(nomi/denomi,1);
-    
+
+   
     delta_obj = mu_d'*gradient_x*tau - tau^2/2*mu_d'*Kmu_d;
     
-    if delta_obj <= 0 || tau < 0
+    if delta_obj < 0 || tau < 0
         return
     end
   
@@ -153,7 +159,7 @@ function gradient_descent(xi)
         Rmu{u}(:,xi) = mu_x(u,:)';
     end
 
-  % reshape loss
+    % reshape loss
     loss = reshape(loss,loss_size);
 
 end
@@ -473,7 +479,7 @@ function print_message(msg,verbosity_level,filename)
     global profile;
 
     if params.verbosity >= verbosity_level
-        fprintf('\n%.1f: %s ',cputime-profile.start_time,msg);
+        fprintf('%.1f: %s \n',cputime-profile.start_time,msg);
         if nargin == 3
             fid = fopen(filename,'a');
             fprintf(fid,'%.1f: %s\n',cputime-profile.start_time,msg);
