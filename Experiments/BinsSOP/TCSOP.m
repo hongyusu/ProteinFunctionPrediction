@@ -53,10 +53,10 @@ function TCSOP (paramsIn, dataIn)
     profile_init;
     
     % Optimization
-    print_message('Training model with gradient ascent ...',0);
+    print_message('Model training with gradient ascent ...',0);
 
     % Compute dualit gap
-	compute_duality_gap;
+    compute_duality_gap;
 
     % compute the profiling statistics before optimization
     profile_update_tr;
@@ -65,9 +65,10 @@ function TCSOP (paramsIn, dataIn)
     while opt_round < params.maxiter
         
         opt_round = opt_round + 1;
+        profile.NUpdt = 0;
         
         % gradient descent on each individual training example
-        if opt_round > 10000
+        if opt_round > Inf
             [~,I] = sort(sum(reshape(mu,4*ENum,m)),'descend');
             I = I(1:round(m/3));
         else
@@ -106,6 +107,7 @@ function gradient_descent(xi)
     global ind_edge_val;
     global obj;
     global opt_round;
+    global profile;
     
     loss_size = size(loss);
     loss      = reshape(loss, 4*ENum,m);
@@ -164,6 +166,7 @@ function gradient_descent(xi)
 
     % reshape loss
     loss = reshape(loss,loss_size);
+    profile.NUpdt = profile.NUpdt + 1;
 
 end
 
@@ -266,14 +269,15 @@ function profile_update_tr
 
     % print message
     print_message(...
-        sprintf('iter: %d 1_tr: %d %3.2f %% h_tr: %d %3.2f %% obj: %3.2f gap: %.2f %%',...
+        sprintf('iter: %d 1_tr: %d %3.2f %% h_tr: %d %3.2f %% obj: %3.2f gap: %.2f %% update %.2f %% ',...
         opt_round,...
         profile.n_err,...
         profile.p_err*100,...
         profile.n_err_microlabel,...
         profile.p_err_microlabel*100,...
         obj,...
-        duality_gap/primal_ub*100),...
+        duality_gap/primal_ub*100,...
+        profile.NUpdt/m),...
         0,sprintf('%s',params.logFilename));
 end
 
@@ -463,6 +467,7 @@ function profile_init
 
     global profile;
     profile.start_time              = cputime;
+    profile.NUpdt                   = 0;
     profile.n_err                   = 0;
     profile.p_err                   = 0; 
     profile.n_err_microlabel        = 0; 
