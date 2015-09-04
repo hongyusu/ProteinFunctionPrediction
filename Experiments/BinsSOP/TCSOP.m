@@ -184,7 +184,6 @@ function Kmu_x = compute_Kmu_x(xi)
     term12 = zeros(1,ENum);
     term34 = zeros(4,ENum);
     
-    a = tic;
     for u=1:4
 
         H_u = Smu{u}*data.Ktr(:,xi)-Rmu{u}*data.Ktr(:,xi);
