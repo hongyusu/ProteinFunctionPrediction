@@ -134,11 +134,14 @@ function gradient_descent(xi)
     Kmu_0    = Kmu_x + Kxx_mu_0 - Kxx_mu_x(:,xi);
     Kmu_d    = Kmu_0 - Kmu_x;
 
-    nomi   = mu_d'*gradient_x;
+    % exact line search
+    nomi   = mu_d'  * gradient_x;
     denomi = Kmu_d' * mu_d;
-    
-    tau = min(nomi/denomi,1);
+    tau    = min(nomi/denomi,1);
 
+    if tau < 0
+        return
+    end
    
     delta_obj = mu_d'*gradient_x*tau - tau^2/2*mu_d'*Kmu_d;
     
