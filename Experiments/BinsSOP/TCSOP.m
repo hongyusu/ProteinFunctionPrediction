@@ -414,7 +414,6 @@ function parameter_init()
             loss(u,:) = reshape((Te1 ~= u_1)+(Te2 ~= u_2),m*ENum,1);
         end
     end
-    loss = loss;
     
     SrcSpc = ones(4,size(data.S,1)*ENum);
     Te1 = data.S(:,data.E(:,1))';
