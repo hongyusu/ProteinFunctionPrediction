@@ -113,7 +113,7 @@ function gradient_descent(xi)
     
     loss_size = size(loss);
     loss      = reshape(loss, 4*ENum,m);
-
+    
     Kmu_x = compute_Kmu_x(xi);
 
     gradient_x  = loss(:,xi)-Kmu_x;
@@ -184,11 +184,13 @@ function Kmu_x = compute_Kmu_x(xi)
     term12 = zeros(1,ENum);
     term34 = zeros(4,ENum);
     
+    a = tic;
     for u=1:4
-        Ind_te_u    = full(ind_edge_val{u}(:,xi));
-        H_u         = Smu{u}*data.Ktr(:,xi)-Rmu{u}*data.Ktr(:,xi);
-        term12(1,Ind_te_u) = H_u(Ind_te_u)';
+
+        H_u = Smu{u}*data.Ktr(:,xi)-Rmu{u}*data.Ktr(:,xi);
+        term12(1,ind_edge_val{u}(:,xi)) = H_u(ind_edge_val{u}(:,xi))';
         term34(u,:) = -H_u';
+
     end
     Kmu_x = reshape(term12(ones(4,1),:) + term34,4*ENum,1);
 
@@ -436,7 +438,7 @@ function parameter_init()
     
     Ye = reshape(loss==0,4,ENum*m);
     for u = 1:4
-        ind_edge_val{u} = sparse(reshape(Ye(u,:)~=0,ENum,m));
+        ind_edge_val{u} = reshape(Ye(u,:)~=0,ENum,m);
     end
     Ye = reshape(Ye,4*ENum,m);
     
