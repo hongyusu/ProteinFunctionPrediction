@@ -38,7 +38,7 @@ function single_SOP(xFilename,yFilename,EFilename,SFilename,foldIndex,sopC,outpu
   
   
   % some global parameter
-  smallN = 500;
+  smallN = 3000;
   smallN = min(smallN,size(K,1));
 
   % selection: selecting labels with more than two proteins
@@ -63,7 +63,7 @@ function single_SOP(xFilename,yFilename,EFilename,SFilename,foldIndex,sopC,outpu
   S(S==0) = -1;
   
   % set parameter
-  paramsIn.profileiter    = 1;            % Profile the training every fix number of iterations
+  paramsIn.profileiter    = 5;            % Profile the training every fix number of iterations
   paramsIn.maxiter        = 30;           % maximum number of iterations in the outer loop
   paramsIn.mlloss         = 0;            % assign loss to microlabels(0) edges(1)
   paramsIn.epsilon        = 1E-6;         % stopping criterion: minimum relative duality gap
