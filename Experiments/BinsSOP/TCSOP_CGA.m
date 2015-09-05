@@ -17,7 +17,7 @@
 % Hongyu Su, hongyu.su@me.com
 %
 %% ================================================================================================================
-function TCSOP (paramsIn, dataIn)
+function TCSOP_CGA (paramsIn, dataIn)
 
     % Set random seed to make different run comparable.
     rand('twister', 0);
@@ -92,45 +92,6 @@ function TCSOP (paramsIn, dataIn)
     profile_update_ts;
     
 end
-
-%%
-function gradient_ascent_multiple
-    global loss;
-    global ENum;
-    global m;
-    global mu;
-    global delta_obj;
-    global params;
-    global Ye;
-    global Kxx_mu_x;
-    global Smu;
-    global Rmu;
-    global ind_edge_val;
-    global obj;
-    global opt_round;
-    global profile;
-    
-    loss_size = size(loss);
-    loss      = reshape(loss, 4*ENum,m);
-    
-    
-    term12 = zeros(1,ENum);
-    term34 = zeros(4,ENum);
-    
-    for u=1:4
-
-        H_u = Smu{u}*data.Ktr(:,xi)-Rmu{u}*data.Ktr(:,xi);
-        term12(1,ind_edge_val{u}(:,xi)) = H_u(ind_edge_val{u}(:,xi))';
-        term34(u,:) = -H_u';
-        
-    end
-    
-    loss = reshape(loss,loss_size);
-    
-end
-
-
-
 
 %% gradient descent on a single example xi
 function gradient_ascent(xi)
@@ -211,6 +172,7 @@ function gradient_ascent(xi)
 
 end
 
+
 %% need to be checked, on training data
 function Kmu_x = compute_Kmu_x(xi)
     
@@ -233,6 +195,7 @@ function Kmu_x = compute_Kmu_x(xi)
     Kmu_x = reshape(term12(ones(4,1),:) + term34,4*ENum,1);
 
 end
+
 
 
 %% need to be checked
