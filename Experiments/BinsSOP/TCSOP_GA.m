@@ -70,7 +70,13 @@ function TCSOP_GA (paramsIn, dataIn)
         profile.NUpdt = 0;
         
         % gradient descent on each individual training example
-        gradient_ascent;
+        if opt_round < 0
+            for xi=1:m
+                gradient_ascent_old(xi);
+            end
+        else
+            gradient_ascent(1);
+        end
         obj = obj + delta_obj;
         
         % look the the progress at the fix time interval
@@ -86,7 +92,133 @@ function TCSOP_GA (paramsIn, dataIn)
 end
 
 %%
-function gradient_ascent
+function gradient_ascent(xi)
+
+    global loss;
+    global ENum;
+    global m;
+    global mu;
+    global delta_obj;
+    global params;
+    global Ye;
+    global Kxx_mu_x;
+    global Smu;
+    global Rmu;
+    global ind_edge_val;
+    global obj;
+    global profile;
+        
+    loss_size = size(loss);
+    loss      = reshape(loss, 4*ENum,m);
+    
+    Kmu_x    = compute_Kmu_x;
+    
+    gradient = loss-Kmu_x;
+    
+    Gcur = sum(-mu.*gradient);
+
+    [~,~,Umax,Gmax] = compute_best_multilabel(gradient);
+    
+    Gmax = Gmax*params.C;
+        
+    if sum(Gmax) < sum(Gcur)
+        return
+    end
+    
+    mu_0 = Umax * params.C;     % feasible solution
+    mu_d = mu_0 - mu;           % update direction
+    
+    smu_1_te = sum(reshape(mu_0.*Ye,4,ENum*m));
+    smu_1_te = reshape(smu_1_te(ones(4,1),:),ENum*4,m);
+    Kxx_mu_0 = ~Ye*params.C + mu_0 - smu_1_te;
+    Kmu_0    = Kmu_x + Kxx_mu_0 - Kxx_mu_x;
+    Kmu_d    = Kmu_0 - Kmu_x;
+    
+    % exact line search
+    nomi   = sum( mu_d .* gradient );
+    denomi = sum( mu_d .* Kmu_d );
+    tau    = min(sum(nomi)/sum(denomi),1);   
+    
+%     tau = min(sum(nomi(xi))/sum(denomi(xi)),1);
+
+
+
+    if tau < 0
+        return
+    end
+   
+    delta_obj = sum(sum( tau * mu_d .* gradient - tau^2/2 * mu_d .* Kmu_d ));
+%     delta_obj = sum(sum( tau * mu_d(:,xi) .* gradient(:,xi) - tau^2/2 * mu_d(:,xi) .* Kmu_d(:,xi) ));
+
+    if delta_obj < 0 || tau < 0
+        return
+    end
+  
+    mu  = mu + tau*mu_d;
+%     mu(:,xi) = mu(:,xi) + tau*mu_d(:,xi);
+        
+    obj = obj + delta_obj;
+    
+    Kxx_mu_x = (1-tau)*Kxx_mu_x + tau*Kxx_mu_0;
+%     Kxx_mu_x(:,xi) = (1-tau)*Kxx_mu_x(:,xi) + tau*Kxx_mu_0(:,xi);
+   
+    % update Smu and Rmu
+    mu = reshape(mu,4,ENum*m);
+    for u=1:4
+        Smu{u} = reshape(sum(mu),ENum,m).*ind_edge_val{u};
+        Rmu{u} = reshape(mu(u,:),ENum,m);
+    end
+    mu = reshape(mu,ENum*4,m);
+%     mu_x = reshape(mu(:,xi),4,ENum);
+%     for u = 1:4
+%         Smu{u}(:,xi) = (sum(mu_x)').*ind_edge_val{u}(:,xi);
+%         Rmu{u}(:,xi) = mu_x(u,:)';
+%     end
+
+    % reshape loss
+    loss = reshape(loss,loss_size);
+    profile.NUpdt = sum(Gmax>=Gcur');
+   
+end
+
+%% need to be checked, on training data
+function Kmu_x = compute_Kmu_x(xi)
+    
+    global ind_edge_val;
+    global ENum;
+    global data;
+    global Smu;
+    global Rmu;
+    global m;
+
+    if nargin == 1
+        term12 = zeros(1,ENum);
+        term34 = zeros(4,ENum);
+
+        for u=1:4
+            H_u = Smu{u}*data.Ktr(:,xi)-Rmu{u}*data.Ktr(:,xi);
+            term12(1,ind_edge_val{u}(:,xi)) = H_u(ind_edge_val{u}(:,xi))';
+            term34(u,:) = -H_u';
+        end
+        Kmu_x = reshape(term12(ones(4,1),:) + term34,4*ENum,1);
+    else
+        term12 = zeros(ENum,m);
+        term34 = zeros(4,ENum*m);
+
+        for u=1:4
+            H_u = Smu{u}*data.Ktr-Rmu{u}*data.Ktr;
+            term12(ind_edge_val{u}) = H_u(ind_edge_val{u});
+            term34(u,:) = reshape(-H_u,1,ENum*m);
+        end
+        term12 = reshape(term12,1,ENum*m);
+        Kmu_x = reshape(term12(ones(4,1),:) + term34,4*ENum,m);
+    end
+end
+
+
+
+function gradient_ascent_old(xi)
+
     global loss;
     global ENum;
     global m;
@@ -101,15 +233,12 @@ function gradient_ascent
     global obj;
     global opt_round;
     global profile;
-    global data;
     
-    % loss : 4|E|*m
     loss_size = size(loss);
     loss      = reshape(loss, 4*ENum,m);
     
-    % Kmu_x : 4|E|*m
-    Kmu_x = compute_Kmu_x;
-    
+    Kmu_x = compute_Kmu_x(xi);
+
     gradient_x  = loss(:,xi)-Kmu_x;
     
     Gcur = -mu(:,xi)'*gradient_x;
@@ -122,9 +251,10 @@ function gradient_ascent
     if Gmax < Gcur
         return
     end
-    
+
     mu_0 = Umax * params.C;  % feasible solution
     mu_d = mu_0 - mu(:,xi);  % update direction
+    
     
     smu_1_te = sum(reshape(mu_0.*Ye(:,xi),4,ENum),1);
     smu_1_te = reshape(smu_1_te(ones(4,1),:),numel(mu(:,xi)),1);
@@ -163,41 +293,7 @@ function gradient_ascent
     % reshape loss
     loss = reshape(loss,loss_size);
     profile.NUpdt = profile.NUpdt + 1;
-   
-    
-end
 
-%% need to be checked, on training data
-function Kmu_x = compute_Kmu_x(xi)
-    
-    global ind_edge_val;
-    global ENum;
-    global data;
-    global Smu;
-    global Rmu;
-
-    if nargin == 1
-        term12 = zeros(1,ENum);
-        term34 = zeros(4,ENum);
-
-        for u=1:4
-            H_u = Smu{u}*data.Ktr(:,xi)-Rmu{u}*data.Ktr(:,xi);
-            term12(1,ind_edge_val{u}(:,xi)) = H_u(ind_edge_val{u}(:,xi))';
-            term34(u,:) = -H_u';
-        end
-        Kmu_x = reshape(term12(ones(4,1),:) + term34,4*ENum,1);
-    else
-        term12 = zeros(ENum,m);
-        term34 = zeros(4,ENum*m);
-
-        for u=1:4
-            H_u = Smu{u}*data.Ktr-Rmu{u}*data.Ktr;
-            term12(ind_edge_val{u}) = H_u(ind_edge_val{u});
-            term34(u,:) = reshape(-H_u,1,ENum*m);
-        end
-        term12 = reshape(term12,1,ENum*m);
-        Kmu_x = reshape(term12(ones(4,1),:) + term34,4*ENum,m);
-    end
 end
 
 %% need to be checked
@@ -287,6 +383,7 @@ function profile_update_tr
         profile.NUpdt,...
         profile.NUpdt/m*100),...
         0,sprintf('%s',params.logFilename));
+
 end
 
 %% Profile after optimization --> prediction
