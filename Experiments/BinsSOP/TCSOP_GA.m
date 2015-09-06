@@ -78,7 +78,6 @@ function TCSOP_GA (paramsIn, dataIn)
         else
             gradient_ascent(1);
         end
-        obj = obj + delta_obj;
         
         % look the the progress at the fix time interval
         if mod(opt_round,params.profileiter) == 0
@@ -141,23 +140,21 @@ function gradient_ascent(xi)
     Kmu_d    = Kmu_0 - Kmu_x(:,I);
     
     % exact line search
-    %nomi   = sum( mu_d .* gradient(:,I) );
-    %denomi = sum( mu_d .* Kmu_d );
-    %tau    = min(sum(nomi)/sum(denomi),0.1);
+    nomi   = sum( mu_d .* gradient(:,I) );
+    denomi = sum( mu_d .* Kmu_d );
+    tau    = min(sum(nomi)/sum(denomi),0.1);
 
     % fixed step size
-    tau = 1/(1+params.C*opt_round);
+    tau = 1/(1+params.C/3*opt_round);
 
 
     if tau < 0
         return
     end
    
-
     delta_obj = sum(sum( tau * mu_d .* gradient(:,I) - tau^2/2 * mu_d .* Kmu_d ));
 
-    
-    if delta_obj < 0 || tau < 0
+    if delta_obj < 0 | tau < 0
         return
     end
   
