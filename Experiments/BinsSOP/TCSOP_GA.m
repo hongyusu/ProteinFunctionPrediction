@@ -142,9 +142,9 @@ function gradient_ascent(xi)
     Kmu_d    = Kmu_0 - Kmu_x(:,I);
     
     % exact line search
-    nomi   = sum( mu_d .* gradient(:,I) );
-    denomi = sum( mu_d .* Kmu_d );
-%     tau    = min(sum(nomi)/sum(denomi),0.1);
+    %nomi   = sum( mu_d .* gradient(:,I) );
+    %denomi = sum( mu_d .* Kmu_d );
+    %tau    = min(sum(nomi)/sum(denomi),0.1);
     tau = 1/(1+params.C*opt_round);
 
 
