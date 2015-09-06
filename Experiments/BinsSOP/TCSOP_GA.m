@@ -72,7 +72,7 @@ function TCSOP_GA (paramsIn, dataIn)
         % gradient descent on each individual training example
         if opt_round < 0
             for xi=1:m
-                gradient_ascent_old(xi);
+                gradient_ascent(xi);
             end
         else
             gradient_ascent(1);
@@ -107,6 +107,7 @@ function gradient_ascent(xi)
     global ind_edge_val;
     global obj;
     global profile;
+    global opt_round;
         
     loss_size = size(loss);
     loss      = reshape(loss, 4*ENum,m);
@@ -120,47 +121,50 @@ function gradient_ascent(xi)
     [~,~,Umax,Gmax] = compute_best_multilabel(gradient);
     
     Gmax = Gmax*params.C;
-        
-    if sum(Gmax) < sum(Gcur)
+    
+%     I = find(Gmax>=Gcur');          % mini batch 
+    I = [1:m]';
+%     [~,I] = sort(Gmax - Gcur','descend');
+%     I = I(1:round(m/(1+opt_round/3)));
+    
+    if sum(Gmax(I)) < sum(Gcur(I))
         return
     end
     
-    mu_0 = Umax * params.C;     % feasible solution
-    mu_d = mu_0 - mu;           % update direction
+    mu_0 = Umax(:,I) * params.C;     % feasible solution
+    mu_d = mu_0 - mu(:,I);           % update direction
     
-    smu_1_te = sum(reshape(mu_0.*Ye,4,ENum*m));
-    smu_1_te = reshape(smu_1_te(ones(4,1),:),ENum*4,m);
-    Kxx_mu_0 = ~Ye*params.C + mu_0 - smu_1_te;
-    Kmu_0    = Kmu_x + Kxx_mu_0 - Kxx_mu_x;
-    Kmu_d    = Kmu_0 - Kmu_x;
+    smu_1_te = sum(reshape(mu_0.*Ye(:,I),4,ENum*size(I,1)));
+    smu_1_te = reshape(smu_1_te(ones(4,1),:),ENum*4,size(I,1));
+    Kxx_mu_0 = ~Ye(:,I)*params.C + mu_0 - smu_1_te;
+    
+    Kmu_0    = Kmu_x(:,I) + Kxx_mu_0 - Kxx_mu_x(:,I);
+    Kmu_d    = Kmu_0 - Kmu_x(:,I);
     
     % exact line search
-    nomi   = sum( mu_d .* gradient );
+    nomi   = sum( mu_d .* gradient(:,I) );
     denomi = sum( mu_d .* Kmu_d );
-    tau    = min(sum(nomi)/sum(denomi),1);   
-    
-%     tau = min(sum(nomi(xi))/sum(denomi(xi)),1);
-
+%     tau    = min(sum(nomi)/sum(denomi),0.1);
+    tau = 1/(1+params.C*opt_round);
 
 
     if tau < 0
         return
     end
    
-    delta_obj = sum(sum( tau * mu_d .* gradient - tau^2/2 * mu_d .* Kmu_d ));
-%     delta_obj = sum(sum( tau * mu_d(:,xi) .* gradient(:,xi) - tau^2/2 * mu_d(:,xi) .* Kmu_d(:,xi) ));
 
+    delta_obj = sum(sum( tau * mu_d .* gradient(:,I) - tau^2/2 * mu_d .* Kmu_d ));
+
+    
     if delta_obj < 0 || tau < 0
         return
     end
   
-    mu  = mu + tau*mu_d;
-%     mu(:,xi) = mu(:,xi) + tau*mu_d(:,xi);
+    mu(:,I)  = mu(:,I) + tau*mu_d;
         
     obj = obj + delta_obj;
     
-    Kxx_mu_x = (1-tau)*Kxx_mu_x + tau*Kxx_mu_0;
-%     Kxx_mu_x(:,xi) = (1-tau)*Kxx_mu_x(:,xi) + tau*Kxx_mu_0(:,xi);
+    Kxx_mu_x(:,I) = (1-tau)*Kxx_mu_x(:,I) + tau*Kxx_mu_0;
    
     % update Smu and Rmu
     mu = reshape(mu,4,ENum*m);
@@ -272,7 +276,12 @@ function gradient_ascent_old(xi)
     end
    
     delta_obj = mu_d'*gradient_x*tau - tau^2/2*mu_d'*Kmu_d;
+   
+    [tau,delta_obj]
     
+    if xi==2
+        asdfasd
+    end
     if delta_obj < 0 || tau < 0
         return
     end
