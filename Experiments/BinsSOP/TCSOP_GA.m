@@ -4,12 +4,13 @@
 %% ================================================================================================================ 
 %
 % Structured output prediction for predicting transporter protein classification
+% Model is based on Max-margin conditional random field.
+% Optimization is throught primal, dual, marginized dual representation.
+% Optimization algorithm is gradient ascent.
 %
 % INPUT PARAMETERS:
 %   paramsIn:   input parameters
 %   dataIn:     input data e.g., kernel and label matrices for training and testing
-%
-%
 %
 % USAGE:
 %   This function is called by a MATLAB wrapper function single_SOP()

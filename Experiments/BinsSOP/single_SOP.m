@@ -63,8 +63,8 @@ function single_SOP(xFilename,yFilename,EFilename,SFilename,foldIndex,sopC,outpu
   S(S==0) = -1;
   
   % set parameter
-  paramsIn.profileiter    = 1;            % Profile the training every fix number of iterations
-  paramsIn.maxiter        = 50;           % maximum number of iterations in the outer loop
+  paramsIn.profileiter    = 10;            % Profile the training every fix number of iterations
+  paramsIn.maxiter        = 100;           % maximum number of iterations in the outer loop
   paramsIn.mlloss         = 0;            % assign loss to microlabels(0) edges(1)
   paramsIn.epsilon        = 1E-6;         % stopping criterion: minimum relative duality gap
   paramsIn.C              = sopC;         % margin slack
