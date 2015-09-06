@@ -123,17 +123,15 @@ function gradient_ascent(xi)
     
     Gmax = Gmax*params.C;
     
-%     I = find(Gmax>=Gcur');          % mini batch 
-    I = [1:m]';
-%     [~,I] = sort(Gmax - Gcur','descend');
-%     I = I(1:round(m/(1+opt_round/3)));
+    % select mini batch to update
+    I = [1:m]';                         % all training examples will be updated
     
     if sum(Gmax(I)) < sum(Gcur(I))
         return
     end
     
-    mu_0 = Umax(:,I) * params.C;     % feasible solution
-    mu_d = mu_0 - mu(:,I);           % update direction
+    mu_0 = Umax(:,I) * params.C;        % feasible solution
+    mu_d = mu_0 - mu(:,I);              % update direction
     
     smu_1_te = sum(reshape(mu_0.*Ye(:,I),4,ENum*size(I,1)));
     smu_1_te = reshape(smu_1_te(ones(4,1),:),ENum*4,size(I,1));
@@ -146,6 +144,8 @@ function gradient_ascent(xi)
     %nomi   = sum( mu_d .* gradient(:,I) );
     %denomi = sum( mu_d .* Kmu_d );
     %tau    = min(sum(nomi)/sum(denomi),0.1);
+
+    % fixed step size
     tau = 1/(1+params.C*opt_round);
 
 
