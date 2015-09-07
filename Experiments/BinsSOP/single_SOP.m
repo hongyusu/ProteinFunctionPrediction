@@ -40,7 +40,7 @@ function single_SOP(xFilename,yFilename,EFilename,SFilename,foldIndex,sopC,outpu
   
   
   % some global parameter
-  smallN = 200;
+  smallN = 1000;
   smallN = min(smallN,size(K,1));
 
   % selection: selecting labels with more than two proteins
