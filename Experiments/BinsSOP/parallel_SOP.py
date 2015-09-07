@@ -100,9 +100,10 @@ def run():
   paramInd = 0
   kFold    = 5 
   suffix   = 'sel'
-  isTest   = '1'
+  isTest   = '0'
   # iterate over the lists
-  xFilenameList         = ['../Data/tcdb.all.HUNIMKL','../Data/tcdb.all.HALIGN','../Data/tcdb.all.HALIGNF']
+  #xFilenameList         = ['../Data/tcdb.all.HUNIMKL','../Data/tcdb.all.HALIGN','../Data/tcdb.all.HALIGNF']
+  xFilenameList         = ['../Data/tcdb.all.HUNIMKL']
   foldIndexList         = xrange(1,kFold+1) 
   cList                 = ['10','50','100','500','1000']
   stepSize1List         = ['1','3','5']
@@ -125,8 +126,8 @@ def run():
 
   # get computing node
   logging.info('\t\tObtain cluster node')
-  #cluster = get_free_nodes()[0]
-  cluster = ['ukko133'] 
+  cluster = get_free_nodes()[0]
+  #cluster = ['ukko133'] 
 
   # run jobs
   job_size = job_queue.qsize()
