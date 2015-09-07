@@ -71,13 +71,7 @@ function TCSOP_GA (paramsIn, dataIn)
         profile.NUpdt = 0;
         
         % gradient descent on each individual training example
-        if opt_round < 0
-            for xi=1:m
-                gradient_ascent(xi);
-            end
-        else
-            gradient_ascent(1);
-        end
+        gradient_ascent();
         
         % look the the progress at the fix time interval
         if mod(opt_round,params.profileiter) == 0
@@ -92,7 +86,7 @@ function TCSOP_GA (paramsIn, dataIn)
 end
 
 %%
-function gradient_ascent(xi)
+function gradient_ascent()
 
     global loss;
     global ENum;
@@ -443,7 +437,6 @@ function [Ymax,YmaxVal,Umax,Gmax] = compute_best_multilabel (gradient)
     global data;
     global ENum;
     global SrcSpc;
-    global opt_round;
     
     gradient        = reshape(gradient,4*ENum,numel(gradient)/4/ENum);
     [Gmax,YmaxInd]  = max(gradient'*SrcSpc,[],2);   % Gmax is in mx1, YmaxInd is in mx1
