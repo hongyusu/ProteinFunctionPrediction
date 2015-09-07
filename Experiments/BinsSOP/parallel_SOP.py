@@ -70,14 +70,15 @@ def checkfile(filename):
 
 def singleJob(node, job):
   (priority, job_detail) = job
-  (paramInd,xFilename,yFilename,labelIndex,foldIndex,svmC,outputFilename,isTest) = job_detail
+  (paramInd,xFilename,yFilename,EFilename,SFilename,foldIndex,sopC,outputFilename,logFilename,stepSize1,stepSize2,isTest,suffix) = job_detail
   try:
     if checkfile(outputFilename):
       logging.info('\t--< (priority) %d (node)%s (filename) %s' %(priority, node, outputFilename))
       fail_penalty = 0
     else:
       logging.info('\t--> (priority) %d (node)%s (filename) %s' %(priority, node, outputFilename))
-      os.system(""" ssh -o StrictHostKeyChecking=no %s 'cd /cs/work/group/urenzyme/workspace/ProteinFunctionPrediction/Experiments/BinsMKL/; nohup matlab -nodisplay -nosplash -r "single_kernelSVM '%s' '%s' '%s' '%s' '%s' '%s' '%s'" > /var/tmp/tmp'  """ % (node,xFilename,yFilename,labelIndex,foldIndex,svmC,outputFilename,isTest) )
+      os.system(""" ssh -o StrictHostKeyChecking=no %s 'cd /cs/work/group/urenzyme/workspace/ProteinFunctionPrediction/Experiments/BinsSOP/; nohup matlab -nodisplay -nosplash -r "single_SOP '%s' '%s' '%s' '%s' '%s' '%s' '%s' '%s' '%s' '%s' '%s'" > /var/tmp/tmp'  """ % (node,xFilename,yFilename,EFilename,SFilename,foldIndex,sopC,outputFilename,logFilename,stepSize1,stepSize2,isTest) )
+      #print(""" ssh -o StrictHostKeyChecking=no %s 'cd /cs/work/group/urenzyme/workspace/ProteinFunctionPrediction/Experiments/BinsSOP/; nohup matlab -nodisplay -nosplash -r "single_SOP '%s' '%s' '%s' '%s' '%s' '%s' '%s' '%s' '%s' '%s' '%s'" > /var/tmp/tmp'  """ % (node,xFilename,yFilename,EFilename,SFilename,foldIndex,sopC,outputFilename,logFilename,stepSize1,stepSize2,isTest) )
       logging.info('\t--| (priority) %d (node)%s (filename) %s' %(priority, node, outputFilename))
       fail_penalty = -1
       time.sleep(1)
@@ -103,16 +104,16 @@ def run():
   # iterate over the lists
   xFilenameList         = ['../Data/tcdb.all.HUNIMKL','../Data/tcdb.all.HALIGN','../Data/tcdb.all.HALIGNF']
   foldIndexList         = xrange(1,kFold+1) 
-  cList                 = ['10','50','100','500','1000','5000']
+  cList                 = ['10','50','100','500','1000']
   stepSize1List         = ['1','3','5']
   stepSize2List         = ['1','3','5']
-  # 
+
   yFilename   = '../Data/tcdb.TC'
   EFilename   = '../Data/tcdb.TC.E'
-  Sfilename   = '../Data/tcdb.TC.S'
+  SFilename   = '../Data/tcdb.TC.SrcSpc'
 
   for xFilename,foldIndex,sopC,stepSize1,stepSize2 in list(itertools.product(xFilenameList,foldIndexList,cList,stepSize1List,stepSize2List)):
-    tmpDir   = '../ResultsMKL/tmp_%s_%s/' % ( re.sub('.*/','',xFilename), re.sub('.*/','',yFilename))
+    tmpDir   = '../ResultsSOP/tmp_%s_%s/' % ( re.sub('.*/','',xFilename), re.sub('.*/','',yFilename))
     if not os.path.exists(tmpDir): os.mkdir(tmpDir)
     paramInd += 1
     outputFilename = tmpDir + '/' + re.sub('.*/','',xFilename) + '_' + re.sub('.*/','',yFilename) + '_f' + str(foldIndex) + '_c' +sopC + '_s1' + stepSize1 + '_s2' + stepSize2 + '_t' + isTest + '_' + suffix + '.mat'
@@ -122,13 +123,10 @@ def run():
     ## put parameter into queue
     job_queue.put( (paramInd,(str(paramInd),xFilename,yFilename,EFilename,SFilename,str(foldIndex),sopC,outputFilename,logFilename,stepSize1,stepSize2,isTest,suffix)) )
 
-  while job_queue.empty():
-    
-  return
   # get computing node
   logging.info('\t\tObtain cluster node')
   #cluster = get_free_nodes()[0]
-  cluster = ['ukko133.hpc'] 
+  cluster = ['ukko133'] 
 
   # run jobs
   job_size = job_queue.qsize()
