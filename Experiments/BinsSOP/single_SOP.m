@@ -13,7 +13,7 @@
 % isTest:               select a small port of data for sanity check if isTest=True  
 %%========
 
-function single_SOP(xFilename,yFilename,EFilename,SFilename,foldIndex,sopC,outputFilename,logFilename,isTest)
+function single_SOP(xFilename,yFilename,EFilename,SFilename,foldIndex,sopC,outputFilename,logFilename,stepSize1,stepSize2,isTest)
 
   % random number generator
   rand('twister',0)
@@ -22,6 +22,8 @@ function single_SOP(xFilename,yFilename,EFilename,SFilename,foldIndex,sopC,outpu
   foldIndex  = eval(foldIndex);
   sopC       = eval(sopC);
   isTest     = eval(isTest);
+  stepSize1  = eval(stepSize1);
+  stepSize2  = eval(stepSize2);
 
   % add svm matlab path
   addpath '~/softwares/libsvm-3.12/matlab/'
@@ -38,7 +40,7 @@ function single_SOP(xFilename,yFilename,EFilename,SFilename,foldIndex,sopC,outpu
   
   
   % some global parameter
-  smallN = 5000;
+  smallN = 200;
   smallN = min(smallN,size(K,1));
 
   % selection: selecting labels with more than two proteins
@@ -74,6 +76,8 @@ function single_SOP(xFilename,yFilename,EFilename,SFilename,foldIndex,sopC,outpu
   paramsIn.outputFilename = outputFilename;         % output filename
   paramsIn.foldIndex      = foldIndex;              % fold index
   paramsIn.exampleIndex   = find(Ind==foldIndex);   % index of examples
+  paramsIn.stepSize1      = stepSize1;
+  paramsIn.stepSize2      = stepSize2;
 
   % set input data
   dataIn.S   = S;          % search space
