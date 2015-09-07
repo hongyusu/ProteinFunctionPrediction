@@ -125,13 +125,16 @@ function gradient_ascent()
     
     mu_0 = Umax(:,I) * params.C;        % feasible solution
     mu_d = mu_0 - mu(:,I);              % update direction
-    
+    clear Umax;
+
     smu_1_te = sum(reshape(mu_0.*Ye(:,I),4,ENum*size(I,1)));
     smu_1_te = reshape(smu_1_te(ones(4,1),:),ENum*4,size(I,1));
     Kxx_mu_0 = ~Ye(:,I)*params.C + mu_0 - smu_1_te;
+    clear smu_1_te,mu_0;
     
-    Kmu_0    = Kmu_x(:,I) + Kxx_mu_0 - Kxx_mu_x(:,I);
-    Kmu_d    = Kmu_0 - Kmu_x(:,I);
+    %Kmu_0    = Kmu_x(:,I) + Kxx_mu_0 - Kxx_mu_x(:,I);
+    %Kmu_d    = Kmu_0 - Kmu_x(:,I);
+    Kmu_d    = Kxx_mu_0 - Kxx_mu_x(:,I);
     
     % either : exact line search
     %nomi   = sum( mu_d .* gradient(:,I) );
@@ -145,6 +148,7 @@ function gradient_ascent()
     tau = 1/( 1 + ceil(opt_round/params.stepSize1) * params.C / params.stepSize2);
 
     delta_obj = sum(sum( tau * mu_d .* gradient(:,I) - tau^2/2 * mu_d .* Kmu_d ));
+    clear gradient,Kmu_d;
 
     if delta_obj < 0 | tau < 0
         return
@@ -155,6 +159,7 @@ function gradient_ascent()
     obj = obj + delta_obj;
     
     Kxx_mu_x(:,I) = (1-tau)*Kxx_mu_x(:,I) + tau*Kxx_mu_0;
+    clear Kxx_mu_0;
    
     % update Smu and Rmu
     mu = reshape(mu,4,ENum*m);
@@ -207,92 +212,6 @@ function Kmu_x = compute_Kmu_x(xi)
         term12 = reshape(term12,1,ENum*m);
         Kmu_x = reshape(term12(ones(4,1),:) + term34,4*ENum,m);
     end
-end
-
-
-
-function gradient_ascent_old(xi)
-
-    global loss;
-    global ENum;
-    global m;
-    global mu;
-    global delta_obj;
-    global params;
-    global Ye;
-    global Kxx_mu_x;
-    global Smu;
-    global Rmu;
-    global ind_edge_val;
-    global obj;
-    global opt_round;
-    global profile;
-    
-    loss_size = size(loss);
-    loss      = reshape(loss, 4*ENum,m);
-    
-    Kmu_x = compute_Kmu_x(xi);
-
-    gradient_x  = loss(:,xi)-Kmu_x;
-    
-    Gcur = -mu(:,xi)'*gradient_x;
-
-    [~,~,Umax,Gmax] = compute_best_multilabel(gradient_x);
-    
-    Gmax = Gmax*params.C;
-    
-    
-    if Gmax < Gcur
-        return
-    end
-
-    mu_0 = Umax * params.C;  % feasible solution
-    mu_d = mu_0 - mu(:,xi);  % update direction
-    
-    
-    smu_1_te = sum(reshape(mu_0.*Ye(:,xi),4,ENum),1);
-    smu_1_te = reshape(smu_1_te(ones(4,1),:),numel(mu(:,xi)),1);
-    Kxx_mu_0 = ~Ye(:,xi)*params.C+mu_0-smu_1_te;
-    Kmu_0    = Kmu_x + Kxx_mu_0 - Kxx_mu_x(:,xi);
-    Kmu_d    = Kmu_0 - Kmu_x;
-
-    % exact line search
-    nomi   = mu_d'  * gradient_x;
-    denomi = Kmu_d' * mu_d;
-    tau    = min(nomi/denomi,1);
-
-    if tau < 0
-        return
-    end
-   
-    delta_obj = mu_d'*gradient_x*tau - tau^2/2*mu_d'*Kmu_d;
-   
-    [tau,delta_obj]
-    
-    if xi==2
-        asdfasd
-    end
-    if delta_obj < 0 || tau < 0
-        return
-    end
-  
-    mu(:,xi) = mu(:,xi) + tau*mu_d;
-        
-    obj = obj + delta_obj;
-    
-    Kxx_mu_x(:,xi) = (1-tau)*Kxx_mu_x(:,xi) + tau*Kxx_mu_0;
-   
-    % update Smu and Rmu
-    mu_x = reshape(mu(:,xi),4,ENum);
-    for u = 1:4
-        Smu{u}(:,xi) = (sum(mu_x)').*ind_edge_val{u}(:,xi);
-        Rmu{u}(:,xi) = mu_x(u,:)';
-    end
-
-    % reshape loss
-    loss = reshape(loss,loss_size);
-    profile.NUpdt = profile.NUpdt + 1;
-
 end
 
 %% need to be checked
