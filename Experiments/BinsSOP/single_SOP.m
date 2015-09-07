@@ -24,6 +24,12 @@ function single_SOP(xFilename,yFilename,EFilename,SFilename,foldIndex,sopC,outpu
   isTest     = eval(isTest);
   stepSize1  = eval(stepSize1);
   stepSize2  = eval(stepSize2);
+  if exist(outputFilename,'file')
+      system(sprintf('rm %s', outputFilename));
+  end
+  if exist(logFilename,'file')
+      system(sprintf('rm %s', logFilename));
+  end
 
   % add svm matlab path
   addpath '~/softwares/libsvm-3.12/matlab/'
@@ -40,7 +46,7 @@ function single_SOP(xFilename,yFilename,EFilename,SFilename,foldIndex,sopC,outpu
   
   
   % some global parameter
-  smallN = 1000;
+  smallN = 500;
   smallN = min(smallN,size(K,1));
 
   % selection: selecting labels with more than two proteins
