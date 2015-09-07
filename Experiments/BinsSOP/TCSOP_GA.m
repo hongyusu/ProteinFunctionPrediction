@@ -145,7 +145,8 @@ function gradient_ascent(xi)
     %tau    = min(sum(nomi)/sum(denomi),0.1);
 
     % fixed step size
-    tau = params.stepSize1/(params.stepSize1+params.C/params.stepSize2*opt_round);
+    %tau = params.stepSize1/(params.stepSize1+params.C/params.stepSize2*opt_round);
+    tau = 1/( 1 + ceil(opt_round/params.stepSize1) * params.C / params.stepSize2);
 
     if tau < 0
         return
