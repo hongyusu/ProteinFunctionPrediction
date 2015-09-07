@@ -139,19 +139,17 @@ function gradient_ascent(xi)
     Kmu_0    = Kmu_x(:,I) + Kxx_mu_0 - Kxx_mu_x(:,I);
     Kmu_d    = Kmu_0 - Kmu_x(:,I);
     
-    % exact line search
+    % either : exact line search
     %nomi   = sum( mu_d .* gradient(:,I) );
     %denomi = sum( mu_d .* Kmu_d );
     %tau    = min(sum(nomi)/sum(denomi),0.1);
+    %if tau < 0
+    %    return
+    %end
 
-    % fixed step size
-    %tau = params.stepSize1/(params.stepSize1+params.C/params.stepSize2*opt_round);
+    % or    : fixed step size
     tau = 1/( 1 + ceil(opt_round/params.stepSize1) * params.C / params.stepSize2);
 
-    if tau < 0
-        return
-    end
-   
     delta_obj = sum(sum( tau * mu_d .* gradient(:,I) - tau^2/2 * mu_d .* Kmu_d ));
 
     if delta_obj < 0 | tau < 0
