@@ -109,6 +109,7 @@ function gradient_ascent()
     Kmu_x    = compute_Kmu_x;
     
     gradient = loss-Kmu_x;
+    clearvars Kmu_x;
     
     Gcur = sum(-mu.*gradient);
 
@@ -125,12 +126,12 @@ function gradient_ascent()
     
     mu_0 = Umax(:,I) * params.C;        % feasible solution
     mu_d = mu_0 - mu(:,I);              % update direction
-    clear Umax;
+    clearvars Umax;
 
     smu_1_te = sum(reshape(mu_0.*Ye(:,I),4,ENum*size(I,1)));
     smu_1_te = reshape(smu_1_te(ones(4,1),:),ENum*4,size(I,1));
     Kxx_mu_0 = ~Ye(:,I)*params.C + mu_0 - smu_1_te;
-    clear smu_1_te,mu_0;
+    clearvars smu_1_te mu_0;
     
     %Kmu_0    = Kmu_x(:,I) + Kxx_mu_0 - Kxx_mu_x(:,I);
     %Kmu_d    = Kmu_0 - Kmu_x(:,I);
@@ -148,18 +149,19 @@ function gradient_ascent()
     tau = 1/( 1 + ceil(opt_round/params.stepSize1) * params.C / params.stepSize2);
 
     delta_obj = sum(sum( tau * mu_d .* gradient(:,I) - tau^2/2 * mu_d .* Kmu_d ));
-    clear gradient,Kmu_d;
+    clearvars gradient Kmu_d;
 
     if delta_obj < 0 | tau < 0
         return
     end
   
     mu(:,I)  = mu(:,I) + tau*mu_d;
+    clearvars mu_d;
         
     obj = obj + delta_obj;
     
     Kxx_mu_x(:,I) = (1-tau)*Kxx_mu_x(:,I) + tau*Kxx_mu_0;
-    clear Kxx_mu_0;
+    clearvars Kxx_mu_0;
    
     % update Smu and Rmu
     mu = reshape(mu,4,ENum*m);
