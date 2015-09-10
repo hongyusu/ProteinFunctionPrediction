@@ -20,7 +20,8 @@
         - [MKL experiment settings](#mkl-experiment-settings)
         - [MKL kernel weights](#mkl-kernel-weights)
         - [MKL results](#mkl-results)
-
+    - [Structured output learning](#structured-output-learning)
+        - [SOP results](#sop-results)
 
 # Introduction
 
@@ -490,4 +491,14 @@ In stead of predicting the transporter classification (TC) with single feature m
 1. Precision recall curves are shown in the following figure.
 
    ![alt text](https://github.com/aalto-ics-kepaco/ProteinFunctionPrediction/blob/master/Experiments/PlotsMKL/auprc.jpg)
+
+
+## Structured output learning
+
+### SOP results
+
+   | Input feature | AUC | Accuracy | F1 | Precision | Recall |
+   |:--:|:--:|--:|:--:|:--:|:--:|:--:|
+   |UNIMKL*| NA | 0.9993 | 0.7138 | 0.7138 | 0.7138
+
 
