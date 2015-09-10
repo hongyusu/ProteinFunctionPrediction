@@ -497,6 +497,8 @@ In stead of predicting the transporter classification (TC) with single feature m
 
 ### SOP results
 
+1. Prediction performance of structured output learning is shown in the following table.
+
    | Input feature | AUC | Accuracy | F1 | Precision | Recall |
    |:--:|:--:|--:|:--:|:--:|:--:|:--:|
    |UNIMKL*| NA | 0.9993 | 0.7138 | 0.7138 | 0.7138
