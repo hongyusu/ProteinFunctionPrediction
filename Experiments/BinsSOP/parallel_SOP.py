@@ -44,7 +44,7 @@ class Worker(Thread):
     all_done = 0
     while not all_done:
       try:
-        time.sleep(random.randint(5000,6000) / 1000.0)  # get some rest :-)
+        time.sleep(random.randint(20000,30000) / 100.0)  # get some rest :-)
         time.sleep(self.penalty*120) # bad worker will rest more
         job = self.job_queue.get(0)
         add_penalty = singleJob(self.node, job)
@@ -105,9 +105,9 @@ def run():
   #xFilenameList         = ['../Data/tcdb.all.HUNIMKL','../Data/tcdb.all.HALIGN','../Data/tcdb.all.HALIGNF']
   xFilenameList         = ['../Data/tcdb.all.HUNIMKL']
   foldIndexList         = xrange(1,kFold+1) 
-  cList                 = ['10','50','100','500','1000']
-  stepSize1List         = ['1','3','5']
-  stepSize2List         = ['1','3','5']
+  cList                 = ['10','50','100','500','1000','5000','10000']
+  stepSize1List         = ['1','3','5','7']
+  stepSize2List         = ['1','3','5','7']
 
   yFilename   = '../Data/tcdb.TC'
   EFilename   = '../Data/tcdb.TC.E'
