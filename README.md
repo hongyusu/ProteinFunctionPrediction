@@ -499,7 +499,7 @@ In stead of predicting the transporter classification (TC) with single feature m
 
 1. Prediction performance of structured output learning is shown in the following table.
 
-   | Input feature | AUC | 0/1 loss | Hamming losss | F1 | Precision | Recall |
+   | Input feature | AUC | Multilabel Acc | Microlabel Acc | F1 | Precision | Recall |
    |:--:|:--:|--:|:--:|:--:|:--:|:--:|:---:|
    |UNIMKL*| NA | 0.5492 | 0.9993 | 0.7138 | 0.7138 | 0.7138
 
