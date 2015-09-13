@@ -2,7 +2,8 @@
 
 
 function compute_results()
-  xFilenameList         = {'tcdb.all.HUNIMKL'};
+  xFilenameList         = {'tcdb.all.HUNIMKL','tcdb.all.HALIGN'};
+  xFilenameList         = {'tcdb.all.HALIGN'};
   foldIndexList         = {'1','2','3','4','5'}; 
   cList                 = {'10','50','100','500','1000','5000','10000'};
   stepSize1List         = {'1','3','5','7'};
@@ -11,7 +12,7 @@ function compute_results()
 
   for fileI=1:length(xFilenameList)
 
-    resfilename = sprintf('../ResultsSOP/%s.res', xFilenameList{fileI}); 
+    resfilename = sprintf('../ResultsSOP/%s_tcdb.TC', xFilenameList{fileI}); 
 
     if exist(resfilename,'file') ~= 2
       Yp = [];
@@ -22,7 +23,7 @@ function compute_results()
         for cI=1:length(cList)
           for stepSize1I=1:length(stepSize1List)
             for stepSize2I=1:length(stepSize2List)
-              filename =sprintf('../ResultsSOP/tmp_tcdb.all.HUNIMKL_tcdb.TC/%s_tcdb.TC_f%s_c%s_s1%s_s2%s_t0_sel.mat',xFilenameList{fileI},foldIndexList{foldI},cList{cI},stepSize1List{stepSize1I},stepSize2List{stepSize2I});
+              filename =sprintf('../ResultsSOP/tmp_%s_tcdb.TC/%s_tcdb.TC_f%s_c%s_s1%s_s2%s_t0_sel.mat',xFilenameList{fileI},xFilenameList{fileI},foldIndexList{foldI},cList{cI},stepSize1List{stepSize1I},stepSize2List{stepSize2I});
               if exist(filename, 'file') == 2
                 load(filename);
                 index = index+1;
