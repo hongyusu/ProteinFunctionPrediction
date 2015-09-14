@@ -3,7 +3,7 @@
 
 function compute_results()
   xFilenameList         = {'tcdb.all.HUNIMKL','tcdb.all.HALIGN'};
-  xFilenameList         = {'tcdb.all.HALIGN'};
+  xFilenameList         = {'tcdb.all.HALIGNF'};
   foldIndexList         = {'1','2','3','4','5'}; 
   cList                 = {'10','50','100','500','1000','5000','10000'};
   stepSize1List         = {'1','3','5','7'};

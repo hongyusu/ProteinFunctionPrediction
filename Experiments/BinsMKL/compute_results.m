@@ -3,11 +3,11 @@ function compute_results()
 
   [xFilenameList,yFilenameList,svmCList] = textread('parameter_setting','%s %s %s');
   for i=1:size(xFilenameList,1)
-    i=6
+    %i=6
     tStart = tic;
     compute_results_single_dataset(xFilenameList{i},yFilenameList{i},svmCList{i});
     tEnd = toc(tStart)
-    return
+    %return
   end
 
 end
@@ -24,14 +24,14 @@ function compute_results_single_dataset(xFilename,yFilename,svmC)
 
   isTest = '0';
   suffix = 'val';
-  res = zeros(1,6);
-  [auc,auprc,accuracy,f1,precision,recall] = compute_performance(xFilename,yFilename,svmC,isTest,suffix,Y);
-  res = [auc,auprc,accuracy,f1,precision,recall];
+  res = zeros(1,7);
+  [auc,auprc,accuracy,f1,precision,recall,mlaccuracy] = compute_performance(xFilename,yFilename,svmC,isTest,suffix,Y);
+  res = [auc,auprc,accuracy,f1,precision,recall,mlaccuracy];
   res
 
   
   fileID = fopen('../ResultsMKL/results','a');
-  fprintf(fileID, '%s %s %.4f %.4f %.4f %.4f %.4f %.4f\n',xFilename,yFilename,res(1),res(2),res(3),res(4),res(5),res(6));
+  fprintf(fileID, '%s %s %.4f %.4f %.4f %.4f %.4f %.4f %.4f\n',xFilename,yFilename,res(1),res(2),res(3),res(4),res(5),res(6),res(7));
   fclose(fileID);
 
 end
@@ -44,7 +44,7 @@ end
 % svmC:                 svm slack parameter
 % isTest:               select a small port of data for sanity check if isTest=True  
 %
-function [auc,auprc,accuracy,f1,precision,recall] = compute_performance(xFilename,yFilename,svmC,isTest,suffix,Y)
+function [auc,auprc,accuracy,f1,precision,recall,mlaccuracy] = compute_performance(xFilename,yFilename,svmC,isTest,suffix,Y)
 
   allOutputFilename = sprintf('../ResultsMKL/%s_%s_c%s_t%s_%s',...
       regexprep(xFilename,'.*/',''),...
@@ -90,6 +90,7 @@ function [auc,auprc,accuracy,f1,precision,recall] = compute_performance(xFilenam
   precision = tp / (tp + fp); 
   f1 = 2*precision*recall / (precision+recall);
   accuracy = 1-sum(sum(xor(Y,Ypred)))/size(Y,1)/size(Y,2);
+  mlaccuracy = 1-sum(sum(xor(Y,Ypred),2)~=0)/size(Y,1);
 
   
   
