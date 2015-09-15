@@ -7,4 +7,5 @@
 |---TCSOP_CGA.m                 # structured output prediction model with conditional gradient ascent optimization
 |---TCSOP_GA.m                  # structured output prediction model with gradient ascent optimization
 |---README.md                   # this file
+|---parameters                  # parameters for structured output model
 ```

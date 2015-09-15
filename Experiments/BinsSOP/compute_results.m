@@ -2,14 +2,14 @@
 
 
 function compute_results()
-  xFilenameList         = {'tcdb.all.HUNIMKL','tcdb.all.HALIGN'};
-  xFilenameList         = {'tcdb.all.HALIGNF'};
+  xFilenameList         = {'tcdb.all.HUNIMKL','tcdb.all.HALIGN','tcdb.all.HALIGNF'};
   foldIndexList         = {'1','2','3','4','5'}; 
   cList                 = {'10','50','100','500','1000','5000','10000'};
   stepSize1List         = {'1','3','5','7'};
   stepSize2List         = {'1','3','5','7'};
 
 
+  pfileID = fopen('./parameters','a');
   for fileI=1:length(xFilenameList)
 
     resfilename = sprintf('../ResultsSOP/%s_tcdb.TC', xFilenameList{fileI}); 
@@ -17,6 +17,7 @@ function compute_results()
     if exist(resfilename,'file') ~= 2
       Yp = [];
       for foldI=1:length(foldIndexList)
+
         results = [];
         filenames = cell(1,1000);
         index = 0;
@@ -35,9 +36,11 @@ function compute_results()
         end
         [X,I] = sortrows(results,[1,2]);
         filename = filenames{I(1)};  
+        fprintf(pfileID,'%s\n',filename);
         load(filename);
         test_err
         Yp = [Yp;Yts];
+
       end
   
       Yp = sortrows(Yp,[1]);
@@ -53,22 +56,24 @@ function compute_results()
     Y = dlmread('../Data/tcdb.TC',' ');
     Y = Y(2:size(Y,1),2:size(Y,2));
   
-    sum(sum(Yp==Y))/size(Y,1)/size(Y,2)
-    sum(sum(Yp~=Y,2) == 0)/size(Y,1)
+    mlaccuracy = sum(sum(Yp~=Y,2) == 0)/size(Y,1);
 
     tp = sum(sum((Y+Yp)==2));
-      tn = sum(sum((Y+Yp)==0));
-        fp = sum(sum((Y-Yp)==-1));
-          fn = sum(sum((Y-Yp)==1));
+    tn = sum(sum((Y+Yp)==0));
+    fp = sum(sum((Y-Yp)==-1));
+    fn = sum(sum((Y-Yp)==1));
+    
+    recall    = tp / (tp + fn);
+    precision = tp / (tp + fp); 
+    f1 = 2*precision*recall / (precision+recall);
+    accuracy = 1-sum(sum(xor(Y,Yp)))/size(Y,1)/size(Y,2);
+    res = [nan,nan,accuracy,f1,precision,recall,mlaccuracy]
 
-          [tp,tn,fp,fn]
-            recall    = tp / (tp + fn);
-              precision = tp / (tp + fp); 
-                f1 = 2*precision*recall / (precision+recall);
-                  accuracy = 1-sum(sum(xor(Y,Yp)))/size(Y,1)/size(Y,2);
-                [accuracy,f1,precision,recall]
-                
+    fileID = fopen('../ResultsSOP/results','a');
+    fprintf(fileID, '%s %.4f %.4f %.4f %.4f %.4f %.4f %.4f\n',xFilenameList{fileI},res(1),res(2),res(3),res(4),res(5),res(6),res(7));
+    fclose(fileID);
+    
   end
-
+  fclose(pfileID);
 
 end
