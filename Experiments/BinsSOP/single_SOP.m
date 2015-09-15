@@ -11,6 +11,7 @@
 % sopC:                 margin slack parameter
 % outputFilename:       tmp directory for results
 % isTest:               select a small port of data for sanity check if isTest=True  
+%
 %%========
 
 function single_SOP(xFilename,yFilename,EFilename,SFilename,foldIndex,sopC,outputFilename,logFilename,stepSize1,stepSize2,isTest)

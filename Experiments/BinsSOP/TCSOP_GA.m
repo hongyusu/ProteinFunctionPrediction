@@ -7,6 +7,7 @@
 % Model is based on Max-margin conditional random field.
 % Optimization is throught primal, dual, marginized dual representation.
 % Optimization algorithm is gradient ascent.
+% In each iteration, it computes the gradient for all examples and perform the update.
 %
 % INPUT PARAMETERS:
 %   paramsIn:   input parameters
@@ -15,9 +16,11 @@
 % USAGE:
 %   This function is called by a MATLAB wrapper function single_SOP()
 %
-% Hongyu Su, hongyu.su@me.com
+% CONTACT:
+%   Hongyu Su, hongyu.su@me.com
 %
 %% ================================================================================================================
+
 function TCSOP_GA (paramsIn, dataIn)
 
     % Set random seed to make different run comparable.
