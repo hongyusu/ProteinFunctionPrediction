@@ -503,6 +503,6 @@ In stead of predicting the transporter classification (TC) with single feature m
    |:--:|:--:|--:|:--:|:--:|:--:|:--:|:---:|
    |UNIMKL*| NA | 0.9993 | 0.7138 | 0.7138 | 0.7138 | 0.5497 
    |ALIGN* | NA | 0.9994 | 0.7664 | 0.7664 | 0.7664 | 0.5800 
-   |ALIGNF*| NA | 0.9995 | 0.7966 | 0.7966 | 0.7966 | 0.6267 
+   |ALIGNF*| NA | 0.9995 | 0.7995 | 0.7995 | 0.7995 | 0.6291 
 
 
