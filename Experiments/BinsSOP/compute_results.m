@@ -4,9 +4,9 @@
 function compute_results()
   xFilenameList         = {'tcdb.all.HUNIMKL','tcdb.all.HALIGN','tcdb.all.HALIGNF'};
   foldIndexList         = {'1','2','3','4','5'}; 
-  cList                 = {'10','50','100','500','1000','5000','10000'};
-  stepSize1List         = {'1','3','5','7'};
-  stepSize2List         = {'1','3','5','7'};
+  cList                 = {'10','50','100','500','1000','5000','10000','50000'};
+  stepSize1List         = {'1','3','5','7','9'};
+  stepSize2List         = {'1','3','5','7','9'};
 
 
   pfileID = fopen('./parameters','a');

@@ -103,10 +103,11 @@ def run():
   isTest   = '0'
   # iterate over the lists
   xFilenameList         = ['../Data/tcdb.all.HUNIMKL','../Data/tcdb.all.HALIGN','../Data/tcdb.all.HALIGNF','../Data/tcdb.all.KUNIMKL','../Data/tcdb.all.KALIGN','../Data/tcdb.all.KALIGNF']
+  xFilenameList         = ['../Data/tcdb.all.HUNIMKL','../Data/tcdb.all.HALIGN','../Data/tcdb.all.HALIGNF','../Data/tcdb.all.KUNIMKL']
   foldIndexList         = xrange(1,kFold+1) 
-  cList                 = ['100','500','1000','5000','10000']
-  stepSize1List         = ['3','5','7']
-  stepSize2List         = ['3','5','7']
+  cList                 = ['100','500','1000','5000','10000','50000']
+  stepSize1List         = ['3','5','7','9']
+  stepSize2List         = ['3','5','7','9']
 
   yFilename   = '../Data/tcdb.TC'
   EFilename   = '../Data/tcdb.TC.E'
