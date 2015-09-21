@@ -520,7 +520,7 @@ In stead of predicting the transporter classification (TC) with single feature m
 
 ### MMR results
 
-1. Prediction performance of MMR is shown in the following table. In particular, kernels are computed from multiple kernel learning approaches.
+1. Prediction performance of MMR is shown in the following table. In particular, kernels are computed directly from multiple kernel learning approaches.
 
    | Input feature | AUC | Microlabel Accuracy | F1 | Precision | Recall | Multilabel Accuracy | 
    |:--:|:--:|--:|:--:|:--:|:--:|:--:|:---:|
