@@ -182,7 +182,7 @@ NOTE: Su, her you should specify which version has been considered (I guess a ve
    1. Interproscan results is located as `./Data/tcdbips`. The file follows the structure described in the following table
 
       |Column|Description|
-      |---:|---:|
+      |:---:|:---|
       |1|Protein Accession (e.g. P51587)|
       |2|Sequence MD5 digest (e.g. 14086411a2cdf1c4cba63020e1622579)|
       |3|Sequence Length (e.g. 3418)|
