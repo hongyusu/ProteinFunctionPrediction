@@ -155,7 +155,7 @@ NOTE: Su, her you should specify which version has been considered (I guess a ve
    1. In particular, we download the InterProScan package together with various databases. Version information of InterProScan software and databases can be found from the following table
 
       |Tool|Version|Information|
-      |---:|---:|---:|
+      |:---|:---:|:---|
       |InterProScan|5.13-52.0|InterProScan package|
       |ProDom|2006.1|ProDom is a comprehensive set of protein domain families automatically generated from the UniProt Knowledge Database.|
       |HAMAP||High-quality Automated and Manual Annotation of Microbial Proteomes|
