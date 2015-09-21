@@ -426,9 +426,9 @@ In this section, we test the classification performance on transporter classific
    |../Data/tcdb.TIProDom   |0.8708|0.9981|0.0345|0.9884|0.0176|
    |../Data/tcdb.TIProSitePatterns|0.8672|0.9870|0.0301|0.0176|0.1018|
    |../Data/tcdb.TIProSiteProfiles|0.8783|0.9979|0.1560|0.3745|0.0985|
-   |../Data/tcdb.TISignalP_EUK    |0.8596|0.9899|0.0109|0.0068|0.0283|
-   |../Data/tcdb.TISignalP_GRAM_NEGATIVE|0.8677|0.9979|0.0362|0.2543|0.0195|
-   |../Data/tcdb.TISignalP_GRAM_POSITIVE|0.8724|0.9980|0.0413|0.5434|0.0214|
+   |../Data/tcdb.TISignalP_ EUK    |0.8596|0.9899|0.0109|0.0068|0.0283|
+   |../Data/tcdb.TISignalP_ GRAM_NEGATIVE|0.8677|0.9979|0.0362|0.2543|0.0195|
+   |../Data/tcdb.TISignalP_ GRAM_POSITIVE|0.8724|0.9980|0.0413|0.5434|0.0214|
    |../Data/tcdb.TISMART      |0.8732|0.9979|0.0715|0.2742|0.0411|
    |../Data/tcdb.TISUPERFAMILY|0.8851|0.9975|0.1486|0.2275|0.1104|
    |../Data/tcdb.TITIGRFAM    |0.8819|0.9977|0.2226|0.3421|0.1650|
