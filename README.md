@@ -154,7 +154,7 @@ NOTE: Su, her you should specify which version has been considered (I guess a ve
    1. A brief instruction for installation and running InterProScan is documented in [my blog post](http://hongyusu.github.io/lessons/2015/06/17/extract-protein-features-via-interproscan/).
    1. In particular, we download the InterProScan package together with various databases. Version information of InterProScan software and databases can be found from the following table
 
-      |Software and databases|Version|Information|
+      |Tool|Version|Information|
       |---:|---:|---:|
       |InterProScan|5.13-52.0|InterProScan package|
       |ProDom|2006.1|ProDom is a comprehensive set of protein domain families automatically generated from the UniProt Knowledge Database.|

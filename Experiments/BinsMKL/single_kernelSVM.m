@@ -32,7 +32,13 @@ function single_kernelSVM(xFilename,yFilename,labelIndex,foldIndex,svmC,outputFi
   addpath '~/softwares/libsvm-3.12/matlab/'
 
   % read in input and output files
-  K = dlmread(xFilename,',');
+  if xFilename(18) == 'G'
+    load(sprintf('%s.mat',xFilename));
+    K=xkernel;
+    clearvars xkernel;
+  else
+    K = dlmread(xFilename,',');%Kd = diag(K);Kd(Kd==0) = 1;K = K ./ ( sqrt(Kd) * sqrt(Kd)' );
+  end
   Y = dlmread(yFilename,' ');
   Y = Y(2:size(Y,1),2:size(Y,2));
 
