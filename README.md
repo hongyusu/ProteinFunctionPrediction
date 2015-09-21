@@ -475,16 +475,11 @@ In stead of predicting the transporter classification (TC) with single feature m
 
 1. Prediction performances of three multiple kernel learning approaches are listed in the following table in which all combined kernel are centered and * corresponds to additional operation on the combined kernel `normalization->centering`.
 
-   | Input feature | AUC | Accuracy | F1 | Precision | Recall | Multilabel Accuracy |
-   |:--:|:--:|--:|:--:|:--:|:--:|:--:|:--:|
-   |UNIMKL | 0.9807 | 0.9995 | 0.8583 | 0.9676 | 0.7713 | 0.5959
-   |ALIGN  | 0.9804 | 0.9995 | 0.8518 | 0.9548 | 0.7689 | 0.5921
-   |ALIGNF | 0.9602 | 0.9989 | 0.6543 | 0.8678 | 0.5251 | 0.2625
-   |UNIMKL*| 0.9851 | 0.9989 | 0.6826 | 0.8364 | 0.5766 | 0.2380 
-   |ALIGN* | 0.9889 | 0.9991 | 0.7463 | 0.8662 | 0.6555 | 0.3179
-   |ALIGNF*| 0.9878 | 0.9993 | 0.7918 | 0.8885 | 0.7140 | 0.4016 
-
-
+   |Kernel function| Input feature | AUC | Accuracy | F1 | Precision | Recall | Multilabel Accuracy |
+   |:--:           |:--:|:--:|--:|:--:|:--:|:--:|:--:|:--:|
+   |Linear         |UNIMKL*| 0.9851 | 0.9989 | 0.6826 | 0.8364 | 0.5766 | 0.2380 
+   |Linear         |ALIGN* | 0.9889 | 0.9991 | 0.7463 | 0.8662 | 0.6555 | 0.3179
+   |Linear         |ALIGNF*| 0.9878 | 0.9993 | 0.7918 | 0.8885 | 0.7140 | 0.4016 
 
 1. ROC curves of three multiple kernel learning approaches are shown in the following figure. It is worth noting that the red and the blue curves almost overlap on top of each other. 
   
