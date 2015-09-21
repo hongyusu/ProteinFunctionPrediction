@@ -359,15 +359,15 @@ NOTE: Su, her you should specify which version has been considered (I guess a ve
 1. I compute the following statistice for the overall merged dataset, in particular, for the file `./Preprocessing/Results/tcdb.mtx`.
 
    |Type of statistics|Value|
-   |:---|---:|
+   |:---|:---:|
    |Number of proteins|12546|
    |Number of features|25704|
    |Number of categories|20|
 
 1. Category information are listed in the table as follows: 
 
-   |Feature prefix|Size|Feature type|Version | Feature description|
-   |:---|---:|:---:|:---:|:----------|
+   |Prefix|Size|Feature|Version | Feature description|
+   |:---|:---:|:---|:---:|:----------|
    |TC__|3145|	TCDB||TCDB classification|
    |TB__|12535|	_BLAST_||_BLAST_ search|
    |TIProDom__|145|	ProDom|2006.1|ProDom is a comprehensive set of protein domain families automatically generated from the UniProt Knowledge Database.|
