@@ -511,9 +511,9 @@ In stead of predicting the transporter classification (TC) with single feature m
 
    | Input feature | AUC | Microlabel Accuracy | F1 | Precision | Recall | Multilabel Accuracy | 
    |:--:|:--:|--:|:--:|:--:|:--:|:--:|:---:|
-   |UNIMKL*| NA | 0.9993 | 0.7173 | 0.7173 | 0.7173 | 0.5513 
-   |ALIGN* | NA | 0.9994 | 0.7711 | 0.7711 | 0.7711 | 0.5874 
-   |ALIGNF*| NA | 0.9995 | 0.8045 | 0.8045 | 0.8045 | 0.6365 
+   |UNIMKL*| NA | 0.9993 | 0.7992| 0.7992| 0.7992 | 0.6428 
+   |ALIGN* | NA | 0.9994 | 0.8284| 0.8284| 0.8284 | 0.6856 
+   |ALIGNF*| NA | 0.9995 | 0.8524| 0.8524| 0.8524 | 0.7281 
 
 
 ## Max margin regression
