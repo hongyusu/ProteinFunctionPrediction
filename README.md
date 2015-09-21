@@ -214,7 +214,7 @@ NOTE: Su, her you should specify which version has been considered (I guess a ve
       1. Merge the following feature types into one matrix
    
          |Data type|#Proteins|#Features|
-         |----:|----:|----:|
+         |:----|:----:|:----:|
          |matgoBP|101422|12891|
          |matgoCC|101422|1670|
          |matgoMF|101422|4816|
@@ -230,14 +230,14 @@ NOTE: Su, her you should specify which version has been considered (I guess a ve
          2. The number of proteins and the number of features in the intersection of the collection of matrics are shown in the following table. Notice that a protein will present in the interection matrix if it has features in GO/_BLAST_/Pfam/Taxonomy categories. 
    
             |Type|#Proteins|#Features|
-            |----:|----:|----:|
+            |:----|:----:|:----:|
             |Union|123619|64328|
             |Intersection|1336|64328|
    
          3. Different type of fetures are annotated in `.collab` according to the following table
    
             |Feature name|Prefix|
-            |---:|---:|
+            |:---|:---:|
             |Gene ontology: biological process|GB|
             |Gene ontology: cellular component|GC|
             |Gene ontology: molecular function|GM|
@@ -256,7 +256,7 @@ NOTE: Su, her you should specify which version has been considered (I guess a ve
    NOTE: In this way you removed the annotations for proteins having multiple annotation paths. These are 29:
    
    |AC|TC|
-   |---:|---:|
+   |:---:|:---|
    |D4ZJA6|1.A.30.1.5|
    |D4ZJA6|1.A.30.1.6|
    |O24303|1.A.18.1.1|
