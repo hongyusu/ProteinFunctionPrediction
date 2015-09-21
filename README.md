@@ -501,19 +501,19 @@ In stead of predicting the transporter classification (TC) with single feature m
 
 1. Prediction performance of the developed structured output prediction method is shown in the following table. In particular, kernels are computed from multiple kernel learning approaches.
 
-   | Input feature | AUC | Microlabel Accuracy | F1 | Precision | Recall | Multilabel Accuracy | 
-   |:--:|:--:|--:|:--:|:--:|:--:|:--:|:---:|
-   |UNIMKL*| NA | 0.9993 | 0.7173 | 0.7173 | 0.7173 | 0.5513 
-   |ALIGN* | NA | 0.9994 | 0.7711 | 0.7711 | 0.7711 | 0.5874 
-   |ALIGNF*| NA | 0.9995 | 0.8045 | 0.8045 | 0.8045 | 0.6365 
+   |Kernel function| Input feature | AUC | Microlabel Accuracy | F1 | Precision | Recall | Multilabel Accuracy | 
+   |:--:           |:--:|:--:|--:|:--:|:--:|:--:|:--:|:---:|
+   |Linear         |UNIMKL*| NA | 0.9993 | 0.7173 | 0.7173 | 0.7173 | 0.5513 
+   |Linear         |ALIGN* | NA | 0.9994 | 0.7711 | 0.7711 | 0.7711 | 0.5874 
+   |Linear         |ALIGNF*| NA | 0.9995 | 0.8045 | 0.8045 | 0.8045 | 0.6365 
 
 2. Predidction performance of the developed structured output prediction model with additional Gaussian kernels on kernel matrices that are computed from multiple kernel learning approaches.
 
-   | Input feature | AUC | Microlabel Accuracy | F1 | Precision | Recall | Multilabel Accuracy | 
-   |:--:|:--:|--:|:--:|:--:|:--:|:--:|:---:|
-   |UNIMKL*| NA | 0.9995 | 0.7992| 0.7992| 0.7992 | 0.6428 
-   |ALIGN* | NA | 0.9996 | 0.8284| 0.8284| 0.8284 | 0.6856 
-   |ALIGNF*| NA | 0.9996 | 0.8524| 0.8524| 0.8524 | 0.7281 
+   |Kernel function| Input feature | AUC | Microlabel Accuracy | F1 | Precision | Recall | Multilabel Accuracy | 
+   |:--:           |:--:|:--:|--:|:--:|:--:|:--:|:--:|:---:|
+   |Gaussian       |UNIMKL*| NA | 0.9995 | 0.7992| 0.7992| 0.7992 | 0.6428 
+   |Gaussian       |ALIGN* | NA | 0.9996 | 0.8284| 0.8284| 0.8284 | 0.6856 
+   |Gaussian       |ALIGNF*| NA | 0.9996 | 0.8524| 0.8524| 0.8524 | 0.7281 
 
 
 ## Max margin regression
@@ -522,18 +522,18 @@ In stead of predicting the transporter classification (TC) with single feature m
 
 1. Prediction performance of MMR is shown in the following table. In particular, kernels are computed directly from multiple kernel learning approaches.
 
-   | Input feature | AUC | Microlabel Accuracy | F1 | Precision | Recall | Multilabel Accuracy | 
-   |:--:|:--:|--:|:--:|:--:|:--:|:--:|:---:|
-   |UNIMKL*| NA | NA | 0.3512 | 0.3512 | 0.3512 | 0.0690 
-   |ALIGN* | NA | NA | 0.3387 | 0.3387 | 0.3387 | 0.0587 
-   |ALIGNF*| NA | NA | 0.5012 | 0.5012 | 0.5012 | 0.2095 
+   |Kernel function| Input feature | AUC | Microlabel Accuracy | F1 | Precision | Recall | Multilabel Accuracy | 
+   |:--:           |:--:|:--:|--:|:--:|:--:|:--:|:--:|:---:|
+   |Linear         |UNIMKL*| NA | NA | 0.3512 | 0.3512 | 0.3512 | 0.0690 
+   |Linear         |ALIGN* | NA | NA | 0.3387 | 0.3387 | 0.3387 | 0.0587 
+   |Linear         |ALIGNF*| NA | NA | 0.5012 | 0.5012 | 0.5012 | 0.2095 
 
 2. Predidction performance of MMR with additional Gaussian kernels on kernel matrices that are computed from multiple kernel learning approaches.
 
-   | Input feature | AUC | Microlabel Accuracy | F1 | Precision | Recall | Multilabel Accuracy | 
-   |:--:|:--:|--:|:--:|:--:|:--:|:--:|:---:|
-   |UNIMKL*| NA | NA | 0.7987 | 0.7987 | 0.7987 | 0.6409 
-   |ALIGN* | NA | NA | 0.8296 | 0.8296 | 0.8296 | 0.6828 
-   |ALIGNF*| NA | NA | 0.8537 | 0.8537 | 0.8537 | 0.7272 
+   |Kernel function| Input feature | AUC | Microlabel Accuracy | F1 | Precision | Recall | Multilabel Accuracy | 
+   |:--:           |:--:|:--:|--:|:--:|:--:|:--:|:--:|:---:|
+   |Gaussian       |UNIMKL*| NA | NA | 0.7987 | 0.7987 | 0.7987 | 0.6409 
+   |Gaussian       |ALIGN* | NA | NA | 0.8296 | 0.8296 | 0.8296 | 0.6828 
+   |Gaussian       |ALIGNF*| NA | NA | 0.8537 | 0.8537 | 0.8537 | 0.7272 
 
 
