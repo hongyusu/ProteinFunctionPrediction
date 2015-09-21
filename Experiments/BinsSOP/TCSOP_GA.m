@@ -31,7 +31,7 @@ function TCSOP_GA (paramsIn, dataIn)
     global params;              % input parameters
     data    = dataIn;
     params  = paramsIn;
-    clear dataIn paramsIn;      % destroy input parameters to save memory
+    clearvars dataIn paramsIn;      % destroy input parameters to save memory
     
     % other global variables
     global loss;                % loss defined on the edge of the network
