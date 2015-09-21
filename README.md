@@ -22,6 +22,8 @@
         - [MKL results](#mkl-results)
     - [Structured output learning](#structured-output-learning)
         - [SOP results](#sop-results)
+    - [Max margin regression](#max-margin-regression)
+        - [MMR results](#mmr-results)
 
 # Introduction
 
@@ -497,8 +499,35 @@ In stead of predicting the transporter classification (TC) with single feature m
 
 ### SOP results
 
-1. Prediction performance of structured output learning is shown in the following table.
+1. Prediction performance of the developed structured output prediction method is shown in the following table. In particular, kernels are computed from multiple kernel learning approaches.
 
+   | Input feature | AUC | Microlabel Accuracy | F1 | Precision | Recall | Multilabel Accuracy | 
+   |:--:|:--:|--:|:--:|:--:|:--:|:--:|:---:|
+   |UNIMKL*| NA | 0.9993 | 0.7173 | 0.7173 | 0.7173 | 0.5513 
+   |ALIGN* | NA | 0.9994 | 0.7711 | 0.7711 | 0.7711 | 0.5874 
+   |ALIGNF*| NA | 0.9995 | 0.8045 | 0.8045 | 0.8045 | 0.6365 
+
+2. Predidction performance of the developed structured output prediction model with additional Gaussian kernels on kernel matrices that are computed from multiple kernel learning approaches.
+   | Input feature | AUC | Microlabel Accuracy | F1 | Precision | Recall | Multilabel Accuracy | 
+   |:--:|:--:|--:|:--:|:--:|:--:|:--:|:---:|
+   |UNIMKL*| NA | 0.9993 | 0.7173 | 0.7173 | 0.7173 | 0.5513 
+   |ALIGN* | NA | 0.9994 | 0.7711 | 0.7711 | 0.7711 | 0.5874 
+   |ALIGNF*| NA | 0.9995 | 0.8045 | 0.8045 | 0.8045 | 0.6365 
+
+
+## Max margin regression
+
+### MMR results
+
+1. Prediction performance of MMR is shown in the following table. In particular, kernels are computed from multiple kernel learning approaches.
+
+   | Input feature | AUC | Microlabel Accuracy | F1 | Precision | Recall | Multilabel Accuracy | 
+   |:--:|:--:|--:|:--:|:--:|:--:|:--:|:---:|
+   |UNIMKL*| NA | 0.9993 | 0.7173 | 0.7173 | 0.7173 | 0.5513 
+   |ALIGN* | NA | 0.9994 | 0.7711 | 0.7711 | 0.7711 | 0.5874 
+   |ALIGNF*| NA | 0.9995 | 0.8045 | 0.8045 | 0.8045 | 0.6365 
+
+2. Predidction performance of MMR with additional Gaussian kernels on kernel matrices that are computed from multiple kernel learning approaches.
    | Input feature | AUC | Microlabel Accuracy | F1 | Precision | Recall | Multilabel Accuracy | 
    |:--:|:--:|--:|:--:|:--:|:--:|:--:|:---:|
    |UNIMKL*| NA | 0.9993 | 0.7173 | 0.7173 | 0.7173 | 0.5513 
