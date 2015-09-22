@@ -481,6 +481,8 @@ In stead of predicting the transporter classification (TC) with single feature m
    |Linear         |ALIGN* | 0.9889 | 0.9991 | 0.7463 | 0.8662 | 0.6555 | 0.3179
    |Linear         |ALIGNF*| 0.9878 | 0.9993 | 0.7918 | 0.8885 | 0.7140 | 0.4016 
 
+1. In addition, we use Guassian kenrel on all three computed kernels, the corresponding prediction performance is shown in the following table. 
+
    |Kernel function| Input feature | AUC | Accuracy | F1 | Precision | Recall | Multilabel Accuracy |
    |:--:           |:--:|:--:|--:|:--:|:--:|:--:|:--:|:--:|
    |Gaussian       |UNIMKL*| 0.8990 | 0.9984 | 0.3172 | 0.9786 | 0.1893 | 0.1248 
