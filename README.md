@@ -481,6 +481,15 @@ In stead of predicting the transporter classification (TC) with single feature m
    |Linear         |ALIGN* | 0.9889 | 0.9991 | 0.7463 | 0.8662 | 0.6555 | 0.3179
    |Linear         |ALIGNF*| 0.9878 | 0.9993 | 0.7918 | 0.8885 | 0.7140 | 0.4016 
 
+   |Kernel function| Input feature | AUC | Accuracy | F1 | Precision | Recall | Multilabel Accuracy |
+   |:--:           |:--:|:--:|--:|:--:|:--:|:--:|:--:|:--:|
+   |Gaussian       |UNIMKL*| 0.8990 | 0.9984 | 0.3172 | 0.9786 | 0.1893 | 0.1248 
+   |Gaussian       |ALIGN* | 0.8976 | 0.9984 | 0.3077 | 0.9818 | 0.1825 | 0.1272
+   |Gaussian       |ALIGNF*| 0.8902 | 0.9983 | 0.2364 | 0.9834 | 0.1343 | 0.0972 
+
+
+
+
 1. ROC curves of three multiple kernel learning approaches are shown in the following figure. It is worth noting that the red and the blue curves almost overlap on top of each other. 
   
    ![alt text](https://github.com/aalto-ics-kepaco/ProteinFunctionPrediction/blob/master/Experiments/PlotsMKL/auc.jpg)

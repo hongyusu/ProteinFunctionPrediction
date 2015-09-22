@@ -5,3 +5,6 @@
 ../Data/tcdb.all.HUNIMKL ../Data/tcdb.TC 0.9851 0.5044 0.9989 0.6826 0.8364 0.5766 0.2380
 ../Data/tcdb.all.HALIGN ../Data/tcdb.TC 0.9889 0.5275 0.9991 0.7463 0.8662 0.6555 0.3179
 ../Data/tcdb.all.HALIGNF ../Data/tcdb.TC 0.9878 0.4885 0.9993 0.7918 0.8885 0.7140 0.4016
+../Data/tcdb.all.GUNIMKL ../Data/tcdb.TC 0.8990 0.2738 0.9984 0.3172 0.9786 0.1893 0.1248
+../Data/tcdb.all.GALIGN ../Data/tcdb.TC 0.8976 0.2660 0.9984 0.3077 0.9818 0.1825 0.1272
+../Data/tcdb.all.GALIGNF ../Data/tcdb.TC 0.8902 0.2540 0.9983 0.2364 0.9834 0.1343 0.0972
