@@ -491,16 +491,6 @@ In stead of predicting the transporter classification (TC) with single feature m
 
 
 
-
-1. ROC curves of three multiple kernel learning approaches are shown in the following figure. It is worth noting that the red and the blue curves almost overlap on top of each other. 
-  
-   ![alt text](https://github.com/aalto-ics-kepaco/ProteinFunctionPrediction/blob/master/Experiments/PlotsMKL/auc.jpg)
-
-1. Precision recall curves are shown in the following figure.
-
-   ![alt text](https://github.com/aalto-ics-kepaco/ProteinFunctionPrediction/blob/master/Experiments/PlotsMKL/auprc.jpg)
-
-
 ## Structured output learning
 
 ### SOP results
