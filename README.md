@@ -547,6 +547,7 @@ In stead of predicting the transporter classification (TC) with single feature m
    |TiGRFAM|4488|v14.0|
    |NCBI curated| 11273||
    |Entrez multimodel superfamilies|3285||
+   |Tigr|||
 
 1. Download CDD source files from NCBI FTP server ftp://ftp.ncbi.nih.gov/pub/mmdb/cdd//cdd.tar.gz.
 1. Download CDD version file from NCBI FTP server ftp://ftp.ncbi.nih.gov/pub/mmdb/cdd//cdd.info.
