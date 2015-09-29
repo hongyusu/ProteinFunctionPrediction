@@ -537,6 +537,7 @@ In stead of predicting the transporter classification (TC) with single feature m
 ### Position specific scoring matrix (PSSM) features
 
 1. Statistics for all databases included in CDD.
+
    |Database|Number of models|Version|
    |:---:|---:|---:|
    |CDD  |47363| 3.14|
