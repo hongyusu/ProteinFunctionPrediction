@@ -555,12 +555,19 @@ In stead of predicting the transporter classification (TC) with single feature m
 
 1. Build CDD databases from different sources by NCBI Blast+ tool with the following command.
    `../makeprofiledb -title SMART     -in Smart.pn -out Smart -threshold 9.82 -scale 100.0 -dbtype rps -index true`
+
    `../makeprofiledb -title Pfam      -in Pfam.pn -out Pfam -threshold 9.82 -scale 100.0 -dbtype rps -index true`
+
    `../makeprofiledb -title COG       -in Cog.pn -out Cog -threshold 9.82 -scale 100.0 -dbtype rps -index true`
+
    `../makeprofiledb -title KOG       -in Kog.pn -out Kog -threshold 9.82 -scale 100.0 -dbtype rps -index true`
+
    `../makeprofiledb -title CDD_NCBI  -in Cdd_NCBI.pn -out Cdd_NCBI -threshold 9.82 -scale 100.0 -dbtype rps -index true`
+
    `../makeprofiledb -title PRK       -in Prk.pn -out Prk -threshold 9.82 -scale 100.0 -dbtype rps -index true`
+
    `../makeprofiledb -title Tigr      -in Tigr.pn -out Tigr -threshold 9.82 -scale 100.0 -dbtype rps -index true`
+
 1. A CDD database covering all sources can be built with the following command 
    `../makeprofiledb -title CDD       -in Cdd.pn -out Cdd -threshold 9.82 -scale 100.0 -dbtype rps -index true`
 
