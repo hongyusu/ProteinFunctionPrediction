@@ -543,15 +543,14 @@ In stead of predicting the transporter classification (TC) with single feature m
 
    |Database|Number of models|Version|
    |:---:|---:|---:|
-   |CDD  |47363| 3.14|
-   |Pfam |14831 | v27|
-   |COG|4875| v1 |
+   |CDD  |47363| v3.14|
+   |Pfam |14831 | v27.0|
+   |COG|4825| v1.0 |
+   |KOG|4875| v1.0 |
    |SMART|1013|v6.0|
-   |Entrez protein clusters|10885||
-   |TiGRFAM|4488|v14.0|
-   |NCBI curated| 11273||
-   |Entrez multimodel superfamilies|3285||
-   |Tigr|||
+   |PRK|10885|v6.9|
+   |TiGRFAM|4488|v15.0|
+   |CDD_NCBI|11273||
 
 1. Build CDD databases from different sources by NCBI Blast+ tool with the following command.
    `../makeprofiledb -title SMART     -in Smart.pn -out Smart -threshold 9.82 -scale 100.0 -dbtype rps -index true`
