@@ -536,12 +536,13 @@ In stead of predicting the transporter classification (TC) with single feature m
 
 ## Additional features
 
-### Position specific scoring matrix features
+### PSSM features generated from CDD database 
 
-1. Download CDD source files from NCBI FTP server ftp://ftp.ncbi.nih.gov/pub/mmdb/cdd//cdd.tar.gz.
-1. Download CDD version file from NCBI FTP server ftp://ftp.ncbi.nih.gov/pub/mmdb/cdd//cdd.info.
-1. Download PSSM version file from NCBI FTP server ftp://ftp.ncbi.nih.gov/pub/mmdb/cdd//cdd.versions.
-1. Statistics for all databases included in CDD.
+1. This section describes how to compute position specific scoring matrix PSSM features from public conserved domain databases CDD.
+1. Download CDD database source files from [NCBI FTP server](ftp://ftp.ncbi.nih.gov/pub/mmdb/cdd//cdd.tar.gz).
+1. Download CDD database version file from [NCBI FTP server](ftp://ftp.ncbi.nih.gov/pub/mmdb/cdd//cdd.info).
+1. Download PSSM version file from [NCBI FTP server](ftp://ftp.ncbi.nih.gov/pub/mmdb/cdd//cdd.versions).
+1. The following table shows the statistics and version information of all databases in CDD.
 
    |Database|Number of models|Version|
    |:---:|---:|---:|
@@ -552,9 +553,10 @@ In stead of predicting the transporter classification (TC) with single feature m
    |SMART|1013|v6.0|
    |PRK|10885|v6.9|
    |TiGRFAM|4488|v15.0|
-   |CDD_NCBI|11273||
+   |CDD NCBI|11273||
 
-1. Build CDD databases from different sources by NCBI Blast+ tool with the following command.
+1. Build local CDD databases from different source files using NCBI Blast+ tool according to the following commands.
+
    `../makeprofiledb -title SMART     -in Smart.pn -out Smart -threshold 9.82 -scale 100.0 -dbtype rps -index true`
 
    `../makeprofiledb -title Pfam      -in Pfam.pn -out Pfam -threshold 9.82 -scale 100.0 -dbtype rps -index true`
@@ -569,10 +571,20 @@ In stead of predicting the transporter classification (TC) with single feature m
 
    `../makeprofiledb -title Tigr      -in Tigr.pn -out Tigr -threshold 9.82 -scale 100.0 -dbtype rps -index true`
 
-   `../../makeprofiledb -title TCDB201509PSSM -in tcdb201509pssm.pn -out tcdb201509pssm -threshold 9.82 -scale 100.0 -dbtype rps -index true`
-
 1. A CDD database covering all sources can be built with the following command 
+
    `../makeprofiledb -title CDD       -in Cdd.pn -out Cdd -threshold 9.82 -scale 100.0 -dbtype rps -index true`
 
+1. Once the databases are ready, BLAST search can be performed with `rpsblast` with the following command (e.g., search against SMART CDD).
+
+   `../Blast/ncbi-blast-2.2.31+/bin/rpsblast  -evalue 0.01 -num_threads 4 -outfmt "6 qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue bitscore" -db ../Blast/ncbi-blast-2.2.31+/bin/CDD/SMART -query ../../Data/tcdb -out ../../Data/tcdbrpsSMART `
+
+### PSSM features generated from TCDB
+
+1. 
+
+   `../../makeprofiledb -title TCDB201509PSSM -in tcdb201509pssm.pn -out tcdb201509pssm -threshold 9.82 -scale 100.0 -dbtype rps -index true`
+
+## PSSM features generated from TCDB CDD
 
 
