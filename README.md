@@ -582,6 +582,8 @@ In stead of predicting the transporter classification (TC) with single feature m
 
    `../Blast/ncbi-blast-2.2.31+/bin/rpsblast  -evalue 0.01 -num_threads 4 -outfmt "6 qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue bitscore" -db ../Blast/ncbi-blast-2.2.31+/bin/CDD/SMART -query ../../Data/tcdb -out ../../Data/tcdbrpsSMART `
 
+1. The complete code is available from [my GitHub](https://github.com/hongyusu/ProteinFunctionPrediction/blob/master/Preprocessing/Bins/run_rpsblast.py).
+
 ### PSSM features generated from TCDB
 
 1. `psiblast` provides an alternative to search against TCDB database with PSSM features.
@@ -591,12 +593,14 @@ In stead of predicting the transporter classification (TC) with single feature m
 
    `../../makeprofiledb -title TCDB201509PSSM -in tcdb201509pssm.pn -out tcdb201509pssm -threshold 9.82 -scale 100.0 -dbtype rps -index true`
 
+1. The complete code is available from [my GitHub](https://github.com/hongyusu/ProteinFunctionPrediction/blob/master/Preprocessing/Bins/run_psiblast.py
+
 ## PSSM features generated from TCDB-CDD
 
 1. As an alterntive, one can search each protein sequence against TCDB and generate a PSSM pattern.
 1. With all generate PSSM patterns, one can build a CDD database of TCDB protein sequences.
 1. After that, each protein sequence is search against the CDD dataabse of TCDB protein sequences.
-
+1. The complete code is available from [my GitHub](https://github.com/hongyusu/ProteinFunctionPrediction/blob/master/Preprocessing/Bins/run_rpsblast.py).
 
 
 

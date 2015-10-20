@@ -6,6 +6,9 @@ import re
 
 
 def run_rpsblast_rpsdbs():
+  '''
+  run rps blast on public CDD databases
+  '''
   dbs=['Cdd_NCBI','Cdd','Cog','Kog','Pfam','Prk','Smart','Tigr']
   for db in dbs:
     print db
@@ -13,6 +16,9 @@ def run_rpsblast_rpsdbs():
 
 
 def run_rpsblast_tcdb():
+  '''
+  run rpsblast on CDD database of all tcdb proteins
+  '''
   for line in open('../Blast/ncbi-blast-2.2.31+/bin/db/tcdb201509pssm/tcdb201509pssm.pn'):
     filename = re.sub('.smp','',line.strip())
     print filename
