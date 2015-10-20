@@ -593,7 +593,7 @@ In stead of predicting the transporter classification (TC) with single feature m
 
    `../../makeprofiledb -title TCDB201509PSSM -in tcdb201509pssm.pn -out tcdb201509pssm -threshold 9.82 -scale 100.0 -dbtype rps -index true`
 
-1. The complete code is available from [my GitHub](https://github.com/hongyusu/ProteinFunctionPrediction/blob/master/Preprocessing/Bins/run_psiblast.py
+1. The complete code is available from [my GitHub](https://github.com/hongyusu/ProteinFunctionPrediction/blob/master/Preprocessing/Bins/run_psiblast.py).
 
 ## PSSM features generated from TCDB-CDD
 
