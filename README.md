@@ -25,7 +25,9 @@
     - [Max margin regression](#max-margin-regression)
         - [MMR results](#mmr-results)
 - [Additional features](#additional-features)
-    - [Position Specific scoring matrix (PSSM) features](#position-specific-scoring-matrix-features)
+    - [PSSM features generated from CDD database](#pssm-features-generated-from-cdd-databases)
+    - [PSSM features generated from TCDB](#pssm-features-generated-from-tcdb)
+    - [PSSM features generated from TCDB-CDD](#pssm-features-generated-from-tcdb-cdd)
 
 # Introduction
 
@@ -538,6 +540,7 @@ In stead of predicting the transporter classification (TC) with single feature m
 
 ### PSSM features generated from CDD database 
 
+1. There are many public databases which contains conserved protein domain information in position specific scoring matrix PSSM format. 
 1. This section describes how to compute position specific scoring matrix PSSM features from public conserved domain databases CDD.
 1. Download CDD database source files from [NCBI FTP server](ftp://ftp.ncbi.nih.gov/pub/mmdb/cdd//cdd.tar.gz).
 1. Download CDD database version file from [NCBI FTP server](ftp://ftp.ncbi.nih.gov/pub/mmdb/cdd//cdd.info).
@@ -581,10 +584,22 @@ In stead of predicting the transporter classification (TC) with single feature m
 
 ### PSSM features generated from TCDB
 
-1. 
+1. `psiblast` provides an alternative to search against TCDB database with PSSM features.
+1. In particular, each protein sequence is searched against TCDB and a PSSM is computed for this sequence. 
+1. After that, the system use constructed PSSM to perform a second search against TCDB.
+1. The command to perform `psiblast` search is shown as the following.  
 
    `../../makeprofiledb -title TCDB201509PSSM -in tcdb201509pssm.pn -out tcdb201509pssm -threshold 9.82 -scale 100.0 -dbtype rps -index true`
 
-## PSSM features generated from TCDB CDD
+## PSSM features generated from TCDB-CDD
+
+1. As an alterntive, one can search each protein sequence against TCDB and generate a PSSM pattern.
+1. With all generate PSSM patterns, one can build a CDD database of TCDB protein sequences.
+1. After that, each protein sequence is search against the CDD dataabse of TCDB protein sequences.
+
+
+
+
+
 
 
