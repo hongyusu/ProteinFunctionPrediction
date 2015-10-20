@@ -547,7 +547,7 @@ In stead of predicting the transporter classification (TC) with single feature m
 1. Download PSSM version file from [NCBI FTP server](ftp://ftp.ncbi.nih.gov/pub/mmdb/cdd//cdd.versions).
 1. The following table shows the statistics and version information of all databases in CDD.
 
-   |Database|Number of models|Version|
+   |Database|Number of PSSM models|Version|
    |:---:|---:|---:|
    |CDD  |47363| v3.14|
    |Pfam |14831 | v27.0|
@@ -601,6 +601,11 @@ In stead of predicting the transporter classification (TC) with single feature m
 1. With all generate PSSM patterns, one can build a CDD database of TCDB protein sequences.
 1. After that, each protein sequence is search against the CDD dataabse of TCDB protein sequences.
 1. The complete code is available from [my GitHub](https://github.com/hongyusu/ProteinFunctionPrediction/blob/master/Preprocessing/Bins/run_rpsblast.py).
+1. Statistics of CDD database of TCDB sequences is shown in the following table.
+
+   |Database|Number of PSSM models|Version|
+   |:---:|---:|---:|
+   |CDD-TCDB  |12540| 201509 version of TCDB|
 
 
 
