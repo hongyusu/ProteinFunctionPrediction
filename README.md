@@ -25,7 +25,7 @@
     - [Max margin regression](#max-margin-regression)
         - [MMR results](#mmr-results)
 - [Additional features](#additional-features)
-    - [Position Specific scoring matrix (PSSM) features](#position-specific-scoring-matrix-(PSSM)-features)
+    - [Position Specific scoring matrix (PSSM) features](#position-specific-scoring-matrix-features)
 
 # Introduction
 
@@ -536,7 +536,7 @@ In stead of predicting the transporter classification (TC) with single feature m
 
 ## Additional features
 
-### Position specific scoring matrix (PSSM) features
+### Position specific scoring matrix features
 
 1. Download CDD source files from NCBI FTP server ftp://ftp.ncbi.nih.gov/pub/mmdb/cdd//cdd.tar.gz.
 1. Download CDD version file from NCBI FTP server ftp://ftp.ncbi.nih.gov/pub/mmdb/cdd//cdd.info.
