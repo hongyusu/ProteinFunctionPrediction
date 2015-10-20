@@ -25,7 +25,7 @@
     - [Max margin regression](#max-margin-regression)
         - [MMR results](#mmr-results)
 - [Additional features](#additional-features)
-    - [PSSM features generated from CDD database](#pssm-features-generated-from-cdd-databases)
+    - [PSSM features generated from CDD database](#pssm-features-generated-from-cdd-database)
     - [PSSM features generated from TCDB](#pssm-features-generated-from-tcdb)
     - [PSSM features generated from TCDB-CDD](#pssm-features-generated-from-tcdb-cdd)
 
