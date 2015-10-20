@@ -24,7 +24,8 @@
         - [SOP results](#sop-results)
     - [Max margin regression](#max-margin-regression)
         - [MMR results](#mmr-results)
-
+- [Additional features](#additional-features)
+    - [Position Specific scoring matrix (PSSM) features](#position-specific-scoring-matrix-(PSSM)-features)
 # Introduction
 
 For now the project aims to reliably predict the function of the transporter proteins.

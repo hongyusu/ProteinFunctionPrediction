@@ -15,7 +15,7 @@ def run_rpsblast_tcdb():
   dbs=['tcdb201509pssm']
   for db in dbs:
     print db
-    os.system('''../Blast/ncbi-blast-2.2.31+/bin/rpsblast  -evalue 0.01 -num_threads 4 -outfmt "6 qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue bitscore" -db ../Blast/ncbi-blast-2.2.31+/bin/CDD/%s -query ../../Data/tcdb -out ../../Data/tcdbrps%s ''' % (db,db))
+    os.system('''../Blast/ncbi-blast-2.2.31+/bin/rpsblast  -evalue 0.01 -num_threads 4 -outfmt "6 qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue bitscore" -db ../Blast/ncbi-blast-2.2.31+/bin/db/tcdb201509pssm/%s -query ../../Data/tcdb -out ../../Data/tcdbrps%s ''' % (db,db))
 
 
 
