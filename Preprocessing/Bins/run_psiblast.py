@@ -7,6 +7,9 @@ import re
 
 
 def psiblast():
+  '''
+  generate psiblast database
+  '''
   fout_namelist = open('../Blast/ncbi-blast-2.2.31+/bin/db/tcdb201509pssm/tcdb201509pssm.pn','w')
   for line in open('../../Data/tcdb'):
     if line.startswith('>'):
