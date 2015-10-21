@@ -4,13 +4,14 @@
 
 
 
-#import pandas as pd
-#import numpy as np
 import os
 import re
 
 
 def process_tcdb(filename,fout):
+  '''
+  process tcdb tc feature
+  '''
   for line in open('../../Data/tcdb'):
     if not line.startswith('>'):
       continue
@@ -22,15 +23,6 @@ def process_tcdb(filename,fout):
     fout.write('%s TC__%s 1\n' % (proteinname,'.'.join(words[1].split('.')[0:2])))
     fout.write('%s TC__%s 1\n' % (proteinname,'.'.join(words[1].split('.')[0:3])))
     fout.write('%s TC__%s 1\n' % (proteinname,'.'.join(words[1].split('.')[0:4])))
-  pass
-
-def process_tcdbblast(filename,fout):
-  for line in open('../../Data/tcdbblast'):
-    words = line.strip().split('\t')
-    proteinname = re.sub('.*\|','',words[0])
-    featurename = re.sub('.*\|','',words[1])
-    score = re.sub(' *','',words[11])
-    fout.write('%s TB__%s %s\n' % (proteinname,featurename,score))
   pass
 
 def process_tcdbips(filename,fout):
@@ -46,23 +38,37 @@ def process_tcdbips(filename,fout):
     fout.write('%s TI%s %s\n' % (proteinname,featurename,words[8]))
   pass
 
+def process_tcdbblast(filename,prefix,fout):
+  '''
+  process other features
+  '''
+  for line in open('../../Data/%s' % filename):
+    words = line.strip().split('\t')
+    proteinname = re.sub('.*\|','',words[0])
+    featurename = re.sub('.*\|','',words[1])
+    score = re.sub(' *','',words[11])
+    fout.write('%s %s__%s %s\n' % (proteinname,prefix,featurename,score))
+  pass
+
 
 def put_together_names():
-  filenamelist = ['tcdb','tcdbblast','tcdbips']
+  '''
+  merge different feature files
+  '''
+  # mapping filename:prefix
+  mappings={('tcdb','TC'),('tcdbblast','TB'),('tcdbips','TI'),('tcdbpsi','TPSI'),('tcdbrpsCdd','TRPSCDD'),('tcdbrpsCdd_NCBI','TRPSCDDNCBI'),('tcdbrpsCog','TRPSCOG'),('tcdbrpsKog','TRPSKOG'),('tcdbrpsPfam','TRPSPFAM'),('tcdbrpsPrk','TRPSPRK'),('tcdbrpsSmart','TRPSSMART'),('tcdbrpstcdb201509pssm','TRPSTCDB201509PSSM'),('tcdbrpsTigr','TRPSTIGR')}
   fout = open('../../Preprocessing/Results/tcdbdata','w')
 
   # process individual file
-  for filename in filenamelist:
-    print filename
+  for filename,prefix in mappings:
+    print filename,prefix
 
     if filename == 'tcdb':
       process_tcdb(filename,fout)
-      continue
-    if filename == 'tcdbblast':
-      process_tcdbblast(filename,fout)
-      continue
-    if filename == 'tcdbips':
+    elif filename == 'tcdbips':
       process_tcdbips(filename,fout)
+    else:
+      process_tcdbblast(filename,prefix,fout)
       continue
 
   fout.close()
