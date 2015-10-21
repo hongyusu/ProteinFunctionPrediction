@@ -7,6 +7,6 @@
 |---run_interproscan.sh             # run interproscan
 |---run_rpsblast.py                 # run rpsblast
 |---run_psiblast.py                 # run psiblast
-|---merge_tcdb_blast_and_ips.py     # merge tcdb classification file, blast feature, and interproscan features
+|---merge_feature_files.py          # merge tcdb classification file, blast feature, and interproscan features
 |---separate_different_features.py  # separate different feature into different matrices
 ```
