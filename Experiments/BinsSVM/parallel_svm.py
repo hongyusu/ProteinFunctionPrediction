@@ -19,7 +19,7 @@ from threading import Thread
 import os
 import sys
 import commands
-sys.path.append('/cs/taatto/group/urenzyme/workspace/netscripts/')
+sys.path.append('/cs/work/group/urenzyme/workspace/netscripts/')
 from get_free_nodes import get_free_nodes
 import multiprocessing
 import time
@@ -75,8 +75,7 @@ def singleJob(node, job):
       fail_penalty = 0
     else:
       logging.info('\t--> (priority) %d (node)%s (filename) %s' %(priority, node, outputFilename))
-      os.system(""" ssh -o StrictHostKeyChecking=no %s 'cd /cs/taatto/group/urenzyme/workspace/ProteinFunctionPrediction/Experiments/Bins/; nohup matlab -nodisplay -nosplash -r "single_SVM '%s' '%s' '%s' '%s' '%s' '%s' '%s'" > /var/tmp/tmp'  """ % (node,xFilename,yFilename,labelIndex,foldIndex,svmC,outputFilename,isTest) )
-      #os.system(""" ssh -o StrictHostKeyChecking=no %s 'cd /cs/fs/home/su/ProteinFunctionPrediction/Experiments/Bins/; nohup matlab -nodisplay -nosplash -r "single_SVM '%s' '%s' '%s' '%s' '%s' '%s' '%s'" > /var/tmp/tmp'  """ % (node,xFilename,yFilename,labelIndex,foldIndex,svmC,outputFilename,isTest) )
+      os.system(""" ssh -o StrictHostKeyChecking=no %s 'cd /cs/work/group/urenzyme/workspace/ProteinFunctionPrediction/Experiments/Bins/; nohup matlab -nodisplay -nosplash -r "single_SVM '%s' '%s' '%s' '%s' '%s' '%s' '%s'" > /var/tmp/tmpsu'  """ % (node,xFilename,yFilename,labelIndex,foldIndex,svmC,outputFilename,isTest) )
       logging.info('\t--| (priority) %d (node)%s (filename) %s' %(priority, node, outputFilename))
       fail_penalty = -1
       time.sleep(1)
@@ -101,7 +100,7 @@ def run():
   suffix   = 'val'
   isTest   = '0'
   # iterate over the lists
-  xFilenameList         = ['../Data/tcdb.TB','../Data/tcdb.TICoils','../Data/tcdb.TIGene3D','../Data/tcdb.TIHamap','../Data/tcdb.TIPANTHER','../Data/tcdb.TIPfam','../Data/tcdb.TIPhobius','../Data/tcdb.TIPIRSF','../Data/tcdb.TIPRINTS','../Data/tcdb.TIProDom','../Data/tcdb.TIProSitePatterns','../Data/tcdb.TIProSiteProfiles','../Data/tcdb.TISignalP_EUK','../Data/tcdb.TISignalP_GRAM_NEGATIVE','../Data/tcdb.TISignalP_GRAM_POSITIVE','../Data/tcdb.TISMART','../Data/tcdb.TISUPERFAMILY','../Data/tcdb.TITIGRFAM','../Data/tcdb.TITMHMM']
+  xFilenameList         = ['../Data/tcdb.TB','../Data/tcdb.TICoils','../Data/tcdb.TIGene3D','../Data/tcdb.TIHamap','../Data/tcdb.TIPANTHER','../Data/tcdb.TIPfam','../Data/tcdb.TIPhobius','../Data/tcdb.TIPIRSF','../Data/tcdb.TIRINTS','../Data/tcdb.TIProDom','../Data/tcdb.TIProSitePatterns','../Data/tcdb.TIProSiteProfiles','../Data/tcdb.TISignalP_EUK','../Data/tcdb.TISignalP_GRAM_NEGATIVE','../Data/tcdb.TISignalP_GRAM_POSITIVE','../Data/tcdb.TISMART','../Data/tcdb.TISUPERFAMILY','../Data/tcdb.TITIGRFAM','../Data/tcdb.TITMHMM']
   yFilenameList         = ['../Data/tcdb.TC']
   labelIndexList        = xrange(1,numLabel+1)
   foldIndexList         = xrange(1,kFold+1) 

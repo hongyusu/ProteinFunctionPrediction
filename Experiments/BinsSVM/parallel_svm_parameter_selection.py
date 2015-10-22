@@ -75,10 +75,9 @@ def singleJob(node, job):
       logging.info('\t--< (priority) %d (node)%s (filename) %s' %(priority, node, outputFilename))
       fail_penalty = 0
     else:
-      print outputFilename
       logging.info('\t--> (priority) %d (node)%s (filename) %s' %(priority, node, outputFilename))
-      os.system(""" ssh -o StrictHostKeyChecking=no %s 'cd /cs/taatto/group/urenzyme/workspace/ProteinFunctionPrediction/Experiments/Bins/; nohup matlab -nodisplay -nosplash -r "single_SVM '%s' '%s' '%s' '%s' '%s' '%s' '%s'" > /var/tmp/tmp'  """ % (node,xFilename,yFilename,labelIndex,foldIndex,svmC,outputFilename,isTest) )
-      #os.system(""" ssh -o StrictHostKeyChecking=no %s 'cd /cs/fs/home/su/ProteinFunctionPrediction/Experiments/Bins/; nohup matlab -nodisplay -nosplash -r "single_SVM '%s' '%s' '%s' '%s' '%s' '%s' '%s'" > /var/tmp/tmp'  """ % (node,xFilename,yFilename,labelIndex,foldIndex,svmC,outputFilename,isTest) )
+      os.system(""" ssh -o StrictHostKeyChecking=no %s 'cd /cs/work/group/urenzyme/workspace/ProteinFunctionPrediction/Experiments/BinsSVM/; nohup matlab -nodisplay -nosplash -r "single_SVM '%s' '%s' '%s' '%s' '%s' '%s' '%s'" > /var/tmp/tmpsu'  """ % (node,xFilename,yFilename,labelIndex,foldIndex,svmC,outputFilename,isTest) )
+      #print(""" ssh -o StrictHostKeyChecking=no %s 'cd /cs/work/group/urenzyme/workspace/ProteinFunctionPrediction/Experiments/BinsSVM/; nohup matlab -nodisplay -nosplash -r "single_SVM '%s' '%s' '%s' '%s' '%s' '%s' '%s'" > /var/tmp/tmpsu'  """ % (node,xFilename,yFilename,labelIndex,foldIndex,svmC,outputFilename,isTest) )
       logging.info('\t--| (priority) %d (node)%s (filename) %s' %(priority, node, outputFilename))
       fail_penalty = -1
       time.sleep(1)
@@ -104,6 +103,7 @@ def run():
   isTest   = '1'
   # iterate over the lists
   xFilenameList         = ['../Data/tcdb.TB',  '../Data/tcdb.TICoils',  '../Data/tcdb.TIGene3D',  '../Data/tcdb.TIHamap',  '../Data/tcdb.TIPANTHER',  '../Data/tcdb.TIPfam',  '../Data/tcdb.TIPhobius',  '../Data/tcdb.TIPIRSF',  '../Data/tcdb.TIPRINTS',  '../Data/tcdb.TIProDom',  '../Data/tcdb.TIProSitePatterns',  '../Data/tcdb.TIProSiteProfiles',  '../Data/tcdb.TISignalP_EUK',  '../Data/tcdb.TISignalP_GRAM_NEGATIVE',  '../Data/tcdb.TISignalP_GRAM_POSITIVE',  '../Data/tcdb.TISMART',  '../Data/tcdb.TISUPERFAMILY',  '../Data/tcdb.TITIGRFAM',  '../Data/tcdb.TITMHMM',  '../Data/tcdb.TPSI',  '../Data/tcdb.TRPSCDD',  '../Data/tcdb.TRPSCDDNCBI',  '../Data/tcdb.TRPSCOG',  '../Data/tcdb.TRPSKOG',  '../Data/tcdb.TRPSPFAM',  '../Data/tcdb.TRPSPRK',  '../Data/tcdb.TRPSSMART',  '../Data/tcdb.TRPSTCDB201509PSSM',  '../Data/tcdb.TRPSTIGR']
+  xFilenameList         = ['../Data/tcdb.TB']
   yFilenameList         = ['../Data/tcdb.TC']
   labelIndexList        = xrange(1,numLabel+1)
   foldIndexList         = xrange(1,kFold+1) 

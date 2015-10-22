@@ -28,7 +28,7 @@ function single_SVM(xFilename,yFilename,labelIndex,foldIndex,svmC,outputFilename
   isTest     = eval(isTest);
 
   % add svm matlab path
-  addpath '~/softwares/libsvm-3.12/matlab/'
+  addpath '../libsvm-3.12/matlab/'
 
   % read in input and output files
   X = dlmread(xFilename,' ');
