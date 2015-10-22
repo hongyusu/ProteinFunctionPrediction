@@ -28,6 +28,7 @@
     - [PSSM features generated from CDD database](#pssm-features-generated-from-cdd-database)
     - [PSSM features generated from TCDB](#pssm-features-generated-from-tcdb)
     - [PSSM features generated from TCDB-CDD](#pssm-features-generated-from-tcdb-cdd)
+- [Statistics of feature sets](#statistics-of-feature-sets)
 
 # Introduction
 
