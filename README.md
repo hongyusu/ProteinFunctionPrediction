@@ -607,6 +607,9 @@ In stead of predicting the transporter classification (TC) with single feature m
    |:---:|---:|---:|
    |CDD-TCDB  |12540| 201509 version of TCDB|
 
+# Statistics of feature sets
+
+1. The following table shows the statistics of features computed for TCDB prediction tasks.
 
    |Feature set| Number of features|
    |:---|---:|
