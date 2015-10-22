@@ -31,7 +31,7 @@ def process_one_prefix(prefix):
     if not featureid in featureidlist:
       continue
     else:
-      if prefix in ['TB__']:
+      if prefix[:4] in ['TB__','TPSI','TRPS']:
         if not featureid in data[proteinid]:
           data[proteinid][featureid] = score
         if data[proteinid][featureid] < score:
@@ -54,7 +54,7 @@ def process_one_prefix(prefix):
           if not featureid in data[proteinid]:
             fout.write(' 0')
           else:
-            if prefix in ['TB__']:
+            if prefix[:4] in ['TB__','TPSI','TRPS']:
               fout.write(' %.2f' % data[proteinid][featureid])
             else:
               fout.write(' %d' % data[proteinid][featureid])
@@ -66,7 +66,7 @@ def process_one_prefix(prefix):
 
 
 def separate_features():
-  prefixlist = ['TC__', 'TB__', 'TIProDom__', 'TIHamap__', 'TISMART__', 'TISUPERFAMILY__', 'TIPRINTS__', 'TIPANTHER__', 'TIGene3D__', 'TIPIRSF__', 'TIPfam__', 'TIProSiteProfiles__', 'TITIGRFAM__', 'TIProSitePatterns__', 'TICoils__', 'TITMHMM__', 'TIPhobius__', 'TISignalP_GRAM_NEGATIVE__', 'TISignalP_EUK__', 'TISignalP_GRAM_POSITIVE__']
+  prefixlist = ['TB__','TC__','TICoils__','TIGene3D__','TIHamap__','TIPANTHER__','TIPfam__','TIPhobius__','TIPIRSF__','TIPRINTS__','TIProDom__','TIProSitePatterns__','TIProSiteProfiles__','TISignalP_EUK__','TISignalP_GRAM_NEGATIVE__','TISignalP_GRAM_POSITIVE__','TISMART__','TISUPERFAMILY__','TITIGRFAM__','TITMHMM__','TPSI__','TRPSCDD__','TRPSCDDNCBI__','TRPSCOG__','TRPSKOG__','TRPSPFAM__','TRPSPRK__','TRPSSMART__','TRPSTCDB201509PSSM__','TRPSTIGR__']
   for prefix in prefixlist:
       process_one_prefix(prefix)
   pass
@@ -77,5 +77,5 @@ def copy_names():
   pass
 
 if __name__ == '__main__':
-  #separate_features()
+  separate_features()
   copy_names()
