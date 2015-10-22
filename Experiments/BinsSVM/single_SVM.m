@@ -16,7 +16,7 @@
 function single_SVM(xFilename,yFilename,labelIndex,foldIndex,svmC,outputFilename,isTest)
 
   % some global parameter
-  smallN = 5000;
+  smallN = 3000;
 
   % random number generator
   rand('twister',0)
@@ -52,10 +52,13 @@ function single_SVM(xFilename,yFilename,labelIndex,foldIndex,svmC,outputFilename
     Y = Y(1:smallN,:);
   end
 
-  % normalization: centering
+  % centering
   X = X - repmat(mean(X),size(X,1),1);
-  %X = X ./ repmat(std(X),size(X,1),1);
-  
+  % normalization
+  X = X ./ repmat(sqrt(sum(abs(X).^2,2)),1,size(X,2));
+  % centering
+  X = X - repmat(mean(X),size(X,1),1);
+
   % cross validation index, 5 fold
   Ind = crossvalind('Kfold',size(X,1),5);
 
