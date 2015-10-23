@@ -13,33 +13,33 @@ def mkl(kFilenameList,yFilename,kType):
 
   if kType == 'UNIMKL':
     for i,kFilename in enumerate(kFilenameList):
-      print i
+      print i,kFilename
       K = numpy.loadtxt(kFilename,delimiter=',')
       if i==0: Kall = numpy.zeros(K.shape)
       Kall = Kall + K/len(kFilenameList) 
     w = numpy.ones(len(kFilenameList))/len(kFilenameList)
-    numpy.savetxt('../Data/tcdb.all.k%s' % kType, Kall, fmt='%.2f', delimiter=',')
-    numpy.savetxt('../Data/tcdb.all.kw%s' % kType, w,    fmt='%.2f', delimiter=',') 
+    numpy.savetxt('../Data/tcdb.all.K%s'  % kType, Kall, fmt='%.2f', delimiter=',')
+    numpy.savetxt('../Data/tcdb.all.KW%s' % kType, w,    fmt='%.2f', delimiter=',') 
 
   elif kType == 'ALIGN':
     Ky = numpy.loadtxt(yFilename,delimiter=',')
     w=[]
     for i,kFilename in enumerate(kFilenameList):
-      print i
+      print i,kFilename
       K = numpy.loadtxt(kFilename,delimiter=',')
       if i==0: Kall = numpy.zeros(K.shape)
       s = f_dot(K, Ky) / f_norm(K) / f_norm(Ky)
       w.append(s)
       Kall = Kall + s*K
     w = numpy.array(w)
-    numpy.savetxt('../Data/tcdb.all.k%s' % kType, Kall, fmt='%.2f', delimiter=',')
-    numpy.savetxt('../Data/tcdb.all.kw%s' % kType, w,    fmt='%.2f', delimiter=',') 
+    numpy.savetxt('../Data/tcdb.all.K%s'  % kType, Kall, fmt='%.2f', delimiter=',')
+    numpy.savetxt('../Data/tcdb.all.KW%s' % kType, w,    fmt='%.2f', delimiter=',') 
 
   elif kType == 'ALIGNF':
     Ky = numpy.loadtxt(yFilename,delimiter=',')
     a = []
     for i,kFilename in enumerate(kFilenameList):
-      print i
+      print i,kFilename
       K = numpy.loadtxt(kFilename,delimiter=',')
       a.append(f_dot(K,Ky))
     a = numpy.array(a,dtype='d')
@@ -69,8 +69,8 @@ def mkl(kFilenameList,yFilename,kType):
     for i in range(len(kFilenameList)):
       K = numpy.loadtxt(kFilenameList[i],delimiter=',')
       Kall = Kall + w[i]*K
-    numpy.savetxt('../Data/tcdb.all.k%s' % kType, Kall, fmt='%.2f', delimiter=',')
-    numpy.savetxt('../Data/tcdb.all.kw%s' % kType, w,    fmt='%.2f', delimiter=',') 
+    numpy.savetxt('../Data/tcdb.all.K%s'  % kType, Kall, fmt='%.2f', delimiter=',')
+    numpy.savetxt('../Data/tcdb.all.KW%s' % kType, w,    fmt='%.2f', delimiter=',') 
 
     pass
 
@@ -92,14 +92,16 @@ def f_dot(k1,k2):
 
 
 if __name__ == '__main__':
-  #kFilenameList = ['../Data/tcdb.TB.K','../Data/tcdb.TICoils.K','../Data/tcdb.TIGene3D.K','../Data/tcdb.TIHamap.K','../Data/tcdb.TIPANTHER.K','../Data/tcdb.TIPfam.K','../Data/tcdb.TIPhobius.K','../Data/tcdb.TIPIRSF.K','../Data/tcdb.TIPRINTS.K','../Data/tcdb.TIProDom.K','../Data/tcdb.TIProSitePatterns.K','../Data/tcdb.TIProSiteProfiles.K','../Data/tcdb.TISignalP_EUK.K','../Data/tcdb.TISignalP_GRAM_NEGATIVE.K','../Data/tcdb.TISignalP_GRAM_POSITIVE.K','../Data/tcdb.TISMART.K','../Data/tcdb.TISUPERFAMILY.K','../Data/tcdb.TITIGRFAM.K','../Data/tcdb.TITMHMM.K']
-  #yFilename = '../Data/tcdb.TC.K'
 
-  kFilenameList = ['../Data/tcdb.TB.k','../Data/tcdb.TICoils.k','../Data/tcdb.TIGene3D.k','../Data/tcdb.TIHamap.k','../Data/tcdb.TIPANTHER.k','../Data/tcdb.TIPfam.k','../Data/tcdb.TIPhobius.k','../Data/tcdb.TIPIRSF.k','../Data/tcdb.TIPRINTS.k','../Data/tcdb.TIProDom.k','../Data/tcdb.TIProSitePatterns.k','../Data/tcdb.TIProSiteProfiles.k','../Data/tcdb.TISignalP_EUK.k','../Data/tcdb.TISignalP_GRAM_NEGATIVE.k','../Data/tcdb.TISignalP_GRAM_POSITIVE.k','../Data/tcdb.TISMART.k','../Data/tcdb.TISUPERFAMILY.k','../Data/tcdb.TITIGRFAM.k','../Data/tcdb.TITMHMM.k']
-  yFilename = '../Data/tcdb.TC.k'
+  kFilenameList = ['../Data/tcdb.TB.K',  '../Data/tcdb.TICoils.K',  '../Data/tcdb.TIGene3D.K',  '../Data/tcdb.TIHamap.K',  '../Data/tcdb.TIPANTHER.K',  '../Data/tcdb.TIPfam.K',  '../Data/tcdb.TIPhobius.K',  '../Data/tcdb.TIPIRSF.K',  '../Data/tcdb.TIPRINTS.K',  '../Data/tcdb.TIProDom.K',  '../Data/tcdb.TIProSitePatterns.K',  '../Data/tcdb.TIProSiteProfiles.K',  '../Data/tcdb.TISignalP_EUK.K',  '../Data/tcdb.TISignalP_GRAM_NEGATIVE.K',  '../Data/tcdb.TISignalP_GRAM_POSITIVE.K',  '../Data/tcdb.TISMART.K',  '../Data/tcdb.TISUPERFAMILY.K',  '../Data/tcdb.TITIGRFAM.K',  '../Data/tcdb.TITMHMM.K',  '../Data/tcdb.TPSI.K',  '../Data/tcdb.TRPSCDD.K',  '../Data/tcdb.TRPSCDDNCBI.K',  '../Data/tcdb.TRPSCOG.K',  '../Data/tcdb.TRPSKOG.K',  '../Data/tcdb.TRPSPFAM.K',  '../Data/tcdb.TRPSPRK.K',  '../Data/tcdb.TRPSSMART.K',  '../Data/tcdb.TRPSTCDB201509PSSM.K',  '../Data/tcdb.TRPSTIGR.K']
 
-  mkl(kFilenameList,yFilename,sys.argv[1])
+  yFilename = '../Data/tcdb.TC.K'
 
-  #mkl(kFilenameList,yFilename,'ALIGN')
-  #mkl(kFilenameList,yFilename,'ALIGNF')
-  #mkl(kFilenameList,yFilename,'UNIMKL')
+  #mkl(kFilenameList,yFilename,sys.argv[1])
+
+  mkl(kFilenameList,yFilename,'ALIGN')
+  mkl(kFilenameList,yFilename,'ALIGNF')
+  mkl(kFilenameList,yFilename,'UNIMKL')
+
+
+
