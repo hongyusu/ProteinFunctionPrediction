@@ -11,6 +11,11 @@
 # In case that job is not completed by the worker, it will be push back to the queue, and will be processed later on.
 
 
+
+__author__ = 'Hongyu Su'
+__email__ = 'hongyu.su@me.com'
+__version__ = '1.0'
+
 import math             # enable math module for matrix etc.
 import re               # enable regular expression
 import Queue            
@@ -33,13 +38,18 @@ job_queue = Queue.PriorityQueue()
 # Worker class
 # job is a tuple of parameters
 class Worker(Thread):
+  '''
+  worker class implemented with Python thread and queue class to enable each worker (a computing node) executes jobs independently
+  '''
   def __init__(self, job_queue, node):
+    '''initialization function for workers'''
     Thread.__init__(self)
     self.job_queue  = job_queue
     self.node = node
     self.penalty = 0 # penalty parameter which prevents computing node with low computational resources getting job_queue from job queue
     pass # def
   def run(self):
+    '''take job from job queue and execute the job'''
     all_done = 0
     while not all_done:
       try:
@@ -61,12 +71,16 @@ global_rundir = ''
 
 # function to check if the result file already exist in the destination folder
 def checkfile(filename):
+  ''' function to check if the file already exist '''
   if os.path.exists(filename):
     if os.path.getsize(filename) > 0: return 1
     else: return 0
   else: return 0
 
 def singleJob(node, job):
+  '''
+  single computing job that will be deployed on a computing node of the cluster
+  '''
   (priority, job_detail) = job
   (paramInd,xFilename,yFilename,labelIndex,foldIndex,svmC,outputFilename,isTest) = job_detail
   try:
@@ -75,7 +89,7 @@ def singleJob(node, job):
       fail_penalty = 0
     else:
       logging.info('\t--> (priority) %d (node)%s (filename) %s' %(priority, node, outputFilename))
-      os.system(""" ssh -o StrictHostKeyChecking=no %s 'cd /cs/work/group/urenzyme/workspace/ProteinFunctionPrediction/Experiments/Bins/; nohup matlab -nodisplay -nosplash -r "single_SVM '%s' '%s' '%s' '%s' '%s' '%s' '%s'" > /var/tmp/tmpsu'  """ % (node,xFilename,yFilename,labelIndex,foldIndex,svmC,outputFilename,isTest) )
+      os.system(""" ssh -o StrictHostKeyChecking=no %s 'cd /cs/work/group/urenzyme/workspace/ProteinFunctionPrediction/Experiments/BinsSVM/; nohup matlab -nodisplay -nosplash -r "single_SVM '%s' '%s' '%s' '%s' '%s' '%s' '%s'" > /var/tmp/tmpsu'  """ % (node,xFilename,yFilename,labelIndex,foldIndex,svmC,outputFilename,isTest) )
       logging.info('\t--| (priority) %d (node)%s (filename) %s' %(priority, node, outputFilename))
       fail_penalty = -1
       time.sleep(1)
@@ -93,6 +107,9 @@ def singleJob(node, job):
   pass
 
 def run():
+  '''
+  a wrapper function to generate cluster node with good perforamnce, to define a job space, and to launch jobs on computing node of the cluster
+  '''
   logging.info('\t\tGenerating priority queue.')
   paramInd = 0
   kFold    = 5 
@@ -100,7 +117,8 @@ def run():
   suffix   = 'val'
   isTest   = '0'
   # iterate over the lists
-  xFilenameList         = ['../Data/tcdb.TB','../Data/tcdb.TICoils','../Data/tcdb.TIGene3D','../Data/tcdb.TIHamap','../Data/tcdb.TIPANTHER','../Data/tcdb.TIPfam','../Data/tcdb.TIPhobius','../Data/tcdb.TIPIRSF','../Data/tcdb.TIRINTS','../Data/tcdb.TIProDom','../Data/tcdb.TIProSitePatterns','../Data/tcdb.TIProSiteProfiles','../Data/tcdb.TISignalP_EUK','../Data/tcdb.TISignalP_GRAM_NEGATIVE','../Data/tcdb.TISignalP_GRAM_POSITIVE','../Data/tcdb.TISMART','../Data/tcdb.TISUPERFAMILY','../Data/tcdb.TITIGRFAM','../Data/tcdb.TITMHMM']
+  xFilenameList         = ['../Data/tcdb.TB',  '../Data/tcdb.TICoils',  '../Data/tcdb.TIGene3D',  '../Data/tcdb.TIHamap',  '../Data/tcdb.TIPANTHER',  '../Data/tcdb.TIPfam',  '../Data/tcdb.TIPhobius',  '../Data/tcdb.TIPIRSF',  '../Data/tcdb.TIPRINTS',  '../Data/tcdb.TIProDom',  '../Data/tcdb.TIProSitePatterns',  '../Data/tcdb.TIProSiteProfiles',  '../Data/tcdb.TISignalP_EUK',  '../Data/tcdb.TISignalP_GRAM_NEGATIVE',  '../Data/tcdb.TISignalP_GRAM_POSITIVE',  '../Data/tcdb.TISMART',  '../Data/tcdb.TISUPERFAMILY',  '../Data/tcdb.TITIGRFAM',  '../Data/tcdb.TITMHMM',  '../Data/tcdb.TPSI',  '../Data/tcdb.TRPSCDD',  '../Data/tcdb.TRPSCDDNCBI',  '../Data/tcdb.TRPSCOG',  '../Data/tcdb.TRPSKOG',  '../Data/tcdb.TRPSPFAM',  '../Data/tcdb.TRPSPRK',  '../Data/tcdb.TRPSSMART',  '../Data/tcdb.TRPSTCDB201509PSSM',  '../Data/tcdb.TRPSTIGR']
+  #xFilenameList         = ['../Data/tcdb.TICoils']
   yFilenameList         = ['../Data/tcdb.TC']
   labelIndexList        = xrange(1,numLabel+1)
   foldIndexList         = xrange(1,kFold+1) 
@@ -110,7 +128,7 @@ def run():
       words = line.strip().split(' ')
       if words[0] == xFilename and words[1] == yFilename:
         svmC = words[2]
-    tmpDir   = '../Results/%s_%s/' % ( re.sub('.*/','',xFilename), re.sub('.*/','',yFilename))
+    tmpDir   = '../ResultsSVM/%s_%s/' % ( re.sub('.*/','',xFilename), re.sub('.*/','',yFilename))
     if not os.path.exists(tmpDir): os.mkdir(tmpDir)
     paramInd += 1
     outputFilename = tmpDir + '/' + re.sub('.*/','',xFilename) + '_' + re.sub('.*/','',yFilename) + '_l' + str(labelIndex) + '_f' + str(foldIndex) + '_c' +svmC + '_t' + isTest + '_' + suffix 
@@ -150,6 +168,9 @@ def run():
 
 # it is not really necessary to have '__name__' space here, but what ever ...
 if __name__ == "__main__":
+  '''
+  the definition of __name__ is to wrap up some computation so that they would be executed when the function is loaded as a module
+  '''
   run()
   pass
 
