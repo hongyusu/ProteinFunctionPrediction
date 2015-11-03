@@ -25,3 +25,5 @@
 ../Data/tcdb.TRPSPFAM ../Data/tcdb.TC 10
 ../Data/tcdb.TRPSPRK ../Data/tcdb.TC 100
 ../Data/tcdb.TRPSSMART ../Data/tcdb.TC 0.1
+../Data/tcdb.TRPSTCDB201509PSSM ../Data/tcdb.TC 100
+../Data/tcdb.TRPSTIGR ../Data/tcdb.TC 10
