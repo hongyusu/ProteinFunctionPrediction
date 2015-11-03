@@ -99,9 +99,9 @@ if __name__ == '__main__':
 
   #mkl(kFilenameList,yFilename,sys.argv[1])
 
-  mkl(kFilenameList,yFilename,'ALIGN')
+  #mkl(kFilenameList,yFilename,'UNIMKL')
+  #mkl(kFilenameList,yFilename,'ALIGN')
   mkl(kFilenameList,yFilename,'ALIGNF')
-  mkl(kFilenameList,yFilename,'UNIMKL')
 
 
 
