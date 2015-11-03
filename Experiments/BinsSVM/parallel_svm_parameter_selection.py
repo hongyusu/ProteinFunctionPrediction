@@ -103,6 +103,7 @@ def run():
   isTest   = '1'
   # iterate over the lists
   xFilenameList         = ['../Data/tcdb.TB',  '../Data/tcdb.TICoils',  '../Data/tcdb.TIGene3D',  '../Data/tcdb.TIHamap',  '../Data/tcdb.TIPANTHER',  '../Data/tcdb.TIPfam',  '../Data/tcdb.TIPhobius',  '../Data/tcdb.TIPIRSF',  '../Data/tcdb.TIPRINTS',  '../Data/tcdb.TIProDom',  '../Data/tcdb.TIProSitePatterns',  '../Data/tcdb.TIProSiteProfiles',  '../Data/tcdb.TISignalP_EUK',  '../Data/tcdb.TISignalP_GRAM_NEGATIVE',  '../Data/tcdb.TISignalP_GRAM_POSITIVE',  '../Data/tcdb.TISMART',  '../Data/tcdb.TISUPERFAMILY',  '../Data/tcdb.TITIGRFAM',  '../Data/tcdb.TITMHMM',  '../Data/tcdb.TPSI',  '../Data/tcdb.TRPSCDD',  '../Data/tcdb.TRPSCDDNCBI',  '../Data/tcdb.TRPSCOG',  '../Data/tcdb.TRPSKOG',  '../Data/tcdb.TRPSPFAM',  '../Data/tcdb.TRPSPRK',  '../Data/tcdb.TRPSSMART',  '../Data/tcdb.TRPSTCDB201509PSSM',  '../Data/tcdb.TRPSTIGR']
+  xFilenameList = xFilenameList[25:]
   #xFilenameList         = ['../Data/tcdb.TB']
   yFilenameList         = ['../Data/tcdb.TC']
   labelIndexList        = xrange(1,numLabel+1)
@@ -130,7 +131,7 @@ def run():
   is_main_run_factor=1
   # running job_queue
   threads = []
-  workerload = 2 
+  workerload = 3 
   for i in range(len(cluster)):
     for j in range(workerload):
       if job_queue.empty(): break
