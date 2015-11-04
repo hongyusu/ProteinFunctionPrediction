@@ -13,11 +13,10 @@
 % outputFilename:       tmp directory for results
 % isTest:               select a small port of data for sanity check if isTest=True  
 %%========
-
 function single_kernelSVM(xFilename,yFilename,labelIndex,foldIndex,svmC,outputFilename,isTest)
 
   % some global parameter
-  smallN = 5000;
+  smallN = 3000;
 
   % random number generator
   rand('twister',0)
@@ -29,7 +28,7 @@ function single_kernelSVM(xFilename,yFilename,labelIndex,foldIndex,svmC,outputFi
   isTest     = eval(isTest);
 
   % add svm matlab path
-  addpath '~/softwares/libsvm-3.12/matlab/'
+  addpath '../libsvm-3.12/matlab/'
 
   % read in input and output files
   if xFilename(18) == 'G'
