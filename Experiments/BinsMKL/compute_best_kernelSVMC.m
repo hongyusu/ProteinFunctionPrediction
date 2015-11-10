@@ -2,14 +2,19 @@
 
 
 
+function compute_best_svmC()
+  compute_best_svmC_single('../Data/tcdb.all.KUNIMKL','../Data/tcdb.TC')
+  compute_best_svmC_single('../Data/tcdb.all.KALIGN','../Data/tcdb.TC')
+  compute_best_svmC_single('../Data/tcdb.all.KALIGNF','../Data/tcdb.TC')
+end
 
-function compute_best_svmC(xFilename,yFilename)
+function compute_best_svmC_single(xFilename,yFilename)
 
   Y = dlmread(sprintf(yFilename),' ');
   Y = Y(2:size(Y,1),2:size(Y,2));
   Ysum = sum(Y,1);
   Y = Y(:,Ysum>2);
-  Y = Y(:,1:100)
+  Y = Y(:,1:100);
 
   isTest = '1';
   suffix = 'sel';

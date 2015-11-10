@@ -76,7 +76,7 @@ def singleJob(node, job):
       fail_penalty = 0
     else:
       logging.info('\t--> (priority) %d (node)%s (filename) %s' %(priority, node, outputFilename))
-      os.system(""" ssh -o StrictHostKeyChecking=no %s 'cd /cs/work/group/urenzyme/workspace/ProteinFunctionPrediction/Experiments/BinsMKL/; nohup matlab -nodisplay -nosplash -r "single_kernelSVM '%s' '%s' '%s' '%s' '%s' '%s' '%s'" > /var/tmp/tmp'  """ % (node,xFilename,yFilename,labelIndex,foldIndex,svmC,outputFilename,isTest) )
+      os.system(""" ssh -o StrictHostKeyChecking=no %s 'cd /cs/work/group/urenzyme/workspace/ProteinFunctionPrediction/Experiments/BinsMKL/; nohup matlab -nodisplay -nosplash -r "single_kernelSVM '%s' '%s' '%s' '%s' '%s' '%s' '%s'" > /var/tmp/tmpsu'  """ % (node,xFilename,yFilename,labelIndex,foldIndex,svmC,outputFilename,isTest) )
       logging.info('\t--| (priority) %d (node)%s (filename) %s' %(priority, node, outputFilename))
       fail_penalty = -1
       time.sleep(1)
@@ -101,7 +101,7 @@ def run():
   suffix   = 'val'
   isTest   = '0'
   # iterate over the lists
-  xFilenameList         = ['../Data/tcdb.all.GUNIMKL','../Data/tcdb.all.GALIGN','../Data/tcdb.all.GALIGNF']
+  xFilenameList         = ['../Data/tcdb.all.KUNIMKL','../Data/tcdb.all.KALIGN','../Data/tcdb.all.KALIGNF']
   yFilenameList         = ['../Data/tcdb.TC']
   labelIndexList        = xrange(1,numLabel+1)
   foldIndexList         = xrange(1,kFold+1) 
@@ -131,7 +131,7 @@ def run():
   is_main_run_factor=1
   # running job_queue
   threads = []
-  workerload = 2 
+  workerload = 3 
   for i in range(len(cluster)):
     for j in range(workerload):
       if job_queue.empty(): break
