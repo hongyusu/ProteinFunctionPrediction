@@ -3,7 +3,8 @@
 
 
 
-%%=========
+function single_SVM(xFilename,yFilename,labelIndex,foldIndex,svmC,outputFilename,isTest)
+%-------------------------------------------------------------------------------------
 % 
 % xFilename:            input feature
 % yFilename:            output multiple label, label is either 0 or 1
@@ -12,8 +13,8 @@
 % svmC:                 svm slack parameter
 % outputFilename:       tmp directory for results
 % isTest:               select a small port of data for sanity check if isTest=True  
-%%========
-function single_SVM(xFilename,yFilename,labelIndex,foldIndex,svmC,outputFilename,isTest)
+%
+%-------------------------------------------------------------------------------------
 
   % some global parameter
   smallN = 3000;
