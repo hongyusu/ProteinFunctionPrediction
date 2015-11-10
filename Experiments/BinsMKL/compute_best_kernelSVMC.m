@@ -9,6 +9,7 @@ function compute_best_svmC(xFilename,yFilename)
   Y = Y(2:size(Y,1),2:size(Y,2));
   Ysum = sum(Y,1);
   Y = Y(:,Ysum>2);
+  Y = Y(:,1:100)
 
   isTest = '1';
   suffix = 'sel';

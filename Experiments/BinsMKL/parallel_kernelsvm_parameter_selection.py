@@ -98,9 +98,10 @@ def run():
   logging.info('\t\tGenerating priority queue.')
   paramInd = 0
   kFold    = 5 
-  numLabel = 3200  
   suffix   = 'sel'
   isTest   = '1'
+  if isTest == '1': numLabel = 100  
+  else: numLabel = 3200
   # iterate over the lists
   xFilenameList         = ['../Data/tcdb.all.KUNIMKL','../Data/tcdb.all.KALIGN','../Data/tcdb.all.KALIGNF']
   yFilenameList         = ['../Data/tcdb.TC']
@@ -129,7 +130,7 @@ def run():
   is_main_run_factor=1
   # running job_queue
   threads = []
-  workerload = 2 
+  workerload = 3 
   for i in range(len(cluster)):
     for j in range(workerload):
       if job_queue.empty(): break

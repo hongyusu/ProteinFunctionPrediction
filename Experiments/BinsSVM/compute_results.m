@@ -23,13 +23,13 @@ function compute_results_single_dataset(xFilename,yFilename,svmC)
   isTest = '0';
   suffix = 'val';
   res = zeros(1,5);
-  [auc,accuracy,f1,precision,recall] = compute_performance(xFilename,yFilename,svmC,isTest,suffix,Y);
-  res = [auc,accuracy,f1,precision,recall];
+  [auc,accuracy,f1,precision,recall,multiacc] = compute_performance(xFilename,yFilename,svmC,isTest,suffix,Y);
+  res = [auc,accuracy,f1,precision,recall,multiacc];
   res
 
   
-  fileID = fopen('../Results/results','a');
-  fprintf(fileID, '%s %s %.4f %.4f %.4f %.4f %.4f\n',xFilename,yFilename,res(1),res(2),res(3),res(4),res(5));
+  fileID = fopen('../ResultsSVM/results','a');
+  fprintf(fileID, '%s %s %.4f %.4f %.4f %.4f %.4f %.4f\n',xFilename,yFilename,res(1),res(2),res(3),res(4),res(5),res(6));
   fclose(fileID);
 
 end
@@ -42,9 +42,9 @@ end
 % svmC:                 svm slack parameter
 % isTest:               select a small port of data for sanity check if isTest=True  
 %
-function [auc,accuracy,f1,precision,recall] = compute_performance(xFilename,yFilename,svmC,isTest,suffix,Y)
+function [auc,accuracy,f1,precision,recall,multiacc] = compute_performance(xFilename,yFilename,svmC,isTest,suffix,Y)
 
-  allOutputFilename = sprintf('../Results/%s_%s_c%s_t%s_%s',...
+  allOutputFilename = sprintf('../ResultsSVM/%s_%s_c%s_t%s_%s',...
       regexprep(xFilename,'.*/',''),...
       regexprep(yFilename,'.*/',''),...
       svmC,isTest,suffix);
@@ -56,7 +56,7 @@ function [auc,accuracy,f1,precision,recall] = compute_performance(xFilename,yFil
     for labelIndex = 1:size(Y,2)
       for foldIndex = 1:5
         % processing
-        outputFilename = sprintf('../Results/%s_%s/%s_%s_l%d_f%d_c%s_t%s_%s',...
+        outputFilename = sprintf('../ResultsSVM/%s_%s/%s_%s_l%d_f%d_c%s_t%s_%s',...
         regexprep(xFilename,'.*/',''),...
         regexprep(yFilename,'.*/',''),...
         regexprep(xFilename,'.*/',''),...
@@ -74,7 +74,7 @@ function [auc,accuracy,f1,precision,recall] = compute_performance(xFilename,yFil
 
   [Xs,Ys,T,auc] = perfcurve(reshape(Y,size(Y,1)*size(Y,2),1),reshape(Ypred,size(Y,1)*size(Y,2),1),1);
 
-  dlmwrite(sprintf('../Results/perf_%s_%s',regexprep(xFilename,'.*/',''),regexprep(yFilename,'.*/','')),[Xs,Ys]);
+  dlmwrite(sprintf('../ResultsSVM/perf_%s_%s',regexprep(xFilename,'.*/',''),regexprep(yFilename,'.*/','')),[Xs,Ys]);
 
   Ypred = Ypred>0.5;
   tp = sum(sum((Y+Ypred)==2));
@@ -84,8 +84,9 @@ function [auc,accuracy,f1,precision,recall] = compute_performance(xFilename,yFil
 
   recall    = tp / (tp + fn);
   precision = tp / (tp + fp); 
-  f1 = 2*precision*recall / (precision+recall);
-  accuracy = 1-sum(sum(xor(Y,Ypred)))/size(Y,1)/size(Y,2);
+  f1        = 2*precision*recall / (precision+recall);
+  accuracy  = 1-sum(sum(xor(Y,Ypred)))/size(Y,1)/size(Y,2);
+  multiacc  = sum(sum(Y~=Ypred,2)==0) / size(Y,1) 
 
   
   
