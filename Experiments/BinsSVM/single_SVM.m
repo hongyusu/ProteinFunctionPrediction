@@ -74,7 +74,11 @@ function single_SVM(xFilename,yFilename,labelIndex,foldIndex,svmC,outputFilename
     Yprobsvm = Yts*1+YtrUnique(1)
   else
     % training
-    model = svmtrain(Ytr,Xtr,sprintf('-q -s 0 -c %.2f -t 1 -b 1',svmC));
+    if nargin == 6
+      model = svmtrain(Ytr,Xtr,sprintf('-q -s 0 -c %.2f -t 1 -b 1',svmC));
+    else
+      model = svmtrain(Ytr,Xtr,sprintf('-q -s 0 -c %.2f -t 2 -b 1 -g %s',svmC,svmG));
+    end
     % prediction
     [~,~,Yprobsvm] = svmpredict(Yts,Xts, model ,'-b 1');
     Yprobsvm = clear_prob(Ytr,Yprobsvm);
