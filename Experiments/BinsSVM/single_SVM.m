@@ -3,7 +3,7 @@
 
 
 
-function single_SVM(xFilename,yFilename,labelIndex,foldIndex,svmC,outputFilename,isTest)
+function single_SVM(xFilename,yFilename,labelIndex,foldIndex,svmC,outputFilename,isTest,svmG)
 %-------------------------------------------------------------------------------------
 % 
 % xFilename:            input feature
@@ -74,7 +74,7 @@ function single_SVM(xFilename,yFilename,labelIndex,foldIndex,svmC,outputFilename
     Yprobsvm = Yts*1+YtrUnique(1)
   else
     % training
-    if nargin == 6
+    if nargin == 7
       model = svmtrain(Ytr,Xtr,sprintf('-q -s 0 -c %.2f -t 1 -b 1',svmC));
     else
       model = svmtrain(Ytr,Xtr,sprintf('-q -s 0 -c %.2f -t 2 -b 1 -g %s',svmC,svmG));

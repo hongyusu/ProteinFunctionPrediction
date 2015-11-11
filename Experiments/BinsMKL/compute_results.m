@@ -2,7 +2,7 @@
 function compute_results()
 
   [xFilenameList,yFilenameList,svmCList] = textread('parameter_setting','%s %s %s');
-  for i=7:size(xFilenameList,1)
+  for i=1:size(xFilenameList,1)
     %i=6
     tStart = tic;
     compute_results_single_dataset(xFilenameList{i},yFilenameList{i},svmCList{i});
