@@ -12,6 +12,10 @@
 # ======================================================
 
 
+__author__ = 'Hongyu Su'
+__email__ = 'hongyu.su@me.com'
+__version__ = '1.0'
+
 import math             # enable math module for matrix etc.
 import re               # enable regular expression
 import Queue            
@@ -34,13 +38,18 @@ job_queue = Queue.PriorityQueue()
 # Worker class
 # job is a tuple of parameters
 class Worker(Thread):
+  '''
+  worker class implemented with Python thread and queue class to enable each worker (a computing node) executes jobs independently
+  '''
   def __init__(self, job_queue, node):
+    '''initialization function for workers'''
     Thread.__init__(self)
     self.job_queue  = job_queue
     self.node = node
     self.penalty = 0 # penalty parameter which prevents computing node with low computational resources getting job_queue from job queue
     pass # def
   def run(self):
+    '''take job from job queue and execute the job'''
     all_done = 0
     while not all_done:
       try:
@@ -62,6 +71,7 @@ global_rundir = ''
 
 # function to check if the result file already exist in the destination folder
 def checkfile(filename):
+  ''' function to check if the file already exist '''
   if os.path.exists(filename):
     if os.path.getsize(filename) > 0: return 1
     else: return 0
@@ -69,6 +79,9 @@ def checkfile(filename):
 
 
 def singleJob(node, job):
+  '''
+  single computing job that will be deployed on a computing node of the cluster
+  '''
   (priority, job_detail) = job
   (paramInd,xFilename,yFilename,EFilename,SFilename,foldIndex,sopC,outputFilename,logFilename,stepSize1,stepSize2,isTest,suffix) = job_detail
   try:
@@ -78,7 +91,6 @@ def singleJob(node, job):
     else:
       logging.info('\t--> (priority) %d (node)%s (filename) %s' %(priority, node, outputFilename))
       os.system(""" ssh -o StrictHostKeyChecking=no %s 'cd /cs/work/group/urenzyme/workspace/ProteinFunctionPrediction/Experiments/BinsSOP/; nohup matlab -nodisplay -nosplash -r "single_SOP '%s' '%s' '%s' '%s' '%s' '%s' '%s' '%s' '%s' '%s' '%s'" > /var/tmp/tmpsu'  """ % (node,xFilename,yFilename,EFilename,SFilename,foldIndex,sopC,outputFilename,logFilename,stepSize1,stepSize2,isTest) )
-      #print(""" ssh -o StrictHostKeyChecking=no %s 'cd /cs/work/group/urenzyme/workspace/ProteinFunctionPrediction/Experiments/BinsSOP/; nohup matlab -nodisplay -nosplash -r "single_SOP '%s' '%s' '%s' '%s' '%s' '%s' '%s' '%s' '%s' '%s' '%s'" > /var/tmp/tmp'  """ % (node,xFilename,yFilename,EFilename,SFilename,foldIndex,sopC,outputFilename,logFilename,stepSize1,stepSize2,isTest) )
       logging.info('\t--| (priority) %d (node)%s (filename) %s' %(priority, node, outputFilename))
       fail_penalty = -1
       time.sleep(1)
@@ -96,6 +108,9 @@ def singleJob(node, job):
   pass
 
 def run():
+  '''
+  a wrapper function to generate cluster node with good perforamnce, to define a job space, and to launch jobs on computing node of the cluster
+  '''
   logging.info('\t\tGenerating priority queue.')
   paramInd = 0
   kFold    = 5 
@@ -157,6 +172,9 @@ def run():
 
 # it is not really necessary to have '__name__' space here, but what ever ...
 if __name__ == "__main__":
+  '''
+  the definition of __name__ is to wrap up some computation so that they would be executed when the function is loaded as a module
+  '''
   run()
   pass
 
