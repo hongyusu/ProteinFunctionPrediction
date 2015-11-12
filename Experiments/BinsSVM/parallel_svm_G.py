@@ -53,7 +53,7 @@ class Worker(Thread):
     all_done = 0
     while not all_done:
       try:
-        time.sleep(random.randint(5000,6000) / 1000.0)  # get some rest :-)
+        time.sleep(random.randint(5000,10000) / 1000.0)  # get some rest :-)
         time.sleep(self.penalty*120) # bad worker will rest more
         job = self.job_queue.get(0)
         add_penalty = singleJob(self.node, job)
@@ -132,7 +132,7 @@ def run():
       words = line.strip().split(' ')
       if words[0] == xFilename and words[1] == yFilename:
         svmG = words[2]
-    tmpDir   = '../ResultsSVM/%s_%s/' % ( re.sub('.*/','',xFilename), re.sub('.*/','',yFilename))
+    tmpDir   = '../ResultsSVM/%s_%s_G/' % ( re.sub('.*/','',xFilename), re.sub('.*/','',yFilename))
     if not os.path.exists(tmpDir): os.mkdir(tmpDir)
     paramInd += 1
     outputFilename = tmpDir + '/' + re.sub('.*/','',xFilename) + '_' + re.sub('.*/','',yFilename) + '_l' + str(labelIndex) + '_f' + str(foldIndex) + '_c' +svmC + '_g' + svmG + '_t' + isTest + '_' + suffix 
@@ -152,7 +152,7 @@ def run():
   is_main_run_factor=1
   # running job_queue
   threads = []
-  workerload = 3 
+  workerload = 2 
   for i in range(len(cluster)):
     for j in range(workerload):
       if job_queue.empty(): break

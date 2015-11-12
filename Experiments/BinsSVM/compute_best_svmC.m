@@ -69,7 +69,7 @@ function compute(xFilename,yFilename)
   [~,I] = sortrows(res,[-1,-2]);
   bestSVMC = svmCList{I(1)};
   
-  fileID = fopen('./parameter_setting','a');
+  fileID = fopen('./parameter_setting_C','a');
   fprintf(fileID, '%s %s %s\n',xFilename,yFilename,bestSVMC);
   fclose(fileID);
 
