@@ -663,7 +663,7 @@ In stead of predicting the transporter classification (TC) with single feature m
    |Gaussian |ALIGN  | NaN | 0.9996 | 0.8550 | 0.8550 | 0.8550 | 0.7191
    |Gaussian |ALIGNF | NaN | 0.9996 | 0.8463 | 0.8463 | 0.8463 | 0.6839
 
-   | MMR | Kernel | AUC | Microlabel Accuracy | F1 | Precision | Recall | Multilabel Accuracy | 
+   | MKL | Kernel | AUC | Microlabel Accuracy | F1 | Precision | Recall | Multilabel Accuracy | 
    |:--:|:--:|--:|:--:|:--:|:--:|:--:|:---:|
    |Linear | KUNIMKL | 0.9942 | 0.9995 | 0.8485 | 0.9344 | 0.7770 | 0.5327
    |Linear | KALIGN  | 0.9946 | 0.9995 | 0.8621 | 0.9377 | 0.7978 | 0.5484
