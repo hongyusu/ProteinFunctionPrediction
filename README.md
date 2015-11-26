@@ -691,7 +691,7 @@ In stead of predicting the transporter classification (TC) with single feature m
    |Gaussian       |ALIGN | NA | NA | 0.8296 | 0.8296 | 0.8296 | 0.6828 
    |Gaussian       |ALIGNF| NA | NA | 0.8537 | 0.8537 | 0.8537 | 0.7272 
 
-   |Kernel function| Input feature | AUC | Accuracy | F1 | Precision | Recall | Multilabel Accuracy |
+   |MKL| Input feature | AUC | Accuracy | F1 | Precision | Recall | Multilabel Accuracy |
    |:--:           |:--:|:--:|--:|:--:|:--:|:--:|:--:|:--:|
    |Linear         |UNIMKL| 0.9851 | 0.9989 | 0.6826 | 0.8364 | 0.5766 | 0.2380 
    |Linear         |ALIGN | 0.9889 | 0.9991 | 0.7463 | 0.8662 | 0.6555 | 0.3179
