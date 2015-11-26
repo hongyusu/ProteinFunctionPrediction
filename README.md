@@ -647,7 +647,7 @@ In stead of predicting the transporter classification (TC) with single feature m
 
 
    | MMCRF | Kernel | AUC | Microlabel Accuracy | F1 | Precision | Recall | Multilabel Accuracy | 
-   |:--:|--:|:--:|:--:|:--:|:--:|:---:|
+   |:--:|:--:|--:|:--:|:--:|:--:|:--:|:---:|
    |Linear | UNIMKL | NaN | 0.9995 | 0.7957 | 0.7957 | 0.7957 | 0.6176
    |Linear | ALIGN  | NaN | 0.9995 | 0.8174 | 0.8174 | 0.8174 | 0.6334
    |Linear | ALIGNF | NaN | 0.9996 | 0.8240 | 0.8240 | 0.8240 | 0.6426
