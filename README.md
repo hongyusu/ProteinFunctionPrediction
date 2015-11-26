@@ -672,8 +672,6 @@ In stead of predicting the transporter classification (TC) with single feature m
 
 
 
-# Old
-
    |MMCRF| Input feature | AUC | Microlabel Accuracy | F1 | Precision | Recall | Multilabel Accuracy | 
    |:--:           |:--:|:--:|--:|:--:|:--:|:--:|:--:|:---:|
    |Linear         |UNIMKL| NA | 0.9993 | 0.7173 | 0.7173 | 0.7173 | 0.5513 
