@@ -37,8 +37,8 @@ function single_SOP(xFilename,yFilename,EFilename,SFilename,foldIndex,sopC,outpu
 
   % read in input and output files
   E = dlmread(EFilename,',');
-  if xFilename(18) == 'G'
-    load(sprintf('%s.mat',xFilename));
+  if xFilename(1:18) == '../Data/tcdb.all.G'
+    load(sprintf('%s',xFilename),'-mat');
     K=xkernel;
     clearvars xkernel;
   else
@@ -75,6 +75,7 @@ function single_SOP(xFilename,yFilename,EFilename,SFilename,foldIndex,sopC,outpu
   Ytr = Y(Ind~=foldIndex,:); Ytr(Ytr==0)=-1;
   Kts = K(Ind==foldIndex,Ind~=foldIndex);
   Yts = Y(Ind==foldIndex,:); Yts(Yts==0)=-1;
+  S = unique(Yts,'rows');
   S(S==0) = -1;
   
   % set parameter

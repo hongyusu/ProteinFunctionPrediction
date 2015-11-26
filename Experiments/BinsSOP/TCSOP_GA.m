@@ -1,6 +1,7 @@
 
 
 
+function TCSOP_GA (paramsIn, dataIn)
 %% ================================================================================================================ 
 %
 % Structured output prediction for predicting transporter protein classification
@@ -21,7 +22,6 @@
 %
 %% ================================================================================================================
 
-function TCSOP_GA (paramsIn, dataIn)
 
     % Set random seed to make different run comparable.
     rand('twister', 0);

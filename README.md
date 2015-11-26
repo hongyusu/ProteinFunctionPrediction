@@ -645,4 +645,39 @@ In stead of predicting the transporter classification (TC) with single feature m
    |TRPSTCDB201509PSSM | 12531 | 
    |TRPSTIGR | 1561 | 
 
+### MKL results
+
+1. Prediction performances of three multiple kernel learning approaches are listed in the following table in which all combined kernel are centered and * corresponds to additional operation on the combined kernel `normalization->centering`.
+
+   |Kernel function| Input feature | AUC | Accuracy | F1 | Precision | Recall | Multilabel Accuracy |
+   |:--:           |:--:|:--:|--:|:--:|:--:|:--:|:--:|:--:|
+   |Linear         |UNIMKL*| 0.9851 | 0.9989 | 0.6826 | 0.8364 | 0.5766 | 0.2380 
+   |Linear         |ALIGN* | 0.9889 | 0.9991 | 0.7463 | 0.8662 | 0.6555 | 0.3179
+   |Linear         |ALIGNF*| 0.9878 | 0.9993 | 0.7918 | 0.8885 | 0.7140 | 0.4016 
+
+1. In addition, we use Guassian kenrel on all three computed kernels, the corresponding prediction performance is shown in the following table. 
+
+   |Kernel function| Input feature | AUC | Accuracy | F1 | Precision | Recall | Multilabel Accuracy |
+   |:--:           |:--:|:--:|--:|:--:|:--:|:--:|:--:|:--:|
+   |Gaussian       |UNIMKL*| 0.8990 | 0.9984 | 0.3172 | 0.9786 | 0.1893 | 0.1248 
+   |Gaussian       |ALIGN* | 0.8976 | 0.9984 | 0.3077 | 0.9818 | 0.1825 | 0.1272
+   |Gaussian       |ALIGNF*| 0.8902 | 0.9983 | 0.2364 | 0.9834 | 0.1343 | 0.0972 
+
+
+
+## Structured output learning
+
+### SOP results
+
+
+   | MMCRF | AUC | Microlabel Accuracy | F1 | Precision | Recall | Multilabel Accuracy | 
+   |:--:|:--:|--:|:--:|:--:|:--:|:--:|:---:|
+   |KUNIMKL | NaN | 0.9995 | 0.7957 | 0.7957 | 0.7957 | 0.6176
+   |KALIGN  | NaN | 0.9995 | 0.8174 | 0.8174 | 0.8174 | 0.6334
+   |KALIGNF | NaN | 0.9996 | 0.8240 | 0.8240 | 0.8240 | 0.6426
+   |GUNIMKL | NaN | 0.9996 | 0.8369 | 0.8369 | 0.8369 | 0.6977
+   |GALIGN  | NaN | 0.9996 | 0.8615 | 0.8615 | 0.8615 | 0.7421
+
+
+
 
