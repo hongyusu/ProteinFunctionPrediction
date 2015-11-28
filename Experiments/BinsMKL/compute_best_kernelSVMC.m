@@ -6,6 +6,9 @@ function compute_best_svmC()
   compute_best_svmC_single('../Data/tcdb.all.KUNIMKL','../Data/tcdb.TC')
   compute_best_svmC_single('../Data/tcdb.all.KALIGN','../Data/tcdb.TC')
   compute_best_svmC_single('../Data/tcdb.all.KALIGNF','../Data/tcdb.TC')
+  compute_best_svmC_single('../Data/tcdb.all.GUNIMKL','../Data/tcdb.TC')
+  compute_best_svmC_single('../Data/tcdb.all.GALIGN','../Data/tcdb.TC')
+  compute_best_svmC_single('../Data/tcdb.all.GALIGNF','../Data/tcdb.TC')
 end
 
 function compute_best_svmC_single(xFilename,yFilename)

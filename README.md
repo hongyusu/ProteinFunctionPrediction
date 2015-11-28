@@ -648,20 +648,21 @@ In stead of predicting the transporter classification (TC) with single feature m
 
    | MMCRF | Kernel | AUC | Microlabel Accuracy | F1 | Precision | Recall | Multilabel Accuracy | 
    |:--:|:--:|--:|:--:|:--:|:--:|:--:|:---:|
-   |Linear | UNIMKL | NaN | 0.9995 | 0.7957 | 0.7957 | 0.7957 | 0.6176
-   |Linear | ALIGN  | NaN | 0.9995 | 0.8174 | 0.8174 | 0.8174 | 0.6334
-   |Linear | ALIGNF | NaN | 0.9996 | 0.8240 | 0.8240 | 0.8240 | 0.6426
-   |Gaussian |UNIMKL | NaN | 0.9996 | 0.8369 | 0.8369 | 0.8369 | 0.6977
-   |Gaussian |ALIGN  | NaN | 0.9996 | 0.8615 | 0.8615 | 0.8615 | 0.7421
+   |Linear | UNIMKL | NA | 0.9995 | 0.7957 | 0.7957 | 0.7957 | 0.6176
+   |Linear | ALIGN  | NA | 0.9995 | 0.8174 | 0.8174 | 0.8174 | 0.6334
+   |Linear | ALIGNF | NA | 0.9996 | 0.8240 | 0.8240 | 0.8240 | 0.6426
+   |Gaussian |UNIMKL | NA | 0.9996 | 0.8369 | 0.8369 | 0.8369 | 0.6977
+   |Gaussian |ALIGN  | NA | 0.9996 | 0.8615 | 0.8615 | 0.8615 | 0.7421
+   |Gaussian |ALIGNF | NA | 0.9996 | 0.8537 | 0.8537 | 0.8537 | 0.7118
 
    | MMR | Kernel | AUC | Microlabel Accuracy | F1 | Precision | Recall | Multilabel Accuracy | 
    |:--:|:--:|--:|:--:|:--:|:--:|:--:|:---:|
-   |Linear | UNIMKL  | NaN | 0.9995 | 0.4332 | 0.4332 | 0.4332 | 0.1198
-   |Linear | ALIGN   | NaN | 0.9995 | 0.4384 | 0.4384 | 0.4384 | 0.1241
-   |Linear | ALIGNF  | NaN | 0.9996 | 0.4955 | 0.4955 | 0.4955 | 0.1752
-   |Gaussian |UNIMKL | NaN | 0.9996 | 0.8354 | 0.8354 | 0.8354 | 0.6811
-   |Gaussian |ALIGN  | NaN | 0.9996 | 0.8550 | 0.8550 | 0.8550 | 0.7191
-   |Gaussian |ALIGNF | NaN | 0.9996 | 0.8463 | 0.8463 | 0.8463 | 0.6839
+   |Linear | UNIMKL  | NA | NA | 0.4332 | 0.4332 | 0.4332 | 0.1198
+   |Linear | ALIGN   | NA | NA | 0.4384 | 0.4384 | 0.4384 | 0.1241
+   |Linear | ALIGNF  | NA | NA | 0.4955 | 0.4955 | 0.4955 | 0.1752
+   |Gaussian |UNIMKL | NA | NA | 0.8354 | 0.8354 | 0.8354 | 0.6811
+   |Gaussian |ALIGN  | NA | NA | 0.8550 | 0.8550 | 0.8550 | 0.7191
+   |Gaussian |ALIGNF | NA | NA | 0.8463 | 0.8463 | 0.8463 | 0.6839
 
    | MKL | Kernel | AUC | Microlabel Accuracy | F1 | Precision | Recall | Multilabel Accuracy | 
    |:--:|:--:|--:|:--:|:--:|:--:|:--:|:---:|

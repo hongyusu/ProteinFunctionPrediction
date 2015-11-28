@@ -1,3 +1,6 @@
 ../Data/tcdb.all.KUNIMKL ../Data/tcdb.TC 1
 ../Data/tcdb.all.KALIGN ../Data/tcdb.TC 0.1
 ../Data/tcdb.all.KALIGNF ../Data/tcdb.TC 10
+../Data/tcdb.all.GUNIMKL ../Data/tcdb.TC 0.01
+../Data/tcdb.all.GALIGN ../Data/tcdb.TC 1
+../Data/tcdb.all.GALIGNF ../Data/tcdb.TC 0.1

@@ -2,7 +2,7 @@
 
 
 function compute_results()
-  xFilenameList         = {'tcdb.all.GUNIMKL','tcdb.all.GALIGN','tcdb.all.GALIGNF'};
+  xFilenameList         = {'tcdb.all.KUNIMKL','tcdb.all.KALIGN','tcdb.all.KALIGNF','tcdb.all.GUNIMKL','tcdb.all.GALIGN','tcdb.all.GALIGNF'};
   foldIndexList         = {'1','2','3','4','5'}; 
   cList                 = {'1000','5000','10000','50000'};
   stepSize1List         = {'7','9','11'};

@@ -103,8 +103,7 @@ def run():
   if isTest == '1': numLabel = 100  
   else: numLabel = 3200
   # iterate over the lists
-  xFilenameList         = ['../Data/tcdb.all.KUNIMKL','../Data/tcdb.all.KALIGN','../Data/tcdb.all.KALIGNF']
-  #'../Data/tcdb.TB.K',  '../Data/tcdb.TICoils.K',  '../Data/tcdb.TIGene3D.K',  '../Data/tcdb.TIHamap.K',  '../Data/tcdb.TIPANTHER.K',  '../Data/tcdb.TIPfam.K',  '../Data/tcdb.TIPhobius.K',  '../Data/tcdb.TIPIRSF.K',  '../Data/tcdb.TIPRINTS.K',  '../Data/tcdb.TIProDom.K',  '../Data/tcdb.TIProSitePatterns.K',  '../Data/tcdb.TIProSiteProfiles.K',  '../Data/tcdb.TISignalP_EUK.K',  '../Data/tcdb.TISignalP_GRAM_NEGATIVE.K',  '../Data/tcdb.TISignalP_GRAM_POSITIVE.K',  '../Data/tcdb.TISMART.K',  '../Data/tcdb.TISUPERFAMILY.K',  '../Data/tcdb.TITIGRFAM.K',  '../Data/tcdb.TITMHMM.K',  '../Data/tcdb.TPSI.K',  '../Data/tcdb.TRPSCDD.K',  '../Data/tcdb.TRPSCDDNCBI.K',  '../Data/tcdb.TRPSCOG.K',  '../Data/tcdb.TRPSKOG.K',  '../Data/tcdb.TRPSPFAM.K',  '../Data/tcdb.TRPSPRK.K',  '../Data/tcdb.TRPSSMART.K',  '../Data/tcdb.TRPSTCDB201509PSSM.K',  '../Data/tcdb.TRPSTIGR']
+  xFilenameList         = ['../Data/tcdb.all.KUNIMKL','../Data/tcdb.all.KALIGN','../Data/tcdb.all.KALIGNF','../Data/tcdb.all.GUNIMKL','../Data/tcdb.all.GALIGN','../Data/tcdb.all.GALIGNF']
   yFilenameList         = ['../Data/tcdb.TC']
   labelIndexList        = xrange(1,numLabel+1)
   foldIndexList         = xrange(1,kFold+1) 
