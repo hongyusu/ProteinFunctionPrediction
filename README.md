@@ -645,7 +645,9 @@ In stead of predicting the transporter classification (TC) with single feature m
    |TRPSTCDB201509PSSM | 12531 | 
    |TRPSTIGR | 1561 | 
 
-# New kernels
+# Results
+
+1. New kernels
 
    | MMCRF | Kernel | AUC | Microlabel Accuracy | F1 | Precision | Recall | Multilabel Accuracy | 
    |:--:|:--:|--:|:--:|:--:|:--:|:--:|:---:|
@@ -675,7 +677,7 @@ In stead of predicting the transporter classification (TC) with single feature m
    |Gaussian | ALIGNF | 0.9461 | 0.9990 | 0.6609 | 0.9619 | 0.5034 | 0.3289
 
 
-# Old kernels
+2. Old kernels
 
    |MMCRF| Input feature | AUC | Microlabel Accuracy | F1 | Precision | Recall | Multilabel Accuracy | 
    |:--:           |:--:|:--:|--:|:--:|:--:|:--:|:--:|:---:|
