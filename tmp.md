@@ -110,48 +110,6 @@ NOTE: Su, her you should specify which version has been considered (I guess a ve
   1. Data file for TCDB sequence and classification information is in the file `./Data/tcdb.1`.
 
 
-1. [_BLAST_ with TCDB](http://hongyusu.github.io/lessons/2015/06/16/ncbi-blast-installation-and-running-in-parallel/)
-
-   1. Protein sequences are aligned with themselves by running _BLAST_ algorithms.
-   1. This procedure will genrate a pairwise similarity matrix.
-   1. Instruction for installing and running _BLAST_ can be found from [my blog post](http://hongyusu.github.io/lessons/2015/06/16/ncbi-blast-installation-and-running-in-parallel/). 
-   1. In particular, after removing some replicated proteins, there are 12515 protein left in TCDB which will be used to build a TCDB _BLAST_ database.
-   1. The cleaned TCDB data file is located in `./Data/tcdb`.
-   1. For the _BLAST_ search, we obtain all hits with e-value below 0.01. 
-   1. We use _BLAST_ score as similary measure between pair of proteins.
-   1. Some statistics about the TCDB _BLAST_ features are shown in the following table
-
-      |Type of Data|Number of items|
-      |---:|---:|
-      |Protein|12515|
-      |TCDB _BLAST_ feature|12515|
-
-   1. Data file for TCDB _BLAST_ feature is located as `./Data/tcdbblast`.
-
-      1. The format of this file is
-
-         `qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue bitscore`.
-       
-      2. The keywords are explained in the following table
-
-         |Keyword|Representation|
-         |---:|---:|
-         |qseqid | Query Seq-id|
-         |sseqid | Subject Seq-id|
-         |sallacc | All subject accessions|
-         |qstart | Start of alignment in query|
-         |qend | End of alignment in query|
-         |sstart | Start of alignment in subject|
-         |send | End of alignment in subject|
-         |evalue | Expect value|
-         |bitscore | Bit score|
-         |score | Raw score|
-         |length | Alignment length|
-         |pident | Percentage of identical matches|
-         |mismatch | Number of mismatches|
-         |gapopen | Number of gap openings|
-
-
 
 # Preprocessing
 
@@ -344,6 +302,46 @@ NOTE: Su, her you should specify which version has been considered (I guess a ve
 
 ## BLAST features
 
+1. [_BLAST_ with TCDB](http://hongyusu.github.io/lessons/2015/06/16/ncbi-blast-installation-and-running-in-parallel/)
+
+   1. Protein sequences are aligned with themselves by running _BLAST_ algorithms.
+   1. This procedure will genrate a pairwise similarity matrix.
+   1. Instruction for installing and running _BLAST_ can be found from [my blog post](http://hongyusu.github.io/lessons/2015/06/16/ncbi-blast-installation-and-running-in-parallel/). 
+   1. In particular, after removing some replicated proteins, there are 12515 protein left in TCDB which will be used to build a TCDB _BLAST_ database.
+   1. The cleaned TCDB data file is located in `./Data/tcdb`.
+   1. For the _BLAST_ search, we obtain all hits with e-value below 0.01. 
+   1. We use _BLAST_ score as similary measure between pair of proteins.
+   1. Some statistics about the TCDB _BLAST_ features are shown in the following table
+
+      |Type of Data|Number of items|
+      |---:|---:|
+      |Protein|12515|
+      |TCDB _BLAST_ feature|12515|
+
+   1. Data file for TCDB _BLAST_ feature is located as `./Data/tcdbblast`.
+
+      1. The format of this file is
+
+         `qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue bitscore`.
+       
+      2. The keywords are explained in the following table
+
+         |Keyword|Representation|
+         |---:|---:|
+         |qseqid | Query Seq-id|
+         |sseqid | Subject Seq-id|
+         |sallacc | All subject accessions|
+         |qstart | Start of alignment in query|
+         |qend | End of alignment in query|
+         |sstart | Start of alignment in subject|
+         |send | End of alignment in subject|
+         |evalue | Expect value|
+         |bitscore | Bit score|
+         |score | Raw score|
+         |length | Alignment length|
+         |pident | Percentage of identical matches|
+         |mismatch | Number of mismatches|
+         |gapopen | Number of gap openings|
 
 
 ## Interproscan features
