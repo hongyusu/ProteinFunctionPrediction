@@ -471,11 +471,37 @@ In stead of predicting the transporter classification (TC) with single feature m
 
 1. Kernel weights computed from different multiple kernel learning approaches are listed in the following table
  
-   |MKL|tcdb.TB|tcdb.TICoils|tcdb.TIGene3D|tcdb.TIHamap|tcdb.TIPANTHER|tcdb.TIPfam|tcdb.TIPhobius|tcdb.TIPIRSF|tcdb.TIPRINTS|tcdb.TIProDom|tcdb.TIProSitePatterns|tcdb.TIProSiteProfiles|tcdb.TISignalP_EUK|tcdb.TISignalP_GRAM_NEGATIVE|tcdb.TISignalP_GRAM_POSITIVE|tcdb.TISMART|tcdb.TISUPERFAMILY|tcdb.TITIGRFAM|tcdb.TITMHMM|
-   |:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:---:|
-   | UNIMKL |0.05|0.05|0.05|0.05|0.05|0.05|0.05|0.05|0.05|0.05|0.05|0.05|0.05|0.05|0.05|0.05|0.05|0.05|0.05|
-   | ALIGN  |0.15|0.01|0.22|0.02|0.19|0.10|0.23|0.04|0.07|0.01|0.03|0.07|0.06|0.06|0.05|0.03|0.17|0.05|0.23|
-   | ALIGNF |0.00|0.00|0.09|0.14|0.37|0.00|0.00|0.31|0.00|0.86|0.00|0.00|0.04|0.05|0.01|0.00|0.00|0.00|0.00|
+ | Base kernel| UNIMKL | ALIGN | ALIGNF |
+ |:---:|--:|--:|--:|
+ |TB.K                        |0.03 | 0.17 | 0.00|  
+ |TICoils.K                   |0.03 | 0.01 | 0.02|  
+ |TIGene3D.K                  |0.03 | 0.14 | 0.00|  
+ |TIHamap.K                   |0.03 | 0.02 | 0.29|  
+ |TIPANTHER.K                 |0.03 | 0.14 | 0.08|  
+ |TIPfam.K                    |0.03 | 0.19 | 0.29|  
+ |TIPhobius.K                 |0.03 | 0.20 | 0.22|  
+ |TIPIRSF.K                   |0.03 | 0.02 | 0.11|  
+ |TIPRINTS.K                  |0.03 | 0.02 | 0.01|  
+ |TIProDom.K                  |0.03 | 0.01 | 0.14|  
+ |TIProSitePatterns.K         |0.03 | 0.09 | 0.00|  
+ |TIProSiteProfiles.K         |0.03 | 0.14 | 0.01|  
+ |TISignalP_EUK.K             |0.03 | 0.06 | 0.03|  
+ |TISignalP_GRAM_NEGATIVE.K   |0.03 | 0.06 | 0.08|  
+ |TISignalP_GRAM_POSITIVE.K   |0.03 | 0.05 | 0.00|  
+ |TISMART.K                   |0.03 | 0.14 | 0.00|  
+ |TISUPERFAMILY.K             |0.03 | 0.16 | 0.11|  
+ |TITIGRFAM.K                 |0.03 | 0.04 | 0.06|  
+ |TITMHMM.K                   |0.03 | 0.18 | 0.00|  
+ |TPSI.K                      |0.03 | 0.24 | 0.20|  
+ |TRPSCDD.K                   |0.03 | 0.03 | 0.00|  
+ |TRPSCDDNCBI.K               |0.03 | 0.21 | 0.24|  
+ |TRPSCOG.K                   |0.03 | 0.24 | 0.64|  
+ |TRPSKOG.K                   |0.03 | 0.11 | 0.00|  
+ |TRPSPFAM.K                  |0.03 | 0.21 | 0.33|  
+ |TRPSPRK.K                   |0.03 | 0.19 | 0.01|  
+ |TRPSSMART.K                 |0.03 | 0.14 | 0.08|  
+ |TRPSTCDB201509PSSM.K        |0.03 | 0.25 | 0.31|  
+ |TRPSTIGR.K                  |0.03 | 0.20 | 0.00|  
 
 1. In addition, kernel weights are shown in the following bar plot
 
