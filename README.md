@@ -647,34 +647,38 @@ In stead of predicting the transporter classification (TC) with single feature m
 
 # Results
 
-1. New kernels
+## MMCRF
 
-   | MMCRF | Kernel | AUC | Microlabel Accuracy | F1 | Precision | Recall | Multilabel Accuracy | 
-   |:--:|:--:|--:|:--:|:--:|:--:|:--:|:---:|
-   |Linear | UNIMKL | NA | 0.9995 | 0.7957 | 0.7957 | 0.7957 | 0.6176
-   |Linear | ALIGN  | NA | 0.9995 | 0.8174 | 0.8174 | 0.8174 | 0.6334
-   |Linear | ALIGNF | NA | 0.9996 | 0.8240 | 0.8240 | 0.8240 | 0.6426
-   |Gaussian |UNIMKL | NA | 0.9996 | 0.8369 | 0.8369 | 0.8369 | 0.6977
-   |Gaussian |ALIGN  | NA | 0.9996 | 0.8615 | 0.8615 | 0.8615 | 0.7421
-   |Gaussian |ALIGNF | NA | 0.9996 | 0.8537 | 0.8537 | 0.8537 | 0.7118
+| MMCRF | Kernel | AUC | Microlabel Accuracy | F1 | Precision | Recall | Multilabel Accuracy | 
+|:--:|:--:|--:|:--:|:--:|:--:|:--:|:---:|
+|Linear | UNIMKL | NA | 0.9995 | 0.7957 | 0.7957 | 0.7957 | 0.6176
+|Linear | ALIGN  | NA | 0.9995 | 0.8174 | 0.8174 | 0.8174 | 0.6334
+|Linear | ALIGNF | NA | 0.9996 | 0.8240 | 0.8240 | 0.8240 | 0.6426
+|Gaussian |UNIMKL | NA | 0.9996 | 0.8369 | 0.8369 | 0.8369 | 0.6977
+|Gaussian |ALIGN  | NA | 0.9996 | 0.8615 | 0.8615 | 0.8615 | 0.7421
+|Gaussian |ALIGNF | NA | 0.9996 | 0.8537 | 0.8537 | 0.8537 | 0.7118
 
-   | MMR | Kernel | AUC | Microlabel Accuracy | F1 | Precision | Recall | Multilabel Accuracy | 
-   |:--:|:--:|--:|:--:|:--:|:--:|:--:|:---:|
-   |Linear | UNIMKL  | NA | NA | 0.4332 | 0.4332 | 0.4332 | 0.1198
-   |Linear | ALIGN   | NA | NA | 0.4384 | 0.4384 | 0.4384 | 0.1241
-   |Linear | ALIGNF  | NA | NA | 0.4955 | 0.4955 | 0.4955 | 0.1752
-   |Gaussian |UNIMKL | NA | NA | 0.8354 | 0.8354 | 0.8354 | 0.6811
-   |Gaussian |ALIGN  | NA | NA | 0.8550 | 0.8550 | 0.8550 | 0.7191
-   |Gaussian |ALIGNF | NA | NA | 0.8463 | 0.8463 | 0.8463 | 0.6839
+## MMR
 
-   | MKL | Kernel | AUC | Microlabel Accuracy | F1 | Precision | Recall | Multilabel Accuracy | 
-   |:--:|:--:|--:|:--:|:--:|:--:|:--:|:---:|
-   |Linear | UNIMKL | 0.9942 | 0.9995 | 0.8485 | 0.9344 | 0.7770 | 0.5327
-   |Linear | ALIGN  | 0.9946 | 0.9995 | 0.8621 | 0.9377 | 0.7978 | 0.5484
-   |Linear | ALIGNF | 0.9928 | 0.9996 | 0.8822 | 0.9485 | 0.8245 | 0.6048
-   |Gaussian | UNIMKL | 0.9303 | 0.9988 | 0.5568 | 0.9619 | 0.3918 | 0.2315
-   |Gaussian | ALIGN  | 0.9169 | 0.9985 | 0.3938 | 0.9722 | 0.2469 | 0.1595
-   |Gaussian | ALIGNF | 0.9461 | 0.9990 | 0.6609 | 0.9619 | 0.5034 | 0.3289
+| MMR | Kernel | AUC | Microlabel Accuracy | F1 | Precision | Recall | Multilabel Accuracy | 
+|:--:|:--:|--:|:--:|:--:|:--:|:--:|:---:|
+|Linear | UNIMKL  | NA | NA | 0.4332 | 0.4332 | 0.4332 | 0.1198
+|Linear | ALIGN   | NA | NA | 0.4384 | 0.4384 | 0.4384 | 0.1241
+|Linear | ALIGNF  | NA | NA | 0.4955 | 0.4955 | 0.4955 | 0.1752
+|Gaussian |UNIMKL | NA | NA | 0.8354 | 0.8354 | 0.8354 | 0.6811
+|Gaussian |ALIGN  | NA | NA | 0.8550 | 0.8550 | 0.8550 | 0.7191
+|Gaussian |ALIGNF | NA | NA | 0.8463 | 0.8463 | 0.8463 | 0.6839
+
+## SVM
+
+| MKL | Kernel | AUC | Microlabel Accuracy | F1 | Precision | Recall | Multilabel Accuracy | 
+|:--:|:--:|--:|:--:|:--:|:--:|:--:|:---:|
+|Linear | UNIMKL | 0.9942 | 0.9995 | 0.8485 | 0.9344 | 0.7770 | 0.5327
+|Linear | ALIGN  | 0.9946 | 0.9995 | 0.8621 | 0.9377 | 0.7978 | 0.5484
+|Linear | ALIGNF | 0.9928 | 0.9996 | 0.8822 | 0.9485 | 0.8245 | 0.6048
+|Gaussian | UNIMKL | 0.9303 | 0.9988 | 0.5568 | 0.9619 | 0.3918 | 0.2315
+|Gaussian | ALIGN  | 0.9169 | 0.9985 | 0.3938 | 0.9722 | 0.2469 | 0.1595
+|Gaussian | ALIGNF | 0.9461 | 0.9990 | 0.6609 | 0.9619 | 0.5034 | 0.3289
 
 
 
