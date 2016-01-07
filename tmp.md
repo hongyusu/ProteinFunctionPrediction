@@ -417,7 +417,7 @@ In this section, we test the classification performance on transporter classific
 
 1. Preliminary experimental results are shown in the following table
 
-   | Input feature | AUC | Accuracy | F1 | Precision | Recall | Multilabel |
+   | Input feature | AUC | Microlabel Accuracy | F1 | Precision | Recall | Multilabel Accuracy |
    |:--:|:--:|:--:|:--:|:--:|:--:|:--:|
    |TB                      |0.8705|0.9980|0.0023|1.0000|0.0012|0.0000|
    |TICoils                 |0.8705|0.9980|0.0023|1.0000|0.0012|0.0000|
