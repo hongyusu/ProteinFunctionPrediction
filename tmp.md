@@ -440,11 +440,8 @@ In this section, we test the classification performance on transporter classific
    |../Data/tcdb.TITMHMM      |0.8694|0.9975|0.0068|0.0153|0.0044|
 
 
-1. ROC curve is shown as 
-  
-   ![alt text](https://github.com/aalto-ics-kepaco/ProteinFunctionPrediction/blob/master/Experiments/PlotsSVM/auc.jpg)
 
-## Multiple kernel learning
+## Multiple kernel learning (MKL)
 
 In stead of predicting the transporter classification (TC) with single feature map as studied in the previous section, we aim to combine those 19 different feature maps with multiple kernel learning approaches.
 
@@ -476,8 +473,6 @@ In stead of predicting the transporter classification (TC) with single feature m
 
    ![alt text](https://github.com/aalto-ics-kepaco/ProteinFunctionPrediction/blob/master/Experiments/PlotsMKL/kernel_weights.jpg)
 
-
-## Multiple kernel learning (MKL)
 
 ### Support vector machine (SVM)
 
@@ -630,7 +625,6 @@ Prediction performance of MMR is shown in the following table. In particular, ke
    |TRPSTCDB201509PSSM | 12531 | 
    |TRPSTIGR | 1561 | 
 
-# Results
 
 
 
