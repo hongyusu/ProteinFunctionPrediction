@@ -476,66 +476,51 @@ In stead of predicting the transporter classification (TC) with single feature m
 
    ![alt text](https://github.com/aalto-ics-kepaco/ProteinFunctionPrediction/blob/master/Experiments/PlotsMKL/kernel_weights.jpg)
 
-### MKL results
 
-1. Prediction performances of three multiple kernel learning approaches are listed in the following table in which all combined kernel are centered and * corresponds to additional operation on the combined kernel `normalization->centering`.
+## Multiple kernel learning (MKL)
 
-   |Kernel function| Input feature | AUC | Accuracy | F1 | Precision | Recall | Multilabel Accuracy |
-   |:--:           |:--:|:--:|--:|:--:|:--:|:--:|:--:|:--:|
-   |Linear         |UNIMKL*| 0.9851 | 0.9989 | 0.6826 | 0.8364 | 0.5766 | 0.2380 
-   |Linear         |ALIGN* | 0.9889 | 0.9991 | 0.7463 | 0.8662 | 0.6555 | 0.3179
-   |Linear         |ALIGNF*| 0.9878 | 0.9993 | 0.7918 | 0.8885 | 0.7140 | 0.4016 
+### Support vector machine (SVM)
 
-1. In addition, we use Guassian kenrel on all three computed kernels, the corresponding prediction performance is shown in the following table. 
+Prediction performances of three multiple kernel learning approaches are listed in the following table in which all combined kernel are `centered->normalized->centered`. In addition, we use Guassian kenrel on all three computed kernels, the corresponding prediction performance is shown in the following table. 
 
-   |Kernel function| Input feature | AUC | Accuracy | F1 | Precision | Recall | Multilabel Accuracy |
-   |:--:           |:--:|:--:|--:|:--:|:--:|:--:|:--:|:--:|
-   |Gaussian       |UNIMKL*| 0.8990 | 0.9984 | 0.3172 | 0.9786 | 0.1893 | 0.1248 
-   |Gaussian       |ALIGN* | 0.8976 | 0.9984 | 0.3077 | 0.9818 | 0.1825 | 0.1272
-   |Gaussian       |ALIGNF*| 0.8902 | 0.9983 | 0.2364 | 0.9834 | 0.1343 | 0.0972 
+   | MKL | Kernel | AUC | Microlabel Accuracy | F1 | Precision | Recall | Multilabel Accuracy | 
+   |:--:|:--:|--:|:--:|:--:|:--:|:--:|:---:|
+   |Linear | UNIMKL | 0.9942 | 0.9995 | 0.8485 | 0.9344 | 0.7770 | 0.5327
+   |Linear | ALIGN  | 0.9946 | 0.9995 | 0.8621 | 0.9377 | 0.7978 | 0.5484
+   |Linear | ALIGNF | 0.9928 | 0.9996 | 0.8822 | 0.9485 | 0.8245 | 0.6048
+   |Gaussian | UNIMKL | 0.9303 | 0.9988 | 0.5568 | 0.9619 | 0.3918 | 0.2315
+   |Gaussian | ALIGN  | 0.9169 | 0.9985 | 0.3938 | 0.9722 | 0.2469 | 0.1595
+   |Gaussian | ALIGNF | 0.9461 | 0.9990 | 0.6609 | 0.9619 | 0.5034 | 0.3289
 
 
+### Max-margin conditional random field (MMCRF)
 
-## Structured output learning
+Prediction performance of the developed structured output prediction method is shown in the following table. In particular, kernels are computed from multiple kernel learning approaches. Predidction performance of the developed structured output prediction model with additional Gaussian kernels on kernel matrices that are computed from multiple kernel learning approaches.
 
-### SOP results
-
-1. Prediction performance of the developed structured output prediction method is shown in the following table. In particular, kernels are computed from multiple kernel learning approaches.
-
-   |Kernel function| Input feature | AUC | Microlabel Accuracy | F1 | Precision | Recall | Multilabel Accuracy | 
-   |:--:           |:--:|:--:|--:|:--:|:--:|:--:|:--:|:---:|
-   |Linear         |UNIMKL*| NA | 0.9993 | 0.7173 | 0.7173 | 0.7173 | 0.5513 
-   |Linear         |ALIGN* | NA | 0.9994 | 0.7711 | 0.7711 | 0.7711 | 0.5874 
-   |Linear         |ALIGNF*| NA | 0.9995 | 0.8045 | 0.8045 | 0.8045 | 0.6365 
-
-2. Predidction performance of the developed structured output prediction model with additional Gaussian kernels on kernel matrices that are computed from multiple kernel learning approaches.
-
-   |Kernel function| Input feature | AUC | Microlabel Accuracy | F1 | Precision | Recall | Multilabel Accuracy | 
-   |:--:           |:--:|:--:|--:|:--:|:--:|:--:|:--:|:---:|
-   |Gaussian       |UNIMKL*| NA | 0.9995 | 0.7992| 0.7992| 0.7992 | 0.6428 
-   |Gaussian       |ALIGN* | NA | 0.9996 | 0.8284| 0.8284| 0.8284 | 0.6856 
-   |Gaussian       |ALIGNF*| NA | 0.9996 | 0.8524| 0.8524| 0.8524 | 0.7281 
+| MMCRF | Kernel | AUC | Microlabel Accuracy | F1 | Precision | Recall | Multilabel Accuracy | 
+|:--:|:--:|--:|:--:|:--:|:--:|:--:|:---:|
+|Linear | UNIMKL | NA | 0.9995 | 0.7957 | 0.7957 | 0.7957 | 0.6176
+|Linear | ALIGN  | NA | 0.9995 | 0.8174 | 0.8174 | 0.8174 | 0.6334
+|Linear | ALIGNF | NA | 0.9996 | 0.8240 | 0.8240 | 0.8240 | 0.6426
+|Gaussian |UNIMKL | NA | 0.9996 | 0.8369 | 0.8369 | 0.8369 | 0.6977
+|Gaussian |ALIGN  | NA | 0.9996 | 0.8615 | 0.8615 | 0.8615 | 0.7421
+|Gaussian |ALIGNF | NA | 0.9996 | 0.8537 | 0.8537 | 0.8537 | 0.7118
 
 
-## Max margin regression
+### Max margin regression (MMR)
 
-### MMR results
+Prediction performance of MMR is shown in the following table. In particular, kernels are computed directly from multiple kernel learning approaches. Predidction performance of MMR with additional Gaussian kernels on kernel matrices that are computed from multiple kernel learning approaches.
 
-1. Prediction performance of MMR is shown in the following table. In particular, kernels are computed directly from multiple kernel learning approaches.
+| MMR | Kernel | AUC | Microlabel Accuracy | F1 | Precision | Recall | Multilabel Accuracy | 
+|:--:|:--:|--:|:--:|:--:|:--:|:--:|:---:|
+|Linear | UNIMKL  | NA | NA | 0.4332 | 0.4332 | 0.4332 | 0.1198
+|Linear | ALIGN   | NA | NA | 0.4384 | 0.4384 | 0.4384 | 0.1241
+|Linear | ALIGNF  | NA | NA | 0.4955 | 0.4955 | 0.4955 | 0.1752
+|Gaussian |UNIMKL | NA | NA | 0.8354 | 0.8354 | 0.8354 | 0.6811
+|Gaussian |ALIGN  | NA | NA | 0.8550 | 0.8550 | 0.8550 | 0.7191
+|Gaussian |ALIGNF | NA | NA | 0.8463 | 0.8463 | 0.8463 | 0.6839
 
-   |Kernel function| Input feature | AUC | Microlabel Accuracy | F1 | Precision | Recall | Multilabel Accuracy | 
-   |:--:           |:--:|:--:|--:|:--:|:--:|:--:|:--:|:---:|
-   |Linear         |UNIMKL*| NA | NA | 0.3512 | 0.3512 | 0.3512 | 0.0690 
-   |Linear         |ALIGN* | NA | NA | 0.3387 | 0.3387 | 0.3387 | 0.0587 
-   |Linear         |ALIGNF*| NA | NA | 0.5012 | 0.5012 | 0.5012 | 0.2095 
 
-2. Predidction performance of MMR with additional Gaussian kernels on kernel matrices that are computed from multiple kernel learning approaches.
-
-   |Kernel function| Input feature | AUC | Microlabel Accuracy | F1 | Precision | Recall | Multilabel Accuracy | 
-   |:--:           |:--:|:--:|--:|:--:|:--:|:--:|:--:|:---:|
-   |Gaussian       |UNIMKL*| NA | NA | 0.7987 | 0.7987 | 0.7987 | 0.6409 
-   |Gaussian       |ALIGN* | NA | NA | 0.8296 | 0.8296 | 0.8296 | 0.6828 
-   |Gaussian       |ALIGNF*| NA | NA | 0.8537 | 0.8537 | 0.8537 | 0.7272 
 
 ## Additional features
 
@@ -646,39 +631,6 @@ In stead of predicting the transporter classification (TC) with single feature m
    |TRPSTIGR | 1561 | 
 
 # Results
-
-## MMCRF
-
-| MMCRF | Kernel | AUC | Microlabel Accuracy | F1 | Precision | Recall | Multilabel Accuracy | 
-|:--:|:--:|--:|:--:|:--:|:--:|:--:|:---:|
-|Linear | UNIMKL | NA | 0.9995 | 0.7957 | 0.7957 | 0.7957 | 0.6176
-|Linear | ALIGN  | NA | 0.9995 | 0.8174 | 0.8174 | 0.8174 | 0.6334
-|Linear | ALIGNF | NA | 0.9996 | 0.8240 | 0.8240 | 0.8240 | 0.6426
-|Gaussian |UNIMKL | NA | 0.9996 | 0.8369 | 0.8369 | 0.8369 | 0.6977
-|Gaussian |ALIGN  | NA | 0.9996 | 0.8615 | 0.8615 | 0.8615 | 0.7421
-|Gaussian |ALIGNF | NA | 0.9996 | 0.8537 | 0.8537 | 0.8537 | 0.7118
-
-## MMR
-
-| MMR | Kernel | AUC | Microlabel Accuracy | F1 | Precision | Recall | Multilabel Accuracy | 
-|:--:|:--:|--:|:--:|:--:|:--:|:--:|:---:|
-|Linear | UNIMKL  | NA | NA | 0.4332 | 0.4332 | 0.4332 | 0.1198
-|Linear | ALIGN   | NA | NA | 0.4384 | 0.4384 | 0.4384 | 0.1241
-|Linear | ALIGNF  | NA | NA | 0.4955 | 0.4955 | 0.4955 | 0.1752
-|Gaussian |UNIMKL | NA | NA | 0.8354 | 0.8354 | 0.8354 | 0.6811
-|Gaussian |ALIGN  | NA | NA | 0.8550 | 0.8550 | 0.8550 | 0.7191
-|Gaussian |ALIGNF | NA | NA | 0.8463 | 0.8463 | 0.8463 | 0.6839
-
-## SVM
-
-| MKL | Kernel | AUC | Microlabel Accuracy | F1 | Precision | Recall | Multilabel Accuracy | 
-|:--:|:--:|--:|:--:|:--:|:--:|:--:|:---:|
-|Linear | UNIMKL | 0.9942 | 0.9995 | 0.8485 | 0.9344 | 0.7770 | 0.5327
-|Linear | ALIGN  | 0.9946 | 0.9995 | 0.8621 | 0.9377 | 0.7978 | 0.5484
-|Linear | ALIGNF | 0.9928 | 0.9996 | 0.8822 | 0.9485 | 0.8245 | 0.6048
-|Gaussian | UNIMKL | 0.9303 | 0.9988 | 0.5568 | 0.9619 | 0.3918 | 0.2315
-|Gaussian | ALIGN  | 0.9169 | 0.9985 | 0.3938 | 0.9722 | 0.2469 | 0.1595
-|Gaussian | ALIGNF | 0.9461 | 0.9990 | 0.6609 | 0.9619 | 0.5034 | 0.3289
 
 
 
