@@ -393,45 +393,123 @@ NOTE: Su, her you should specify which version has been considered (I guess a ve
    |TISignalP_ GRAM_NEGATIVE__|2|	SignalP GRAM NEGATIVE |4.0|SignalP (organism type gram-negative prokaryotes) predicts the presence and location of signal peptide cleavage sites in amino acid sequences for gram-negative prokaryotes|
    |TISignalP_ EUK__|2|	SignalP EyUK|4.0|SignalP (organism type eukaryotes) predicts the presence and location of signal peptide cleavage sites in amino acid sequences for eukaryotes.|
    |TISignalP_ GRAM_POSITIVE__|1|	SignalP GRAM POSITIVE |4.0|SignalP (organism type gram-positive prokaryotes) predicts the presence and location of signal peptide cleavage sites in amino acid sequences for gram-positive prokaryotes|
- 
+
+
+
+## BLAST features
+
+## Interproscan features
+
+## PSSM features 
+
+### PSSM features generated from CDD database 
+
+1. There are many public databases which contains conserved protein domain information in position specific scoring matrix PSSM format. 
+1. This section describes how to compute position specific scoring matrix PSSM features from public conserved domain databases CDD.
+1. Download CDD database source files from [NCBI FTP server](ftp://ftp.ncbi.nih.gov/pub/mmdb/cdd//cdd.tar.gz).
+1. Download CDD database version file from [NCBI FTP server](ftp://ftp.ncbi.nih.gov/pub/mmdb/cdd//cdd.info).
+1. Download PSSM version file from [NCBI FTP server](ftp://ftp.ncbi.nih.gov/pub/mmdb/cdd//cdd.versions).
+1. The following table shows the statistics and version information of all databases in CDD.
+
+   |Database|Number of PSSM models|Version|
+   |:---:|---:|---:|
+   |CDD  |47363| v3.14|
+   |Pfam |14831 | v27.0|
+   |COG|4825| v1.0 |
+   |KOG|4875| v1.0 |
+   |SMART|1013|v6.0|
+   |PRK|10885|v6.9|
+   |TiGRFAM|4488|v15.0|
+   |CDD NCBI|11273||
+
+1. Build local CDD databases from different source files using NCBI Blast+ tool according to the following commands.
+
+   `../makeprofiledb -title SMART     -in Smart.pn -out Smart -threshold 9.82 -scale 100.0 -dbtype rps -index true`
+
+   `../makeprofiledb -title Pfam      -in Pfam.pn -out Pfam -threshold 9.82 -scale 100.0 -dbtype rps -index true`
+
+   `../makeprofiledb -title COG       -in Cog.pn -out Cog -threshold 9.82 -scale 100.0 -dbtype rps -index true`
+
+   `../makeprofiledb -title KOG       -in Kog.pn -out Kog -threshold 9.82 -scale 100.0 -dbtype rps -index true`
+
+   `../makeprofiledb -title CDD_NCBI  -in Cdd_NCBI.pn -out Cdd_NCBI -threshold 9.82 -scale 100.0 -dbtype rps -index true`
+
+   `../makeprofiledb -title PRK       -in Prk.pn -out Prk -threshold 9.82 -scale 100.0 -dbtype rps -index true`
+
+   `../makeprofiledb -title Tigr      -in Tigr.pn -out Tigr -threshold 9.82 -scale 100.0 -dbtype rps -index true`
+
+1. A CDD database covering all sources can be built with the following command 
+
+   `../makeprofiledb -title CDD       -in Cdd.pn -out Cdd -threshold 9.82 -scale 100.0 -dbtype rps -index true`
+
+1. Once the databases are ready, BLAST search can be performed with `rpsblast` with the following command (e.g., search against SMART CDD).
+
+   `../Blast/ncbi-blast-2.2.31+/bin/rpsblast  -evalue 0.01 -num_threads 4 -outfmt "6 qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue bitscore" -db ../Blast/ncbi-blast-2.2.31+/bin/CDD/SMART -query ../../Data/tcdb -out ../../Data/tcdbrpsSMART `
+
+1. The complete code is available from [my GitHub](https://github.com/hongyusu/ProteinFunctionPrediction/blob/master/Preprocessing/Bins/run_rpsblast.py).
+
+### PSSM features generated from TCDB
+
+1. `psiblast` provides an alternative to search against TCDB database with PSSM features.
+1. In particular, each protein sequence is searched against TCDB and a PSSM is computed for this sequence. 
+1. After that, the system use constructed PSSM to perform a second search against TCDB.
+1. The command to perform `psiblast` search is shown as the following.  
+
+   `../../makeprofiledb -title TCDB201509PSSM -in tcdb201509pssm.pn -out tcdb201509pssm -threshold 9.82 -scale 100.0 -dbtype rps -index true`
+
+1. The complete code is available from [my GitHub](https://github.com/hongyusu/ProteinFunctionPrediction/blob/master/Preprocessing/Bins/run_psiblast.py).
+
+## PSSM features generated from TCDB-CDD
+
+1. As an alterntive, one can search each protein sequence against TCDB and generate a PSSM pattern.
+1. With all generate PSSM patterns, one can build a CDD database of TCDB protein sequences.
+1. After that, each protein sequence is search against the CDD dataabse of TCDB protein sequences.
+1. The complete code is available from [my GitHub](https://github.com/hongyusu/ProteinFunctionPrediction/blob/master/Preprocessing/Bins/run_rpsblast.py).
+1. Statistics of CDD database of TCDB sequences is shown in the following table.
+
+   |Database|Number of PSSM models|Version|
+   |:---:|---:|---:|
+   |CDD-TCDB  |12540| 201509 version of TCDB|
+
+
 
 
 ## Statistics of feature sets
 
-1. The following table shows the statistics of features computed for TCDB prediction tasks.
+The following table shows the statistics of features computed for TCDB prediction tasks.
 
-   |Feature set| Number of features|
-   |:---|---:|
-   |TB | 12535 | 
-   |TC | 3145 | 
-   |TICoils | 1 | 
-   |TIGene3D | 611 | 
-   |TIHamap | 209 | 
-   |TIPANTHER | 4070 | 
-   |TIPfam | 2025 | 
-   |TIPhobius | 7 | 
-   |TIPIRSF | 283 | 
-   |TIPRINTS | 579 | 
-   |TIProDom | 145 | 
-   |TIProSitePatterns | 285 | 
-   |TIProSiteProfiles | 282 | 
-   |TISignalPEUK | 2 | 
-   |TISignalP_GRAM_NEGATIVE | 2 | 
-   |TISignalP_GRAM_POSITIVE | 1 | 
-   |TISMART | 240 | 
-   |TISUPERFAMILY | 512 | 
-   |TITIGRFAM | 769 | 
-   |TITMHMM | 1 | 
-   |TPSI | 12540 | 
-   |TRPSCDD | 10727 | 
-   |TRPSCDDNCBI | 4265 | 
-   |TRPSCOG | 1739 | 
-   |TRPSKOG | 2066 | 
-   |TRPSPFAM | 3048 | 
-   |TRPSPRK | 3374 | 
-   |TRPSSMART | 394 | 
-   |TRPSTCDB201509PSSM | 12531 | 
-   |TRPSTIGR | 1561 | 
+|Feature set| Number of features|
+|:---|---:|
+|TB | 12535 | 
+|TC | 3145 | 
+|TICoils | 1 | 
+|TIGene3D | 611 | 
+|TIHamap | 209 | 
+|TIPANTHER | 4070 | 
+|TIPfam | 2025 | 
+|TIPhobius | 7 | 
+|TIPIRSF | 283 | 
+|TIPRINTS | 579 | 
+|TIProDom | 145 | 
+|TIProSitePatterns | 285 | 
+|TIProSiteProfiles | 282 | 
+|TISignalPEUK | 2 | 
+|TISignalP_GRAM_NEGATIVE | 2 | 
+|TISignalP_GRAM_POSITIVE | 1 | 
+|TISMART | 240 | 
+|TISUPERFAMILY | 512 | 
+|TITIGRFAM | 769 | 
+|TITMHMM | 1 | 
+|TPSI | 12540 | 
+|TRPSCDD | 10727 | 
+|TRPSCDDNCBI | 4265 | 
+|TRPSCOG | 1739 | 
+|TRPSKOG | 2066 | 
+|TRPSPFAM | 3048 | 
+|TRPSPRK | 3374 | 
+|TRPSSMART | 394 | 
+|TRPSTCDB201509PSSM | 12531 | 
+|TRPSTIGR | 1561 | 
 
 
 
@@ -586,78 +664,6 @@ Prediction performance of MMR is shown in the following table. In particular, ke
 |Gaussian |ALIGN  | NA | NA | 0.8550 | 0.8550 | 0.8550 | 0.7191
 |Gaussian |ALIGNF | NA | NA | 0.8463 | 0.8463 | 0.8463 | 0.6839
 
-
-
-## Additional features
-
-### PSSM features generated from CDD database 
-
-1. There are many public databases which contains conserved protein domain information in position specific scoring matrix PSSM format. 
-1. This section describes how to compute position specific scoring matrix PSSM features from public conserved domain databases CDD.
-1. Download CDD database source files from [NCBI FTP server](ftp://ftp.ncbi.nih.gov/pub/mmdb/cdd//cdd.tar.gz).
-1. Download CDD database version file from [NCBI FTP server](ftp://ftp.ncbi.nih.gov/pub/mmdb/cdd//cdd.info).
-1. Download PSSM version file from [NCBI FTP server](ftp://ftp.ncbi.nih.gov/pub/mmdb/cdd//cdd.versions).
-1. The following table shows the statistics and version information of all databases in CDD.
-
-   |Database|Number of PSSM models|Version|
-   |:---:|---:|---:|
-   |CDD  |47363| v3.14|
-   |Pfam |14831 | v27.0|
-   |COG|4825| v1.0 |
-   |KOG|4875| v1.0 |
-   |SMART|1013|v6.0|
-   |PRK|10885|v6.9|
-   |TiGRFAM|4488|v15.0|
-   |CDD NCBI|11273||
-
-1. Build local CDD databases from different source files using NCBI Blast+ tool according to the following commands.
-
-   `../makeprofiledb -title SMART     -in Smart.pn -out Smart -threshold 9.82 -scale 100.0 -dbtype rps -index true`
-
-   `../makeprofiledb -title Pfam      -in Pfam.pn -out Pfam -threshold 9.82 -scale 100.0 -dbtype rps -index true`
-
-   `../makeprofiledb -title COG       -in Cog.pn -out Cog -threshold 9.82 -scale 100.0 -dbtype rps -index true`
-
-   `../makeprofiledb -title KOG       -in Kog.pn -out Kog -threshold 9.82 -scale 100.0 -dbtype rps -index true`
-
-   `../makeprofiledb -title CDD_NCBI  -in Cdd_NCBI.pn -out Cdd_NCBI -threshold 9.82 -scale 100.0 -dbtype rps -index true`
-
-   `../makeprofiledb -title PRK       -in Prk.pn -out Prk -threshold 9.82 -scale 100.0 -dbtype rps -index true`
-
-   `../makeprofiledb -title Tigr      -in Tigr.pn -out Tigr -threshold 9.82 -scale 100.0 -dbtype rps -index true`
-
-1. A CDD database covering all sources can be built with the following command 
-
-   `../makeprofiledb -title CDD       -in Cdd.pn -out Cdd -threshold 9.82 -scale 100.0 -dbtype rps -index true`
-
-1. Once the databases are ready, BLAST search can be performed with `rpsblast` with the following command (e.g., search against SMART CDD).
-
-   `../Blast/ncbi-blast-2.2.31+/bin/rpsblast  -evalue 0.01 -num_threads 4 -outfmt "6 qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue bitscore" -db ../Blast/ncbi-blast-2.2.31+/bin/CDD/SMART -query ../../Data/tcdb -out ../../Data/tcdbrpsSMART `
-
-1. The complete code is available from [my GitHub](https://github.com/hongyusu/ProteinFunctionPrediction/blob/master/Preprocessing/Bins/run_rpsblast.py).
-
-### PSSM features generated from TCDB
-
-1. `psiblast` provides an alternative to search against TCDB database with PSSM features.
-1. In particular, each protein sequence is searched against TCDB and a PSSM is computed for this sequence. 
-1. After that, the system use constructed PSSM to perform a second search against TCDB.
-1. The command to perform `psiblast` search is shown as the following.  
-
-   `../../makeprofiledb -title TCDB201509PSSM -in tcdb201509pssm.pn -out tcdb201509pssm -threshold 9.82 -scale 100.0 -dbtype rps -index true`
-
-1. The complete code is available from [my GitHub](https://github.com/hongyusu/ProteinFunctionPrediction/blob/master/Preprocessing/Bins/run_psiblast.py).
-
-## PSSM features generated from TCDB-CDD
-
-1. As an alterntive, one can search each protein sequence against TCDB and generate a PSSM pattern.
-1. With all generate PSSM patterns, one can build a CDD database of TCDB protein sequences.
-1. After that, each protein sequence is search against the CDD dataabse of TCDB protein sequences.
-1. The complete code is available from [my GitHub](https://github.com/hongyusu/ProteinFunctionPrediction/blob/master/Preprocessing/Bins/run_rpsblast.py).
-1. Statistics of CDD database of TCDB sequences is shown in the following table.
-
-   |Database|Number of PSSM models|Version|
-   |:---:|---:|---:|
-   |CDD-TCDB  |12540| 201509 version of TCDB|
 
 
 
