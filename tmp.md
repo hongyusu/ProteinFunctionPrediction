@@ -152,60 +152,6 @@ NOTE: Su, her you should specify which version has been considered (I guess a ve
          |gapopen | Number of gap openings|
 
 
-1. [InterProScan](http://hongyusu.github.io/lessons/2015/06/17/extract-protein-features-via-interproscan/)
-
-   1. For all proteins in TCDB, we extract various protein features by running [InterProScan](https://code.google.com/p/interproscan/).
-   1. As this procedure takes time, we would like to install and run the InterProScan on local machines other than on webservers.
-   1. A brief instruction for installation and running InterProScan is documented in [my blog post](http://hongyusu.github.io/lessons/2015/06/17/extract-protein-features-via-interproscan/).
-   1. In particular, we download the InterProScan package together with various databases. Version information of InterProScan software and databases can be found from the following table
-
-      |Tool|Version|Information|
-      |:---|:---:|:---|
-      |InterProScan|5.13-52.0|InterProScan package|
-      |ProDom|2006.1|ProDom is a comprehensive set of protein domain families automatically generated from the UniProt Knowledge Database.|
-      |HAMAP||High-quality Automated and Manual Annotation of Microbial Proteomes|
-      |SMART|6.2|SMART allows the identification and analysis of domain architectures based on Hidden Markov Models or HMMs|
-      |SuperFamily|1.75|SUPERFAMILY is a database of structural and functional annotation for all proteins and genomes.|
-      |PRINTS|42.0|A fingerprint is a group of conserved motifs used to characterise a protein family|
-      |Panther|9.0|The PANTHER (Protein ANalysis THrough Evolutionary Relationships) Classification System is a unique resource that classifies genes by their functions, using published scientific experimental evidence and evolutionary relationships to predict function even in the absence of direct experimental evidence.|
-      |Gene3d|3.5.0|Structural assignment for whole genes and genomes using the CATH domain structure database|
-      |PIRSF|3.01|The PIRSF concept is being used as a guiding principle to provide comprehensive and non-overlapping clustering of UniProtKB sequences into a hierarchical order to reflect their evolutionary relationships.|
-      |PfamA|27.0|A large collection of protein families, each represented by multiple sequence alignments and hidden Markov models (HMMs)|
-      |PrositeProfiles||PROSITE consists of documentation entries describing protein domains, families and functional sites as well as associated patterns and profiles to identify them|
-      |TIGRFAM|15.0|TIGRFAMs are protein families based on Hidden Markov Models or HMMs|
-      |PrositePatterns||PROSITE consists of documentation entries describing protein domains, families and functional sites as well as associated patterns and profiles to identify them|
-      |Coils|2.2|Prediction of Coiled Coil Regions in Proteins|
-      |TMHMM| 2.0| Prediction of transmembrane helices in proteins| 
-      |Phobius |1.01|A combined transmembrane topology and signal peptide predictor|
-      |SignalP GRAM NEGATIVE |4.0|SignalP (organism type gram-negative prokaryotes) predicts the presence and location of signal peptide cleavage sites in amino acid sequences for gram-negative prokaryotes|
-      |SignalP EUK |4.0|SignalP (organism type eukaryotes) predicts the presence and location of signal peptide cleavage sites in amino acid sequences for eukaryotes.|
-      |SignalP GRAM POSITIVE |4.0|SignalP (organism type gram-positive prokaryotes) predicts the presence and location of signal peptide cleavage sites in amino acid sequences for gram-positive prokaryotes|
-   
-   1. Note that the last five tools and Panthon database are installed into InterProScan manually.
-   1. It is not necessary to perform again the scanning with InterProScan for all TCDB sequences as most of the TCDB sequences already have UniProt accession number. Therefore, we depend on the lookup service provided by InterProScan in order to directly extract the sequence features from the database.
-   1. In addition to direct extraction, protein sequences that is not known to InterProScan are scanned.
-   1. Interproscan results is located as `./Data/tcdbips`. The file follows the structure described in the following table
-
-      |Column|Description|
-      |:---:|:---|
-      |1|Protein Accession (e.g. P51587)|
-      |2|Sequence MD5 digest (e.g. 14086411a2cdf1c4cba63020e1622579)|
-      |3|Sequence Length (e.g. 3418)|
-      |4|Analysis (e.g. Pfam / PRINTS / Gene3D)|
-      |5|Signature Accession (e.g. PF09103 / G3DSA:2.40.50.140)|
-      |6|Signature Description (e.g. BRCA2 repeat profile)|
-      |7|Start location|
-      |8|Stop location|
-      |9|Score - is the e-value of the match reported by member database method (e.g. 3.1E-52)|
-      |10|Status - is the status of the match (T: true)|
-      |11|Date - is the date of the run|
-      |12|InterPro annotations - accession (e.g. IPR002093)|
-      |13|InterPro annotations - description (e.g. BRCA2 repeat) |
-      |14|GO annotations (e.g. GO:0005515) |
-      |15|Pathways annotations (e.g. REACT_71) |
-
-1. Besides the data files described above, all original data are located in the directory `./Data/`
-
 
 # Preprocessing
 
@@ -398,7 +344,64 @@ NOTE: Su, her you should specify which version has been considered (I guess a ve
 
 ## BLAST features
 
+
+
 ## Interproscan features
+
+1. [InterProScan](http://hongyusu.github.io/lessons/2015/06/17/extract-protein-features-via-interproscan/)
+
+   1. For all proteins in TCDB, we extract various protein features by running [InterProScan](https://code.google.com/p/interproscan/).
+   1. As this procedure takes time, we would like to install and run the InterProScan on local machines other than on webservers.
+   1. A brief instruction for installation and running InterProScan is documented in [my blog post](http://hongyusu.github.io/lessons/2015/06/17/extract-protein-features-via-interproscan/).
+   1. In particular, we download the InterProScan package together with various databases. Version information of InterProScan software and databases can be found from the following table
+
+      |Tool|Version|Information|
+      |:---|:---:|:---|
+      |InterProScan|5.13-52.0|InterProScan package|
+      |ProDom|2006.1|ProDom is a comprehensive set of protein domain families automatically generated from the UniProt Knowledge Database.|
+      |HAMAP||High-quality Automated and Manual Annotation of Microbial Proteomes|
+      |SMART|6.2|SMART allows the identification and analysis of domain architectures based on Hidden Markov Models or HMMs|
+      |SuperFamily|1.75|SUPERFAMILY is a database of structural and functional annotation for all proteins and genomes.|
+      |PRINTS|42.0|A fingerprint is a group of conserved motifs used to characterise a protein family|
+      |Panther|9.0|The PANTHER (Protein ANalysis THrough Evolutionary Relationships) Classification System is a unique resource that classifies genes by their functions, using published scientific experimental evidence and evolutionary relationships to predict function even in the absence of direct experimental evidence.|
+      |Gene3d|3.5.0|Structural assignment for whole genes and genomes using the CATH domain structure database|
+      |PIRSF|3.01|The PIRSF concept is being used as a guiding principle to provide comprehensive and non-overlapping clustering of UniProtKB sequences into a hierarchical order to reflect their evolutionary relationships.|
+      |PfamA|27.0|A large collection of protein families, each represented by multiple sequence alignments and hidden Markov models (HMMs)|
+      |PrositeProfiles||PROSITE consists of documentation entries describing protein domains, families and functional sites as well as associated patterns and profiles to identify them|
+      |TIGRFAM|15.0|TIGRFAMs are protein families based on Hidden Markov Models or HMMs|
+      |PrositePatterns||PROSITE consists of documentation entries describing protein domains, families and functional sites as well as associated patterns and profiles to identify them|
+      |Coils|2.2|Prediction of Coiled Coil Regions in Proteins|
+      |TMHMM| 2.0| Prediction of transmembrane helices in proteins| 
+      |Phobius |1.01|A combined transmembrane topology and signal peptide predictor|
+      |SignalP GRAM NEGATIVE |4.0|SignalP (organism type gram-negative prokaryotes) predicts the presence and location of signal peptide cleavage sites in amino acid sequences for gram-negative prokaryotes|
+      |SignalP EUK |4.0|SignalP (organism type eukaryotes) predicts the presence and location of signal peptide cleavage sites in amino acid sequences for eukaryotes.|
+      |SignalP GRAM POSITIVE |4.0|SignalP (organism type gram-positive prokaryotes) predicts the presence and location of signal peptide cleavage sites in amino acid sequences for gram-positive prokaryotes|
+   
+   1. Note that the last five tools and Panthon database are installed into InterProScan manually.
+   1. It is not necessary to perform again the scanning with InterProScan for all TCDB sequences as most of the TCDB sequences already have UniProt accession number. Therefore, we depend on the lookup service provided by InterProScan in order to directly extract the sequence features from the database.
+   1. In addition to direct extraction, protein sequences that is not known to InterProScan are scanned.
+   1. Interproscan results is located as `./Data/tcdbips`. The file follows the structure described in the following table
+
+      |Column|Description|
+      |:---:|:---|
+      |1|Protein Accession (e.g. P51587)|
+      |2|Sequence MD5 digest (e.g. 14086411a2cdf1c4cba63020e1622579)|
+      |3|Sequence Length (e.g. 3418)|
+      |4|Analysis (e.g. Pfam / PRINTS / Gene3D)|
+      |5|Signature Accession (e.g. PF09103 / G3DSA:2.40.50.140)|
+      |6|Signature Description (e.g. BRCA2 repeat profile)|
+      |7|Start location|
+      |8|Stop location|
+      |9|Score - is the e-value of the match reported by member database method (e.g. 3.1E-52)|
+      |10|Status - is the status of the match (T: true)|
+      |11|Date - is the date of the run|
+      |12|InterPro annotations - accession (e.g. IPR002093)|
+      |13|InterPro annotations - description (e.g. BRCA2 repeat) |
+      |14|GO annotations (e.g. GO:0005515) |
+      |15|Pathways annotations (e.g. REACT_71) |
+
+1. Besides the data files described above, all original data are located in the directory `./Data/`
+
 
 ## PSSM features 
 
