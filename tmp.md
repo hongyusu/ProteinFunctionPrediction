@@ -400,7 +400,7 @@ NOTE: Su, her you should specify which version has been considered (I guess a ve
 
 # Empirical evaluation 
 
-## Support vector machines
+## Support vector machines (SVM)
 
 In this section, we test the classification performance on transporter classification (TC) based on different input feature maps as discussed in the previous section. 
 
@@ -417,29 +417,37 @@ In this section, we test the classification performance on transporter classific
 
 1. Preliminary experimental results are shown in the following table
 
-   | Input feature | AUC | Accuracy | F1 | Precision | Recall |
-   |:--:|:--:|:--:|:--:|:--:|:--:|
-   |../Data/tcdb.TB         |0.9641|0.9992|0.7445|0.9786|0.6008|
-   |../Data/tcdb.TICoils    |0.8541|0.9964|0.0356|0.0380|0.0336|
-   |../Data/tcdb.TIGene3D   |0.8815|0.9881|0.0403|0.0240|0.1266|
-   |../Data/tcdb.TIHamap    |0.8691|0.9981|0.0553|0.9498|0.0285|
-   |../Data/tcdb.TIPANTHER  |0.9081|0.9981|0.4240|0.5239|0.3562|
-   |../Data/tcdb.TIPfam     |0.9415|0.9978|0.3822|0.4201|0.3506|
-   |../Data/tcdb.TIPhobius  |0.8991|0.9964|0.1174|0.1130|0.1220|
-   |../Data/tcdb.TIPIRSF    |0.8743|0.9981|0.1118|0.9687|0.0593|
-   |../Data/tcdb.TIPRINTS   |0.8788|0.9979|0.1369|0.3550|0.0848|
-   |../Data/tcdb.TIProDom   |0.8708|0.9981|0.0345|0.9884|0.0176|
-   |../Data/tcdb.TIProSitePatterns|0.8672|0.9870|0.0301|0.0176|0.1018|
-   |../Data/tcdb.TIProSiteProfiles|0.8783|0.9979|0.1560|0.3745|0.0985|
-   |../Data/tcdb.TISignalP_ EUK    |0.8596|0.9899|0.0109|0.0068|0.0283|
-   |../Data/tcdb.TISignalP_ GRAM_NEGATIVE|0.8677|0.9979|0.0362|0.2543|0.0195|
-   |../Data/tcdb.TISignalP_ GRAM_POSITIVE|0.8724|0.9980|0.0413|0.5434|0.0214|
-   |../Data/tcdb.TISMART      |0.8732|0.9979|0.0715|0.2742|0.0411|
-   |../Data/tcdb.TISUPERFAMILY|0.8851|0.9975|0.1486|0.2275|0.1104|
-   |../Data/tcdb.TITIGRFAM    |0.8819|0.9977|0.2226|0.3421|0.1650|
-   |../Data/tcdb.TITMHMM      |0.8694|0.9975|0.0068|0.0153|0.0044|
-
-
+   | Input feature | AUC | Accuracy | F1 | Precision | Recall | Multilabel |
+   |:--:|:--:|:--:|:--:|:--:|:--:|:--:|
+   |TB                      |0.8705|0.9980|0.0023|1.0000|0.0012|0.0000|
+   |TICoils                 |0.8705|0.9980|0.0023|1.0000|0.0012|0.0000|
+   |TIGene3D                |0.8729|0.9982|0.2151|0.9255|0.1217|0.0046|
+   |TIHamap                 |0.8714|0.9980|0.0122|0.8896|0.0061|0.0000|
+   |TIPANTHER               |0.8721|0.9981|0.0335|0.9857|0.0170|0.0000|
+   |TIPfam                  |0.8727|0.9981|0.0985|0.6216|0.0535|0.0000|
+   |TIPhobius               |0.9048|0.9979|0.2111|0.3945|0.1441|0.0006|
+   |TIPIRSF                 |0.8714|0.9980|0.0208|0.9941|0.0105|0.0004|
+   |TIPRINTS                |0.8730|0.9981|0.0630|0.9765|0.0325|0.0074|
+   |TIProDom                |0.8711|0.9980|0.0036|0.9886|0.0018|0.0000|
+   |TIProSitePatterns       |0.8720|0.9981|0.1007|0.9896|0.0531|0.0039|
+   |TIProSiteProfiles       |0.8727|0.9982|0.1976|0.9925|0.1097|0.0041|
+   |TISignalP_EUK           |0.8714|0.9980|0.0481|0.5812|0.0251|0.0000|
+   |TISignalP_GRAM_NEGATIVE |0.8708|0.9980|0.0377|0.6214|0.0194|0.0000|
+   |TISignalP_GRAM_POSITIVE |0.8722|0.9980|0.0413|0.5434|0.0214|0.0000|
+   |TISMART                 |0.8734|0.9981|0.0933|0.9577|0.0491|0.0015|
+   |TISUPERFAMILY           |0.8810|0.9983|0.3264|0.8470|0.2022|0.0076|
+   |TITIGRFAM               |0.8721|0.9981|0.0401|0.9861|0.0205|0.0002|
+   |TITMHMM                 |0.8706|0.9980|0.1953|0.5192|0.1203|0.0009|
+   |TPSI                    |0.8705|0.9980|0.0082|0.9804|0.0041|0.0000|
+   |TRPSCDD                 |0.8705|0.9980|0.0023|1.0000|0.0012|0.0000|
+   |TRPSCDDNCBI             |0.8710|0.9981|0.0952|0.9635|0.0501|0.0015|
+   |TRPSCOG                 |0.8860|0.9982|0.2196|0.9124|0.1248|0.0091|
+   |TRPSKOG                 |0.8808|0.9982|0.1956|0.9352|0.1092|0.0142|
+   |TRPSPFAM                |0.8715|0.9980|0.0252|0.9968|0.0128|0.0000|
+   |TRPSPRK                 |0.8717|0.9981|0.1247|0.7926|0.0677|0.0019|
+   |TRPSSMART               |0.8712|0.9981|0.0890|0.9457|0.0467|0.0014|
+   |TRPSTCDB201509PSSM      |0.8705|0.9980|0.0023|1.0000|0.0012|0.0000|
+   |TRPSTIGR                |0.8728|0.9981|0.1134|0.9888|0.0601|0.0037|
 
 ## Multiple kernel learning (MKL)
 
