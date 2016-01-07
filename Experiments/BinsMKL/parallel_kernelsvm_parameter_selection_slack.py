@@ -104,6 +104,7 @@ def run():
   else: numLabel = 3200
   # iterate over the lists
   xFilenameList         = ['../Data/tcdb.all.KUNIMKL','../Data/tcdb.all.KALIGN','../Data/tcdb.all.KALIGNF','../Data/tcdb.all.GUNIMKL','../Data/tcdb.all.GALIGN','../Data/tcdb.all.GALIGNF']
+  xFilenameList         = ['../Data/tcdb.all.GUNIMKL','../Data/tcdb.all.GALIGN','../Data/tcdb.all.GALIGNF']
   yFilenameList         = ['../Data/tcdb.TC']
   labelIndexList        = xrange(1,numLabel+1)
   foldIndexList         = xrange(1,kFold+1) 

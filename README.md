@@ -677,34 +677,4 @@ In stead of predicting the transporter classification (TC) with single feature m
    |Gaussian | ALIGNF | 0.9461 | 0.9990 | 0.6609 | 0.9619 | 0.5034 | 0.3289
 
 
-2. Old kernels
-
-   |MMCRF| Input feature | AUC | Microlabel Accuracy | F1 | Precision | Recall | Multilabel Accuracy | 
-   |:--:           |:--:|:--:|--:|:--:|:--:|:--:|:--:|:---:|
-   |Linear         |UNIMKL| NA | 0.9993 | 0.7173 | 0.7173 | 0.7173 | 0.5513 
-   |Linear         |ALIGN | NA | 0.9994 | 0.7711 | 0.7711 | 0.7711 | 0.5874 
-   |Linear         |ALIGNF| NA | 0.9995 | 0.8045 | 0.8045 | 0.8045 | 0.6365 
-   |Gaussian       |UNIMKL| NA | 0.9995 | 0.7992| 0.7992| 0.7992 | 0.6428 
-   |Gaussian       |ALIGN | NA | 0.9996 | 0.8284| 0.8284| 0.8284 | 0.6856 
-   |Gaussian       |ALIGNF| NA | 0.9996 | 0.8524| 0.8524| 0.8524 | 0.7281 
-
-
-   |MMR| Input feature | AUC | Microlabel Accuracy | F1 | Precision | Recall | Multilabel Accuracy | 
-   |:--:           |:--:|:--:|--:|:--:|:--:|:--:|:--:|:---:|
-   |Linear         |UNIMKL| NA | NA | 0.3512 | 0.3512 | 0.3512 | 0.0690 
-   |Linear         |ALIGN | NA | NA | 0.3387 | 0.3387 | 0.3387 | 0.0587 
-   |Linear         |ALIGNF| NA | NA | 0.5012 | 0.5012 | 0.5012 | 0.2095 
-   |Gaussian       |UNIMKL| NA | NA | 0.7987 | 0.7987 | 0.7987 | 0.6409 
-   |Gaussian       |ALIGN | NA | NA | 0.8296 | 0.8296 | 0.8296 | 0.6828 
-   |Gaussian       |ALIGNF| NA | NA | 0.8537 | 0.8537 | 0.8537 | 0.7272 
-
-   |MKL| Input feature | AUC | Accuracy | F1 | Precision | Recall | Multilabel Accuracy |
-   |:--:           |:--:|:--:|--:|:--:|:--:|:--:|:--:|:--:|
-   |Linear         |UNIMKL| 0.9851 | 0.9989 | 0.6826 | 0.8364 | 0.5766 | 0.2380 
-   |Linear         |ALIGN | 0.9889 | 0.9991 | 0.7463 | 0.8662 | 0.6555 | 0.3179
-   |Linear         |ALIGNF| 0.9878 | 0.9993 | 0.7918 | 0.8885 | 0.7140 | 0.4016 
-   |Gaussian       |UNIMKL| 0.8990 | 0.9984 | 0.3172 | 0.9786 | 0.1893 | 0.1248 
-   |Gaussian       |ALIGN | 0.8976 | 0.9984 | 0.3077 | 0.9818 | 0.1825 | 0.1272
-   |Gaussian       |ALIGNF| 0.8902 | 0.9983 | 0.2364 | 0.9834 | 0.1343 | 0.0972 
-
 
