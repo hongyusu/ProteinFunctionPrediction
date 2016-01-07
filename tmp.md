@@ -396,6 +396,43 @@ NOTE: Su, her you should specify which version has been considered (I guess a ve
  
 
 
+## Statistics of feature sets
+
+1. The following table shows the statistics of features computed for TCDB prediction tasks.
+
+   |Feature set| Number of features|
+   |:---|---:|
+   |TB | 12535 | 
+   |TC | 3145 | 
+   |TICoils | 1 | 
+   |TIGene3D | 611 | 
+   |TIHamap | 209 | 
+   |TIPANTHER | 4070 | 
+   |TIPfam | 2025 | 
+   |TIPhobius | 7 | 
+   |TIPIRSF | 283 | 
+   |TIPRINTS | 579 | 
+   |TIProDom | 145 | 
+   |TIProSitePatterns | 285 | 
+   |TIProSiteProfiles | 282 | 
+   |TISignalPEUK | 2 | 
+   |TISignalP_GRAM_NEGATIVE | 2 | 
+   |TISignalP_GRAM_POSITIVE | 1 | 
+   |TISMART | 240 | 
+   |TISUPERFAMILY | 512 | 
+   |TITIGRFAM | 769 | 
+   |TITMHMM | 1 | 
+   |TPSI | 12540 | 
+   |TRPSCDD | 10727 | 
+   |TRPSCDDNCBI | 4265 | 
+   |TRPSCOG | 1739 | 
+   |TRPSKOG | 2066 | 
+   |TRPSPFAM | 3048 | 
+   |TRPSPRK | 3374 | 
+   |TRPSSMART | 394 | 
+   |TRPSTCDB201509PSSM | 12531 | 
+   |TRPSTIGR | 1561 | 
+
 
 
 # Empirical evaluation 
@@ -621,43 +658,6 @@ Prediction performance of MMR is shown in the following table. In particular, ke
    |Database|Number of PSSM models|Version|
    |:---:|---:|---:|
    |CDD-TCDB  |12540| 201509 version of TCDB|
-
-# Statistics of feature sets
-
-1. The following table shows the statistics of features computed for TCDB prediction tasks.
-
-   |Feature set| Number of features|
-   |:---|---:|
-   |TB | 12535 | 
-   |TC | 3145 | 
-   |TICoils | 1 | 
-   |TIGene3D | 611 | 
-   |TIHamap | 209 | 
-   |TIPANTHER | 4070 | 
-   |TIPfam | 2025 | 
-   |TIPhobius | 7 | 
-   |TIPIRSF | 283 | 
-   |TIPRINTS | 579 | 
-   |TIProDom | 145 | 
-   |TIProSitePatterns | 285 | 
-   |TIProSiteProfiles | 282 | 
-   |TISignalPEUK | 2 | 
-   |TISignalP_GRAM_NEGATIVE | 2 | 
-   |TISignalP_GRAM_POSITIVE | 1 | 
-   |TISMART | 240 | 
-   |TISUPERFAMILY | 512 | 
-   |TITIGRFAM | 769 | 
-   |TITMHMM | 1 | 
-   |TPSI | 12540 | 
-   |TRPSCDD | 10727 | 
-   |TRPSCDDNCBI | 4265 | 
-   |TRPSCOG | 1739 | 
-   |TRPSKOG | 2066 | 
-   |TRPSPFAM | 3048 | 
-   |TRPSPRK | 3374 | 
-   |TRPSSMART | 394 | 
-   |TRPSTCDB201509PSSM | 12531 | 
-   |TRPSTIGR | 1561 | 
 
 
 
