@@ -6,14 +6,15 @@ The fucntion is defined as a TC code following the hierarchical structure (a tre
 In particular, there are five levels in the hierarchical classification system of which we aim to prediction the first four levels.
 This is due to the fact that the functional annotations on the fifth level are very specific. 
 
-We collection over 12,000 protein sequences from TCDB database and generate for each sequence a varity of features of the following three categories
+We collection over 12,000 protein sequences from TCDB database and generate for each sequence a varity of features of the following three main categories
 
-1. BLAST feature
-1. InterProScan features
-1. Position specific scoring matrix features
+1. BLAST feature.
+1. InterProScan features.
+1. Position specific scoring matrix features.
 
-
-
+In the end, we are able to have a collection of about 30 different feature sets. For each feature set we run single label classification model to predict functions of proteins.
+In addition, we combine different types of features with three multiple kernel learning approaches to build a better feature representation of the protein space, and improve prediction performance with the combine feature space. 
+Furthermore, we adpot structured output learning approach to further improve the performance taking into consideration the correlation of different annotations given by the hierarchical structure.  
 
 
 
