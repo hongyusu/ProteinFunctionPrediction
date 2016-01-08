@@ -24,7 +24,8 @@
 		- [Max-margin conditional random field (MMCRF)](#)
 		- [Max margin regression (MMR)](#)
 - [Future work](#)
-- 
+
+
 # Introduction
 
 The final goal of this project is to reliably predict the protein functions in terms of transporter function classification.
