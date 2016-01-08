@@ -22,7 +22,7 @@
 		- [MKL kernel weights](#)
 		- [Support vector machine (SVM)](#)
 		- [Max margin conditional random field (MMCRF)](#max-margin-conditional-random-field)
-		- [Max margin regression (MMR)](#max-margin-regression-(-mmr-))
+		- [Max margin regression (MMR)](#max-margin-regression-(mmr))
 - [Future work](#future-work)
 
 
