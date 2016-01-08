@@ -1,90 +1,53 @@
-
-
-
 #Table of Contents
 
-- [Table of content](#table-of-content)
 - [Introduction](#introduction)
 - [Data](#data)
-    - [Data from Master thesis](#data-from-master-thesis)
-    - [Other data](#other-data)
+	- [TCDB data](#tcdb-data)
 - [Preprocessing](#preprocessing)
-    - [Use the data from Master thesis](#use-data-from-master-thesis)
-    - [Generate protein data with BLAST and InterProScan](#generate-protein-data-with-blast-and-interproscan)
-    - [Data statistics](#data-statistics)
+- [Feature generation](#feature-generation)
+	- [BLAST features](#blast-featrues)
+	- [Interproscan features](#interproscan-feature)
+	- [Data statistics of BLAST and IPS featuers](#data-statistics-of-blast-and-ips-features)
+	- [PSSM features](#pssm-features)
+		- [PSSM features generated from CDD database](#pssm-features-generated-from-cdd-database)
+		- [PSSM features generated from TCDB](#pssm-features-generated-from-tcdb)
+	- [PSSM features generated from TCDB-CDD](#pssm-features-generated-from-tcdb-cdd)
+	- [Statistics of feature sets](#statistics-of-feature-sets)
 - [Empirical evaluation](#empirical-evaluation)
-    - [Support vector machines](#support-vector-machines)
-        - [SVM experiment settings](#svm-experiment-settings)
-        - [SVM results](#svm-results)
-    - [Multiple kernel learning](#multiple-kernel-learning)
-        - [MKL experiment settings](#mkl-experiment-settings)
-        - [MKL kernel weights](#mkl-kernel-weights)
-        - [MKL results](#mkl-results)
-    - [Structured output learning](#structured-output-learning)
-        - [SOP results](#sop-results)
-    - [Max margin regression](#max-margin-regression)
-        - [MMR results](#mmr-results)
-- [Additional features](#additional-features)
-    - [PSSM features generated from CDD database](#pssm-features-generated-from-cdd-database)
-    - [PSSM features generated from TCDB](#pssm-features-generated-from-tcdb)
-    - [PSSM features generated from TCDB-CDD](#pssm-features-generated-from-tcdb-cdd)
-- [Statistics of feature sets](#statistics-of-feature-sets)
+	- [Support vector machines (SVM)](#support-vector-machines-svm)
+		- [SVM experiment settings](#svm-experiment-settings)
+		- [SVM results](#svm-results)
+	- [Multiple kernel learning (MKL)](#multiple-kernel-learning-mkl)
+		- [MKL experiment settings](#mkl-experiment-settings)
+		- [MKL kernel weights](#mkl-kernel-weights)
+		- [Support vector machine (SVM)](#support-vector-machine-svm)
+		- [Max margin conditional random field (MMCRF)](#max-margin-conditional-random-field-mmcrf)
+		- [Max margin regression (MMR)](#max-margin-regression-mmr)
+- [Future work](#future-work)
+
 
 # Introduction
 
-For now the project aims to reliably predict the function of the transporter proteins.
-The function is defined as TC code following the hierarchical structure of the transporter protein classification system.
-The hierarchical structure of the classification system has five level. We aim to predict the first four level as the fifth level is the very specific classification.
-In addition to the transporter proteins documented in TCDB, we also collect proteins from UniProt.
-Uniprot proteins have the following features:
+The final goal of this project is to reliably predict the protein functions in terms of transporter function classification.
+The fucntion is defined as a TC code following the hierarchical structure (a tree) of the transporter protein classification system.
+In particular, there are five levels in the hierarchical classification system of which we aim to prediction the first four levels.
+This is due to the fact that the functional annotations on the fifth level are very specific. 
 
-   1. Gene Ontology
-   2. Protein Family
-   3. _BLAST_ score with UniProt
-   4. Taxonomy in NCBI
+We collection over 12,000 protein sequences from TCDB database and generate for each sequence a varity of features of the following three main categories
 
-For TCDB proteins we extract features of the following two categorises
+1. BLAST feature.
+1. InterProScan features.
+1. Position specific scoring matrix features.
 
-   1. _BLAST_ score with TCDB
-   2. Many InterProScan features
+In the end, we are able to have a collection of about 30 different feature sets. For each feature set we run single label classification model to predict functions of proteins.
+In addition, we combine different types of features with three multiple kernel learning approaches to build a better feature representation of the protein space, and improve prediction performance with the combine feature space. 
+Furthermore, we adpot structured output learning approach to further improve the performance taking into consideration the correlation of different annotations given by the hierarchical structure.  
+
+
 
 # Data
 
-## Data from Master thesis
- 
-We obtain some feature representations for proteins based on the [Master thesis](). This covers features in the following categories. 
-
-1. Features from Gene ontology (GO)
-
-   |Type of data|Number of items|
-   |---:|---:|
-   |Protein|101422|
-   |GO: Biological process|12891|
-   |GO: Molecular function|4816|
-   |GO: Cellular component|1670|
-
-2. Protein family (Pfam) data
-
-   |Type of data|Number of items|
-   |---:|---:|
-   |Protein|100589|
-   |Pfam feature| 7341|
-
-3. Blast score with UniProt
-
-   |Type of data|Number of items|
-   |---:|---:|
-   |Protein|56838|
-   |Blast feature|12646|
-
-4. Taxonomy data
-
-   |Type of data|Number of items|
-   |---:|---:|
-   |Protein|104116|
-   |Taxonomy feature|3004|
-
-## Other data
+## TCDB data
 
 We extract protein classification data from TCDB database.
 As the intersection of the protein data listed above and the ones in TCDB is very small we compute protein features via _BLAST_ and InterProScan.
@@ -109,6 +72,45 @@ NOTE: Su, her you should specify which version has been considered (I guess a ve
 
   1. Data file for TCDB sequence and classification information is in the file `./Data/tcdb.1`.
 
+
+
+# Preprocessing
+
+1. First I remove duplicated proteins from the transporter protein classification database (TCDB), particularly, by analyzing the sequence-classification data file.
+1. Then I run _BLAST_ search and InterProScan for all preprocessed proteins.
+1. Merge TCDB classification (protein labels), TCDB _BLAST_ features, and TCDB InterProScan features.
+1. Make data matrices of different types, e.g., different feature matrices and label matrix.
+   1. In particular, _BLAST_ features use real number (_BLAST_ score), other InterProScan feature use integer number as count
+1. Important scripts and result files are listed as follows.
+
+   ```
+   Preprocessing
+   |---Bins
+       |---process_tcdb.py        # process original TCDB database (remove duplication ect)
+       |---merge_tcdb_blast_and_ips.py          # merge TCDB blast, ips and classfiication data
+       |---run_blast.sh           # run _BLAST_ search
+       |---run_interproscan.sh    # run interproscan search to generate protein features
+       |---separate_different_features.py # generate feature matrices of different types
+   |---Results
+       |---tcdbdata               # merged data in sparse matrix format: 'protein name' 'feature name' 'value' 
+       |---tcdbdata.collab        # feature names
+       |---tcdbdata.rowlab        # protein names
+       |---tcdbdata.mtx           # sparse data matrix with format 'protein id' 'feature id' 'value'
+		  |---tcdb1.annotations.gz   # dense matrix (text file gzipped) with Swissprot AC on rows and TCDB classes on columns. 
+		                             # Entry (i,j) of the matrix is 1 if protein i is annotated to TC class j, otherwise (i,j) = 0
+									 # this matrix includes all the annotations (including multiple paths) obtained from the file tcdb.1 in the Data directory.
+   Experiments
+   |---Data
+       |---tcdb.prefix       # data matrices of different type, where type information are explained in the section of Data statistics.
+       |---README.md         # read me file for experimental data
+       |---tcdb.collab       # feature names
+       |---tcdb.rowlab       # protein names
+   |---Data.tar.gz           # compressed Data files, including files in `./Data` folder
+   ```
+
+# Feature generation
+
+## BLAST features
 
 1. [_BLAST_ with TCDB](http://hongyusu.github.io/lessons/2015/06/16/ncbi-blast-installation-and-running-in-parallel/)
 
@@ -151,6 +153,8 @@ NOTE: Su, her you should specify which version has been considered (I guess a ve
          |mismatch | Number of mismatches|
          |gapopen | Number of gap openings|
 
+
+## Interproscan features
 
 1. [InterProScan](http://hongyusu.github.io/lessons/2015/06/17/extract-protein-features-via-interproscan/)
 
@@ -206,160 +210,7 @@ NOTE: Su, her you should specify which version has been considered (I guess a ve
 
 1. Besides the data files described above, all original data are located in the directory `./Data/`
 
-
-# Preprocessing
-
-## Use the data from Master thesis
-
-1. The first strategy we used is to merge the protein data from the Master thesis and from TCDB database to find an intersection of proteins with both various features and classification information in TCDB.
-1. However, we found out that the intersection is very small. Only about 1000 proteins from TCDB has feature representations in the Master thesis data.
-1. Anywauy, this strategy is briefly illustrated as followings:
-   1. Merge datasets from different sources:
-   
-      1. Merge the following feature types into one matrix
-   
-         |Data type|#Proteins|#Features|
-         |:----|:----:|:----:|
-         |matgoBP|101422|12891|
-         |matgoCC|101422|1670|
-         |matgoMF|101422|4816|
-         |matblastcompressed|56838|12646|
-         |matpfam|100589|7341|
-         |mattaxo|104116|3004|
-         |TCDB|12516|9456|
-   
-      2. A big global matrix is computed by concatenating the matrices of protein-GO, protein-Blast, protein-Ffam, protein-taxonomy, and protein-TCDB, and protein-TCDBblast.
-   
-         1. The number of proteins and the number of features in the union of the collection of matrices are shown in the following table.
-   
-         2. The number of proteins and the number of features in the intersection of the collection of matrics are shown in the following table. Notice that a protein will present in the interection matrix if it has features in GO/_BLAST_/Pfam/Taxonomy categories. 
-   
-            |Type|#Proteins|#Features|
-            |:----|:----:|:----:|
-            |Union|123619|64328|
-            |Intersection|1336|64328|
-   
-         3. Different type of fetures are annotated in `.collab` according to the following table
-   
-            |Feature name|Prefix|
-            |:---|:---:|
-            |Gene ontology: biological process|GB|
-            |Gene ontology: cellular component|GC|
-            |Gene ontology: molecular function|GM|
-            |Protein family|PF|
-            |_BLAST_|MB|
-            |Taxonomy|MT|
-            |TCDB classification|TC|
-            |TCDB _BLAST_|TB|
-
-## Generate protein data with BLAST and InterProScan
-
-1. Realizing that I cannot rely on the data used in the Master thesis, I directly work on proteins from TCDB. In particular, I compuate various protein features via running _BLAST_ search and InterProScan.
-  
-1. First I remove duplicated proteins from the transporter protein classification database (TCDB), particularly, by analyzing the sequence-classification data file.
-      
-   NOTE: In this way you removed the annotations for proteins having multiple annotation paths. These are 29:
-   
-   |AC|TC|
-   |:---:|:---|
-   |D4ZJA6|1.A.30.1.5|
-   |D4ZJA6|1.A.30.1.6|
-   |O24303|1.A.18.1.1|
-   |O24303|3.A.9.1.1|
-   |O34840|2.A.19.2.7|
-   |O34840|2.A.19.2.11|
-   |P0AAW9|8.A.50.1.1|
-   |P0AAW9|2.A.6.2.2|
-   |P0C1S5|9.A.39.1.3|
-   |P0C1S5|9.A.39.1.2|
-   |P18409|1.B.33.3.1|
-   |P18409|1.B.8.6.1|
-   |P23644|3.A.8.1.1|
-   |P23644|1.B.8.2.1|
-   |P25568|2.A.1.24.1|
-   |P25568|9.A.15.1.1|
-   |P28795|9.A.17.1.1|
-   |P28795|3.A.20.1.5|
-   |P29340|3.A.20.1.1|
-   |P29340|3.A.20.1.5|
-   |P34230|3.A.1.203.2|
-   |P34230|3.A.1.203.6|
-   |P94360|3.A.1.1.26|
-   |P94360|3.A.1.1.34|
-   |Q03PY5|3.A.1.28.2|
-   |Q03PY5|3.A.1.26.9|
-   |Q03PY7|3.A.1.28.2|
-   |Q03PY7|3.A.1.26.9|
-   |Q07418|9.A.17.1.1|
-   |Q07418|3.A.20.1.5|
-   |Q15049|9.B.129.1.1|
-   |Q15049|2.A.1.76.1|
-   |Q55JG4|9.B.178.1.5|
-   |Q55JG4|9.B.178.1.6|
-   |Q6GHV7|9.A.39.1.1|
-   |Q6GHV7|9.A.39.1.2|
-   |Q6GUB0|2.A.88.1.1|
-   |Q6GUB0|3.A.1.25.1|
-   |Q72L52|3.A.1.1.24|
-   |Q72L52|3.A.1.1.25|
-   |Q8EAG6|1.A.30.1.5|
-   |Q8EAG6|1.A.30.1.6|
-   |Q8KQR1|9.A.39.1.4|
-   |Q8KQR1|9.A.39.1.2|
-   |Q99257|1.I.1.1.1|
-   |Q99257|3.A.22.1.1|
-   |Q9FBS5|3.A.1.1.42|
-   |Q9FBS5|3.A.1.1.43|
-   |Q9FBS6|3.A.1.1.42|
-   |Q9FBS6|3.A.1.1.43|
-   |Q9FBS7|3.A.1.1.42|
-   |Q9FBS7|3.A.1.1.43|
-   |Q9L0Q1|3.A.1.1.33|
-   |Q9L0Q1|3.A.1.1.36|
-   |Q9RL01|2.A.1.72.1|
-   |Q9RL01|2.A.1.15.15|
-   |Q9Y3Q4|1.A.1.5.10|
-   |Q9Y3Q4|1.A.1.5.11|
-
-
-   If we consider only the annotation till to the fourth level we have only 13 proteins with multiple annotated paths, but in this way we miss (considering annotations from the first to the fourth level) 41 annotations. To my opinion it is not a good idea to eliminate such annotations. Considering that in practice there are only a few multiple paths, we can ignore multiple paths in our predictions, but without removing them from the data. You can recover the full TCDB annotations using the file tcdb.1 instead of tcdb in the Data directory.
-
-   The TCDB annotation matrix, including all the duplicated path annotations till to the fourth level of the TCDB is available in Preprocessing/Results/tcdb1.annotations.levels1234.txt.gz.
-   This gzipped text file has Protein AC on rows (12546 AC) and 3145 TCDB classes on columns. This is a 0/1 dense matrix: the entry (i,j) is equal to 1 means that protein i is annotated with TCDB class j, otherwise (i,j) = 0.
-
-
-1. Then I run _BLAST_ search and InterProScan for all preprocessed proteins.
-1. Merge TCDB classification (protein labels), TCDB _BLAST_ features, and TCDB InterProScan features.
-1. Make data matrices of different types, e.g., different feature matrices and label matrix.
-   1. In particular, _BLAST_ features use real number (_BLAST_ score), other InterProScan feature use integer number as count
-1. Important scripts and result files are listed as follows.
-
-   ```
-   Preprocessing
-   |---Bins
-       |---process_tcdb.py        # process original TCDB database (remove duplication ect)
-       |---merge_tcdb_blast_and_ips.py          # merge TCDB blast, ips and classfiication data
-       |---run_blast.sh           # run _BLAST_ search
-       |---run_interproscan.sh    # run interproscan search to generate protein features
-       |---separate_different_features.py # generate feature matrices of different types
-   |---Results
-       |---tcdbdata               # merged data in sparse matrix format: 'protein name' 'feature name' 'value' 
-       |---tcdbdata.collab        # feature names
-       |---tcdbdata.rowlab        # protein names
-       |---tcdbdata.mtx           # sparse data matrix with format 'protein id' 'feature id' 'value'
-		  |---tcdb1.annotations.gz   # dense matrix (text file gzipped) with Swissprot AC on rows and TCDB classes on columns. 
-		                             # Entry (i,j) of the matrix is 1 if protein i is annotated to TC class j, otherwise (i,j) = 0
-									 # this matrix includes all the annotations (including multiple paths) obtained from the file tcdb.1 in the Data directory.
-   Experiments
-   |---Data
-       |---tcdb.prefix       # data matrices of different type, where type information are explained in the section of Data statistics.
-       |---README.md         # read me file for experimental data
-       |---tcdb.collab       # feature names
-       |---tcdb.rowlab       # protein names
-   |---Data.tar.gz           # compressed Data files, including files in `./Data` folder
-   ```
- 
-## Data statistics
+## Data statistics of BLAST and IPS featuers
 
 1. I compute the following statistice for the overall merged dataset, in particular, for the file `./Preprocessing/Results/tcdb.mtx`.
 
@@ -393,151 +244,10 @@ NOTE: Su, her you should specify which version has been considered (I guess a ve
    |TISignalP_ GRAM_NEGATIVE__|2|	SignalP GRAM NEGATIVE |4.0|SignalP (organism type gram-negative prokaryotes) predicts the presence and location of signal peptide cleavage sites in amino acid sequences for gram-negative prokaryotes|
    |TISignalP_ EUK__|2|	SignalP EyUK|4.0|SignalP (organism type eukaryotes) predicts the presence and location of signal peptide cleavage sites in amino acid sequences for eukaryotes.|
    |TISignalP_ GRAM_POSITIVE__|1|	SignalP GRAM POSITIVE |4.0|SignalP (organism type gram-positive prokaryotes) predicts the presence and location of signal peptide cleavage sites in amino acid sequences for gram-positive prokaryotes|
- 
 
 
 
-
-# Empirical evaluation 
-
-## Support vector machines
-
-In this section, we test the classification performance on transporter classification (TC) based on different input feature maps as discussed in the previous section. 
-
-### SVM experiment settings
-
-1. Linear SVM is used as the baseline learner. We use a SVM implementation from [libSVM](https://www.csie.ntu.edu.tw/~cjlin/libsvm/).
-1. We select for each input feature map a SVM margin slack (C) parameter from the set {0.01,0.1,1,10,100}.
-1. Parameter selection is baed on a random selection of 5000 proteins from the original dataset.
-1. After parametere selection, the best SVM C parameter is applied to both training and test.
-1. Experiment results are reported from a five fold cross validation procedure. We randomly divide examples into five disjoin set of equal size. In each iteration, we use one set for testing and the rest for training. The same procedure is then repeated five times.
-1. We report the following metrics to measure the performance of the classifier including AUC, accuracy, F1, precision, and recall. The scores are computed by pooling all microlabels.
-
-### SVM results
-
-1. Preliminary experimental results are shown in the following table
-
-   | Input feature | AUC | Accuracy | F1 | Precision | Recall |
-   |:--:|:--:|:--:|:--:|:--:|:--:|
-   |../Data/tcdb.TB         |0.9641|0.9992|0.7445|0.9786|0.6008|
-   |../Data/tcdb.TICoils    |0.8541|0.9964|0.0356|0.0380|0.0336|
-   |../Data/tcdb.TIGene3D   |0.8815|0.9881|0.0403|0.0240|0.1266|
-   |../Data/tcdb.TIHamap    |0.8691|0.9981|0.0553|0.9498|0.0285|
-   |../Data/tcdb.TIPANTHER  |0.9081|0.9981|0.4240|0.5239|0.3562|
-   |../Data/tcdb.TIPfam     |0.9415|0.9978|0.3822|0.4201|0.3506|
-   |../Data/tcdb.TIPhobius  |0.8991|0.9964|0.1174|0.1130|0.1220|
-   |../Data/tcdb.TIPIRSF    |0.8743|0.9981|0.1118|0.9687|0.0593|
-   |../Data/tcdb.TIPRINTS   |0.8788|0.9979|0.1369|0.3550|0.0848|
-   |../Data/tcdb.TIProDom   |0.8708|0.9981|0.0345|0.9884|0.0176|
-   |../Data/tcdb.TIProSitePatterns|0.8672|0.9870|0.0301|0.0176|0.1018|
-   |../Data/tcdb.TIProSiteProfiles|0.8783|0.9979|0.1560|0.3745|0.0985|
-   |../Data/tcdb.TISignalP_ EUK    |0.8596|0.9899|0.0109|0.0068|0.0283|
-   |../Data/tcdb.TISignalP_ GRAM_NEGATIVE|0.8677|0.9979|0.0362|0.2543|0.0195|
-   |../Data/tcdb.TISignalP_ GRAM_POSITIVE|0.8724|0.9980|0.0413|0.5434|0.0214|
-   |../Data/tcdb.TISMART      |0.8732|0.9979|0.0715|0.2742|0.0411|
-   |../Data/tcdb.TISUPERFAMILY|0.8851|0.9975|0.1486|0.2275|0.1104|
-   |../Data/tcdb.TITIGRFAM    |0.8819|0.9977|0.2226|0.3421|0.1650|
-   |../Data/tcdb.TITMHMM      |0.8694|0.9975|0.0068|0.0153|0.0044|
-
-
-1. ROC curve is shown as 
-  
-   ![alt text](https://github.com/aalto-ics-kepaco/ProteinFunctionPrediction/blob/master/Experiments/PlotsSVM/auc.jpg)
-
-## Multiple kernel learning
-
-In stead of predicting the transporter classification (TC) with single feature map as studied in the previous section, we aim to combine those 19 different feature maps with multiple kernel learning approaches.
-
-### MKL experiment settings
-
-1. We compute an input base kernel (gram matrix) for each individual feature map. In particular, each base kenrel is a linear kernel on the original feature map.
-1. We compute a linear output kernel for the output multilabels. 
-1. Three multiple kernel learning approaches are applied to combine these 19 base kernels including
-   1. `UNIMKL` which computes a unifom combination of based kenrels
-   1. `ALIGN` which aligns each input kernel with the output kernel, then combines all based kernels according to the alignment scores
-   1. `ALIGNF` which maximizes the alignment score between the output kernel and a convex combination of all input kernels
-1. Support Vector Machines are used to build the classification model. In particular, we used a LibSVM version with precomputed kernel.
-1. We select SVM margin slack parameter (C) based on a random selection of 5000 examples. Best C is selected from the set {0.01,0.1,1,10,100}.
-1. After parameter selection, best C parameter is used for training and prediction.
-1. Experiment results are reported from a five fold cross validation procedure. We randomly divide examples into five disjoin set of equal size. In each iteration, we use one set for testing and the rest for training. The same procedure is then repeated five times.
-1. We report the following metrics to measure the performance of the classifier including AUC (area under the curve), AUPRC (area under the precision-recall curve), accuracy, F1, precision, and recall. The scores are computed by pooling all microlabels. In addition, precision, recall, and accuracy are computed with a threshold 0.5 to binarize all real valued predictions.
-
-### MKL kernel weights 
-
-1. Kernel weights computed from different multiple kernel learning approaches are listed in the following table
- 
-   |MKL|tcdb.TB|tcdb.TICoils|tcdb.TIGene3D|tcdb.TIHamap|tcdb.TIPANTHER|tcdb.TIPfam|tcdb.TIPhobius|tcdb.TIPIRSF|tcdb.TIPRINTS|tcdb.TIProDom|tcdb.TIProSitePatterns|tcdb.TIProSiteProfiles|tcdb.TISignalP_EUK|tcdb.TISignalP_GRAM_NEGATIVE|tcdb.TISignalP_GRAM_POSITIVE|tcdb.TISMART|tcdb.TISUPERFAMILY|tcdb.TITIGRFAM|tcdb.TITMHMM|
-   |:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:---:|
-   | UNIMKL |0.05|0.05|0.05|0.05|0.05|0.05|0.05|0.05|0.05|0.05|0.05|0.05|0.05|0.05|0.05|0.05|0.05|0.05|0.05|
-   | ALIGN  |0.15|0.01|0.22|0.02|0.19|0.10|0.23|0.04|0.07|0.01|0.03|0.07|0.06|0.06|0.05|0.03|0.17|0.05|0.23|
-   | ALIGNF |0.00|0.00|0.09|0.14|0.37|0.00|0.00|0.31|0.00|0.86|0.00|0.00|0.04|0.05|0.01|0.00|0.00|0.00|0.00|
-
-1. In addition, kernel weights are shown in the following bar plot
-
-   ![alt text](https://github.com/aalto-ics-kepaco/ProteinFunctionPrediction/blob/master/Experiments/PlotsMKL/kernel_weights.jpg)
-
-### MKL results
-
-1. Prediction performances of three multiple kernel learning approaches are listed in the following table in which all combined kernel are centered and * corresponds to additional operation on the combined kernel `normalization->centering`.
-
-   |Kernel function| Input feature | AUC | Accuracy | F1 | Precision | Recall | Multilabel Accuracy |
-   |:--:           |:--:|:--:|--:|:--:|:--:|:--:|:--:|:--:|
-   |Linear         |UNIMKL*| 0.9851 | 0.9989 | 0.6826 | 0.8364 | 0.5766 | 0.2380 
-   |Linear         |ALIGN* | 0.9889 | 0.9991 | 0.7463 | 0.8662 | 0.6555 | 0.3179
-   |Linear         |ALIGNF*| 0.9878 | 0.9993 | 0.7918 | 0.8885 | 0.7140 | 0.4016 
-
-1. In addition, we use Guassian kenrel on all three computed kernels, the corresponding prediction performance is shown in the following table. 
-
-   |Kernel function| Input feature | AUC | Accuracy | F1 | Precision | Recall | Multilabel Accuracy |
-   |:--:           |:--:|:--:|--:|:--:|:--:|:--:|:--:|:--:|
-   |Gaussian       |UNIMKL*| 0.8990 | 0.9984 | 0.3172 | 0.9786 | 0.1893 | 0.1248 
-   |Gaussian       |ALIGN* | 0.8976 | 0.9984 | 0.3077 | 0.9818 | 0.1825 | 0.1272
-   |Gaussian       |ALIGNF*| 0.8902 | 0.9983 | 0.2364 | 0.9834 | 0.1343 | 0.0972 
-
-
-
-## Structured output learning
-
-### SOP results
-
-1. Prediction performance of the developed structured output prediction method is shown in the following table. In particular, kernels are computed from multiple kernel learning approaches.
-
-   |Kernel function| Input feature | AUC | Microlabel Accuracy | F1 | Precision | Recall | Multilabel Accuracy | 
-   |:--:           |:--:|:--:|--:|:--:|:--:|:--:|:--:|:---:|
-   |Linear         |UNIMKL*| NA | 0.9993 | 0.7173 | 0.7173 | 0.7173 | 0.5513 
-   |Linear         |ALIGN* | NA | 0.9994 | 0.7711 | 0.7711 | 0.7711 | 0.5874 
-   |Linear         |ALIGNF*| NA | 0.9995 | 0.8045 | 0.8045 | 0.8045 | 0.6365 
-
-2. Predidction performance of the developed structured output prediction model with additional Gaussian kernels on kernel matrices that are computed from multiple kernel learning approaches.
-
-   |Kernel function| Input feature | AUC | Microlabel Accuracy | F1 | Precision | Recall | Multilabel Accuracy | 
-   |:--:           |:--:|:--:|--:|:--:|:--:|:--:|:--:|:---:|
-   |Gaussian       |UNIMKL*| NA | 0.9995 | 0.7992| 0.7992| 0.7992 | 0.6428 
-   |Gaussian       |ALIGN* | NA | 0.9996 | 0.8284| 0.8284| 0.8284 | 0.6856 
-   |Gaussian       |ALIGNF*| NA | 0.9996 | 0.8524| 0.8524| 0.8524 | 0.7281 
-
-
-## Max margin regression
-
-### MMR results
-
-1. Prediction performance of MMR is shown in the following table. In particular, kernels are computed directly from multiple kernel learning approaches.
-
-   |Kernel function| Input feature | AUC | Microlabel Accuracy | F1 | Precision | Recall | Multilabel Accuracy | 
-   |:--:           |:--:|:--:|--:|:--:|:--:|:--:|:--:|:---:|
-   |Linear         |UNIMKL*| NA | NA | 0.3512 | 0.3512 | 0.3512 | 0.0690 
-   |Linear         |ALIGN* | NA | NA | 0.3387 | 0.3387 | 0.3387 | 0.0587 
-   |Linear         |ALIGNF*| NA | NA | 0.5012 | 0.5012 | 0.5012 | 0.2095 
-
-2. Predidction performance of MMR with additional Gaussian kernels on kernel matrices that are computed from multiple kernel learning approaches.
-
-   |Kernel function| Input feature | AUC | Microlabel Accuracy | F1 | Precision | Recall | Multilabel Accuracy | 
-   |:--:           |:--:|:--:|--:|:--:|:--:|:--:|:--:|:---:|
-   |Gaussian       |UNIMKL*| NA | NA | 0.7987 | 0.7987 | 0.7987 | 0.6409 
-   |Gaussian       |ALIGN* | NA | NA | 0.8296 | 0.8296 | 0.8296 | 0.6828 
-   |Gaussian       |ALIGNF*| NA | NA | 0.8537 | 0.8537 | 0.8537 | 0.7272 
-
-## Additional features
+## PSSM features 
 
 ### PSSM features generated from CDD database 
 
@@ -608,46 +318,175 @@ In stead of predicting the transporter classification (TC) with single feature m
    |:---:|---:|---:|
    |CDD-TCDB  |12540| 201509 version of TCDB|
 
-# Statistics of feature sets
 
-1. The following table shows the statistics of features computed for TCDB prediction tasks.
 
-   |Feature set| Number of features|
-   |:---|---:|
-   |TB | 12535 | 
-   |TC | 3145 | 
-   |TICoils | 1 | 
-   |TIGene3D | 611 | 
-   |TIHamap | 209 | 
-   |TIPANTHER | 4070 | 
-   |TIPfam | 2025 | 
-   |TIPhobius | 7 | 
-   |TIPIRSF | 283 | 
-   |TIPRINTS | 579 | 
-   |TIProDom | 145 | 
-   |TIProSitePatterns | 285 | 
-   |TIProSiteProfiles | 282 | 
-   |TISignalPEUK | 2 | 
-   |TISignalP_GRAM_NEGATIVE | 2 | 
-   |TISignalP_GRAM_POSITIVE | 1 | 
-   |TISMART | 240 | 
-   |TISUPERFAMILY | 512 | 
-   |TITIGRFAM | 769 | 
-   |TITMHMM | 1 | 
-   |TPSI | 12540 | 
-   |TRPSCDD | 10727 | 
-   |TRPSCDDNCBI | 4265 | 
-   |TRPSCOG | 1739 | 
-   |TRPSKOG | 2066 | 
-   |TRPSPFAM | 3048 | 
-   |TRPSPRK | 3374 | 
-   |TRPSSMART | 394 | 
-   |TRPSTCDB201509PSSM | 12531 | 
-   |TRPSTIGR | 1561 | 
 
-# Results
+## Statistics of feature sets
 
-## MMCRF
+The following table shows the statistics of features computed for TCDB prediction tasks.
+
+|Feature set| Number of features|
+|:---|---:|
+|TB | 12535 | 
+|TC | 3145 | 
+|TICoils | 1 | 
+|TIGene3D | 611 | 
+|TIHamap | 209 | 
+|TIPANTHER | 4070 | 
+|TIPfam | 2025 | 
+|TIPhobius | 7 | 
+|TIPIRSF | 283 | 
+|TIPRINTS | 579 | 
+|TIProDom | 145 | 
+|TIProSitePatterns | 285 | 
+|TIProSiteProfiles | 282 | 
+|TISignalPEUK | 2 | 
+|TISignalP_GRAM_NEGATIVE | 2 | 
+|TISignalP_GRAM_POSITIVE | 1 | 
+|TISMART | 240 | 
+|TISUPERFAMILY | 512 | 
+|TITIGRFAM | 769 | 
+|TITMHMM | 1 | 
+|TPSI | 12540 | 
+|TRPSCDD | 10727 | 
+|TRPSCDDNCBI | 4265 | 
+|TRPSCOG | 1739 | 
+|TRPSKOG | 2066 | 
+|TRPSPFAM | 3048 | 
+|TRPSPRK | 3374 | 
+|TRPSSMART | 394 | 
+|TRPSTCDB201509PSSM | 12531 | 
+|TRPSTIGR | 1561 | 
+
+
+
+# Empirical evaluation 
+
+## Support vector machines (SVM)
+
+In this section, we test the classification performance on transporter classification (TC) based on different input feature maps as discussed in the previous section. 
+
+### SVM experiment settings
+
+1. Linear SVM is used as the baseline learner. We use a SVM implementation from [libSVM](https://www.csie.ntu.edu.tw/~cjlin/libsvm/).
+1. We select for each input feature map a SVM margin slack (C) parameter from the set {0.01,0.1,1,10,100}.
+1. Parameter selection is baed on a random selection of 5000 proteins from the original dataset.
+1. After parametere selection, the best SVM C parameter is applied to both training and test.
+1. Experiment results are reported from a five fold cross validation procedure. We randomly divide examples into five disjoin set of equal size. In each iteration, we use one set for testing and the rest for training. The same procedure is then repeated five times.
+1. We report the following metrics to measure the performance of the classifier including AUC, accuracy, F1, precision, and recall. The scores are computed by pooling all microlabels.
+
+### SVM results
+
+1. Preliminary experimental results are shown in the following table
+
+   | Input feature | AUC | Microlabel Accuracy | F1 | Precision | Recall | Multilabel Accuracy |
+   |:--:|:--:|:--:|:--:|:--:|:--:|:--:|
+   |TB                      |0.8705|0.9980|0.0023|1.0000|0.0012|0.0000|
+   |TICoils                 |0.8705|0.9980|0.0023|1.0000|0.0012|0.0000|
+   |TIGene3D                |0.8729|0.9982|0.2151|0.9255|0.1217|0.0046|
+   |TIHamap                 |0.8714|0.9980|0.0122|0.8896|0.0061|0.0000|
+   |TIPANTHER               |0.8721|0.9981|0.0335|0.9857|0.0170|0.0000|
+   |TIPfam                  |0.8727|0.9981|0.0985|0.6216|0.0535|0.0000|
+   |TIPhobius               |0.9048|0.9979|0.2111|0.3945|0.1441|0.0006|
+   |TIPIRSF                 |0.8714|0.9980|0.0208|0.9941|0.0105|0.0004|
+   |TIPRINTS                |0.8730|0.9981|0.0630|0.9765|0.0325|0.0074|
+   |TIProDom                |0.8711|0.9980|0.0036|0.9886|0.0018|0.0000|
+   |TIProSitePatterns       |0.8720|0.9981|0.1007|0.9896|0.0531|0.0039|
+   |TIProSiteProfiles       |0.8727|0.9982|0.1976|0.9925|0.1097|0.0041|
+   |TISignalP_EUK           |0.8714|0.9980|0.0481|0.5812|0.0251|0.0000|
+   |TISignalP_GRAM_NEGATIVE |0.8708|0.9980|0.0377|0.6214|0.0194|0.0000|
+   |TISignalP_GRAM_POSITIVE |0.8722|0.9980|0.0413|0.5434|0.0214|0.0000|
+   |TISMART                 |0.8734|0.9981|0.0933|0.9577|0.0491|0.0015|
+   |TISUPERFAMILY           |0.8810|0.9983|0.3264|0.8470|0.2022|0.0076|
+   |TITIGRFAM               |0.8721|0.9981|0.0401|0.9861|0.0205|0.0002|
+   |TITMHMM                 |0.8706|0.9980|0.1953|0.5192|0.1203|0.0009|
+   |TPSI                    |0.8705|0.9980|0.0082|0.9804|0.0041|0.0000|
+   |TRPSCDD                 |0.8705|0.9980|0.0023|1.0000|0.0012|0.0000|
+   |TRPSCDDNCBI             |0.8710|0.9981|0.0952|0.9635|0.0501|0.0015|
+   |TRPSCOG                 |0.8860|0.9982|0.2196|0.9124|0.1248|0.0091|
+   |TRPSKOG                 |0.8808|0.9982|0.1956|0.9352|0.1092|0.0142|
+   |TRPSPFAM                |0.8715|0.9980|0.0252|0.9968|0.0128|0.0000|
+   |TRPSPRK                 |0.8717|0.9981|0.1247|0.7926|0.0677|0.0019|
+   |TRPSSMART               |0.8712|0.9981|0.0890|0.9457|0.0467|0.0014|
+   |TRPSTCDB201509PSSM      |0.8705|0.9980|0.0023|1.0000|0.0012|0.0000|
+   |TRPSTIGR                |0.8728|0.9981|0.1134|0.9888|0.0601|0.0037|
+
+## Multiple kernel learning (MKL)
+
+In stead of predicting the transporter classification (TC) with single feature map as studied in the previous section, we aim to combine those 19 different feature maps with multiple kernel learning approaches.
+
+### MKL experiment settings
+
+1. We compute an input base kernel (gram matrix) for each individual feature map. In particular, each base kenrel is a linear kernel on the original feature map.
+1. We compute a linear output kernel for the output multilabels. 
+1. Three multiple kernel learning approaches are applied to combine these 19 base kernels including
+   1. `UNIMKL` which computes a unifom combination of based kenrels
+   1. `ALIGN` which aligns each input kernel with the output kernel, then combines all based kernels according to the alignment scores
+   1. `ALIGNF` which maximizes the alignment score between the output kernel and a convex combination of all input kernels
+1. Support Vector Machines are used to build the classification model. In particular, we used a LibSVM version with precomputed kernel.
+1. We select SVM margin slack parameter (C) based on a random selection of 5000 examples. Best C is selected from the set {0.01,0.1,1,10,100}.
+1. After parameter selection, best C parameter is used for training and prediction.
+1. Experiment results are reported from a five fold cross validation procedure. We randomly divide examples into five disjoin set of equal size. In each iteration, we use one set for testing and the rest for training. The same procedure is then repeated five times.
+1. We report the following metrics to measure the performance of the classifier including AUC (area under the curve), AUPRC (area under the precision-recall curve), accuracy, F1, precision, and recall. The scores are computed by pooling all microlabels. In addition, precision, recall, and accuracy are computed with a threshold 0.5 to binarize all real valued predictions.
+
+### MKL kernel weights 
+
+1. Kernel weights computed from different multiple kernel learning approaches are listed in the following table
+ 
+ | Base kernel| UNIMKL | ALIGN | ALIGNF |
+ |:---:|--:|--:|--:|
+ |TB.K                        |0.03 | 0.17 | 0.00|  
+ |TICoils.K                   |0.03 | 0.01 | 0.02|  
+ |TIGene3D.K                  |0.03 | 0.14 | 0.00|  
+ |TIHamap.K                   |0.03 | 0.02 | 0.29|  
+ |TIPANTHER.K                 |0.03 | 0.14 | 0.08|  
+ |TIPfam.K                    |0.03 | 0.19 | 0.29|  
+ |TIPhobius.K                 |0.03 | 0.20 | 0.22|  
+ |TIPIRSF.K                   |0.03 | 0.02 | 0.11|  
+ |TIPRINTS.K                  |0.03 | 0.02 | 0.01|  
+ |TIProDom.K                  |0.03 | 0.01 | 0.14|  
+ |TIProSitePatterns.K         |0.03 | 0.09 | 0.00|  
+ |TIProSiteProfiles.K         |0.03 | 0.14 | 0.01|  
+ |TISignalP_EUK.K             |0.03 | 0.06 | 0.03|  
+ |TISignalP_GRAM_NEGATIVE.K   |0.03 | 0.06 | 0.08|  
+ |TISignalP_GRAM_POSITIVE.K   |0.03 | 0.05 | 0.00|  
+ |TISMART.K                   |0.03 | 0.14 | 0.00|  
+ |TISUPERFAMILY.K             |0.03 | 0.16 | 0.11|  
+ |TITIGRFAM.K                 |0.03 | 0.04 | 0.06|  
+ |TITMHMM.K                   |0.03 | 0.18 | 0.00|  
+ |TPSI.K                      |0.03 | 0.24 | 0.20|  
+ |TRPSCDD.K                   |0.03 | 0.03 | 0.00|  
+ |TRPSCDDNCBI.K               |0.03 | 0.21 | 0.24|  
+ |TRPSCOG.K                   |0.03 | 0.24 | 0.64|  
+ |TRPSKOG.K                   |0.03 | 0.11 | 0.00|  
+ |TRPSPFAM.K                  |0.03 | 0.21 | 0.33|  
+ |TRPSPRK.K                   |0.03 | 0.19 | 0.01|  
+ |TRPSSMART.K                 |0.03 | 0.14 | 0.08|  
+ |TRPSTCDB201509PSSM.K        |0.03 | 0.25 | 0.31|  
+ |TRPSTIGR.K                  |0.03 | 0.20 | 0.00|  
+
+1. In addition, kernel weights are shown in the following bar plot
+
+   ![alt text](https://github.com/aalto-ics-kepaco/ProteinFunctionPrediction/blob/master/Experiments/PlotsMKL/kernel_weights.jpg)
+
+
+### Support vector machine (SVM)
+
+Prediction performances of three multiple kernel learning approaches are listed in the following table in which all combined kernel are `centered->normalized->centered`. In addition, we use Guassian kenrel on all three computed kernels, the corresponding prediction performance is shown in the following table. 
+
+| MKL | Kernel | AUC | Microlabel Accuracy | F1 | Precision | Recall | Multilabel Accuracy | 
+|:--:|:--:|--:|:--:|:--:|:--:|:--:|:---:|
+|Linear | UNIMKL | 0.9942 | 0.9995 | 0.8485 | 0.9344 | 0.7770 | 0.5327
+|Linear | ALIGN  | 0.9946 | 0.9995 | 0.8621 | 0.9377 | 0.7978 | 0.5484
+|Linear | ALIGNF | 0.9928 | 0.9996 | 0.8822 | 0.9485 | 0.8245 | 0.6048
+|Gaussian | UNIMKL | 0.9303 | 0.9988 | 0.5568 | 0.9619 | 0.3918 | 0.2315
+|Gaussian | ALIGN  | 0.9169 | 0.9985 | 0.3938 | 0.9722 | 0.2469 | 0.1595
+|Gaussian | ALIGNF | 0.9461 | 0.9990 | 0.6609 | 0.9619 | 0.5034 | 0.3289
+
+
+### Max margin conditional random field (MMCRF)
+
+Prediction performance of the developed structured output prediction method is shown in the following table. In particular, kernels are computed from multiple kernel learning approaches. Predidction performance of the developed structured output prediction model with additional Gaussian kernels on kernel matrices that are computed from multiple kernel learning approaches.
 
 | MMCRF | Kernel | AUC | Microlabel Accuracy | F1 | Precision | Recall | Multilabel Accuracy | 
 |:--:|:--:|--:|:--:|:--:|:--:|:--:|:---:|
@@ -658,7 +497,10 @@ In stead of predicting the transporter classification (TC) with single feature m
 |Gaussian |ALIGN  | NA | 0.9996 | 0.8615 | 0.8615 | 0.8615 | 0.7421
 |Gaussian |ALIGNF | NA | 0.9996 | 0.8537 | 0.8537 | 0.8537 | 0.7118
 
-## MMR
+
+### Max margin regression (MMR)
+
+Prediction performance of MMR is shown in the following table. In particular, kernels are computed directly from multiple kernel learning approaches. Predidction performance of MMR with additional Gaussian kernels on kernel matrices that are computed from multiple kernel learning approaches.
 
 | MMR | Kernel | AUC | Microlabel Accuracy | F1 | Precision | Recall | Multilabel Accuracy | 
 |:--:|:--:|--:|:--:|:--:|:--:|:--:|:---:|
@@ -669,16 +511,33 @@ In stead of predicting the transporter classification (TC) with single feature m
 |Gaussian |ALIGN  | NA | NA | 0.8550 | 0.8550 | 0.8550 | 0.7191
 |Gaussian |ALIGNF | NA | NA | 0.8463 | 0.8463 | 0.8463 | 0.6839
 
-## SVM
 
-| MKL | Kernel | AUC | Microlabel Accuracy | F1 | Precision | Recall | Multilabel Accuracy | 
-|:--:|:--:|--:|:--:|:--:|:--:|:--:|:---:|
-|Linear | UNIMKL | 0.9942 | 0.9995 | 0.8485 | 0.9344 | 0.7770 | 0.5327
-|Linear | ALIGN  | 0.9946 | 0.9995 | 0.8621 | 0.9377 | 0.7978 | 0.5484
-|Linear | ALIGNF | 0.9928 | 0.9996 | 0.8822 | 0.9485 | 0.8245 | 0.6048
-|Gaussian | UNIMKL | 0.9303 | 0.9988 | 0.5568 | 0.9619 | 0.3918 | 0.2315
-|Gaussian | ALIGN  | 0.9169 | 0.9985 | 0.3938 | 0.9722 | 0.2469 | 0.1595
-|Gaussian | ALIGNF | 0.9461 | 0.9990 | 0.6609 | 0.9619 | 0.5034 | 0.3289
+
+
+# Future work
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
