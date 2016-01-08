@@ -484,7 +484,7 @@ Prediction performances of three multiple kernel learning approaches are listed 
 |Gaussian | ALIGNF | 0.9461 | 0.9990 | 0.6609 | 0.9619 | 0.5034 | 0.3289
 
 
-### Max-margin conditional random field (MMCRF)
+### Max margin conditional random field (MMCRF)
 
 Prediction performance of the developed structured output prediction method is shown in the following table. In particular, kernels are computed from multiple kernel learning approaches. Predidction performance of the developed structured output prediction model with additional Gaussian kernels on kernel matrices that are computed from multiple kernel learning approaches.
 
