@@ -21,9 +21,9 @@
 		- [MKL experiment settings](#)
 		- [MKL kernel weights](#)
 		- [Support vector machine (SVM)](#)
-		- [Max-margin conditional random field (MMCRF)](#)
-		- [Max margin regression (MMR)](#)
-- [Future work](#)
+		- [Max margin conditional random field (MMCRF)](#max-margin-conditional-random-field)
+		- [Max margin regression (MMR)](#max-margin-regression-(-mmr-))
+- [Future work](#future-work)
 
 
 # Introduction
