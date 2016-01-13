@@ -2,7 +2,7 @@
 
 - [Introduction](#introduction)
 - [Data](#data)
-	- [TCDB data](#tcdb-data)
+	- [TCDB database](#tcdb-database)
 - [Preprocessing](#preprocessing)
 - [Feature generation](#feature-generation)
 	- [BLAST features](#blast-featrues)
@@ -47,7 +47,7 @@ Furthermore, we adpot structured output learning approach to further improve the
 
 # Data
 
-## TCDB data
+## TCDB database
 
 We extract protein classification data from TCDB database.
 As the intersection of the protein data listed above and the ones in TCDB is very small we compute protein features via _BLAST_ and InterProScan.
@@ -66,9 +66,9 @@ NOTE: Su, her you should specify which version has been considered (I guess a ve
       |---:|---:|
       |1|7| 
       |2|30| 
-      |3|867| 
-      |4|2237| 
-      |5|9456| 
+      |3|868| 
+      |4|2240| 
+      |5|9483| 
 
   1. Data file for TCDB sequence and classification information is in the file `./Data/tcdb.1`.
 
