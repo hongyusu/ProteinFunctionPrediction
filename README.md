@@ -327,35 +327,35 @@ The following table shows the statistics of features computed for TCDB predictio
 
 |Feature set| Version | Number of features|
 |:---|---:|---:|
-      |  	BLAST-TCDB                  | v201506  |  12535  |
-      |  	IPS-ProDom                  | v200601  |  145    |
-      |  	IPS-HAMAP                   | v1.0     |  209    |
-      |  	IPS-SMART                   | v6.2     |  240    |
-      |  	IPS-SuperFamily             | v1.75    |  512    |
-      |  	IPS-PRINTS                  | v42.0    |  579    |
-      |  	IPS-Panther                 | v9.0     |  4070   |
-      |  	IPS-Gene3d                  | v3.5.0   |  611    |
-      |  	IPS-PIRSF                   | v3.01    |  283    |
-      |  	IPS-PfamA                   | v27.0    |  2025   |
-      |  	IPS-PrositeProfiles         | v1.0     |  282    |
-      |  	IPS-TIGRFAM                 | v15.0    |  769    |
-      |  	IPS-PrositePatterns         | v1.0     |  285    |
-      |  	IPS-Coils                   | v2.2     |  1      |
-      |  	IPS-TMHMM                   | v2.0     |  1      |
-      |  	IPS-Phobius                 | v1.01    |  7      |
-      |  	IPS-SignalP GRAM NEGATIVE   | v4.0     |  2      |
-      |  	IPS-SignalP EyUK            | v4.0     |  2      |
-      |  	IPS-SignalP GRAM POSITIVE   | v4.0     |  1      |
-      |     PSSM-CDD                    | v3.14    |  47363  |
-      |     PSSM-Pfam                   | v27.0    |  14831  |
-      |     PSSM-COG                    | v1.0     |  4825   |
-      |     PSSM-KOG                    | v1.0     |  4875   |
-      |     PSSM-SMART                  | v6.0     |  1013   |
-      |     PSSM-PRK                    | v6.9     |  10885  |
-      |     PSSM-TiGRFAM                | v15.0    |  4488   |
-      |     PSSM-CDDNCBI                | v201506  |  11273  |
-      |     PSSM-PSITCDB                | v201506  |  12540  |
-      |     PSSM-RPSTCDB                | v201506  |  12531  |
+|  	BLAST-TCDB                  | v201506  |  12535  |
+|  	IPS-ProDom                  | v200601  |  145    |
+|  	IPS-HAMAP                   | v1.0     |  209    |
+|  	IPS-SMART                   | v6.2     |  240    |
+|  	IPS-SuperFamily             | v1.75    |  512    |
+|  	IPS-PRINTS                  | v42.0    |  579    |
+|  	IPS-Panther                 | v9.0     |  4070   |
+|  	IPS-Gene3d                  | v3.5.0   |  611    |
+|  	IPS-PIRSF                   | v3.01    |  283    |
+|  	IPS-PfamA                   | v27.0    |  2025   |
+|  	IPS-PrositeProfiles         | v1.0     |  282    |
+|  	IPS-TIGRFAM                 | v15.0    |  769    |
+|  	IPS-PrositePatterns         | v1.0     |  285    |
+|  	IPS-Coils                   | v2.2     |  1      |
+|  	IPS-TMHMM                   | v2.0     |  1      |
+|  	IPS-Phobius                 | v1.01    |  7      |
+|  	IPS-SignalP GRAM NEGATIVE   | v4.0     |  2      |
+|  	IPS-SignalP EyUK            | v4.0     |  2      |
+|  	IPS-SignalP GRAM POSITIVE   | v4.0     |  1      |
+|   PSSM-CDD                    | v3.14    |  47363  |
+|   PSSM-Pfam                   | v27.0    |  14831  |
+|   PSSM-COG                    | v1.0     |  4825   |
+|   PSSM-KOG                    | v1.0     |  4875   |
+|   PSSM-SMART                  | v6.0     |  1013   |
+|   PSSM-PRK                    | v6.9     |  10885  |
+|   PSSM-TiGRFAM                | v15.0    |  4488   |
+|   PSSM-CDDNCBI                | v201506  |  11273  |
+|   PSSM-PSITCDB                | v201506  |  12540  |
+|   PSSM-RPSTCDB                | v201506  |  12531  |
 
 
 
