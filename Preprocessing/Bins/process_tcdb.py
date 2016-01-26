@@ -36,6 +36,9 @@ def process_tcdb_for_blast():
 
 
 def process_tcdb_label():
+  '''
+  generate row labels and column labels
+  '''
   rownamelist = []
   colnamelist = []
   fout_row = open('../../Data/tcdb.rowlab','w')
