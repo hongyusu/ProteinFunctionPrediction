@@ -16,9 +16,10 @@
 |---merge_feature_files.py          # merge tcdb classification file, blast feature, and interproscan features
 |---separate_features.py            # separate different feature into different matrices in ../Experiments/Data/ folder
 |---compute_TC_edgelist.py          # Generate edge list of the TC hierarchical structure
+|---Others                          # Other 'old' scripts
+    |---get_intersection.py
+    |---merge_datasets.py
 ```
 
 
 
-|---get_intersection.py
-|---merge_datasets.py
