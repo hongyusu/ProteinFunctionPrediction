@@ -101,6 +101,14 @@ def rename_files():
 
 
 def merge_datasets():
+  '''
+  merge different feature representation of the protein sequence into one file
+  the name of the merge file:
+  tcdbdata.collab: columnames, feature id number
+  tcdbdata.rowlab: rownames, protein id number
+  tcdbdata.mtx: proteinID-featureID-scroe tuples
+  tcdbdat: proteinName-featureName-scorea typles
+  '''
   put_together_names()
   rename_files()
   pass
