@@ -5,7 +5,7 @@
 
 # List of files
 
-This directory consists of the following files used for data preprocessing
+This directory consists of the following files used for data preprocessing. 
 
 ```
 |---README.md                       # this file
