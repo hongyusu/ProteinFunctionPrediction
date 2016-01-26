@@ -6,6 +6,7 @@
 # List of files
 
 This directory consists of the following files used for data preprocessing. 
+The final goal is to generate data matrices in ../Experiments/Data/ folder for a variety of machine learning algorithms and tasks.
 
 ```
 |---README.md                       # this file
