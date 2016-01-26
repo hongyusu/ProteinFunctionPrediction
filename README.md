@@ -6,7 +6,7 @@
 - [Preprocessing](#preprocessing)
 - [Feature generation](#feature-generation)
 	- [BLAST features](#blast-featrues)
-	- [Interproscan features](#interproscan-feature)
+	- [Interproscan features](#interproscan-features)
 	- [Data statistics of BLAST and IPS featuers](#data-statistics-of-blast-and-ips-features)
 	- [PSSM features](#pssm-features)
 		- [PSSM features generated from CDD database](#pssm-features-generated-from-cdd-database)
@@ -112,11 +112,11 @@ NOTE: Su, her you should specify which version has been considered (I guess a ve
 
 ## BLAST features
 
-1. [_BLAST_ with TCDB](http://hongyusu.github.io/lessons/2015/06/16/ncbi-blast-installation-and-running-in-parallel/)
+1. [_BLAST_ with TCDB](http://hongyusu.github.io/research/2015/06/16/ncbi-blast-installation-and-running-in-parallel/)
 
    1. Protein sequences are aligned with themselves by running _BLAST_ algorithms.
    1. This procedure will genrate a pairwise similarity matrix.
-   1. Instruction for installing and running _BLAST_ can be found from [my blog post](http://hongyusu.github.io/lessons/2015/06/16/ncbi-blast-installation-and-running-in-parallel/). 
+   1. Instruction for installing and running _BLAST_ can be found from [my blog post](http://hongyusu.github.io/research/2015/06/16/ncbi-blast-installation-and-running-in-parallel/). 
    1. In particular, after removing some replicated proteins, there are 12515 protein left in TCDB which will be used to build a TCDB _BLAST_ database.
    1. The cleaned TCDB data file is located in `./Data/tcdb`.
    1. For the _BLAST_ search, we obtain all hits with e-value below 0.01. 
@@ -156,11 +156,11 @@ NOTE: Su, her you should specify which version has been considered (I guess a ve
 
 ## Interproscan features
 
-1. [InterProScan](http://hongyusu.github.io/lessons/2015/06/17/extract-protein-features-via-interproscan/)
+1. [InterProScan](http://hongyusu.github.io/research/2015/06/17/extract-protein-features-via-interproscan/)
 
    1. For all proteins in TCDB, we extract various protein features by running [InterProScan](https://code.google.com/p/interproscan/).
    1. As this procedure takes time, we would like to install and run the InterProScan on local machines other than on webservers.
-   1. A brief instruction for installation and running InterProScan is documented in [my blog post](http://hongyusu.github.io/lessons/2015/06/17/extract-protein-features-via-interproscan/).
+   1. A brief instruction for installation and running InterProScan is documented in [my blog post](http://hongyusu.github.io/research/2015/06/17/extract-protein-features-via-interproscan/).
    1. In particular, we download the InterProScan package together with various databases. Version information of InterProScan software and databases can be found from the following table
 
       |Tool|Version|Information|
