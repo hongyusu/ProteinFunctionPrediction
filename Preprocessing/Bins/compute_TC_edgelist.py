@@ -3,6 +3,9 @@
 import re
 
 def compute_edgelist(tcdbcollabFilename,EFilename):
+  '''
+  this script is to generate the edge list of TC hierarchical structure
+  '''
   fout = open(EFilename,'w')
   index = 0
   mapper = {}
