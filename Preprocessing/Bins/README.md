@@ -3,7 +3,7 @@
 
 
 
-# Directiary for preprocessing scripts
+# List of files
 
 This directory consists of the following files used for data preprocessing
 
