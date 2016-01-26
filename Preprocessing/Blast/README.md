@@ -13,6 +13,7 @@
 1. Download CDD version file from NCBI FTP server ftp://ftp.ncbi.nih.gov/pub/mmdb/cdd//cdd.info.
 1. Download PSSM version file from NCBI FTP server ftp://ftp.ncbi.nih.gov/pub/mmdb/cdd//cdd.versions.
 1. Build CDD databases from different sources by NCBI Blast+ tool with the following command.
+
    `../makeprofiledb -title SMART     -in Smart.pn -out Smart -threshold 9.82 -scale 100.0 -dbtype rps -index true`
 
    `../makeprofiledb -title Pfam      -in Pfam.pn -out Pfam -threshold 9.82 -scale 100.0 -dbtype rps -index true`
