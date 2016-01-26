@@ -5,6 +5,8 @@
 
 # Directiary for preprocessing scripts
 
+This directory consists of the following files used for data preprocessing
+
 ```
 |---README.md                       # this file
 |---process_tcdb.py                 # process tcdb database to remove duplication, and generate row labels and column labels
@@ -21,5 +23,5 @@
     |---merge_datasets.py
 ```
 
-
+# Other information
 
