@@ -22,8 +22,13 @@ def generate_results(inputFilename):
         if not val == '-1': results[str(i+1)].append( key+1 )
   if inputFilename.startswith('../../Experiments/ResultsMKL'):
     for i,line in enumerate(open(inputFilename)):
-      for key,val in enumerate(line.strip().split(',')):
-        if not eval(val) >= 0.5: results[str(i+1)].append( key+1 )
+      words = line.strip().split(',')
+      for j in range(4):
+        if eval(words[results[str(i+1)][j]-1])>0.5:
+          results[str(i+1)].append(results[j])
+        else:
+          results[str(i+1)].append('-1')
+
 
   statistics = [0,0,0,0]
   n = 0
