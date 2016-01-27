@@ -16,18 +16,20 @@ def generate_results(inputFilename):
         if not val == '0': results[words[0]].append( key )
 
   #for i,line in enumerate(open('../../Experiments/ResultsSOP/tcdb.all.KUNIMKL_tcdb.TC')):
-  for i,line in enumerate(open(inputFilename)):
-    for key,val in enumerate(line.strip().split(',')):
-      if inputFilename.startswith('../../Experiments/ResultsSOP'):
+  if inputFilename.startswith('../../Experiments/ResultsSOP'):
+    for i,line in enumerate(open(inputFilename)):
+      for key,val in enumerate(line.strip().split(',')):
         if not val == '-1': results[str(i+1)].append( key+1 )
-      if inputFilename.startswith('../../Experiments/ResultsMKL'):
+  if inputFilename.startswith('../../Experiments/ResultsMKL'):
+    for i,line in enumerate(open(inputFilename)):
+      for key,val in enumerate(line.strip().split(',')):
         if not eval(val) >= 0.5: results[str(i+1)].append( key+1 )
 
   statistics = [0,0,0,0]
   n = 0
   fout = open('../Results/results','a')
   for key in results.keys():
-    #print results[key]
+    print results[key]
     n+=1
     if results[key][0] == results[key][4]: statistics[0]+=1
     if results[key][1] == results[key][5]: statistics[1]+=1
@@ -38,12 +40,12 @@ def generate_results(inputFilename):
   pass
 
 if __name__ == '__main__':
-  generate_results('../../Experiments/ResultsSOP/tcdb.all.KUNIMKL_tcdb.TC')
-  generate_results('../../Experiments/ResultsSOP/tcdb.all.KALIGN_tcdb.TC')
-  generate_results('../../Experiments/ResultsSOP/tcdb.all.KALIGNF_tcdb.TC')
-  generate_results('../../Experiments/ResultsSOP/tcdb.all.GUNIMKL_tcdb.TC')
-  generate_results('../../Experiments/ResultsSOP/tcdb.all.GALIGN_tcdb.TC')
-  generate_results('../../Experiments/ResultsSOP/tcdb.all.GALIGNF_tcdb.TC')
+  #generate_results('../../Experiments/ResultsSOP/tcdb.all.KUNIMKL_tcdb.TC')
+  #generate_results('../../Experiments/ResultsSOP/tcdb.all.KALIGN_tcdb.TC')
+  #generate_results('../../Experiments/ResultsSOP/tcdb.all.KALIGNF_tcdb.TC')
+  #generate_results('../../Experiments/ResultsSOP/tcdb.all.GUNIMKL_tcdb.TC')
+  #generate_results('../../Experiments/ResultsSOP/tcdb.all.GALIGN_tcdb.TC')
+  #generate_results('../../Experiments/ResultsSOP/tcdb.all.GALIGNF_tcdb.TC')
 
   generate_results('../../Experiments/ResultsMKL/tcdb.all.GALIGNF_tcdb.TC_c1_t0_val')
   generate_results('../../Experiments/ResultsMKL/tcdb.all.GALIGN_tcdb.TC_c1_t0_val')
